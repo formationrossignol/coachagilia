@@ -9,13 +9,13 @@ const NAV_LINKS = [
 export function NavBar() {
   const { pathname } = useLocation()
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label="Main">
       <Link to="/" className="navbar__brand">
         Scrum Master Sim
       </Link>
       <ul className="navbar__links">
         {NAV_LINKS.map(({ to, label }) => {
-          const isActive = pathname.startsWith(to)
+          const isActive = pathname === to || pathname.startsWith(to + '/')
           return (
             <li key={to}>
               <Link
