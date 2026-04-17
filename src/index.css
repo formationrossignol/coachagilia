@@ -301,3 +301,25 @@ body {
 }
 .quiz-question-dot--answered { background: var(--color-ok); color: #fff; border-color: var(--color-ok); }
 .quiz-question-dot--current { border-color: var(--color-primary); }
+
+/* ── Quiz Results ── */
+.quiz-results { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+.quiz-results__global { text-align: center; margin-bottom: 2.5rem; }
+.quiz-score { margin-bottom: 1rem; }
+.quiz-score__value { font-size: 3.5rem; font-weight: 800; color: var(--color-primary); display: block; line-height: 1; }
+.quiz-score__pct { font-size: 1.5rem; color: var(--color-text-muted); }
+.quiz-results__badge { font-size: 1rem; padding: 0.4rem 1rem; margin: 0.75rem 0; display: inline-block; }
+.quiz-results__time { color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+.quiz-results__section-title { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+.quiz-review-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.quiz-review-item {
+  background: var(--color-surface);
+  border-radius: var(--radius); padding: 1rem 1.25rem;
+  border-left: 3px solid transparent;
+}
+.quiz-review-item--correct { border-left-color: var(--color-ok); }
+.quiz-review-item--wrong { border-left-color: var(--color-danger); }
+.quiz-review-item__question { font-size: 0.95rem; line-height: 1.6; white-space: pre-line; margin-bottom: 0.5rem; }
+.quiz-review-item__your-answer { font-size: 0.85rem; color: var(--color-text-muted); }
+.quiz-review-item__correct-answer { font-size: 0.85rem; color: var(--color-ok); margin-top: 0.25rem; }
+.quiz-results__actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
