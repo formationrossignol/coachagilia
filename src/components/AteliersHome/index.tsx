@@ -1,1 +1,38 @@
-export function AteliersHome() { return <div>AteliersHome</div> }
+import { Link } from 'react-router-dom'
+
+const ATELIERS = [
+  {
+    to: '/ateliers/scrum-guide',
+    title: 'Le cadre Scrum',
+    description: 'Replacez les rôles, événements, artefacts et engagements du Scrum Guide au bon endroit sur le diagramme.',
+    level: 'Débutant',
+    levelVariant: 'green' as const,
+    duration: '~10 min',
+  },
+]
+
+export function AteliersHome() {
+  return (
+    <div className="ateliers-home">
+      <header className="selector-header">
+        <h1>Ateliers</h1>
+        <p>Ancrez les concepts par la pratique : glisser-déposer, puzzles, cartes.</p>
+      </header>
+      <div className="ateliers-grid">
+        {ATELIERS.map(({ to, title, description, level, levelVariant, duration }) => (
+          <article key={to} className="atelier-card">
+            <div className="scenario-card__meta">
+              <span className={`badge badge--${levelVariant}`}>{level}</span>
+              <span className="scenario-card__duration">{duration}</span>
+            </div>
+            <h2 className="scenario-card__title">{title}</h2>
+            <p className="scenario-card__theme">{description}</p>
+            <Link to={to} className="btn btn--primary">
+              Démarrer
+            </Link>
+          </article>
+        ))}
+      </div>
+    </div>
+  )
+}

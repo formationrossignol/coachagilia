@@ -323,3 +323,85 @@ body {
 .quiz-review-item__your-answer { font-size: 0.85rem; color: var(--color-text-muted); }
 .quiz-review-item__correct-answer { font-size: 0.85rem; color: var(--color-ok); margin-top: 0.25rem; }
 .quiz-results__actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+
+/* ── Ateliers Home ── */
+.ateliers-home { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+.ateliers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+.atelier-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+.atelier-card .btn { margin-top: auto; }
+
+/* ── Atelier Page ── */
+.atelier-page { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
+.atelier-header { text-align: center; margin-bottom: 2rem; }
+.atelier-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.4rem; }
+.atelier-subtitle { color: var(--color-text-muted); }
+
+/* ── Scrum Diagram ── */
+.scrum-diagram { display: grid; grid-template-columns: 220px 1fr 220px; gap: 1.5rem; align-items: start; margin-bottom: 1.5rem; }
+.scrum-col { display: flex; flex-direction: column; gap: 1rem; }
+.scrum-artifact-block { display: flex; flex-direction: column; gap: 0.5rem; }
+.scrum-commitment-row { display: flex; align-items: center; gap: 0.5rem; padding-left: 0.5rem; }
+.scrum-commitment-label { font-size: 0.72rem; color: var(--color-text-muted); white-space: nowrap; }
+
+.scrum-sprint-box {
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.scrum-sprint-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.scrum-sprint-duration { font-size: 0.75rem; color: var(--color-text-muted); }
+.scrum-sprint-events { display: flex; flex-direction: column; gap: 0.6rem; }
+.scrum-retro-row { display: flex; gap: 0.75rem; }
+.scrum-retro-row .scrum-zone { flex: 1; }
+
+/* ── Drop Zone ── */
+.scrum-zone {
+  min-height: 44px; border-radius: var(--radius);
+  border: 2px dashed var(--color-border);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0.4rem 0.6rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.scrum-zone--empty { background: var(--color-surface); }
+.scrum-zone--filled { border-style: solid; border-color: var(--color-border); background: var(--color-surface-2); }
+.scrum-zone--hover { border-color: var(--color-primary); background: rgba(99,102,241,0.08); }
+.scrum-zone--correct { border-color: var(--color-ok) !important; background: rgba(34,197,94,0.08) !important; }
+.scrum-zone--wrong { border-color: var(--color-danger) !important; background: rgba(239,68,68,0.08) !important; }
+.scrum-zone__placeholder { color: var(--color-border); font-size: 1.1rem; font-weight: 700; }
+
+/* ── Labels ── */
+.scrum-label {
+  background: var(--color-primary); color: #fff;
+  border-radius: 4px; padding: 0.3rem 0.65rem;
+  font-size: 0.82rem; font-weight: 600; cursor: grab;
+  user-select: none; white-space: nowrap;
+}
+.scrum-label:active { cursor: grabbing; }
+.scrum-label--placed { background: var(--color-primary); }
+
+/* ── Score Banner ── */
+.scrum-score-banner { text-align: center; margin-bottom: 1.25rem; }
+.scrum-score-banner .badge { font-size: 1rem; padding: 0.5rem 1.25rem; }
+
+/* ── Palette ── */
+.scrum-palette {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  min-height: 80px;
+}
+.scrum-palette__title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 0.75rem; }
+.scrum-palette__labels { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.scrum-palette__empty { font-size: 0.85rem; color: var(--color-text-muted); }
+
+/* ── Atelier Actions ── */
+.scrum-actions { display: flex; gap: 0.75rem; }
