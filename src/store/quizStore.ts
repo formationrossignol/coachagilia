@@ -28,9 +28,15 @@ export const useQuizStore = create<QuizStore>()(
       submittedAt: null,
 
       startQuiz(examId: string) {
+        let exam
+        try {
+          exam = getExam(examId)
+        } catch {
+          return
+        }
         set({
           status: 'in_progress',
-          exam: getExam(examId),
+          exam,
           answers: {},
           startedAt: Date.now(),
           submittedAt: null,

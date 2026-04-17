@@ -294,8 +294,7 @@ Choose all that apply.`,
   {
     id: 'e1-q21',
     text: `What might cause a Development Team's progress to be unpredictable ?`,
-    options: [{ letter: 'A', text: `Impediments` }, { letter: 'B', text: `Changes in technology
-——— C :Changes in stakeholders and company strategies` }, { letter: 'D', text: `Changes in market conditions` }, { letter: 'E', text: `Changes in team composition` }, { letter: 'F', text: `All of the above` }],
+    options: [{ letter: 'A', text: `Impediments` }, { letter: 'B', text: `Changes in technology` }, { letter: 'C', text: `Changes in stakeholders and company strategies` }, { letter: 'D', text: `Changes in market conditions` }, { letter: 'E', text: `Changes in team composition` }, { letter: 'F', text: `All of the above` }],
     correctAnswer: ['F'],
     isMultiple: false,
   },
@@ -324,8 +323,7 @@ Choose all that apply.`,
     id: 'e1-q23',
     text: `A Development Team selects a set of Product Backlog items for a Sprint Backlog with the intent to get the selected items done by the end of the Sprint. Select two statements that explain what done means.
 Choose 2 answers.`,
-    options: [{ letter: 'A', text: `All work performed given the skills that are actually present in the Development Team` }, { letter: 'B', text: `All work to create software usable by end users.` }, { letter: 'C', text: `Ready for integration
-——— D :No work left from the definition of "Done"` }, { letter: 'E', text: `Whatever the Product Owner defines as quality` }],
+    options: [{ letter: 'A', text: `All work performed given the skills that are actually present in the Development Team` }, { letter: 'B', text: `All work to create software usable by end users.` }, { letter: 'C', text: `Ready for integration` }, { letter: 'D', text: `No work left from the definition of "Done"` }, { letter: 'E', text: `Whatever the Product Owner defines as quality` }],
     correctAnswer: ['B', 'D'],
     isMultiple: true,
   },
@@ -406,8 +404,7 @@ Choose 2 answers.`,
     id: 'e1-q68',
     text: `Which three of the following are time boxed events in Scrum?
 Choose 3 answers.`,
-    options: [{ letter: 'A', text: `Sprint Testing` }, { letter: 'B', text: `Sprint 0` }, { letter: 'C', text: `Daily Scrum` }, { letter: 'D', text: `Release Testing` }, { letter: 'E', text: `Sprint Planning` }, { letter: 'F', text: `Sprint Retrospective
-——— G : Release Retrospective` }],
+    options: [{ letter: 'A', text: `Sprint Testing` }, { letter: 'B', text: `Sprint 0` }, { letter: 'C', text: `Daily Scrum` }, { letter: 'D', text: `Release Testing` }, { letter: 'E', text: `Sprint Planning` }, { letter: 'F', text: `Sprint Retrospective` }, { letter: 'G', text: `Release Retrospective` }],
     correctAnswer: ['C', 'E', 'F'],
     isMultiple: true,
   },

@@ -4,10 +4,7 @@ export const questions: QuizQuestion[] = [
   {
     id: 'e2-q1',
     text: `Who is responsible for managing the progress of work during a Sprint?`,
-    options: [{ letter: 'A', text: `The Development Team
-——— B :The Scrum Master
-——— C :The Product Owner
-——— D :The most junior member of the Team` }],
+    options: [{ letter: 'A', text: `The Development Team` }, { letter: 'B', text: `The Scrum Master` }, { letter: 'C', text: `The Product Owner` }, { letter: 'D', text: `The most junior member of the Team` }],
     correctAnswer: ['A'],
     isMultiple: false,
   },

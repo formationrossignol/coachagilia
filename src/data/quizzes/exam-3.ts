@@ -125,9 +125,8 @@ Choose 2 answers.`,
   },
   {
     id: 'e3-q49',
-    text: `Of the following choices, what is the most effective way a Scrum Master can keep a Development Team working at its highest level of productivity ?
-——— A :Prevent changes to the backlog once the Sprint begins.`,
-    options: [{ letter: 'B', text: `Ensure the meetings start and end at the proper time.` }, { letter: 'C', text: `Facilitate Development Team decisions and removing impediments.` }, { letter: 'D', text: `Keep high value features high in the Product Backlog` }],
+    text: `Of the following choices, what is the most effective way a Scrum Master can keep a Development Team working at its highest level of productivity ?`,
+    options: [{ letter: 'A', text: `Prevent changes to the backlog once the Sprint begins.` }, { letter: 'B', text: `Ensure the meetings start and end at the proper time.` }, { letter: 'C', text: `Facilitate Development Team decisions and removing impediments.` }, { letter: 'D', text: `Keep high value features high in the Product Backlog` }],
     correctAnswer: ['C'],
     isMultiple: false,
   },
@@ -572,8 +571,7 @@ Choose 2 answers.`,
     id: 'e3-q40',
     text: `Which three of the following are time boxed events in Scrum?
 Choose 3 answers.`,
-    options: [{ letter: 'A', text: `Sprint Testing` }, { letter: 'B', text: `Sprint 0` }, { letter: 'C', text: `Daily Scrum` }, { letter: 'D', text: `Release Testing` }, { letter: 'E', text: `Sprint Planning` }, { letter: 'F', text: `Sprint Retrospective
-——— G : Release Retrospective` }],
+    options: [{ letter: 'A', text: `Sprint Testing` }, { letter: 'B', text: `Sprint 0` }, { letter: 'C', text: `Daily Scrum` }, { letter: 'D', text: `Release Testing` }, { letter: 'E', text: `Sprint Planning` }, { letter: 'F', text: `Sprint Retrospective` }, { letter: 'G', text: `Release Retrospective` }],
     correctAnswer: ['C', 'E', 'F'],
     isMultiple: true,
   },
