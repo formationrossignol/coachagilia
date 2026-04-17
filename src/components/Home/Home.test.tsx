@@ -13,7 +13,7 @@ describe('Home', () => {
     render(<MemoryRouter><Home /></MemoryRouter>)
     expect(screen.getByText(/simulation/i)).toBeInTheDocument()
     expect(screen.getByText(/quiz psm-1/i)).toBeInTheDocument()
-    expect(screen.getByText(/ateliers/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /ateliers/i })).toBeInTheDocument()
   })
 
   it('renders links to /simulation, /quiz and /ateliers', () => {

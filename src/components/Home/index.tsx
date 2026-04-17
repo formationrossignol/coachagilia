@@ -23,7 +23,7 @@ const SECTIONS = [
     description: 'Ancrez les concepts du Scrum Guide par la pratique : drag & drop, cartes, puzzles.',
     badge: 'Pratique',
     badgeClass: 'badge--green',
-    cta: 'Accéder aux activités',
+    cta: 'Accéder aux ateliers',
   },
 ] as const
 
