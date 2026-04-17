@@ -208,3 +208,22 @@ body {
 }
 .navbar__link:hover { color: var(--color-text); background: var(--color-surface-2); }
 .navbar__link--active { color: var(--color-primary); background: var(--color-surface-2); }
+
+/* ── Home Hub ── */
+.home { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+.home__header { text-align: center; margin-bottom: 3.5rem; }
+.home__title { font-size: 2.8rem; font-weight: 800; margin-bottom: 0.75rem; }
+.home__subtitle { font-size: 1.15rem; color: var(--color-text-muted); }
+.home__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.home-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  transition: border-color 0.15s;
+}
+.home-card:hover { border-color: var(--color-primary); }
+.home-card .btn { margin-top: auto; }
+.home-card__title { font-size: 1.5rem; font-weight: 700; }
+.home-card__description { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); }
