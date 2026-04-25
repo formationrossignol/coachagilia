@@ -41,6 +41,14 @@ const ATELIERS = [
     levelVariant: 'orange' as const,
     duration: '~15 min',
   },
+  {
+    to: '/ateliers/ask-vs-tell',
+    title: 'Ask vs Tell',
+    description: "Identifiez la bonne posture de coaching, classez des situations selon qu'elles appellent une posture directive ou de coaching, puis reformulez des phrases directives en questions ouvertes.",
+    level: 'Avancé',
+    levelVariant: 'red' as const,
+    duration: '~20 min',
+  },
 ]
 
 export function AteliersHome() {

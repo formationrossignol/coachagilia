@@ -650,3 +650,74 @@ body {
   width: 100%;
 }
 .sm-zone-cards { display: flex; flex-direction: column; gap: 0.4rem; width: 100%; }
+
+/* ── AskTellAtelier ── */
+.at-stance-zones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 800px;
+}
+.at-stance-zone {
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.at-stance-zone--filled { border-style: solid; border-color: var(--color-primary); }
+.at-stance-zone--hover { border-color: var(--color-primary-hover); background: var(--color-surface-2); }
+.at-stance-zone--correct { border-color: var(--color-ok); background: #14532d33; }
+.at-stance-zone--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
+.at-stance-zone__header { font-size: 1.2rem; font-weight: 700; }
+.at-stance-zone__sub { font-size: 0.82rem; color: var(--color-text-muted); text-align: center; }
+.at-stance-zone__placeholder { color: var(--color-text-muted); font-size: 0.9rem; margin-top: auto; }
+
+.at-reformulations { display: flex; flex-direction: column; gap: 1.25rem; max-width: 800px; margin: 1.5rem auto; }
+.at-phrase-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.at-directive { display: flex; align-items: baseline; gap: 0.6rem; font-size: 0.95rem; }
+.at-directive__tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--color-surface-2);
+  color: var(--color-primary-hover);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  flex-shrink: 0;
+}
+.at-phrase-input {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+.at-phrase-input:focus { outline: none; border-color: var(--color-primary); }
+.at-indicators { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.at-indicator {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.at-indicator--ok { background: #14532d55; color: var(--color-ok); }
+.at-indicator--nok { background: #7f1d1d44; color: var(--color-danger); }

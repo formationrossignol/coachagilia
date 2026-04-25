@@ -13,6 +13,7 @@ import { ConflictAtelier } from './components/ConflictAtelier'
 import { DelegationPokerAtelier } from './components/DelegationPokerAtelier'
 import { GrowModelAtelier } from './components/GrowModelAtelier'
 import { StakeholderMappingAtelier } from './components/StakeholderMappingAtelier'
+import { AskTellAtelier } from './components/AskTellAtelier'
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/ateliers/delegation-poker" element={<DelegationPokerAtelier />} />
         <Route path="/ateliers/grow-model" element={<GrowModelAtelier />} />
         <Route path="/ateliers/stakeholder-mapping" element={<StakeholderMappingAtelier />} />
+        <Route path="/ateliers/ask-vs-tell" element={<AskTellAtelier />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
