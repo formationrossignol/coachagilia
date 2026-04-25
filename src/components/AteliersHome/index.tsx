@@ -25,6 +25,14 @@ const ATELIERS = [
     levelVariant: 'orange' as const,
     duration: '~15 min',
   },
+  {
+    to: '/ateliers/grow-model',
+    title: 'Modèle GROW',
+    description: 'Ordonnez les 4 étapes du modèle de coaching GROW, puis associez des questions de coaching à chaque étape.',
+    level: 'Intermédiaire',
+    levelVariant: 'orange' as const,
+    duration: '~15 min',
+  },
 ]
 
 export function AteliersHome() {

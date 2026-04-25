@@ -11,6 +11,7 @@ import { AteliersHome } from './components/AteliersHome'
 import { ScrumGuideAtelier } from './components/ScrumGuideAtelier'
 import { ConflictAtelier } from './components/ConflictAtelier'
 import { DelegationPokerAtelier } from './components/DelegationPokerAtelier'
+import { GrowModelAtelier } from './components/GrowModelAtelier'
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/ateliers/scrum-guide" element={<ScrumGuideAtelier />} />
         <Route path="/ateliers/conflits" element={<ConflictAtelier />} />
         <Route path="/ateliers/delegation-poker" element={<DelegationPokerAtelier />} />
+        <Route path="/ateliers/grow-model" element={<GrowModelAtelier />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
