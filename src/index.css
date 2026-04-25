@@ -752,6 +752,8 @@ body {
 }
 .mm-slot--filled { border-style: solid; border-color: var(--color-border); }
 .mm-slot--hover { border-color: var(--color-primary); background: var(--color-surface-2); }
+.mm-slot--correct { border-color: var(--color-ok) !important; background: #14532d22; }
+.mm-slot--wrong { border-color: var(--color-danger) !important; background: #7f1d1d22; }
 .mm-slot__rank {
   font-size: 0.75rem;
   font-weight: 700;
@@ -998,3 +1000,64 @@ body {
 .ishi-root-item__label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.86rem; }
 .ishi-root-item__label input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
 .ishi-root-fields { display: flex; flex-direction: column; gap: 0.4rem; padding-left: 1.5rem; margin-top: 0.2rem; }
+
+/* TroikaConsultingAtelier */
+.tk-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  max-width: 1100px;
+  margin: 1rem auto 0;
+}
+.tk-col {
+  background: var(--color-surface);
+  border: 1.5px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: border-color 0.15s;
+}
+.tk-col:hover { border-color: var(--color-primary); }
+.tk-col__header {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-primary-hover);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
+  flex-shrink: 0;
+}
+.tk-col__cards { display: flex; flex-direction: column; gap: 0.3rem; }
+.tk-col__placeholder { color: var(--color-text-muted); font-size: 0.72rem; }
+.tk-intervention-card {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.28rem 0.45rem;
+  font-size: 0.72rem;
+  cursor: grab;
+  line-height: 1.35;
+  transition: background 0.12s, border-color 0.12s;
+}
+.tk-intervention-card:hover { background: var(--color-surface); border-color: var(--color-primary); }
+.tk-intervention-card--correct { border-color: var(--color-ok); background: #14532d22; }
+.tk-intervention-card--wrong { border-color: var(--color-danger); background: #7f1d1d22; }
+.tk-pool { max-width: 1100px; margin: 0.75rem auto 0; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.75rem 1rem; }
+.tk-simulation { max-width: 720px; margin: 1rem auto 0; display: flex; flex-direction: column; gap: 1.25rem; }
+.tk-scenario {
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+.tk-phase-block { display: flex; flex-direction: column; gap: 0.5rem; }
+.tk-phase-block h3 { font-size: 0.95rem; margin: 0; }
+.tk-phase-block p { font-size: 0.85rem; color: var(--color-text-muted); margin: 0; }
+.tk-input-group { display: flex; flex-direction: column; gap: 0.75rem; }

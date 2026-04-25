@@ -65,6 +65,14 @@ const ATELIERS = [
     levelVariant: 'orange' as const,
     duration: '~15 min',
   },
+  {
+    to: '/ateliers/troika-consulting',
+    title: 'Troika Consulting',
+    description: 'Ordonnez les 5 étapes de la pratique Troika Consulting, classez 15 interventions dans la bonne étape, puis simulez votre rôle de consultant.',
+    level: 'Avancé',
+    levelVariant: 'red' as const,
+    duration: '~20 min',
+  },
 ]
 
 export function AteliersHome() {

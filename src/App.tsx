@@ -16,6 +16,7 @@ import { StakeholderMappingAtelier } from './components/StakeholderMappingAtelie
 import { AskTellAtelier } from './components/AskTellAtelier'
 import { MovingMotivatorsAtelier } from './components/MovingMotivatorsAtelier'
 import { IshikawaAtelier } from './components/IshikawaAtelier'
+import { TroikaConsultingAtelier } from './components/TroikaConsultingAtelier'
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/ateliers/ask-vs-tell" element={<AskTellAtelier />} />
         <Route path="/ateliers/moving-motivators" element={<MovingMotivatorsAtelier />} />
         <Route path="/ateliers/ishikawa" element={<IshikawaAtelier />} />
+        <Route path="/ateliers/troika-consulting" element={<TroikaConsultingAtelier />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
