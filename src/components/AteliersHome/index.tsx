@@ -49,6 +49,14 @@ const ATELIERS = [
     levelVariant: 'red' as const,
     duration: '~20 min',
   },
+  {
+    to: '/ateliers/moving-motivators',
+    title: 'Moving Motivators',
+    description: 'Classez vos 10 motivateurs intrinsèques par importance, évaluez votre satisfaction pour chacun, puis construisez un plan d\'action pour les motivateurs critiques.',
+    level: 'Intermédiaire',
+    levelVariant: 'orange' as const,
+    duration: '~15 min',
+  },
 ]
 
 export function AteliersHome() {
