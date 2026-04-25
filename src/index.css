@@ -570,3 +570,83 @@ body {
 .dp-level-card--placed { background: transparent; border: none; padding: 0.25rem 0.5rem; width: 100%; }
 .dp-level-card__label { font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
 .dp-level-card__desc { font-size: 0.78rem; color: var(--color-text-muted); }
+
+/* ── Stakeholder Mapping Matrix ── */
+.sm-matrix {
+  display: grid;
+  grid-template-areas: "y grid" ". x";
+  grid-template-columns: 3rem 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 0.5rem;
+  max-width: 620px;
+  margin: 2rem auto;
+}
+.sm-matrix--phase2 { max-width: 820px; }
+.sm-axis-y {
+  grid-area: y;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  padding: 0.5rem 0;
+}
+.sm-axis-y__title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 0.72rem;
+}
+.sm-axis-x-spacer { grid-area: none; }
+.sm-axis-x {
+  grid-area: x;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  padding: 0 0.25rem;
+}
+.sm-axis-x__title { font-size: 0.72rem; }
+.sm-matrix-grid {
+  grid-area: grid;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.5rem;
+  min-height: 220px;
+}
+.sm-matrix-grid--phase2 { min-height: 280px; }
+.sm-zone {
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+.sm-zone--filled { border-style: solid; border-color: var(--color-primary); }
+.sm-zone--hover { border-color: var(--color-primary-hover); background: var(--color-surface-2); }
+.sm-zone--correct { border-color: var(--color-ok); background: #14532d33; }
+.sm-zone--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
+.sm-zone__placeholder { color: var(--color-text-muted); font-size: 1.1rem; }
+.sm-zone--drop {
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  border-style: solid;
+  border-color: var(--color-border);
+  overflow-y: auto;
+}
+.sm-zone-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-primary-hover);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.3rem;
+  width: 100%;
+}
+.sm-zone-cards { display: flex; flex-direction: column; gap: 0.4rem; width: 100%; }

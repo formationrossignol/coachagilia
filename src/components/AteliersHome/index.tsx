@@ -33,6 +33,14 @@ const ATELIERS = [
     levelVariant: 'orange' as const,
     duration: '~15 min',
   },
+  {
+    to: '/ateliers/stakeholder-mapping',
+    title: 'Stakeholder Mapping',
+    description: 'Associez la bonne stratégie à chaque quadrant de la matrice Influence / Intérêt, puis positionnez les parties prenantes.',
+    level: 'Intermédiaire',
+    levelVariant: 'orange' as const,
+    duration: '~15 min',
+  },
 ]
 
 export function AteliersHome() {
