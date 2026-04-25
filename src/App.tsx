@@ -9,6 +9,7 @@ import { QuizScreen } from './components/QuizScreen'
 import { QuizResults } from './components/QuizResults'
 import { AteliersHome } from './components/AteliersHome'
 import { ScrumGuideAtelier } from './components/ScrumGuideAtelier'
+import { ConflictAtelier } from './components/ConflictAtelier'
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/quiz/:examId/results" element={<QuizResults />} />
         <Route path="/ateliers" element={<AteliersHome />} />
         <Route path="/ateliers/scrum-guide" element={<ScrumGuideAtelier />} />
+        <Route path="/ateliers/conflits" element={<ConflictAtelier />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

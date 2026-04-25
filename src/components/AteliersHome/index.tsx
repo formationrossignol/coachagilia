@@ -9,6 +9,14 @@ const ATELIERS = [
     levelVariant: 'green' as const,
     duration: '~10 min',
   },
+  {
+    to: '/ateliers/conflits',
+    title: 'Gestion des conflits',
+    description: 'Positionnez les 5 modes du modèle Thomas-Kilmann sur le diagramme, puis associez des situations réelles à chaque mode.',
+    level: 'Intermédiaire',
+    levelVariant: 'orange' as const,
+    duration: '~15 min',
+  },
 ]
 
 export function AteliersHome() {

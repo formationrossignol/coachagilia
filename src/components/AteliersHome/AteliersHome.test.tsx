@@ -16,7 +16,13 @@ describe('AteliersHome', () => {
 
   it('links to /ateliers/scrum-guide', () => {
     render(<MemoryRouter><AteliersHome /></MemoryRouter>)
-    const link = screen.getByRole('link', { name: /démarrer/i })
-    expect(link).toHaveAttribute('href', '/ateliers/scrum-guide')
+    const links = screen.getAllByRole('link', { name: /démarrer/i })
+    const scrumLink = links.find(l => l.getAttribute('href') === '/ateliers/scrum-guide')
+    expect(scrumLink).toBeDefined()
+  })
+
+  it('renders the Gestion des conflits atelier card', () => {
+    render(<MemoryRouter><AteliersHome /></MemoryRouter>)
+    expect(screen.getByText('Gestion des conflits')).toBeInTheDocument()
   })
 })

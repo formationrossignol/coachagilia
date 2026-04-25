@@ -405,3 +405,107 @@ body {
 
 /* ── Atelier Actions ── */
 .scrum-actions { display: flex; gap: 0.75rem; }
+
+/* ── TKI Diagram (Phase 1) ── */
+.tki-diagram {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  grid-template-rows: 1fr 2rem;
+  gap: 0.5rem;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+.tki-axis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.tki-axis--y {
+  grid-column: 1;
+  grid-row: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.tki-axis--x {
+  grid-column: 2;
+  grid-row: 2;
+  text-align: center;
+}
+.tki-grid {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.5rem;
+  min-height: 240px;
+}
+.tki-cell--empty { background: transparent; }
+.tki-zone {
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+.tki-zone--filled { border-style: solid; border-color: var(--color-primary); }
+.tki-zone--hover { border-color: var(--color-primary-hover); background: var(--color-surface-2); }
+.tki-zone--correct { border-color: var(--color-ok); background: #14532d33; }
+.tki-zone--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
+
+/* ── TKI Columns (Phase 2) ── */
+.tki-columns {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+.tki-column {
+  flex: 1;
+  min-width: 160px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 200px;
+}
+.tki-column__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary-hover);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.tki-column__cards { display: flex; flex-direction: column; gap: 0.5rem; }
+.tki-situation-card {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem;
+  font-size: 0.82rem;
+  color: var(--color-text);
+  cursor: grab;
+  line-height: 1.4;
+  transition: border-color 0.15s;
+}
+.tki-situation-card:hover { border-color: var(--color-primary); }
+.tki-situation-card--correct { border-color: var(--color-ok); background: #14532d33; }
+.tki-situation-card--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
+.tki-pool {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+.tki-pool__cards { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; }
