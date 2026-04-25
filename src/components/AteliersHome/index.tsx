@@ -17,6 +17,14 @@ const ATELIERS = [
     levelVariant: 'orange' as const,
     duration: '~15 min',
   },
+  {
+    to: '/ateliers/delegation-poker',
+    title: 'Delegation Poker',
+    description: 'Ordonnez les 7 niveaux de délégation, puis associez des situations Scrum au niveau approprié.',
+    level: 'Intermédiaire',
+    levelVariant: 'orange' as const,
+    duration: '~15 min',
+  },
 ]
 
 export function AteliersHome() {

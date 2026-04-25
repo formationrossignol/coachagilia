@@ -509,3 +509,64 @@ body {
   margin: 1rem 0;
 }
 .tki-pool__cards { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; }
+
+/* ── Delegation Poker Scale (Phase 1) ── */
+.dp-scale {
+  max-width: 520px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.dp-scale__legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+.dp-scale-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.dp-scale-item__number {
+  width: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+.dp-zone {
+  flex: 1;
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.dp-zone--filled { border-style: solid; border-color: var(--color-primary); }
+.dp-zone--hover { border-color: var(--color-primary-hover); background: var(--color-surface-2); }
+.dp-zone--correct { border-color: var(--color-ok); background: #14532d33; }
+.dp-zone--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
+.dp-zone__placeholder { color: var(--color-text-muted); font-size: 1.1rem; margin: auto; }
+.dp-level-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.75rem;
+  cursor: grab;
+  transition: border-color 0.15s;
+  user-select: none;
+}
+.dp-level-card:hover { border-color: var(--color-primary); }
+.dp-level-card--placed { background: transparent; border: none; padding: 0.25rem 0.5rem; width: 100%; }
+.dp-level-card__label { font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
+.dp-level-card__desc { font-size: 0.78rem; color: var(--color-text-muted); }
