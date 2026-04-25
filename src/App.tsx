@@ -15,6 +15,7 @@ import { GrowModelAtelier } from './components/GrowModelAtelier'
 import { StakeholderMappingAtelier } from './components/StakeholderMappingAtelier'
 import { AskTellAtelier } from './components/AskTellAtelier'
 import { MovingMotivatorsAtelier } from './components/MovingMotivatorsAtelier'
+import { IshikawaAtelier } from './components/IshikawaAtelier'
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/ateliers/stakeholder-mapping" element={<StakeholderMappingAtelier />} />
         <Route path="/ateliers/ask-vs-tell" element={<AskTellAtelier />} />
         <Route path="/ateliers/moving-motivators" element={<MovingMotivatorsAtelier />} />
+        <Route path="/ateliers/ishikawa" element={<IshikawaAtelier />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

@@ -50,6 +50,14 @@ const ATELIERS = [
     duration: '~20 min',
   },
   {
+    to: '/ateliers/ishikawa',
+    title: 'Ishikawa (Fishbone)',
+    description: 'Positionnez les 6 catégories sur le diagramme en arête de poisson, classez 18 causes potentielles, puis identifiez les causes racines.',
+    level: 'Intermédiaire',
+    levelVariant: 'orange' as const,
+    duration: '~15 min',
+  },
+  {
     to: '/ateliers/moving-motivators',
     title: 'Moving Motivators',
     description: 'Classez vos 10 motivateurs intrinsèques par importance, évaluez votre satisfaction pour chacun, puis construisez un plan d\'action pour les motivateurs critiques.',

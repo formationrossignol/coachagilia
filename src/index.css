@@ -886,3 +886,115 @@ body {
   gap: 0.35rem;
 }
 .mm-result__item--risk { border-color: var(--color-danger); background: #7f1d1d1a; }
+
+/* ── IshikawaAtelier ── */
+.ishi-diagram { max-width: 920px; margin: 1.5rem auto; display: flex; flex-direction: column; gap: 0; }
+.ishi-branches-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+.ishi-branches-row--top { margin-bottom: 0.4rem; }
+.ishi-branches-row--bottom { margin-top: 0.4rem; }
+.ishi-spine {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.ishi-spine__line { flex: 1; height: 3px; background: var(--color-primary); border-radius: 2px; }
+.ishi-spine__effect {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+.ishi-branch {
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.6rem;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+.ishi-branch--filled { border-style: solid; border-color: var(--color-border); }
+.ishi-branch--hover { border-color: var(--color-primary); background: var(--color-surface-2); }
+.ishi-branch--correct { border-color: var(--color-ok); background: #14532d33; }
+.ishi-branch--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
+.ishi-branch__placeholder { color: var(--color-text-muted); font-size: 0.8rem; }
+.ishi-category-label {
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.3rem 0.65rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: grab;
+  transition: background 0.12s;
+}
+.ishi-category-label:hover { background: var(--color-surface); }
+.ishi-category-label--placed { background: transparent; border-color: transparent; cursor: grab; }
+
+.ishi-col {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: border-color 0.15s;
+}
+.ishi-col:hover { border-color: var(--color-primary); }
+.ishi-col__header {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-primary-hover);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.25rem;
+  flex-shrink: 0;
+}
+.ishi-col__cards { display: flex; flex-direction: column; gap: 0.3rem; }
+.ishi-col__placeholder { color: var(--color-text-muted); font-size: 0.74rem; }
+.ishi-cause-card {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.28rem 0.5rem;
+  font-size: 0.76rem;
+  cursor: grab;
+  transition: background 0.12s, border-color 0.12s;
+  line-height: 1.35;
+}
+.ishi-cause-card:hover { background: var(--color-surface); border-color: var(--color-primary); }
+.ishi-cause-card--correct { border-color: var(--color-ok); background: #14532d22; }
+.ishi-cause-card--wrong { border-color: var(--color-danger); background: #7f1d1d22; }
+.ishi-pool { max-width: 920px; margin: 0.75rem auto 0; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.75rem 1rem; }
+.ishi-pool__cards { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.ishi-root-section { max-width: 800px; margin: 1.5rem auto; display: flex; flex-direction: column; gap: 0.75rem; }
+.ishi-root-instructions { color: var(--color-text-muted); font-size: 0.88rem; }
+.ishi-root-category { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.75rem 1rem; }
+.ishi-root-category__title {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-primary-hover);
+  margin-bottom: 0.5rem;
+}
+.ishi-root-item { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.35rem 0; border-bottom: 1px solid var(--color-border); }
+.ishi-root-item:last-child { border-bottom: none; }
+.ishi-root-item--selected { background: var(--color-surface-2); border-radius: 6px; padding: 0.5rem; margin: 0 -0.25rem; }
+.ishi-root-item__label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.86rem; }
+.ishi-root-item__label input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+.ishi-root-fields { display: flex; flex-direction: column; gap: 0.4rem; padding-left: 1.5rem; margin-top: 0.2rem; }
