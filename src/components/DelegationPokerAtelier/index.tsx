@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
+import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 
 const LEVELS = [
   { key: 'tell',     label: 'Tell',     description: "Je décide et j'informe" },
@@ -181,6 +183,7 @@ export function DelegationPokerAtelier() {
 
   return (
     <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'delegation-poker')!} />
       <header className="atelier-header">
         <h1 className="atelier-title">Delegation Poker</h1>
         <p className="atelier-subtitle">

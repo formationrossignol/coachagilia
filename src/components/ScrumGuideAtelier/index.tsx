@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
+import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 
 // Zone ID → correct label
 const ZONE_ANSWERS: Record<string, string> = {
@@ -115,6 +117,7 @@ export function ScrumGuideAtelier() {
 
   return (
     <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'scrum-guide')!} />
       <header className="atelier-header">
         <h1 className="atelier-title">Le cadre Scrum</h1>
         <p className="atelier-subtitle">Replacez les 14 éléments du Scrum Guide au bon endroit.</p>

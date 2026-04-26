@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
+import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 
 const STEPS = [
   { key: 'goal',    label: 'Goal',    description: "Clarifier l'objectif" },
@@ -177,6 +179,7 @@ export function GrowModelAtelier() {
 
   return (
     <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'grow-model')!} />
       <header className="atelier-header">
         <h1 className="atelier-title">Modèle GROW</h1>
         <p className="atelier-subtitle">

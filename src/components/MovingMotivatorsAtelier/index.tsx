@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
+import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 
 type Motivator = 'curiosity' | 'honor' | 'acceptance' | 'mastery' | 'power' | 'freedom' | 'relatedness' | 'order' | 'goal' | 'status'
 type SatisfactionLevel = 'low' | 'medium' | 'high'
@@ -97,6 +99,7 @@ export function MovingMotivatorsAtelier() {
 
   return (
     <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'moving-motivators')!} />
       <header className="atelier-header">
         <h1 className="atelier-title">Moving Motivators</h1>
         <p className="atelier-subtitle">

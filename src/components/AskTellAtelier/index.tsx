@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
+import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 
 const ZONE_ANSWERS: Record<string, string> = {
   'tell': 'Posture directive',
@@ -200,6 +202,7 @@ export function AskTellAtelier() {
 
   return (
     <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'ask-vs-tell')!} />
       <header className="atelier-header">
         <h1 className="atelier-title">Ask vs Tell — Posture de coaching</h1>
         <p className="atelier-subtitle">

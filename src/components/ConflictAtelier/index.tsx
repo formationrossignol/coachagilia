@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
+import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 
 const DIAGRAM_ANSWERS: Record<string, string> = {
   'top-left':     'Compétition',
@@ -158,6 +160,7 @@ export function ConflictAtelier() {
 
   return (
     <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'thomas-kilmann')!} />
       <header className="atelier-header">
         <h1 className="atelier-title">Gestion des conflits — Thomas-Kilmann</h1>
         <p className="atelier-subtitle">

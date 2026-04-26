@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
+import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 
 type TroikaStep = 'problem' | 'clarification' | 'consultants' | 'reaction' | 'action'
 type Phase = 1 | 2 | 3
@@ -155,6 +157,7 @@ export function TroikaConsultingAtelier() {
 
   return (
     <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'troika-consulting')!} />
       <header className="atelier-header">
         <h1 className="atelier-title">Troika Consulting</h1>
         <p className="atelier-subtitle">

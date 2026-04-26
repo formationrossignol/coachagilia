@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
+import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 
 type IshikawaCategory = 'people' | 'process' | 'tools' | 'product' | 'environment' | 'management'
 type Phase = 1 | 2 | 3
@@ -194,6 +196,7 @@ export function IshikawaAtelier() {
 
   return (
     <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'ishikawa')!} />
       <header className="atelier-header">
         <h1 className="atelier-title">Diagramme d'Ishikawa</h1>
         <p className="atelier-subtitle">
