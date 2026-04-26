@@ -1,101 +1,31 @@
-import { Link } from 'react-router-dom'
-
-const ATELIERS = [
-  {
-    to: '/ateliers/scrum-guide',
-    title: 'Le cadre Scrum',
-    description: 'Replacez les rôles, événements, artefacts et engagements du Scrum Guide au bon endroit sur le diagramme.',
-    level: 'Débutant',
-    levelVariant: 'green' as const,
-    duration: '~10 min',
-  },
-  {
-    to: '/ateliers/conflits',
-    title: 'Gestion des conflits',
-    description: 'Positionnez les 5 modes du modèle Thomas-Kilmann sur le diagramme, puis associez des situations réelles à chaque mode.',
-    level: 'Intermédiaire',
-    levelVariant: 'orange' as const,
-    duration: '~15 min',
-  },
-  {
-    to: '/ateliers/delegation-poker',
-    title: 'Delegation Poker',
-    description: 'Ordonnez les 7 niveaux de délégation, puis associez des situations Scrum au niveau approprié.',
-    level: 'Intermédiaire',
-    levelVariant: 'orange' as const,
-    duration: '~15 min',
-  },
-  {
-    to: '/ateliers/grow-model',
-    title: 'Modèle GROW',
-    description: 'Ordonnez les 4 étapes du modèle de coaching GROW, puis associez des questions de coaching à chaque étape.',
-    level: 'Intermédiaire',
-    levelVariant: 'orange' as const,
-    duration: '~15 min',
-  },
-  {
-    to: '/ateliers/stakeholder-mapping',
-    title: 'Stakeholder Mapping',
-    description: 'Associez la bonne stratégie à chaque quadrant de la matrice Influence / Intérêt, puis positionnez les parties prenantes.',
-    level: 'Intermédiaire',
-    levelVariant: 'orange' as const,
-    duration: '~15 min',
-  },
-  {
-    to: '/ateliers/ask-vs-tell',
-    title: 'Ask vs Tell',
-    description: "Identifiez la bonne posture de coaching, classez des situations selon qu'elles appellent une posture directive ou de coaching, puis reformulez des phrases directives en questions ouvertes.",
-    level: 'Avancé',
-    levelVariant: 'red' as const,
-    duration: '~20 min',
-  },
-  {
-    to: '/ateliers/ishikawa',
-    title: 'Ishikawa (Fishbone)',
-    description: 'Positionnez les 6 catégories sur le diagramme en arête de poisson, classez 18 causes potentielles, puis identifiez les causes racines.',
-    level: 'Intermédiaire',
-    levelVariant: 'orange' as const,
-    duration: '~15 min',
-  },
-  {
-    to: '/ateliers/moving-motivators',
-    title: 'Moving Motivators',
-    description: 'Classez vos 10 motivateurs intrinsèques par importance, évaluez votre satisfaction pour chacun, puis construisez un plan d\'action pour les motivateurs critiques.',
-    level: 'Intermédiaire',
-    levelVariant: 'orange' as const,
-    duration: '~15 min',
-  },
-  {
-    to: '/ateliers/troika-consulting',
-    title: 'Troika Consulting',
-    description: 'Ordonnez les 5 étapes de la pratique Troika Consulting, classez 15 interventions dans la bonne étape, puis simulez votre rôle de consultant.',
-    level: 'Avancé',
-    levelVariant: 'red' as const,
-    duration: '~20 min',
-  },
-]
+import { useState } from 'react'
+import { WORKSHOP_CATEGORIES } from '../../data/workshops/categories'
+import { WORKSHOP_DEFINITIONS } from '../../data/workshops/definitions'
+import { WorkshopCategoryNav } from '../WorkshopCategoryNav'
+import { WorkshopCard } from '../WorkshopCard'
+import type { WorkshopCategorySlug } from '../../data/workshops/types'
 
 export function AteliersHome() {
+  const [activeCategory, setActiveCategory] = useState<WorkshopCategorySlug | null>(null)
+
+  const visible = activeCategory
+    ? WORKSHOP_DEFINITIONS.filter(w => w.categorySlug === activeCategory)
+    : WORKSHOP_DEFINITIONS
+
   return (
     <div className="ateliers-home">
       <header className="selector-header">
         <h1>Ateliers</h1>
         <p>Ancrez les concepts par la pratique : glisser-déposer, puzzles, cartes.</p>
       </header>
+      <WorkshopCategoryNav
+        categories={WORKSHOP_CATEGORIES}
+        workshops={WORKSHOP_DEFINITIONS}
+        activeCategory={activeCategory}
+        onSelect={setActiveCategory}
+      />
       <div className="ateliers-grid">
-        {ATELIERS.map(({ to, title, description, level, levelVariant, duration }) => (
-          <article key={to} className="atelier-card">
-            <div className="scenario-card__meta">
-              <span className={`badge badge--${levelVariant}`}>{level}</span>
-              <span className="scenario-card__duration">{duration}</span>
-            </div>
-            <h2 className="scenario-card__title">{title}</h2>
-            <p className="scenario-card__theme">{description}</p>
-            <Link to={to} className="btn btn--primary">
-              Démarrer
-            </Link>
-          </article>
-        ))}
+        {visible.map(w => <WorkshopCard key={w.id} workshop={w} />)}
       </div>
     </div>
   )

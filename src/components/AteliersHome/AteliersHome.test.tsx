@@ -1,28 +1,38 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { AteliersHome } from './index'
+import { describe, it, expect } from 'vitest'
+import { AteliersHome } from '.'
 
 describe('AteliersHome', () => {
-  it('renders at least one atelier card', () => {
+  it('renders all available workshops by default', () => {
     render(<MemoryRouter><AteliersHome /></MemoryRouter>)
-    expect(screen.getAllByRole('article').length).toBeGreaterThan(0)
+    expect(screen.getByText('SBI — Situation Behavior Impact')).toBeInTheDocument()
+    expect(screen.getByText('TRIZ — Anti-Goal')).toBeInTheDocument()
+    expect(screen.getByText('Troika Consulting')).toBeInTheDocument()
   })
 
-  it('shows the Scrum Guide atelier card', () => {
+  it('renders category navigation', () => {
     render(<MemoryRouter><AteliersHome /></MemoryRouter>)
-    expect(screen.getByText(/le cadre scrum/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Facilitation/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Management 3\.0/ })).toBeInTheDocument()
   })
 
-  it('links to /ateliers/scrum-guide', () => {
+  it('filters to facilitation category workshops only', () => {
     render(<MemoryRouter><AteliersHome /></MemoryRouter>)
-    const links = screen.getAllByRole('link', { name: /démarrer/i })
-    const scrumLink = links.find(l => l.getAttribute('href') === '/ateliers/scrum-guide')
-    expect(scrumLink).toBeDefined()
+    fireEvent.click(screen.getByRole('button', { name: /Facilitation/ }))
+    expect(screen.getByText('Troika Consulting')).toBeInTheDocument()
+    expect(screen.queryByText('SBI — Situation Behavior Impact')).not.toBeInTheDocument()
   })
 
-  it('renders the Gestion des conflits atelier card', () => {
+  it('resets filter when active category clicked again', () => {
     render(<MemoryRouter><AteliersHome /></MemoryRouter>)
-    expect(screen.getByText('Gestion des conflits')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /Facilitation/ }))
+    fireEvent.click(screen.getByRole('button', { name: /Facilitation/ }))
+    expect(screen.getByText('SBI — Situation Behavior Impact')).toBeInTheDocument()
+  })
+
+  it('shows coming soon cards', () => {
+    render(<MemoryRouter><AteliersHome /></MemoryRouter>)
+    expect(screen.getAllByText('Bientôt').length).toBeGreaterThan(0)
   })
 })
