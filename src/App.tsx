@@ -8,6 +8,7 @@ import { QuizSelector } from './components/QuizSelector'
 import { QuizScreen } from './components/QuizScreen'
 import { QuizResults } from './components/QuizResults'
 import { AteliersHome } from './components/AteliersHome'
+import { WorkshopCategoryPage } from './components/WorkshopCategoryPage'
 import { ScrumGuideAtelier } from './components/ScrumGuideAtelier'
 import { ConflictAtelier } from './components/ConflictAtelier'
 import { DelegationPokerAtelier } from './components/DelegationPokerAtelier'
@@ -17,6 +18,8 @@ import { AskTellAtelier } from './components/AskTellAtelier'
 import { MovingMotivatorsAtelier } from './components/MovingMotivatorsAtelier'
 import { IshikawaAtelier } from './components/IshikawaAtelier'
 import { TroikaConsultingAtelier } from './components/TroikaConsultingAtelier'
+import { SBIAtelier } from './components/SBIAtelier'
+import { TRIZAtelier } from './components/TRIZAtelier'
 
 export default function App() {
   return (
@@ -40,6 +43,9 @@ export default function App() {
         <Route path="/ateliers/moving-motivators" element={<MovingMotivatorsAtelier />} />
         <Route path="/ateliers/ishikawa" element={<IshikawaAtelier />} />
         <Route path="/ateliers/troika-consulting" element={<TroikaConsultingAtelier />} />
+        <Route path="/ateliers/sbi" element={<SBIAtelier />} />
+        <Route path="/ateliers/triz" element={<TRIZAtelier />} />
+        <Route path="/ateliers/categories/:slug" element={<WorkshopCategoryPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
