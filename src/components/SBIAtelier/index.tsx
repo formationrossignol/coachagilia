@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 type Phase = 1 | 2 | 3
 type SBIType = 'situation' | 'behavior' | 'impact'
@@ -66,6 +68,8 @@ export function SBIAtelier() {
   const [phase, setPhase] = useState<Phase>(1)
 
   const [ranking, setRanking] = useState<(SBIType | null)[]>(Array(3).fill(null))
+  const isDirty = phase > 1 || ranking.some(b => b !== null)
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
   const [phase1Result, setPhase1Result] = useState<Record<number, boolean> | null>(null)
 
   const [assignments, setAssignments] = useState<Record<string, SBIType>>({})
@@ -148,6 +152,7 @@ export function SBIAtelier() {
   const finalBadgeGreen = phase2Score !== null && phase2Score >= 10 && phase3AllValid
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'sbi')!} />
       <header className="atelier-header">
@@ -382,5 +387,17 @@ export function SBIAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }
