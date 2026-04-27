@@ -169,3 +169,16 @@ describe('IshikawaAtelier — Phase 3', () => {
     expect(document.querySelector('[data-root-cause="c5"] input[type="checkbox"]')).toHaveProperty('disabled', true)
   })
 })
+
+describe('IshikawaAtelier — Structure fishbone', () => {
+  it('renders SVG avec colonne vertébrale, queue, tête et 6 zones de dépôt', () => {
+    render(<IshikawaAtelier />)
+    const svg = document.querySelector('.ishi-fishbone__svg')
+    expect(svg).toBeInTheDocument()
+    expect(svg!.querySelector('line[x1="70"][y1="140"][x2="680"][y2="140"]')).toBeInTheDocument()
+    expect(svg!.querySelector('polyline')).toBeInTheDocument()
+    expect(svg!.querySelector('path')).toBeInTheDocument()
+    expect(document.querySelector('.ishi-effect-label')).toBeInTheDocument()
+    expect(document.querySelectorAll('[data-branch]')).toHaveLength(6)
+  })
+})
