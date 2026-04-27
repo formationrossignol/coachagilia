@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 type Phase = 1 | 2 | 3 | 4
 type TrizCategory = 'communication' | 'organization' | 'quality' | 'collaboration' | 'leadership'
@@ -70,6 +72,8 @@ export function TRIZAtelier() {
   const [phase, setPhase] = useState<Phase>(1)
 
   const [antiGoal, setAntiGoal] = useState('')
+  const isDirty = phase > 1 || antiGoal.trim().length > 0
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
   const [phase1Eval, setPhase1Eval] = useState<AntiGoalEval | null>(null)
 
   const [behaviorAssignments, setBehaviorAssignments] = useState<Record<string, TrizCategory>>({})
@@ -138,6 +142,7 @@ export function TRIZAtelier() {
   const FREQ_LABEL: Record<Frequency, string> = { low: 'Faible', medium: 'Moyen', high: 'Élevé' }
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'triz')!} />
       <header className="atelier-header">
@@ -385,5 +390,17 @@ export function TRIZAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }
