@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 type IshikawaCategory = 'people' | 'process' | 'tools' | 'product' | 'environment' | 'management'
 type Phase = 1 | 2 | 3
@@ -127,6 +129,8 @@ export function IshikawaAtelier() {
 
   // Phase 1
   const [branchAssignments, setBranchAssignments] = useState<Partial<Record<string, IshikawaCategory>>>({})
+  const isDirty = phase > 1 || Object.keys(branchAssignments).length > 0
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
   const [phase1Result, setPhase1Result] = useState<Partial<Record<string, boolean>> | null>(null)
 
   // Phase 2
@@ -224,6 +228,7 @@ export function IshikawaAtelier() {
   }
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'ishikawa')!} />
       <header className="atelier-header">
@@ -434,5 +439,17 @@ export function IshikawaAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }
