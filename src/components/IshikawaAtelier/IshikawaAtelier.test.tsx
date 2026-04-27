@@ -1,5 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import { IshikawaAtelier } from '.'
 
 const CORRECT_PLACEMENTS = [
@@ -16,6 +18,14 @@ const CAUSES = [
   { id: 'c16', category: 'management' },  { id: 'c17', category: 'management' },  { id: 'c18', category: 'management' },
 ] as const
 
+function renderIshikawaAtelier() {
+  const router = createMemoryRouter(
+    [{ path: '/ateliers/ishikawa', element: <IshikawaAtelier /> }],
+    { initialEntries: ['/ateliers/ishikawa'] }
+  )
+  return render(<RouterProvider router={router} />)
+}
+
 function placePhase1Correctly() {
   CORRECT_PLACEMENTS.forEach(([branchId, category]) => {
     fireEvent.dragStart(document.querySelector(`[data-category="${category}"]`)!)
@@ -31,7 +41,7 @@ function placeAllCausesCorrectly() {
 }
 
 function reachPhase2() {
-  render(<IshikawaAtelier />)
+  renderIshikawaAtelier()
   placePhase1Correctly()
   fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
   fireEvent.click(screen.getByRole('button', { name: /Phase suivante/ }))
@@ -46,23 +56,23 @@ function reachPhase3() {
 
 describe('IshikawaAtelier — Phase 1', () => {
   it('renders 6 category labels in palette', () => {
-    render(<IshikawaAtelier />)
+    renderIshikawaAtelier()
     expect(document.querySelectorAll('[data-category]')).toHaveLength(6)
   })
 
   it('disables Vérifier when not all branches filled', () => {
-    render(<IshikawaAtelier />)
+    renderIshikawaAtelier()
     expect(screen.getByRole('button', { name: 'Vérifier' })).toBeDisabled()
   })
 
   it('enables Vérifier after all 6 labels placed', () => {
-    render(<IshikawaAtelier />)
+    renderIshikawaAtelier()
     placePhase1Correctly()
     expect(screen.getByRole('button', { name: 'Vérifier' })).not.toBeDisabled()
   })
 
   it('shows 6/6 and Phase suivante on correct placement', () => {
-    render(<IshikawaAtelier />)
+    renderIshikawaAtelier()
     placePhase1Correctly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     expect(screen.getByText(/6 \/ 6 correct/)).toBeInTheDocument()
@@ -70,7 +80,7 @@ describe('IshikawaAtelier — Phase 1', () => {
   })
 
   it('shows Réessayer on wrong placement', () => {
-    render(<IshikawaAtelier />)
+    renderIshikawaAtelier()
     const wrong = [
       ['b0', 'management'], ['b1', 'environment'], ['b2', 'product'],
       ['b3', 'tools'], ['b4', 'process'], ['b5', 'people'],
@@ -172,7 +182,7 @@ describe('IshikawaAtelier — Phase 3', () => {
 
 describe('IshikawaAtelier — Structure fishbone', () => {
   it('renders SVG avec colonne vertébrale, queue, tête et 6 zones de dépôt', () => {
-    render(<IshikawaAtelier />)
+    renderIshikawaAtelier()
     const svg = document.querySelector('.ishi-fishbone__svg')
     expect(svg).toBeInTheDocument()
     expect(svg!.querySelector('line[x1="70"][y1="140"][x2="680"][y2="140"]')).toBeInTheDocument()

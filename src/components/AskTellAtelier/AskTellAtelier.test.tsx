@@ -1,6 +1,16 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import { AskTellAtelier } from '.'
+
+function renderAskTellAtelier() {
+  const router = createMemoryRouter(
+    [{ path: '/ateliers/ask-vs-tell', element: <AskTellAtelier /> }],
+    { initialEntries: ['/ateliers/ask-vs-tell'] }
+  )
+  return render(<RouterProvider router={router} />)
+}
 
 function placePhase1Correctly() {
   fireEvent.dragStart(screen.getByText('Posture directive'))
@@ -11,24 +21,24 @@ function placePhase1Correctly() {
 
 describe('AskTellAtelier — Phase 1', () => {
   it('renders 2 stance labels in the palette', () => {
-    render(<AskTellAtelier />)
+    renderAskTellAtelier()
     expect(screen.getByText('Posture directive')).toBeInTheDocument()
     expect(screen.getByText('Posture de coaching')).toBeInTheDocument()
   })
 
   it('disables Vérifier when not all zones are filled', () => {
-    render(<AskTellAtelier />)
+    renderAskTellAtelier()
     expect(screen.getByRole('button', { name: 'Vérifier' })).toBeDisabled()
   })
 
   it('enables Vérifier after both labels are placed', () => {
-    render(<AskTellAtelier />)
+    renderAskTellAtelier()
     placePhase1Correctly()
     expect(screen.getByRole('button', { name: 'Vérifier' })).not.toBeDisabled()
   })
 
   it('shows 2/2 and Phase suivante on perfect placement', () => {
-    render(<AskTellAtelier />)
+    renderAskTellAtelier()
     placePhase1Correctly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     expect(screen.getByText(/2 \/ 2 correct/)).toBeInTheDocument()
@@ -36,7 +46,7 @@ describe('AskTellAtelier — Phase 1', () => {
   })
 
   it('shows Réessayer on wrong placement', () => {
-    render(<AskTellAtelier />)
+    renderAskTellAtelier()
     fireEvent.dragStart(screen.getByText('Posture directive'))
     fireEvent.drop(document.querySelector('[data-zone="ask"]')!)
     fireEvent.dragStart(screen.getByText('Posture de coaching'))
@@ -49,7 +59,7 @@ describe('AskTellAtelier — Phase 1', () => {
 
 describe('AskTellAtelier — Phase 2', () => {
   function reachPhase2() {
-    render(<AskTellAtelier />)
+    renderAskTellAtelier()
     placePhase1Correctly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     fireEvent.click(screen.getByRole('button', { name: /Phase suivante/ }))
@@ -94,7 +104,7 @@ describe('AskTellAtelier — Phase 2', () => {
 
 describe('AskTellAtelier — Phase 3', () => {
   function reachPhase3() {
-    render(<AskTellAtelier />)
+    renderAskTellAtelier()
     placePhase1Correctly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     fireEvent.click(screen.getByRole('button', { name: /Phase suivante/ }))

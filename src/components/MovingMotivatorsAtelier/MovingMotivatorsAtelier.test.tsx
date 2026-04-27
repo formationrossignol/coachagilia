@@ -1,8 +1,18 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import { MovingMotivatorsAtelier } from '.'
 
 const MOTIVATOR_IDS = ['curiosity', 'honor', 'acceptance', 'mastery', 'power', 'freedom', 'relatedness', 'order', 'goal', 'status'] as const
+
+function renderMovingMotivatorsAtelier() {
+  const router = createMemoryRouter(
+    [{ path: '/ateliers/moving-motivators', element: <MovingMotivatorsAtelier /> }],
+    { initialEntries: ['/ateliers/moving-motivators'] }
+  )
+  return render(<RouterProvider router={router} />)
+}
 
 function placeAllInSlots() {
   MOTIVATOR_IDS.forEach((m, i) => {
@@ -12,7 +22,7 @@ function placeAllInSlots() {
 }
 
 function reachPhase2() {
-  render(<MovingMotivatorsAtelier />)
+  renderMovingMotivatorsAtelier()
   placeAllInSlots()
   fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
   fireEvent.click(screen.getByRole('button', { name: /Phase suivante/ }))
@@ -41,37 +51,37 @@ function reachPhase3NoCriticals() {
 
 describe('MovingMotivatorsAtelier — Phase 1', () => {
   it('renders 10 motivator cards in the pool initially', () => {
-    render(<MovingMotivatorsAtelier />)
+    renderMovingMotivatorsAtelier()
     expect(document.querySelectorAll('[data-motivator]')).toHaveLength(10)
   })
 
   it('disables Vérifier when not all placed', () => {
-    render(<MovingMotivatorsAtelier />)
+    renderMovingMotivatorsAtelier()
     expect(screen.getByRole('button', { name: 'Vérifier' })).toBeDisabled()
   })
 
   it('enables Vérifier after all 10 cards are placed', () => {
-    render(<MovingMotivatorsAtelier />)
+    renderMovingMotivatorsAtelier()
     placeAllInSlots()
     expect(screen.getByRole('button', { name: 'Vérifier' })).not.toBeDisabled()
   })
 
   it('shows "Classement enregistré" after clicking Vérifier', () => {
-    render(<MovingMotivatorsAtelier />)
+    renderMovingMotivatorsAtelier()
     placeAllInSlots()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     expect(screen.getByText(/Classement enregistré/)).toBeInTheDocument()
   })
 
   it('shows Phase suivante button after clicking Vérifier', () => {
-    render(<MovingMotivatorsAtelier />)
+    renderMovingMotivatorsAtelier()
     placeAllInSlots()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     expect(screen.getByRole('button', { name: /Phase suivante/ })).toBeInTheDocument()
   })
 
   it('moves card to slot when dropped', () => {
-    render(<MovingMotivatorsAtelier />)
+    renderMovingMotivatorsAtelier()
     fireEvent.dragStart(document.querySelector('[data-motivator="curiosity"]')!)
     fireEvent.drop(document.querySelector('[data-slot="0"]')!)
     expect(document.querySelector('[data-slot="0"] [data-motivator="curiosity"]')).toBeInTheDocument()

@@ -1,5 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import { TroikaConsultingAtelier } from '.'
 
 const CORRECT_ORDER = ['problem', 'clarification', 'consultants', 'reaction', 'action'] as const
@@ -22,6 +24,14 @@ const INTERVENTIONS = [
   { id: 'i15', step: 'action' },
 ] as const
 
+function renderTroikaConsultingAtelier() {
+  const router = createMemoryRouter(
+    [{ path: '/ateliers/troika-consulting', element: <TroikaConsultingAtelier /> }],
+    { initialEntries: ['/ateliers/troika-consulting'] }
+  )
+  return render(<RouterProvider router={router} />)
+}
+
 function placePhase1Correctly() {
   CORRECT_ORDER.forEach((step, i) => {
     fireEvent.dragStart(document.querySelector(`[data-step="${step}"]`)!)
@@ -37,7 +47,7 @@ function placeAllInterventionsCorrectly() {
 }
 
 function reachPhase2() {
-  render(<TroikaConsultingAtelier />)
+  renderTroikaConsultingAtelier()
   placePhase1Correctly()
   fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
   fireEvent.click(screen.getByRole('button', { name: /Phase suivante/ }))
@@ -52,23 +62,23 @@ function reachPhase3() {
 
 describe('TroikaConsultingAtelier — Phase 1', () => {
   it('renders 5 step cards in pool initially', () => {
-    render(<TroikaConsultingAtelier />)
+    renderTroikaConsultingAtelier()
     expect(document.querySelectorAll('[data-step]')).toHaveLength(5)
   })
 
   it('disables Vérifier when not all slots filled', () => {
-    render(<TroikaConsultingAtelier />)
+    renderTroikaConsultingAtelier()
     expect(screen.getByRole('button', { name: 'Vérifier' })).toBeDisabled()
   })
 
   it('enables Vérifier after all 5 steps placed', () => {
-    render(<TroikaConsultingAtelier />)
+    renderTroikaConsultingAtelier()
     placePhase1Correctly()
     expect(screen.getByRole('button', { name: 'Vérifier' })).not.toBeDisabled()
   })
 
   it('shows 5/5 and Phase suivante on correct placement', () => {
-    render(<TroikaConsultingAtelier />)
+    renderTroikaConsultingAtelier()
     placePhase1Correctly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     expect(screen.getByText(/5 \/ 5 correct/)).toBeInTheDocument()
@@ -76,7 +86,7 @@ describe('TroikaConsultingAtelier — Phase 1', () => {
   })
 
   it('shows Réessayer on wrong placement', () => {
-    render(<TroikaConsultingAtelier />)
+    renderTroikaConsultingAtelier()
     const wrongOrder = [...CORRECT_ORDER].reverse()
     wrongOrder.forEach((step, i) => {
       fireEvent.dragStart(document.querySelector(`[data-step="${step}"]`)!)
