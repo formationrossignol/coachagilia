@@ -48,4 +48,24 @@ describe('quizStore', () => {
     expect(useQuizStore.getState().status).toBe('idle')
     expect(useQuizStore.getState().exam).toBeNull()
   })
+
+  it('toggleFlag adds a question id to flaggedQuestions', () => {
+    useQuizStore.getState().startQuiz('exam-2')
+    useQuizStore.getState().toggleFlag('e2-q1')
+    expect(useQuizStore.getState().flaggedQuestions).toContain('e2-q1')
+  })
+
+  it('toggleFlag removes an already-flagged question id', () => {
+    useQuizStore.getState().startQuiz('exam-2')
+    useQuizStore.getState().toggleFlag('e2-q1')
+    useQuizStore.getState().toggleFlag('e2-q1')
+    expect(useQuizStore.getState().flaggedQuestions).toEqual([])
+  })
+
+  it('resetQuiz clears flaggedQuestions', () => {
+    useQuizStore.getState().startQuiz('exam-2')
+    useQuizStore.getState().toggleFlag('e2-q1')
+    useQuizStore.getState().resetQuiz()
+    expect(useQuizStore.getState().flaggedQuestions).toEqual([])
+  })
 })

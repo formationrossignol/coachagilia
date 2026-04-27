@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import { QuizScreen } from './index'
 import { useQuizStore } from '../../store/quizStore'
 
@@ -15,13 +16,11 @@ afterEach(() => {
 })
 
 function renderQuizScreen() {
-  return render(
-    <MemoryRouter initialEntries={['/quiz/exam-2']}>
-      <Routes>
-        <Route path="/quiz/:examId" element={<QuizScreen />} />
-      </Routes>
-    </MemoryRouter>
+  const router = createMemoryRouter(
+    [{ path: '/quiz/:examId', element: <QuizScreen /> }],
+    { initialEntries: ['/quiz/exam-2'] }
   )
+  return render(<RouterProvider router={router} />)
 }
 
 describe('QuizScreen', () => {
