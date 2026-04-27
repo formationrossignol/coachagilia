@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 type Motivator = 'curiosity' | 'honor' | 'acceptance' | 'mastery' | 'power' | 'freedom' | 'relatedness' | 'order' | 'goal' | 'status'
 type SatisfactionLevel = 'low' | 'medium' | 'high'
@@ -43,6 +45,8 @@ function isFirstStepClear(text: string): boolean {
 export function MovingMotivatorsAtelier() {
   const [phase, setPhase] = useState<Phase>(1)
   const [ranking, setRanking] = useState<(Motivator | null)[]>(Array(10).fill(null))
+  const isDirty = phase > 1 || ranking.some(m => m !== null)
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
   const [phase1Verified, setPhase1Verified] = useState(false)
   const [satisfaction, setSatisfaction] = useState<Partial<Record<Motivator, SatisfactionLevel>>>({})
   const [actionPlan, setActionPlan] = useState<Partial<Record<Motivator, { action: string; firstStep: string }>>>({})
@@ -98,6 +102,7 @@ export function MovingMotivatorsAtelier() {
   const top3 = topRanking.slice(0, 3)
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'moving-motivators')!} />
       <header className="atelier-header">
@@ -331,5 +336,17 @@ export function MovingMotivatorsAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }
