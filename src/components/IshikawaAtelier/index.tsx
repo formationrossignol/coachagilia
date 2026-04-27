@@ -5,13 +5,13 @@ import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 type IshikawaCategory = 'people' | 'process' | 'tools' | 'product' | 'environment' | 'management'
 type Phase = 1 | 2 | 3
 
-const BRANCH_LIST: { id: string; category: IshikawaCategory; label: string; row: 'top' | 'bottom' }[] = [
-  { id: 'b0', category: 'people',      label: 'People',      row: 'top' },
-  { id: 'b1', category: 'process',     label: 'Process',     row: 'top' },
-  { id: 'b2', category: 'tools',       label: 'Tools',       row: 'top' },
-  { id: 'b3', category: 'product',     label: 'Product',     row: 'bottom' },
-  { id: 'b4', category: 'environment', label: 'Environment', row: 'bottom' },
-  { id: 'b5', category: 'management',  label: 'Management',  row: 'bottom' },
+const BRANCH_LIST: { id: string; category: IshikawaCategory; label: string }[] = [
+  { id: 'b0', category: 'people',      label: 'People' },
+  { id: 'b1', category: 'process',     label: 'Process' },
+  { id: 'b2', category: 'tools',       label: 'Tools' },
+  { id: 'b3', category: 'product',     label: 'Product' },
+  { id: 'b4', category: 'environment', label: 'Environment' },
+  { id: 'b5', category: 'management',  label: 'Management' },
 ]
 
 const CATEGORY_META: Record<IshikawaCategory, { label: string }> = {
