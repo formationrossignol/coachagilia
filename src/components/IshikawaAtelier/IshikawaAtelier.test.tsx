@@ -180,5 +180,6 @@ describe('IshikawaAtelier — Structure fishbone', () => {
     expect(svg!.querySelector('path')).toBeInTheDocument()
     expect(document.querySelector('.ishi-effect-label')).toBeInTheDocument()
     expect(document.querySelectorAll('[data-branch]')).toHaveLength(6)
+    expect(svg!.querySelectorAll('line')).toHaveLength(7) // 1 spine + 6 bones
   })
 })

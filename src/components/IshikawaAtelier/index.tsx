@@ -25,7 +25,9 @@ const CATEGORY_META: Record<IshikawaCategory, { label: string }> = {
 
 const CATEGORY_IDS = BRANCH_LIST.map(b => b.category)
 
-const BRANCH_POSITIONS: Record<string, { left: string; top: string }> = {
+type BranchId = typeof BRANCH_LIST[number]['id']
+
+const BRANCH_POSITIONS: Record<BranchId, { left: string; top: string }> = {
   b0: { left: '15.85%', top: '10.71%' },
   b1: { left: '36.59%', top: '10.71%' },
   b2: { left: '57.93%', top: '10.71%' },
