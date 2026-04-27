@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 const ZONE_ANSWERS: Record<string, string> = {
   'tell': 'Posture directive',
@@ -101,6 +103,8 @@ export function AskTellAtelier() {
   const [stanceZones, setStanceZones] = useState<Record<string, string>>(() =>
     Object.fromEntries(ZONE_IDS.map(id => [id, '']))
   )
+  const isDirty = phase > 1 || Object.values(stanceZones).some(Boolean)
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
   const [phase1Result, setPhase1Result] = useState<Record<string, boolean> | null>(null)
 
   // Phase 2
@@ -201,6 +205,7 @@ export function AskTellAtelier() {
   const finalBadgeGreen = phase2Score !== null && phase2Score >= 12 && phase3Score !== null && phase3Score >= 5
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'ask-vs-tell')!} />
       <header className="atelier-header">
@@ -399,5 +404,17 @@ export function AskTellAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }
