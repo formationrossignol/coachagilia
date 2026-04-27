@@ -890,46 +890,52 @@ body {
 .mm-result__item--risk { border-color: var(--color-danger); background: #7f1d1d1a; }
 
 /* ── IshikawaAtelier ── */
-.ishi-diagram { max-width: 920px; margin: 1.5rem auto; display: flex; flex-direction: column; gap: 0; }
-.ishi-branches-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
+.ishi-fishbone {
+  position: relative;
+  max-width: 860px;
+  margin: 1.5rem auto;
 }
-.ishi-branches-row--top { margin-bottom: 0.4rem; }
-.ishi-branches-row--bottom { margin-top: 0.4rem; }
-.ishi-spine {
-  display: flex;
-  align-items: center;
-  gap: 0;
+.ishi-fishbone__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  overflow: visible;
 }
-.ishi-spine__line { flex: 1; height: 3px; background: var(--color-primary); border-radius: 2px; }
-.ishi-spine__effect {
-  background: var(--color-primary);
-  color: #fff;
-  padding: 0.3rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  white-space: nowrap;
-  margin-left: 0.5rem;
+.ishi-fishbone__overlay {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
 }
-.ishi-branch {
+.ishi-zone {
+  position: absolute;
+  min-width: 110px;
+  transform: translate(-50%, -50%);
   background: var(--color-surface);
   border: 2px dashed var(--color-border);
   border-radius: var(--radius);
-  padding: 0.6rem;
-  min-height: 64px;
+  padding: 0.5rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.3rem;
   transition: border-color 0.15s, background 0.15s;
 }
-.ishi-branch--filled { border-style: solid; border-color: var(--color-border); }
-.ishi-branch--hover { border-color: var(--color-primary); background: var(--color-surface-2); }
-.ishi-branch--correct { border-color: var(--color-ok); background: #14532d33; }
-.ishi-branch--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
-.ishi-branch__placeholder { color: var(--color-text-muted); font-size: 0.8rem; }
+.ishi-zone--filled { border-style: solid; border-color: var(--color-border); }
+.ishi-zone--hover { border-color: var(--color-primary); background: var(--color-surface-2); }
+.ishi-zone--correct { border-color: var(--color-ok); background: #14532d33; }
+.ishi-zone--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
+.ishi-zone__placeholder { color: var(--color-text-muted); font-size: 0.74rem; text-align: center; }
+.ishi-zone__cards { display: flex; flex-direction: column; gap: 0.3rem; }
+.ishi-zone__header {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-primary-hover);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.25rem;
+  flex-shrink: 0;
+}
 .ishi-category-label {
   font-weight: 600;
   font-size: 0.88rem;
@@ -942,31 +948,21 @@ body {
 }
 .ishi-category-label:hover { background: var(--color-surface); }
 .ishi-category-label--placed { background: transparent; border-color: transparent; cursor: grab; }
-
-.ishi-col {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+.ishi-effect-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.4rem 0.6rem;
   border-radius: var(--radius);
-  padding: 0.5rem;
-  min-height: 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  transition: border-color 0.15s;
-}
-.ishi-col:hover { border-color: var(--color-primary); }
-.ishi-col__header {
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-primary-hover);
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 0.25rem;
-  flex-shrink: 0;
+  text-align: center;
+  line-height: 1.3;
+  min-width: 80px;
+  pointer-events: none;
 }
-.ishi-col__cards { display: flex; flex-direction: column; gap: 0.3rem; }
-.ishi-col__placeholder { color: var(--color-text-muted); font-size: 0.74rem; }
+
 .ishi-cause-card {
   background: var(--color-surface-2);
   border: 1px solid var(--color-border);
