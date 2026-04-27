@@ -920,11 +920,11 @@ body {
   gap: 0.3rem;
   transition: border-color 0.15s, background 0.15s;
 }
-.ishi-zone--filled { border-style: solid; }
+.ishi-zone--filled { border-style: solid; border-color: var(--color-border); }
 .ishi-zone--hover { border-color: var(--color-primary); background: var(--color-surface-2); }
 .ishi-zone--correct { border-color: var(--color-ok); background: #14532d33; }
 .ishi-zone--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
-.ishi-zone__placeholder { color: var(--color-text-muted); font-size: 0.8rem; text-align: center; }
+.ishi-zone__placeholder { color: var(--color-text-muted); font-size: 0.74rem; text-align: center; }
 .ishi-zone__cards { display: flex; flex-direction: column; gap: 0.3rem; }
 .ishi-zone__header {
   font-size: 0.74rem;
@@ -954,7 +954,7 @@ body {
   background: var(--color-primary);
   color: #fff;
   padding: 0.4rem 0.6rem;
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-size: 0.75rem;
   font-weight: 700;
   text-align: center;
