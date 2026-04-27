@@ -36,6 +36,15 @@ const BRANCH_POSITIONS: Record<BranchId, { left: string; top: string }> = {
   b5: { left: '57.93%', top: '89.29%' },
 }
 
+const CATEGORY_POSITIONS: Record<IshikawaCategory, { left: string; top: string }> = {
+  people:      { left: '15.85%', top: '10.71%' },
+  process:     { left: '36.59%', top: '10.71%' },
+  tools:       { left: '57.93%', top: '10.71%' },
+  product:     { left: '15.85%', top: '89.29%' },
+  environment: { left: '36.59%', top: '89.29%' },
+  management:  { left: '57.93%', top: '89.29%' },
+}
+
 type Cause = { id: string; text: string; category: IshikawaCategory }
 
 const CAUSES: Cause[] = [
@@ -204,9 +213,6 @@ export function IshikawaAtelier() {
     })
   }
 
-  const topBranches = BRANCH_LIST.filter(b => b.row === 'top')
-  const bottomBranches = BRANCH_LIST.filter(b => b.row === 'bottom')
-
   return (
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'ishikawa')!} />
@@ -286,44 +292,50 @@ export function IshikawaAtelier() {
 
       {phase === 2 && (
         <>
-          <div className="ishi-diagram">
-            <div className="ishi-branches-row ishi-branches-row--top">
-              {topBranches.map(b => {
+          <div className="ishi-fishbone">
+            <svg className="ishi-fishbone__svg" viewBox="0 0 820 280" aria-hidden="true">
+              <polyline points="70,140 20,100 20,180 70,140" fill="none" style={{ stroke: 'var(--color-primary)' }} strokeWidth={2.5} strokeLinejoin="round"/>
+              <line x1={70} y1={140} x2={680} y2={140} style={{ stroke: 'var(--color-primary)' }} strokeWidth={3.5}/>
+              <path d="M680,100 Q760,100 780,140 Q760,180 680,180 Z" fill="none" style={{ stroke: 'var(--color-primary)' }} strokeWidth={2.5}/>
+              <circle cx={730} cy={130} r={6} fill="none" style={{ stroke: 'var(--color-primary)' }} strokeWidth={2}/>
+              <circle cx={730} cy={130} r={2} style={{ fill: 'var(--color-primary)' }}/>
+              <line x1={200} y1={140} x2={130} y2={30} style={{ stroke: 'var(--color-border)' }} strokeWidth={2.5}/>
+              <line x1={370} y1={140} x2={300} y2={30} style={{ stroke: 'var(--color-border)' }} strokeWidth={2.5}/>
+              <line x1={540} y1={140} x2={475} y2={30} style={{ stroke: 'var(--color-border)' }} strokeWidth={2.5}/>
+              <line x1={200} y1={140} x2={130} y2={250} style={{ stroke: 'var(--color-border)' }} strokeWidth={2.5}/>
+              <line x1={370} y1={140} x2={300} y2={250} style={{ stroke: 'var(--color-border)' }} strokeWidth={2.5}/>
+              <line x1={540} y1={140} x2={475} y2={250} style={{ stroke: 'var(--color-border)' }} strokeWidth={2.5}/>
+            </svg>
+            <div className="ishi-fishbone__overlay">
+              <div className="ishi-effect-label" style={{ left: '88.4%', top: '50%' }}>
+                Vélocité<br/>insuffisante
+              </div>
+              {BRANCH_LIST.map(b => {
                 const colCauses = CAUSES.filter(c => causeAssignments[c.id] === b.category)
+                const { left, top } = CATEGORY_POSITIONS[b.category]
                 return (
-                  <div key={b.id} data-category-zone={b.category} className="ishi-col ishi-col--top"
-                    onDragOver={e => e.preventDefault()} onDrop={() => handleDropOnCategoryZone(b.category)}>
-                    <p className="ishi-col__header">{b.label}</p>
-                    <div className="ishi-col__cards">
+                  <div
+                    key={b.id}
+                    data-category-zone={b.category}
+                    className="ishi-zone ishi-zone--filled"
+                    style={{ left, top }}
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => handleDropOnCategoryZone(b.category)}
+                  >
+                    <p className="ishi-zone__header">{b.label}</p>
+                    <div className="ishi-zone__cards">
                       {colCauses.map(c => (
-                        <div key={c.id} data-cause={c.id}
+                        <div
+                          key={c.id}
+                          data-cause={c.id}
                           className={'ishi-cause-card' + (phase2Result !== null ? (phase2Result[c.id] ? ' ishi-cause-card--correct' : ' ishi-cause-card--wrong') : '')}
-                          draggable onDragStart={() => handleDragStartCause(c.id)}>{c.text}</div>
+                          draggable
+                          onDragStart={() => handleDragStartCause(c.id)}
+                        >
+                          {c.text}
+                        </div>
                       ))}
-                      {colCauses.length === 0 && <span className="ishi-col__placeholder">Déposer ici</span>}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-            <div className="ishi-spine">
-              <div className="ishi-spine__line" />
-              <div className="ishi-spine__effect">Vélocité insuffisante</div>
-            </div>
-            <div className="ishi-branches-row ishi-branches-row--bottom">
-              {bottomBranches.map(b => {
-                const colCauses = CAUSES.filter(c => causeAssignments[c.id] === b.category)
-                return (
-                  <div key={b.id} data-category-zone={b.category} className="ishi-col ishi-col--bottom"
-                    onDragOver={e => e.preventDefault()} onDrop={() => handleDropOnCategoryZone(b.category)}>
-                    <p className="ishi-col__header">{b.label}</p>
-                    <div className="ishi-col__cards">
-                      {colCauses.map(c => (
-                        <div key={c.id} data-cause={c.id}
-                          className={'ishi-cause-card' + (phase2Result !== null ? (phase2Result[c.id] ? ' ishi-cause-card--correct' : ' ishi-cause-card--wrong') : '')}
-                          draggable onDragStart={() => handleDragStartCause(c.id)}>{c.text}</div>
-                      ))}
-                      {colCauses.length === 0 && <span className="ishi-col__placeholder">Déposer ici</span>}
+                      {colCauses.length === 0 && <span className="ishi-zone__placeholder">Déposer ici</span>}
                     </div>
                   </div>
                 )
