@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 type TroikaStep = 'problem' | 'clarification' | 'consultants' | 'reaction' | 'action'
 type Phase = 1 | 2 | 3
@@ -67,6 +69,8 @@ export function TroikaConsultingAtelier() {
 
   // Phase 1
   const [ranking, setRanking] = useState<(TroikaStep | null)[]>(Array(5).fill(null))
+  const isDirty = phase > 1 || ranking.some(s => s !== null)
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
   const [phase1Result, setPhase1Result] = useState<Record<number, boolean> | null>(null)
 
   // Phase 2
@@ -156,6 +160,7 @@ export function TroikaConsultingAtelier() {
   const finalBadgeGreen = phase2Score !== null && phase2Score >= 13 && phase3Score !== null && phase3Score >= 2
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'troika-consulting')!} />
       <header className="atelier-header">
@@ -363,5 +368,17 @@ export function TroikaConsultingAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }
