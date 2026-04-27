@@ -1,19 +1,19 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 import { SimulationScreen } from './index'
 import { useSimulationStore } from '../../store/simulationStore'
 
 function renderSimulation(scenarioId = 'scenario-01') {
-  return render(
-    <MemoryRouter initialEntries={[`/simulation/${scenarioId}`]}>
-      <Routes>
-        <Route path="/simulation/:id" element={<SimulationScreen />} />
-        <Route path="/debrief" element={<div>Debrief</div>} />
-      </Routes>
-    </MemoryRouter>
+  const router = createMemoryRouter(
+    [
+      { path: '/simulation/:id', element: <SimulationScreen /> },
+      { path: '/debrief', element: <div>Debrief</div> },
+    ],
+    { initialEntries: [`/simulation/${scenarioId}`] }
   )
+  return render(<RouterProvider router={router} />)
 }
 
 beforeEach(() => {

@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useSimulationStore } from '../../store/simulationStore'
 import { StateIndicators } from '../StateIndicators'
 import type { Choice } from '../../engine/types'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 const SCENE_TYPE_LABELS: Record<string, string> = {
   briefing: 'Briefing',
@@ -23,6 +25,8 @@ export function SimulationScreen() {
   const makeChoice = useSimulationStore(s => s.makeChoice)
   const dismissFeedback = useSimulationStore(s => s.dismissFeedback)
 
+  const { showModal, confirm, cancel } = useExitGuard(status === 'running')
+
   useEffect(() => {
     if (id && (!scenario || scenario.id !== id)) {
       startSimulation(id)
@@ -40,55 +44,68 @@ export function SimulationScreen() {
   }
 
   return (
-    <div className="simulation-layout">
-      <main className="simulation-main">
-        <div className="scene-header">
-          <span className="scene-type-badge">
-            {SCENE_TYPE_LABELS[currentScene.type] ?? currentScene.type}
-          </span>
-          <h2 className="scene-title">{currentScene.title}</h2>
-          <div className="scene-characters">
-            {currentScene.characters.map(cid => {
-              const char = scenario.characters[cid]
-              return char ? (
-                <span key={cid} className="character-chip" title={char.description}>
-                  {char.name} · {char.role}
-                </span>
-              ) : null
-            })}
+    <>
+      <div className="simulation-layout">
+        <main className="simulation-main">
+          <div className="scene-header">
+            <span className="scene-type-badge">
+              {SCENE_TYPE_LABELS[currentScene.type] ?? currentScene.type}
+            </span>
+            <h2 className="scene-title">{currentScene.title}</h2>
+            <div className="scene-characters">
+              {currentScene.characters.map(cid => {
+                const char = scenario.characters[cid]
+                return char ? (
+                  <span key={cid} className="character-chip" title={char.description}>
+                    {char.name} · {char.role}
+                  </span>
+                ) : null
+              })}
+            </div>
           </div>
-        </div>
 
-        <p className="scene-narrative">{currentScene.narrative}</p>
+          <p className="scene-narrative">{currentScene.narrative}</p>
 
-        {pendingFeedback ? (
-          <div className="feedback-panel" role="region" aria-label="Feedback">
-            <p className="feedback-text">{pendingFeedback.text}</p>
-            {pendingFeedback.scrumPrinciple && (
-              <blockquote className="scrum-principle">
-                <strong>Principe Scrum :</strong> {pendingFeedback.scrumPrinciple}
-              </blockquote>
-            )}
-            <button className="btn btn--primary" onClick={dismissFeedback}>
-              Continuer →
-            </button>
-          </div>
-        ) : (
-          <div className="choices">
-            {currentScene.choices.map((choice: Choice) => (
-              <button
-                key={choice.id}
-                className="choice-btn"
-                onClick={() => makeChoice(choice)}
-              >
-                {choice.text}
+          {pendingFeedback ? (
+            <div className="feedback-panel" role="region" aria-label="Feedback">
+              <p className="feedback-text">{pendingFeedback.text}</p>
+              {pendingFeedback.scrumPrinciple && (
+                <blockquote className="scrum-principle">
+                  <strong>Principe Scrum :</strong> {pendingFeedback.scrumPrinciple}
+                </blockquote>
+              )}
+              <button className="btn btn--primary" onClick={dismissFeedback}>
+                Continuer →
               </button>
-            ))}
-          </div>
-        )}
-      </main>
+            </div>
+          ) : (
+            <div className="choices">
+              {currentScene.choices.map((choice: Choice) => (
+                <button
+                  key={choice.id}
+                  className="choice-btn"
+                  onClick={() => makeChoice(choice)}
+                >
+                  {choice.text}
+                </button>
+              ))}
+            </div>
+          )}
+        </main>
 
-      <StateIndicators />
-    </div>
+        <StateIndicators />
+      </div>
+
+      {showModal && (
+        <ConfirmLeaveModal
+          title="Quitter le scénario ?"
+          body="Votre progression sera perdue."
+          cancelLabel="Continuer"
+          confirmLabel="Quitter quand même"
+          onConfirm={confirm}
+          onCancel={cancel}
+        />
+      )}
+    </>
   )
 }
