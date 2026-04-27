@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 const DIAGRAM_ANSWERS: Record<string, string> = {
   'top-left':     'Compétition',
@@ -76,6 +78,9 @@ export function ConflictAtelier() {
   const [phase2Result, setPhase2Result] = useState<Record<string, boolean> | null>(null)
 
   const [dragging, setDragging] = useState<{ label: string; fromDiagramZone?: string } | null>(null)
+
+  const isDirty = phase > 1 || Object.values(diagramZones).some(Boolean)
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
 
   const placedModes = new Set(Object.values(diagramZones).filter(Boolean))
   const paletteModes = MODE_LABELS.filter(l => !placedModes.has(l))
@@ -159,6 +164,7 @@ export function ConflictAtelier() {
   const phase2Score = phase2Result ? Object.values(phase2Result).filter(Boolean).length : null
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'thomas-kilmann')!} />
       <header className="atelier-header">
@@ -300,5 +306,17 @@ export function ConflictAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }

@@ -1,8 +1,18 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import { DelegationPokerAtelier } from '.'
 
 const CORRECT_ORDER = ['tell', 'sell', 'consult', 'agree', 'advise', 'inquire', 'delegate']
+
+function renderDelegationPokerAtelier() {
+  const router = createMemoryRouter(
+    [{ path: '/ateliers/delegation-poker', element: <DelegationPokerAtelier /> }],
+    { initialEntries: ['/ateliers/delegation-poker'] }
+  )
+  return render(<RouterProvider router={router} />)
+}
 
 function placeAllCorrectly() {
   CORRECT_ORDER.forEach((levelKey, i) => {
@@ -13,23 +23,23 @@ function placeAllCorrectly() {
 
 describe('DelegationPokerAtelier — Phase 1', () => {
   it('renders 7 delegation level cards in the palette', () => {
-    render(<DelegationPokerAtelier />)
+    renderDelegationPokerAtelier()
     expect(document.querySelectorAll('[data-level]')).toHaveLength(7)
   })
 
   it('disables Vérifier button when not all slots are filled', () => {
-    render(<DelegationPokerAtelier />)
+    renderDelegationPokerAtelier()
     expect(screen.getByRole('button', { name: 'Vérifier' })).toBeDisabled()
   })
 
   it('enables Vérifier after all 7 levels are placed', () => {
-    render(<DelegationPokerAtelier />)
+    renderDelegationPokerAtelier()
     placeAllCorrectly()
     expect(screen.getByRole('button', { name: 'Vérifier' })).not.toBeDisabled()
   })
 
   it('shows 7/7 and Phase suivante button on perfect placement', () => {
-    render(<DelegationPokerAtelier />)
+    renderDelegationPokerAtelier()
     placeAllCorrectly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     expect(screen.getByText(/7 \/ 7 correct/)).toBeInTheDocument()
@@ -37,7 +47,7 @@ describe('DelegationPokerAtelier — Phase 1', () => {
   })
 
   it('shows Réessayer button when placement is wrong', () => {
-    render(<DelegationPokerAtelier />)
+    renderDelegationPokerAtelier()
     // Place in reverse order (wrong)
     ;[...CORRECT_ORDER].reverse().forEach((levelKey, i) => {
       fireEvent.dragStart(document.querySelector(`[data-level="${levelKey}"]`)!)
@@ -51,7 +61,7 @@ describe('DelegationPokerAtelier — Phase 1', () => {
 
 describe('DelegationPokerAtelier — Phase 2', () => {
   function reachPhase2() {
-    render(<DelegationPokerAtelier />)
+    renderDelegationPokerAtelier()
     placeAllCorrectly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     fireEvent.click(screen.getByRole('button', { name: /Phase suivante/ }))

@@ -1,5 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import { StakeholderMappingAtelier } from '.'
 
 const CORRECT_PLACEMENTS: [string, string][] = [
@@ -8,6 +10,14 @@ const CORRECT_PLACEMENTS: [string, string][] = [
   ['À informer',          'low-high'],
   ['À surveiller',        'low-low'],
 ]
+
+function renderStakeholderMappingAtelier() {
+  const router = createMemoryRouter(
+    [{ path: '/ateliers/stakeholder-mapping', element: <StakeholderMappingAtelier /> }],
+    { initialEntries: ['/ateliers/stakeholder-mapping'] }
+  )
+  return render(<RouterProvider router={router} />)
+}
 
 function placeAllCorrectly() {
   CORRECT_PLACEMENTS.forEach(([label, zoneId]) => {
@@ -18,7 +28,7 @@ function placeAllCorrectly() {
 
 describe('StakeholderMappingAtelier — Phase 1', () => {
   it('renders 4 strategy labels in the palette', () => {
-    render(<StakeholderMappingAtelier />)
+    renderStakeholderMappingAtelier()
     expect(screen.getByText('À gérer étroitement')).toBeInTheDocument()
     expect(screen.getByText('À satisfaire')).toBeInTheDocument()
     expect(screen.getByText('À informer')).toBeInTheDocument()
@@ -26,18 +36,18 @@ describe('StakeholderMappingAtelier — Phase 1', () => {
   })
 
   it('disables Vérifier when not all zones are filled', () => {
-    render(<StakeholderMappingAtelier />)
+    renderStakeholderMappingAtelier()
     expect(screen.getByRole('button', { name: 'Vérifier' })).toBeDisabled()
   })
 
   it('enables Vérifier after all 4 labels are placed', () => {
-    render(<StakeholderMappingAtelier />)
+    renderStakeholderMappingAtelier()
     placeAllCorrectly()
     expect(screen.getByRole('button', { name: 'Vérifier' })).not.toBeDisabled()
   })
 
   it('shows 4/4 and Phase suivante on perfect placement', () => {
-    render(<StakeholderMappingAtelier />)
+    renderStakeholderMappingAtelier()
     placeAllCorrectly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     expect(screen.getByText(/4 \/ 4 correct/)).toBeInTheDocument()
@@ -45,7 +55,7 @@ describe('StakeholderMappingAtelier — Phase 1', () => {
   })
 
   it('shows Réessayer on wrong placement', () => {
-    render(<StakeholderMappingAtelier />)
+    renderStakeholderMappingAtelier()
     // Place all labels but in wrong zones
     const wrongPlacements: [string, string][] = [
       ['À gérer étroitement', 'low-low'],
@@ -65,7 +75,7 @@ describe('StakeholderMappingAtelier — Phase 1', () => {
 
 describe('StakeholderMappingAtelier — Phase 2', () => {
   function reachPhase2() {
-    render(<StakeholderMappingAtelier />)
+    renderStakeholderMappingAtelier()
     placeAllCorrectly()
     fireEvent.click(screen.getByRole('button', { name: 'Vérifier' }))
     fireEvent.click(screen.getByRole('button', { name: /Phase suivante/ }))

@@ -1,10 +1,20 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import { ConflictAtelier } from '.'
+
+function renderConflictAtelier() {
+  const router = createMemoryRouter(
+    [{ path: '/ateliers/conflict', element: <ConflictAtelier /> }],
+    { initialEntries: ['/ateliers/conflict'] }
+  )
+  return render(<RouterProvider router={router} />)
+}
 
 describe('ConflictAtelier — Phase 1', () => {
   it('renders 5 TKI mode labels in the palette', () => {
-    render(<ConflictAtelier />)
+    renderConflictAtelier()
     expect(screen.getByText('Compétition')).toBeInTheDocument()
     expect(screen.getByText('Collaboration')).toBeInTheDocument()
     expect(screen.getByText('Compromis')).toBeInTheDocument()
@@ -13,12 +23,12 @@ describe('ConflictAtelier — Phase 1', () => {
   })
 
   it('disables Vérifier button when not all zones are filled', () => {
-    render(<ConflictAtelier />)
+    renderConflictAtelier()
     expect(screen.getByRole('button', { name: 'Vérifier' })).toBeDisabled()
   })
 
   it('enables Vérifier after all 5 modes are placed', () => {
-    render(<ConflictAtelier />)
+    renderConflictAtelier()
     const placements = [
       ['Compétition',  'top-left'],
       ['Collaboration','top-right'],
@@ -34,7 +44,7 @@ describe('ConflictAtelier — Phase 1', () => {
   })
 
   it('shows 5/5 and Phase suivante button on perfect placement', () => {
-    render(<ConflictAtelier />)
+    renderConflictAtelier()
     const placements = [
       ['Compétition',  'top-left'],
       ['Collaboration','top-right'],
@@ -52,7 +62,7 @@ describe('ConflictAtelier — Phase 1', () => {
   })
 
   it('shows Réessayer button when placement is wrong', () => {
-    render(<ConflictAtelier />)
+    renderConflictAtelier()
     const placements = [
       ['Accommodation','top-left'],
       ['Évitement',    'top-right'],
@@ -72,7 +82,7 @@ describe('ConflictAtelier — Phase 1', () => {
 
 describe('ConflictAtelier — Phase 2', () => {
   function reachPhase2() {
-    render(<ConflictAtelier />)
+    renderConflictAtelier()
     const placements = [
       ['Compétition',  'top-left'],
       ['Collaboration','top-right'],

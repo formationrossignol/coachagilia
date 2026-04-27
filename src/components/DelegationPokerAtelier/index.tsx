@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 const LEVELS = [
   { key: 'tell',     label: 'Tell',     description: "Je décide et j'informe" },
@@ -100,6 +102,9 @@ export function DelegationPokerAtelier() {
 
   const [dragging, setDragging] = useState<{ label: string; fromSlot?: string } | null>(null)
 
+  const isDirty = phase > 1 || Object.values(slots).some(Boolean)
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
+
   const placedLevels = new Set(Object.values(slots).filter(Boolean))
   const paletteLevels = LEVEL_KEYS.filter(k => !placedLevels.has(k))
   const phase1AllFilled = paletteLevels.length === 0
@@ -182,6 +187,7 @@ export function DelegationPokerAtelier() {
   const phase2Score = phase2Result ? Object.values(phase2Result).filter(Boolean).length : null
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'delegation-poker')!} />
       <header className="atelier-header">
@@ -335,5 +341,17 @@ export function DelegationPokerAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
+import { useExitGuard } from '../../hooks/useExitGuard'
+import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 // Grid order: top-left, top-right, bottom-left, bottom-right
 // Top = High Influence, Bottom = Low Influence
@@ -84,6 +86,9 @@ export function StakeholderMappingAtelier() {
 
   const [dragging, setDragging] = useState<{ label: string; fromZone?: string } | null>(null)
 
+  const isDirty = phase > 1 || Object.values(matrixZones).some(Boolean)
+  const { showModal, confirm, cancel } = useExitGuard(isDirty)
+
   const placedLabels = new Set(Object.values(matrixZones).filter(Boolean))
   const paletteLabels = STRATEGY_LABELS.filter(l => !placedLabels.has(l))
   const phase1AllFilled = paletteLabels.length === 0
@@ -166,6 +171,7 @@ export function StakeholderMappingAtelier() {
   const phase2Score = phase2Result ? Object.values(phase2Result).filter(Boolean).length : null
 
   return (
+    <>
     <div className="atelier-page">
       <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'stakeholder-mapping')!} />
       <header className="atelier-header">
@@ -335,5 +341,17 @@ export function StakeholderMappingAtelier() {
         </>
       )}
     </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
+    </>
   )
 }
