@@ -2,10 +2,20 @@ export type WorkshopCategorySlug =
   | 'conflict-and-communication'
   | 'facilitation'
   | 'coaching-and-posture'
+  | 'leadership'
   | 'team-intelligence'
   | 'management-3-0'
+  | 'retrospectives'
   | 'problem-solving'
   | 'stakeholders-and-alignment'
+  | 'product-discovery'
+  | 'prioritization'
+  | 'decision-making'
+  | 'delivery-excellence'
+  | 'systems-thinking'
+  | 'organization-design'
+  | 'change-management'
+  | 'strategic-thinking'
 
 export interface WorkshopCategory {
   slug: WorkshopCategorySlug

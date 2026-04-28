@@ -36,4 +36,54 @@ export const WORKSHOP_CATEGORIES: WorkshopCategory[] = [
     name: 'Stakeholders and alignment',
     description: "Outils pour cartographier les parties prenantes, clarifier l'alignement et améliorer la communication externe.",
   },
+  {
+    slug: 'leadership',
+    name: 'Leadership',
+    description: "Modèles et pratiques pour développer un style de leadership adaptatif, au service de l'équipe et du système.",
+  },
+  {
+    slug: 'retrospectives',
+    name: 'Rétrospectives',
+    description: "Formats et techniques pour faciliter des rétrospectives variées, engageantes et génératrices d'améliorations concrètes.",
+  },
+  {
+    slug: 'product-discovery',
+    name: 'Product discovery',
+    description: "Outils pour explorer les besoins utilisateurs, définir la vision produit, affiner le backlog et aligner les équipes.",
+  },
+  {
+    slug: 'prioritization',
+    name: 'Priorisation',
+    description: "Frameworks et matrices pour prioriser les fonctionnalités, initiatives et tâches selon la valeur et l'effort.",
+  },
+  {
+    slug: 'decision-making',
+    name: 'Prise de décision',
+    description: "Outils pour structurer, clarifier et distribuer les décisions individuelles et collectives.",
+  },
+  {
+    slug: 'delivery-excellence',
+    name: 'Excellence de livraison',
+    description: "Pratiques pour mesurer, améliorer et sécuriser la qualité et la vélocité de livraison logicielle.",
+  },
+  {
+    slug: 'systems-thinking',
+    name: 'Pensée systémique',
+    description: "Modèles pour comprendre les flux, les interdépendances et les dynamiques d'un système complexe.",
+  },
+  {
+    slug: 'organization-design',
+    name: "Design organisationnel",
+    description: "Frameworks pour concevoir des structures organisationnelles optimisées pour le flux de valeur et l'autonomie.",
+  },
+  {
+    slug: 'change-management',
+    name: 'Gestion du changement',
+    description: "Modèles pour comprendre, accompagner et ancrer les transformations individuelles et organisationnelles.",
+  },
+  {
+    slug: 'strategic-thinking',
+    name: 'Pensée stratégique',
+    description: "Modèles mentaux et outils d'analyse pour développer une réflexion stratégique claire et systémique.",
+  },
 ]
