@@ -263,7 +263,7 @@ export function SBIAtelier() {
 
           <div className="sbi-pool" onDragOver={e => e.preventDefault()} onDrop={handleDropOnPool2}>
             <p className="scrum-palette__title">Éléments à classer</p>
-            <div className="ishi-pool__cards">
+            <div className="sbi-pool__cards">
               {pool2.map(item => (
                 <div key={item.id} data-item={item.id} className="sbi-item-card" draggable onDragStart={() => handleDragStartItem(item.id)}>
                   {item.text}

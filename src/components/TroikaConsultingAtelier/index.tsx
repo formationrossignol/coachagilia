@@ -265,7 +265,7 @@ export function TroikaConsultingAtelier() {
 
           <div className="tk-pool" onDragOver={e => e.preventDefault()} onDrop={handleDropOnPool2}>
             <p className="scrum-palette__title">Interventions à classer</p>
-            <div className="ishi-pool__cards">
+            <div className="tk-pool__cards">
               {pool2.map(i => (
                 <div key={i.id} data-intervention={i.id} className="tk-intervention-card" draggable onDragStart={() => handleDragStartIntervention(i.id)}>{i.text}</div>
               ))}
