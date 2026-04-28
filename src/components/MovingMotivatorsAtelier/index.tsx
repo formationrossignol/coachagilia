@@ -1,4 +1,9 @@
 import { useState } from 'react'
+import type { LucideIcon } from 'lucide-react'
+import {
+  Compass, Shield, Heart, Award, Zap, Wind, Users, LayoutGrid, Target, Star,
+  ChevronUp, ChevronDown, Minus,
+} from 'lucide-react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -13,24 +18,26 @@ const MOTIVATOR_IDS: Motivator[] = [
   'freedom', 'relatedness', 'order', 'goal', 'status',
 ]
 
-const MOTIVATORS: Record<Motivator, { name: string; description: string }> = {
-  curiosity:   { name: 'Curiosity',   description: 'Apprendre et explorer' },
-  honor:       { name: 'Honor',       description: 'Agir selon ses valeurs' },
-  acceptance:  { name: 'Acceptance',  description: 'Être reconnu et accepté' },
-  mastery:     { name: 'Mastery',     description: 'Progresser et devenir expert' },
-  power:       { name: 'Power',       description: "Influencer et avoir de l'impact" },
-  freedom:     { name: 'Freedom',     description: 'Être autonome' },
-  relatedness: { name: 'Relatedness', description: 'Créer du lien' },
-  order:       { name: 'Order',       description: 'Avoir de la structure' },
-  goal:        { name: 'Goal',        description: 'Avoir un objectif clair' },
-  status:      { name: 'Status',      description: 'Être reconnu socialement' },
+type MotivatorDef = {
+  name: string
+  description: string
+  Icon: LucideIcon
+  color: string
+  rgb: string
 }
 
-const SAT_OPTIONS: { value: SatisfactionLevel; label: string }[] = [
-  { value: 'low',    label: '🔴 Faible' },
-  { value: 'medium', label: '🟠 Moyen' },
-  { value: 'high',   label: '🟢 Élevé' },
-]
+const MOTIVATORS: Record<Motivator, MotivatorDef> = {
+  curiosity:   { name: 'Curiosity',   description: 'Apprendre et explorer',          Icon: Compass,    color: '#f59e0b', rgb: '245,158,11' },
+  honor:       { name: 'Honor',       description: 'Agir selon ses valeurs',          Icon: Shield,     color: '#8b5cf6', rgb: '139,92,246' },
+  acceptance:  { name: 'Acceptance',  description: 'Être reconnu et accepté',         Icon: Heart,      color: '#f43f5e', rgb: '244,63,94'  },
+  mastery:     { name: 'Mastery',     description: 'Progresser et devenir expert',    Icon: Award,      color: '#3b82f6', rgb: '59,130,246' },
+  power:       { name: 'Power',       description: "Influencer et avoir de l'impact", Icon: Zap,        color: '#ef4444', rgb: '239,68,68'  },
+  freedom:     { name: 'Freedom',     description: 'Être autonome',                   Icon: Wind,       color: '#0ea5e9', rgb: '14,165,233' },
+  relatedness: { name: 'Relatedness', description: 'Créer du lien',                   Icon: Users,      color: '#22c55e', rgb: '34,197,94'  },
+  order:       { name: 'Order',       description: 'Avoir de la structure',            Icon: LayoutGrid, color: '#94a3b8', rgb: '148,163,184'},
+  goal:        { name: 'Goal',        description: 'Avoir un objectif clair',          Icon: Target,     color: '#f97316', rgb: '249,115,22' },
+  status:      { name: 'Status',      description: 'Être reconnu socialement',         Icon: Star,       color: '#eab308', rgb: '234,179,8'  },
+}
 
 type DraggingState = { motivator: Motivator; fromIndex?: number } | null
 
@@ -40,6 +47,42 @@ function isActionConcrete(text: string): boolean {
 
 function isFirstStepClear(text: string): boolean {
   return text.trim().length >= 8
+}
+
+type MotivatorCardProps = {
+  motivator: Motivator
+  satLevel?: SatisfactionLevel
+  isCritical?: boolean
+  draggable?: boolean
+  onDragStart?: () => void
+}
+
+function MotivatorCard({ motivator, satLevel, isCritical, draggable, onDragStart }: MotivatorCardProps) {
+  const { name, description, Icon, color, rgb } = MOTIVATORS[motivator]
+  return (
+    <div
+      data-motivator={motivator}
+      className={`mm-card${isCritical ? ' mm-card--critical' : ''}`}
+      style={{ '--mm-color': color, '--mm-rgb': rgb } as React.CSSProperties}
+      draggable={draggable}
+      onDragStart={onDragStart}
+    >
+      <div className="mm-card__icon-area">
+        <Icon size={26} strokeWidth={1.6} />
+      </div>
+      <div className="mm-card__body">
+        <strong className="mm-card__name">{name}</strong>
+        <span className="mm-card__desc">{description}</span>
+      </div>
+      {satLevel && (
+        <div className={`mm-card__sat mm-card__sat--${satLevel}`}>
+          {satLevel === 'high' && <ChevronUp size={13} strokeWidth={2.5} />}
+          {satLevel === 'medium' && <Minus size={13} strokeWidth={2.5} />}
+          {satLevel === 'low' && <ChevronDown size={13} strokeWidth={2.5} />}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export function MovingMotivatorsAtelier() {
@@ -53,7 +96,6 @@ export function MovingMotivatorsAtelier() {
   const [phase3Verified, setPhase3Verified] = useState(false)
   const [dragging, setDragging] = useState<DraggingState>(null)
 
-  // Phase 1 derived
   const pool = MOTIVATOR_IDS.filter(m => !ranking.includes(m))
   const phase1AllFilled = ranking.every(m => m !== null)
 
@@ -89,12 +131,10 @@ export function MovingMotivatorsAtelier() {
     setDragging(null)
   }
 
-  // Phase 2 derived
   const topRanking = ranking.filter((m): m is Motivator => m !== null)
   const phase2AllRated = MOTIVATOR_IDS.every(m => satisfaction[m] !== undefined)
   const criticalMotivators = topRanking.slice(0, 5).filter(m => satisfaction[m] === 'low')
 
-  // Phase 3 derived
   const phase3AllFilled = criticalMotivators.length === 0 || criticalMotivators.every(m => {
     const plan = actionPlan[m]
     return plan && plan.action.trim().length > 0 && plan.firstStep.trim().length > 0
@@ -116,60 +156,62 @@ export function MovingMotivatorsAtelier() {
 
       {phase === 1 && (
         <>
-          <div className="mm-phase1-layout">
-            <div className="mm-ranking-zone">
-              <p className="mm-section-label">Votre classement</p>
+          <div className="mm-direction-bar">
+            <span>← Plus important</span>
+            <div className="mm-direction-bar__line" />
+            <span>Moins important →</span>
+          </div>
+
+          <div className="mm-track-scroller">
+            <div className="mm-track">
               {Array.from({ length: 10 }, (_, i) => {
                 const m = ranking[i]
                 return (
                   <div
                     key={i}
                     data-slot={i}
-                    className={'mm-slot' + (m ? ' mm-slot--filled' : ' mm-slot--empty')}
-                    onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('mm-slot--hover') }}
-                    onDragLeave={e => e.currentTarget.classList.remove('mm-slot--hover')}
-                    onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('mm-slot--hover'); handleDropOnSlot(i) }}
+                    className={`mm-track-slot${m ? ' mm-track-slot--filled' : ''}`}
+                    onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('mm-track-slot--hover') }}
+                    onDragLeave={e => e.currentTarget.classList.remove('mm-track-slot--hover')}
+                    onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('mm-track-slot--hover'); handleDropOnSlot(i) }}
                   >
-                    <span className="mm-slot__rank">{i + 1}</span>
+                    <span className="mm-track-slot__rank">{i + 1}</span>
                     {m ? (
-                      <div
-                        data-motivator={m}
-                        className="mm-motivator-card mm-motivator-card--placed"
+                      <MotivatorCard
+                        motivator={m}
                         draggable
                         onDragStart={() => handleDragStartFromSlot(m, i)}
-                      >
-                        <strong className="mm-motivator-card__name">{MOTIVATORS[m].name}</strong>
-                        <span className="mm-motivator-card__desc">{MOTIVATORS[m].description}</span>
-                      </div>
+                      />
                     ) : (
-                      <span className="mm-slot__placeholder">Déposer ici</span>
+                      <div className="mm-track-slot__empty">
+                        <span>Déposer<br />ici</span>
+                      </div>
                     )}
                   </div>
                 )
               })}
             </div>
+          </div>
 
-            <div className="mm-pool" onDragOver={e => e.preventDefault()} onDrop={handleDropOnPool}>
+          {pool.length > 0 && (
+            <div
+              className="mm-pool"
+              onDragOver={e => e.preventDefault()}
+              onDrop={handleDropOnPool}
+            >
               <p className="mm-section-label">Motivateurs à classer</p>
-              <div className="mm-pool__cards">
+              <div className="mm-pool__grid">
                 {pool.map(m => (
-                  <div
+                  <MotivatorCard
                     key={m}
-                    data-motivator={m}
-                    className="mm-motivator-card"
+                    motivator={m}
                     draggable
                     onDragStart={() => handleDragStartFromPool(m)}
-                  >
-                    <strong className="mm-motivator-card__name">{MOTIVATORS[m].name}</strong>
-                    <span className="mm-motivator-card__desc">{MOTIVATORS[m].description}</span>
-                  </div>
+                  />
                 ))}
-                {pool.length === 0 && (
-                  <span className="scrum-palette__empty">Tous les motivateurs sont classés</span>
-                )}
               </div>
             </div>
-          </div>
+          )}
 
           {phase1Verified && (
             <div className="scrum-score-banner">
@@ -190,34 +232,44 @@ export function MovingMotivatorsAtelier() {
 
       {phase === 2 && (
         <>
-          <div className="mm-satisfaction-grid">
-            {topRanking.map((m, i) => (
-              <div
-                key={m}
-                className={'mm-satisfaction-row' + (satisfaction[m] === 'low' && i < 5 ? ' mm-satisfaction-row--critical' : '')}
-              >
-                <span className="mm-rank-badge">#{i + 1}</span>
-                <div className="mm-motivator-info">
-                  <strong>{MOTIVATORS[m].name}</strong>
-                  <span className="mm-motivator-card__desc">{MOTIVATORS[m].description}</span>
-                </div>
-                <div className="mm-satisfaction-btns">
-                  {SAT_OPTIONS.map(opt => (
-                    <button
-                      key={opt.value}
-                      data-satisfaction={`${m}-${opt.value}`}
-                      className={'mm-sat-btn' + (satisfaction[m] === opt.value ? ' mm-sat-btn--active' : '')}
-                      onClick={() => setSatisfaction(prev => ({ ...prev, [m]: opt.value }))}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-                {satisfaction[m] === 'low' && i < 5 && (
-                  <span className="badge badge--red mm-critical-badge">Critique</span>
-                )}
-              </div>
-            ))}
+          <div className="mm-direction-bar">
+            <span>← Plus important</span>
+            <div className="mm-direction-bar__line" />
+            <span>Moins important →</span>
+          </div>
+
+          <div className="mm-track-scroller">
+            <div className="mm-track mm-track--phase2">
+              {topRanking.map((m, i) => {
+                const sat = satisfaction[m]
+                const isCritical = i < 5 && sat === 'low'
+                return (
+                  <div
+                    key={m}
+                    className={`mm-track-slot mm-track-slot--phase2 mm-satisfaction-row${isCritical ? ' mm-satisfaction-row--critical' : ''}`}
+                  >
+                    <span className="mm-track-slot__rank">#{i + 1}</span>
+                    <MotivatorCard motivator={m} satLevel={sat} isCritical={isCritical} />
+                    <div className="mm-sat-controls">
+                      {(['low', 'medium', 'high'] as SatisfactionLevel[]).map(level => (
+                        <button
+                          key={level}
+                          data-satisfaction={`${m}-${level}`}
+                          className={`mm-sat-btn mm-sat-btn--${level}${sat === level ? ' mm-sat-btn--active' : ''}`}
+                          onClick={() => setSatisfaction(prev => ({ ...prev, [m]: level }))}
+                          title={level === 'low' ? 'Faible' : level === 'medium' ? 'Moyen' : 'Élevé'}
+                        >
+                          {level === 'low' && <ChevronDown size={13} />}
+                          {level === 'medium' && <Minus size={13} />}
+                          {level === 'high' && <ChevronUp size={13} />}
+                        </button>
+                      ))}
+                    </div>
+                    {isCritical && <span className="badge badge--red mm-critical-badge">Critique</span>}
+                  </div>
+                )
+              })}
+            </div>
           </div>
 
           <div className="scrum-actions">
@@ -233,13 +285,23 @@ export function MovingMotivatorsAtelier() {
           {criticalMotivators.length > 0 && !phase3Verified && (
             <div className="mm-action-plan">
               {criticalMotivators.map(m => {
+                const { name, description, Icon, color, rgb } = MOTIVATORS[m]
                 const plan = actionPlan[m] ?? { action: '', firstStep: '' }
                 return (
                   <div key={m} className="mm-action-item" data-action-motivator={m}>
-                    <h3 className="mm-action-item__title">
-                      {MOTIVATORS[m].name}
-                      <span className="mm-motivator-card__desc"> — {MOTIVATORS[m].description}</span>
-                    </h3>
+                    <div
+                      className="mm-action-item__header"
+                      style={{ '--mm-color': color, '--mm-rgb': rgb } as React.CSSProperties}
+                    >
+                      <div className="mm-action-item__icon">
+                        <Icon size={18} strokeWidth={1.6} />
+                      </div>
+                      <div>
+                        <h3 className="mm-action-item__title">{name}</h3>
+                        <span className="mm-card__desc">{description}</span>
+                      </div>
+                      <span className="badge badge--red" style={{ marginLeft: 'auto' }}>Critique</span>
+                    </div>
                     <div className="mm-action-fields">
                       <label className="mm-action-label">Action concrète</label>
                       <input
@@ -295,11 +357,19 @@ export function MovingMotivatorsAtelier() {
                 <div className="mm-result__section">
                   <p className="mm-result__label">Top 3 motivateurs</p>
                   <div className="mm-result__list">
-                    {top3.map((m, i) => (
-                      <span key={m} className="mm-result__item">
-                        <span className="mm-rank-badge">#{i + 1}</span> {MOTIVATORS[m].name}
-                      </span>
-                    ))}
+                    {top3.map((m, i) => {
+                      const { name, Icon, color, rgb } = MOTIVATORS[m]
+                      return (
+                        <span
+                          key={m}
+                          className="mm-result__item"
+                          style={{ '--mm-color': color, '--mm-rgb': rgb } as React.CSSProperties}
+                        >
+                          <span className="mm-result__item-icon"><Icon size={14} strokeWidth={1.8} /></span>
+                          <span className="mm-rank-badge">#{i + 1}</span> {name}
+                        </span>
+                      )
+                    })}
                   </div>
                 </div>
               )}

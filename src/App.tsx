@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Outlet, Navigate } from 'react-router-dom'
 import { NavBar } from './components/NavBar'
 import { Home } from './components/Home'
 import { ScenarioSelector } from './components/ScenarioSelector'
@@ -21,33 +21,44 @@ import { TroikaConsultingAtelier } from './components/TroikaConsultingAtelier'
 import { SBIAtelier } from './components/SBIAtelier'
 import { TRIZAtelier } from './components/TRIZAtelier'
 
-export default function App() {
+function Layout() {
   return (
-    <BrowserRouter>
+    <>
       <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/simulation" element={<ScenarioSelector />} />
-        <Route path="/simulation/:id" element={<SimulationScreen />} />
-        <Route path="/debrief" element={<Debrief />} />
-        <Route path="/quiz" element={<QuizSelector />} />
-        <Route path="/quiz/:examId" element={<QuizScreen />} />
-        <Route path="/quiz/:examId/results" element={<QuizResults />} />
-        <Route path="/ateliers" element={<AteliersHome />} />
-        <Route path="/ateliers/scrum-guide" element={<ScrumGuideAtelier />} />
-        <Route path="/ateliers/conflits" element={<ConflictAtelier />} />
-        <Route path="/ateliers/delegation-poker" element={<DelegationPokerAtelier />} />
-        <Route path="/ateliers/grow-model" element={<GrowModelAtelier />} />
-        <Route path="/ateliers/stakeholder-mapping" element={<StakeholderMappingAtelier />} />
-        <Route path="/ateliers/ask-vs-tell" element={<AskTellAtelier />} />
-        <Route path="/ateliers/moving-motivators" element={<MovingMotivatorsAtelier />} />
-        <Route path="/ateliers/ishikawa" element={<IshikawaAtelier />} />
-        <Route path="/ateliers/troika-consulting" element={<TroikaConsultingAtelier />} />
-        <Route path="/ateliers/sbi" element={<SBIAtelier />} />
-        <Route path="/ateliers/triz" element={<TRIZAtelier />} />
-        <Route path="/ateliers/categories/:slug" element={<WorkshopCategoryPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+      <Outlet />
+    </>
   )
+}
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/simulation', element: <ScenarioSelector /> },
+      { path: '/simulation/:id', element: <SimulationScreen /> },
+      { path: '/debrief', element: <Debrief /> },
+      { path: '/quiz', element: <QuizSelector /> },
+      { path: '/quiz/:examId', element: <QuizScreen /> },
+      { path: '/quiz/:examId/results', element: <QuizResults /> },
+      { path: '/ateliers', element: <AteliersHome /> },
+      { path: '/ateliers/scrum-guide', element: <ScrumGuideAtelier /> },
+      { path: '/ateliers/conflits', element: <ConflictAtelier /> },
+      { path: '/ateliers/delegation-poker', element: <DelegationPokerAtelier /> },
+      { path: '/ateliers/grow-model', element: <GrowModelAtelier /> },
+      { path: '/ateliers/stakeholder-mapping', element: <StakeholderMappingAtelier /> },
+      { path: '/ateliers/ask-vs-tell', element: <AskTellAtelier /> },
+      { path: '/ateliers/moving-motivators', element: <MovingMotivatorsAtelier /> },
+      { path: '/ateliers/ishikawa', element: <IshikawaAtelier /> },
+      { path: '/ateliers/troika-consulting', element: <TroikaConsultingAtelier /> },
+      { path: '/ateliers/sbi', element: <SBIAtelier /> },
+      { path: '/ateliers/triz', element: <TRIZAtelier /> },
+      { path: '/ateliers/categories/:slug', element: <WorkshopCategoryPage /> },
+      { path: '*', element: <Navigate to="/" replace /> },
+    ],
+  },
+])
+
+export default function App() {
+  return <RouterProvider router={router} />
 }

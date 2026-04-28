@@ -1,32 +1,73 @@
 import { useState } from 'react'
+import type { LucideIcon } from 'lucide-react'
+import {
+  User, Compass, Code, Calendar, ClipboardList, MessageSquare, BarChart2,
+  RotateCcw, List, ListChecks, Package, Target, Flag, FileCheck,
+  CheckCircle, Shield, Crosshair, Globe, Heart,
+  Eye, Search, RefreshCw,
+} from 'lucide-react'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
 import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
-// Zone ID → correct label
-const ZONE_ANSWERS: Record<string, string> = {
-  'product-owner':        'Product Owner',
-  'scrum-master':         'Scrum Master',
-  'developers':           'Developers',
-  'sprint':               'Sprint',
-  'sprint-planning':      'Sprint Planning',
-  'daily-scrum':          'Daily Scrum',
-  'sprint-review':        'Sprint Review',
-  'sprint-retrospective': 'Sprint Retrospective',
-  'product-backlog':      'Product Backlog',
-  'sprint-backlog':       'Sprint Backlog',
-  'increment':            'Increment',
-  'objectif-produit':     'Objectif Produit',
-  'objectif-sprint':      'Objectif Sprint',
-  'definition-done':      'Définition du « Done »',
+type ZoneType = 'role' | 'event' | 'artifact' | 'commitment' | 'value' | 'pillar'
+
+type ZoneDef = {
+  answer: string
+  type: ZoneType
+  Icon: LucideIcon
 }
 
-const ALL_LABELS = Object.values(ZONE_ANSWERS)
-const ZONE_IDS = Object.keys(ZONE_ANSWERS)
+const ZONE_CONFIG: Record<string, ZoneDef> = {
+  /* ── Roles ─────────────────────────────────────────── */
+  'product-owner':        { answer: 'Product Owner',           type: 'role',       Icon: User },
+  'scrum-master':         { answer: 'Scrum Master',            type: 'role',       Icon: Compass },
+  'developers':           { answer: 'Developers',              type: 'role',       Icon: Code },
+  /* ── Events ─────────────────────────────────────────── */
+  'sprint':               { answer: 'Sprint',                  type: 'event',      Icon: Calendar },
+  'sprint-planning':      { answer: 'Sprint Planning',         type: 'event',      Icon: ClipboardList },
+  'daily-scrum':          { answer: 'Daily Scrum',             type: 'event',      Icon: MessageSquare },
+  'sprint-review':        { answer: 'Sprint Review',           type: 'event',      Icon: BarChart2 },
+  'sprint-retrospective': { answer: 'Sprint Retrospective',    type: 'event',      Icon: RotateCcw },
+  /* ── Artifacts ───────────────────────────────────────── */
+  'product-backlog':      { answer: 'Product Backlog',         type: 'artifact',   Icon: List },
+  'sprint-backlog':       { answer: 'Sprint Backlog',          type: 'artifact',   Icon: ListChecks },
+  'increment':            { answer: 'Increment',               type: 'artifact',   Icon: Package },
+  /* ── Commitments ─────────────────────────────────────── */
+  'objectif-produit':     { answer: 'Objectif Produit',        type: 'commitment', Icon: Target },
+  'objectif-sprint':      { answer: 'Objectif Sprint',         type: 'commitment', Icon: Flag },
+  'definition-done':      { answer: 'Définition du « Done »', type: 'commitment', Icon: FileCheck },
+  /* ── Scrum Values ────────────────────────────────────── */
+  'value-commitment': { answer: 'Commitment', type: 'value', Icon: CheckCircle },
+  'value-courage':    { answer: 'Courage',    type: 'value', Icon: Shield },
+  'value-focus':      { answer: 'Focus',      type: 'value', Icon: Crosshair },
+  'value-openness':   { answer: 'Openness',   type: 'value', Icon: Globe },
+  'value-respect':    { answer: 'Respect',    type: 'value', Icon: Heart },
+  /* ── Empirical Pillars ───────────────────────────────── */
+  'pillar-transparency': { answer: 'Transparence', type: 'pillar', Icon: Eye },
+  'pillar-inspection':   { answer: 'Inspection',   type: 'pillar', Icon: Search },
+  'pillar-adaptation':   { answer: 'Adaptation',   type: 'pillar', Icon: RefreshCw },
+}
+
+const ALL_LABELS = Object.values(ZONE_CONFIG).map(c => c.answer)
+const ZONE_IDS = Object.keys(ZONE_CONFIG)
+
+const LABEL_MAP: Record<string, ZoneDef> = Object.fromEntries(
+  Object.entries(ZONE_CONFIG).map(([, def]) => [def.answer, def])
+)
 
 type ZoneState = Record<string, string>
 type VerifyState = Record<string, boolean>
+
+const TYPE_LABEL: Record<ZoneType, string> = {
+  role: 'Rôle', event: 'Événement', artifact: 'Artefact',
+  commitment: 'Engagement', value: 'Valeur', pillar: 'Pilier',
+}
+
+function TypeBadge({ type }: { type: ZoneType }) {
+  return <span className={`scrum-type-badge scrum-type-badge--${type}`}>{TYPE_LABEL[type]}</span>
+}
 
 function DropZone({
   zoneId, label, verifyResult, onDrop, onDragStart,
@@ -37,6 +78,8 @@ function DropZone({
   onDrop: (zoneId: string) => void
   onDragStart: (label: string, fromZone?: string) => void
 }) {
+  const config = ZONE_CONFIG[zoneId]
+  const { Icon, type } = config
   const verified = verifyResult !== null
   const correct = verifyResult?.[zoneId]
 
@@ -45,25 +88,30 @@ function DropZone({
       data-zone={zoneId}
       role="region"
       aria-label={`Zone ${zoneId}`}
-      className={
-        'scrum-zone' +
-        (label ? ' scrum-zone--filled' : ' scrum-zone--empty') +
-        (verified ? (correct ? ' scrum-zone--correct' : ' scrum-zone--wrong') : '')
-      }
+      className={[
+        'scrum-zone',
+        `scrum-zone--${type}`,
+        label ? 'scrum-zone--filled' : 'scrum-zone--empty',
+        verified ? (correct ? 'scrum-zone--correct' : 'scrum-zone--wrong') : '',
+      ].filter(Boolean).join(' ')}
       onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('scrum-zone--hover') }}
       onDragLeave={e => e.currentTarget.classList.remove('scrum-zone--hover')}
       onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('scrum-zone--hover'); onDrop(zoneId) }}
     >
       {label ? (
         <span
-          className="scrum-label scrum-label--placed"
+          className={`scrum-label scrum-label--placed scrum-label--${type}`}
           draggable
           onDragStart={() => onDragStart(label, zoneId)}
         >
+          <Icon size={12} strokeWidth={2} aria-hidden="true" />
           {label}
         </span>
       ) : (
-        <span className="scrum-zone__placeholder">?</span>
+        <div className="scrum-zone__placeholder">
+          <Icon size={20} className="scrum-zone__icon" aria-hidden="true" />
+          <TypeBadge type={type} />
+        </div>
       )}
     </div>
   )
@@ -107,7 +155,7 @@ export function ScrumGuideAtelier() {
   function handleVerify() {
     const result: VerifyState = {}
     for (const zoneId of ZONE_IDS) {
-      result[zoneId] = zones[zoneId] === ZONE_ANSWERS[zoneId]
+      result[zoneId] = zones[zoneId] === ZONE_CONFIG[zoneId].answer
     }
     setVerifyResult(result)
   }
@@ -119,125 +167,199 @@ export function ScrumGuideAtelier() {
 
   const score = verifyResult ? Object.values(verifyResult).filter(Boolean).length : null
 
+  const dz = (id: string) => (
+    <DropZone
+      zoneId={id}
+      label={zones[id]}
+      verifyResult={verifyResult}
+      onDrop={handleDropOnZone}
+      onDragStart={handleDragStart}
+    />
+  )
+
   return (
     <>
-      <div className="atelier-page">
-        <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'scrum-guide')!} />
-        <header className="atelier-header">
-          <h1 className="atelier-title">Le cadre Scrum</h1>
-          <p className="atelier-subtitle">Replacez les 14 éléments du Scrum Guide au bon endroit.</p>
-        </header>
+    <div className="atelier-page">
+      <WorkshopPedagogyPanel workshop={WORKSHOP_DEFINITIONS.find(w => w.id === 'scrum-guide')!} />
+      <header className="atelier-header">
+        <h1 className="atelier-title">Le cadre Scrum</h1>
+        <p className="atelier-subtitle">Replacez les 22 éléments du Scrum Guide au bon endroit.</p>
+      </header>
 
-        <div className="scrum-diagram">
-          {/* Left: Product Owner + Product Backlog + Objectif Produit */}
-          <div className="scrum-col scrum-col--left">
-            <DropZone zoneId="product-owner" label={zones['product-owner']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-            <div className="scrum-artifact-block">
-              <DropZone zoneId="product-backlog" label={zones['product-backlog']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-              <div className="scrum-commitment-row">
-                <span className="scrum-commitment-label">Engagement :</span>
-                <DropZone zoneId="objectif-produit" label={zones['objectif-produit']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-              </div>
-            </div>
+      {/* ── Top: Values + Pillars ── */}
+      <div className="scrum-foundations">
+        <div className="scrum-foundation-block scrum-foundation-block--value">
+          <div className="scrum-foundation-header scrum-foundation-header--value">
+            Valeurs Scrum
+          </div>
+          <div className="scrum-foundation-zones">
+            {dz('value-commitment')}
+            {dz('value-courage')}
+            {dz('value-focus')}
+            {dz('value-openness')}
+            {dz('value-respect')}
+          </div>
+        </div>
+
+        <div className="scrum-foundation-block scrum-foundation-block--pillar">
+          <div className="scrum-foundation-header scrum-foundation-header--pillar">
+            Piliers de l'Empirisme
+          </div>
+          <div className="scrum-foundation-zones">
+            {dz('pillar-transparency')}
+            {dz('pillar-inspection')}
+            {dz('pillar-adaptation')}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Main diagram ── */}
+      <div className="scrum-diagram">
+        {/* Left: Product Owner + Product Backlog */}
+        <div className="scrum-col scrum-col--left">
+          <div className="scrum-section-block scrum-section-block--role">
+            <div className="scrum-section-header scrum-section-header--role">Rôle</div>
+            {dz('product-owner')}
           </div>
 
-          {/* Center: Sprint box */}
-          <div className="scrum-col scrum-col--center">
-            <div className="scrum-sprint-box">
-              <div className="scrum-sprint-header">
-                <DropZone zoneId="sprint" label={zones['sprint']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-                <span className="scrum-sprint-duration">2–4 semaines</span>
-              </div>
-              <div className="scrum-sprint-events">
-                <DropZone zoneId="sprint-planning" label={zones['sprint-planning']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-                <DropZone zoneId="developers" label={zones['developers']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-                <DropZone zoneId="daily-scrum" label={zones['daily-scrum']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-                <DropZone zoneId="sprint-review" label={zones['sprint-review']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-              </div>
-            </div>
-            <div className="scrum-retro-row">
-              <DropZone zoneId="sprint-retrospective" label={zones['sprint-retrospective']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-              <DropZone zoneId="scrum-master" label={zones['scrum-master']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-            </div>
-          </div>
-
-          {/* Right: Sprint Backlog + Objectif Sprint + Increment + DoD */}
-          <div className="scrum-col scrum-col--right">
-            <div className="scrum-artifact-block">
-              <DropZone zoneId="sprint-backlog" label={zones['sprint-backlog']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-              <div className="scrum-commitment-row">
-                <span className="scrum-commitment-label">Engagement :</span>
-                <DropZone zoneId="objectif-sprint" label={zones['objectif-sprint']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-              </div>
-            </div>
-            <div className="scrum-artifact-block">
-              <DropZone zoneId="increment" label={zones['increment']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-              <div className="scrum-commitment-row">
-                <span className="scrum-commitment-label">Engagement :</span>
-                <DropZone zoneId="definition-done" label={zones['definition-done']} verifyResult={verifyResult} onDrop={handleDropOnZone} onDragStart={handleDragStart} />
-              </div>
+          <div className="scrum-section-block scrum-section-block--artifact">
+            <div className="scrum-section-header scrum-section-header--artifact">Artefact</div>
+            {dz('product-backlog')}
+            <div className="scrum-commitment-row">
+              <span className="scrum-commitment-label">Engagement</span>
+              {dz('objectif-produit')}
             </div>
           </div>
         </div>
 
-        {verifyResult && (
-          <div className="scrum-score-banner">
-            <span className={`badge ${score === 14 ? 'badge--green' : 'badge--orange'}`}>
-              {score} / 14 correct{score === 14 ? ' — Parfait !' : ''}
-            </span>
-          </div>
-        )}
+        <div className="scrum-col-arrow" aria-hidden="true">→</div>
 
-        <div
-          className="scrum-palette"
-          onDragOver={e => e.preventDefault()}
-          onDrop={handleDropOnPalette}
-        >
-          <p className="scrum-palette__title">Éléments à placer</p>
-          <div className="scrum-palette__labels">
-            {paletteLabels.map(label => (
+        {/* Center: Sprint box */}
+        <div className="scrum-col scrum-col--center">
+          <div className="scrum-sprint-box">
+            <div className="scrum-sprint-header">
+              <div className="scrum-sprint-title-row">
+                {dz('sprint')}
+                <span className="scrum-sprint-duration">2–4 semaines</span>
+              </div>
+            </div>
+
+            <div className="scrum-sprint-flow">
+              <div className="scrum-flow-step">
+                <div className="scrum-section-header scrum-section-header--event">Événement</div>
+                {dz('sprint-planning')}
+              </div>
+
+              <div className="scrum-flow-connector" aria-hidden="true">→</div>
+
+              <div className="scrum-flow-step scrum-flow-step--mid">
+                <div className="scrum-section-header scrum-section-header--role">Rôle</div>
+                {dz('developers')}
+                <div className="scrum-section-header scrum-section-header--event" style={{ marginTop: '0.6rem' }}>Événement</div>
+                {dz('daily-scrum')}
+              </div>
+
+              <div className="scrum-flow-connector" aria-hidden="true">→</div>
+
+              <div className="scrum-flow-step">
+                <div className="scrum-section-header scrum-section-header--event">Événement</div>
+                {dz('sprint-review')}
+              </div>
+            </div>
+          </div>
+
+          <div className="scrum-retro-row">
+            <div className="scrum-section-block scrum-section-block--event" style={{ flex: 1 }}>
+              <div className="scrum-section-header scrum-section-header--event">Événement</div>
+              {dz('sprint-retrospective')}
+            </div>
+            <div className="scrum-section-block scrum-section-block--role" style={{ flex: 1 }}>
+              <div className="scrum-section-header scrum-section-header--role">Rôle</div>
+              {dz('scrum-master')}
+            </div>
+          </div>
+        </div>
+
+        <div className="scrum-col-arrow" aria-hidden="true">→</div>
+
+        {/* Right: Sprint Backlog + Increment */}
+        <div className="scrum-col scrum-col--right">
+          <div className="scrum-section-block scrum-section-block--artifact">
+            <div className="scrum-section-header scrum-section-header--artifact">Artefact</div>
+            {dz('sprint-backlog')}
+            <div className="scrum-commitment-row">
+              <span className="scrum-commitment-label">Engagement</span>
+              {dz('objectif-sprint')}
+            </div>
+          </div>
+
+          <div className="scrum-section-block scrum-section-block--artifact">
+            <div className="scrum-section-header scrum-section-header--artifact">Artefact</div>
+            {dz('increment')}
+            <div className="scrum-commitment-row">
+              <span className="scrum-commitment-label">Engagement</span>
+              {dz('definition-done')}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {verifyResult && (
+        <div className="scrum-score-banner">
+          <span className={`badge ${score === 22 ? 'badge--green' : 'badge--orange'}`}>
+            {score} / 22 correct{score === 22 ? ' — Parfait !' : ''}
+          </span>
+        </div>
+      )}
+
+      <div
+        className="scrum-palette"
+        onDragOver={e => e.preventDefault()}
+        onDrop={handleDropOnPalette}
+      >
+        <p className="scrum-palette__title">Éléments à placer</p>
+        <div className="scrum-palette__labels">
+          {paletteLabels.map(label => {
+            const def = LABEL_MAP[label]
+            return (
               <span
                 key={label}
                 data-label={label}
-                className="scrum-label"
+                className={`scrum-label scrum-label--${def.type}`}
                 draggable
                 onDragStart={() => handleDragStart(label)}
               >
+                <def.Icon size={12} strokeWidth={2} aria-hidden="true" />
                 {label}
               </span>
-            ))}
-            {paletteLabels.length === 0 && (
-              <span className="scrum-palette__empty">Tous les éléments ont été placés</span>
-            )}
-          </div>
-        </div>
-
-        <div className="scrum-actions">
-          <button
-            className="btn btn--primary"
-            onClick={handleVerify}
-            disabled={!allFilled}
-          >
-            Vérifier
-          </button>
-          {verifyResult && (
-            <button className="btn btn--secondary" onClick={handleReset}>
-              Réessayer
-            </button>
+            )
+          })}
+          {paletteLabels.length === 0 && (
+            <span className="scrum-palette__empty">Tous les éléments ont été placés</span>
           )}
         </div>
       </div>
 
-      {showModal && (
-        <ConfirmLeaveModal
-          title="Quitter l'atelier ?"
-          body="Votre progression sera perdue."
-          cancelLabel="Continuer"
-          confirmLabel="Quitter quand même"
-          onConfirm={confirm}
-          onCancel={cancel}
-        />
-      )}
+      <div className="scrum-actions">
+        <button className="btn btn--primary" onClick={handleVerify} disabled={!allFilled}>
+          Vérifier
+        </button>
+        {verifyResult && (
+          <button className="btn btn--secondary" onClick={handleReset}>Réessayer</button>
+        )}
+      </div>
+    </div>
+
+    {showModal && (
+      <ConfirmLeaveModal
+        title="Quitter l'atelier ?"
+        body="Votre progression sera perdue."
+        cancelLabel="Continuer"
+        confirmLabel="Quitter quand même"
+        onConfirm={confirm}
+        onCancel={cancel}
+      />
+    )}
     </>
   )
 }
