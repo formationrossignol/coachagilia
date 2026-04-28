@@ -20,6 +20,7 @@ import { IshikawaAtelier } from './components/IshikawaAtelier'
 import { TroikaConsultingAtelier } from './components/TroikaConsultingAtelier'
 import { SBIAtelier } from './components/SBIAtelier'
 import { TRIZAtelier } from './components/TRIZAtelier'
+import { CynefinFrameworkAtelier } from './components/CynefinFrameworkAtelier'
 
 function Layout() {
   return (
@@ -53,6 +54,7 @@ const router = createBrowserRouter([
       { path: '/ateliers/troika-consulting', element: <TroikaConsultingAtelier /> },
       { path: '/ateliers/sbi', element: <SBIAtelier /> },
       { path: '/ateliers/triz', element: <TRIZAtelier /> },
+      { path: '/ateliers/cynefin-framework', element: <CynefinFrameworkAtelier /> },
       { path: '/ateliers/categories/:slug', element: <WorkshopCategoryPage /> },
       { path: '*', element: <Navigate to="/" replace /> },
     ],

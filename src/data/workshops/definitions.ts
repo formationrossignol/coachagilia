@@ -1,4 +1,5 @@
 import type { WorkshopDefinition } from './types'
+import { cynefinFrameworkDataset } from './datasets/cynefin-framework'
 import { sbiDataset } from './datasets/sbi'
 import { conflictDataset } from './datasets/conflict'
 import { delegationPokerDataset } from './datasets/delegation-poker'
@@ -343,6 +344,37 @@ const EXISTING: WorkshopDefinition[] = [
       ],
     },
     dataset: trizDataset,
+  },
+  {
+    id: 'cynefin-framework',
+    slug: 'cynefin-framework',
+    title: 'Cynefin Framework',
+    route: '/ateliers/cynefin-framework',
+    categorySlug: 'problem-solving',
+    toolName: 'Cynefin Framework',
+    level: 'advanced',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: 'Positionnez les 5 domaines du Cynefin Framework, classez 15 situations Scrum / produit / organisation dans le bon domaine, puis définissez votre posture de décision.',
+    pedagogy: {
+      objectives: [
+        'Identifier et positionner les 5 domaines du Cynefin Framework',
+        'Distinguer un contexte Complex d\'un contexte Complicated',
+        'Adapter sa posture de décision selon le type de contexte',
+      ],
+      toolExplanation: "Le Cynefin Framework (Snowden, 1999) est un modèle de sense-making qui distingue 5 domaines : Clear (cause-effet évidente), Complicated (expertise requise), Complex (émergence), Chaotic (urgence) et Disorder (domaine non identifié). Chaque domaine appelle une réponse adaptée : Sense→Categorize→Respond, Sense→Analyze→Respond, Probe→Sense→Respond ou Act→Sense→Respond.",
+      whenToUse: [
+        "Pour choisir la bonne approche face à un problème organisationnel ou produit",
+        "En rétrospective pour analyser pourquoi une décision n'a pas produit les effets attendus",
+        "Pour former une équipe à adapter sa posture selon le contexte",
+      ],
+      expectedOutput: [
+        'Maîtrise des 5 domaines Cynefin et de leurs stratégies de réponse',
+        'Capacité à classer des situations et à adapter sa posture de décision',
+      ],
+      prerequisites: ['Expérience en environnement Scrum ou produit recommandée'],
+    },
+    dataset: cynefinFrameworkDataset,
   },
 ]
 

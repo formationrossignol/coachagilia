@@ -2439,3 +2439,221 @@ body {
 .sbi-field-label--s { color: #38bdf8; }
 .sbi-field-label--b { color: #a78bfa; }
 .sbi-field-label--i { color: #34d399; }
+
+/* ══════════════════════════════════════════════════════════
+   CYNEFIN FRAMEWORK ATELIER
+   ══════════════════════════════════════════════════════════ */
+
+/* Phase 1 — diagram + palette */
+.cf-phase1-layout {
+  display: flex;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 1rem auto;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.cf-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 340px;
+}
+.cf-diagram-row { display: flex; gap: 0.5rem; }
+.cf-diagram-row .cf-zone { flex: 1; }
+.cf-diagram-center { display: flex; justify-content: center; }
+.cf-diagram-center .cf-zone { width: 200px; }
+
+/* Zone — drop target on diagram */
+.cf-zone {
+  min-height: 100px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: var(--color-surface);
+  transition: border-color 0.15s, background 0.15s;
+}
+.cf-zone--filled  { border-style: solid; }
+.cf-zone--hover   { border-color: var(--color-primary); background: rgba(99,102,241,0.05); }
+.cf-zone--correct { border-color: var(--color-ok); background: rgba(20,83,45,0.12); }
+.cf-zone--wrong   { border-color: var(--color-danger); background: rgba(127,29,29,0.12); }
+
+.cf-zone--complex     { border-color: rgba(168,85,247,0.35); }
+.cf-zone--complicated { border-color: rgba(59,130,246,0.35); }
+.cf-zone--chaotic     { border-color: rgba(239,68,68,0.35); }
+.cf-zone--clear       { border-color: rgba(34,197,94,0.35); }
+.cf-zone--disorder    { border-color: rgba(148,163,184,0.35); }
+
+.cf-zone__strategy {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.cf-zone__placeholder {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Domain card — draggable */
+.cf-domain-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.35rem 0.6rem;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: calc(var(--radius) - 2px);
+  cursor: grab;
+}
+.cf-domain-card:hover { border-color: var(--color-primary); }
+.cf-domain-card--placed { background: transparent; border-color: transparent; padding: 0; cursor: grab; }
+.cf-domain-card__name { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
+.cf-domain-card__desc { font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.3; }
+
+/* Palette */
+.cf-palette {
+  min-width: 220px;
+  flex: 0 0 auto;
+}
+.cf-palette__cards { display: flex; flex-direction: column; gap: 0.5rem; }
+
+/* Phase 2 — 5 domain columns */
+.cf-domain-columns {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 1200px;
+  margin: 0.75rem auto 0;
+  flex-wrap: wrap;
+}
+.cf-domain-col {
+  flex: 1;
+  min-width: 160px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-height: 180px;
+}
+.cf-domain-col--complex     { border-top: 3px solid #a855f7; }
+.cf-domain-col--complicated { border-top: 3px solid #3b82f6; }
+.cf-domain-col--chaotic     { border-top: 3px solid #ef4444; }
+.cf-domain-col--clear       { border-top: 3px solid #22c55e; }
+.cf-domain-col--disorder    { border-top: 3px solid #94a3b8; }
+
+.cf-domain-col__header {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cf-domain-col__strategy {
+  font-size: 0.62rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.2rem;
+}
+.cf-domain-col__cards { display: flex; flex-direction: column; gap: 0.3rem; flex: 1; }
+.cf-domain-col__placeholder { color: var(--color-text-muted); font-size: 0.7rem; }
+
+.cf-situation-card {
+  padding: 0.4rem 0.55rem;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 0.78rem;
+  color: var(--color-text);
+  cursor: grab;
+  line-height: 1.4;
+}
+.cf-situation-card:hover { border-color: var(--color-primary); }
+.cf-situation-card--correct { border-color: var(--color-ok); background: rgba(20,83,45,0.13); }
+.cf-situation-card--wrong   { border-color: var(--color-danger); background: rgba(127,29,29,0.13); }
+
+.cf-pool {
+  max-width: 1200px;
+  margin: 0.75rem auto 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+}
+.cf-pool__cards { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* Phase 3 — posture selection */
+.cf-phase3-intro {
+  max-width: 760px;
+  margin: 0.5rem auto 0.75rem;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+.cf-phase3-list {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cf-phase3-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem;
+}
+.cf-phase3-item--selected {
+  border-color: var(--color-primary);
+  background: rgba(99,102,241,0.04);
+}
+.cf-phase3-item__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.cf-phase3-item__header input[type="checkbox"] {
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.cf-phase3-item__text {
+  font-size: 0.83rem;
+  color: var(--color-text);
+  line-height: 1.45;
+  flex: 1;
+}
+.cf-phase3-item__fields {
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cf-field-row { display: flex; flex-direction: column; gap: 0.25rem; }
+.cf-field-label { font-size: 0.78rem; font-weight: 600; color: var(--color-text-muted); }
+
+/* Domain badges */
+.cf-domain-badge {
+  display: inline-block;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.cf-domain-badge--clear       { background: rgba(34,197,94,0.15);  color: #22c55e; }
+.cf-domain-badge--complicated { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.cf-domain-badge--complex     { background: rgba(168,85,247,0.15); color: #c084fc; }
+.cf-domain-badge--chaotic     { background: rgba(239,68,68,0.15);  color: #f87171; }
+.cf-domain-badge--disorder    { background: rgba(148,163,184,0.15);color: #94a3b8; }
