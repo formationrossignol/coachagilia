@@ -14,36 +14,54 @@ const DOMAIN_META: Record<CynefinDomain, {
   description: string
   responseStrategy: string
   suggestedPosture: string
+  practiceLabel: string
+  bgColor: string
+  textColor: string
 }> = {
   clear: {
-    label: 'Clear (Obvious)',
-    description: 'Relation cause-effet évidente',
+    label: 'Clear',
+    description: 'Tightly constrained — no degrees of freedom',
     responseStrategy: 'Sense → Categorize → Respond',
     suggestedPosture: 'Standardiser',
+    practiceLabel: 'Best Practice',
+    bgColor: '#f5f7fa',
+    textColor: '#1e2433',
   },
   complicated: {
     label: 'Complicated',
-    description: 'Expertise nécessaire',
+    description: 'Governing constraints — tightly coupled',
     responseStrategy: 'Sense → Analyze → Respond',
     suggestedPosture: 'Analyser',
+    practiceLabel: 'Good Practice',
+    bgColor: '#d6dde6',
+    textColor: '#1e2433',
   },
   complex: {
     label: 'Complex',
-    description: "L'émergence domine",
+    description: 'Enabling constraints — loosely coupled',
     responseStrategy: 'Probe → Sense → Respond',
     suggestedPosture: 'Expérimenter',
+    practiceLabel: 'Emergent Practice',
+    bgColor: '#3d4f63',
+    textColor: '#ffffff',
   },
   chaotic: {
     label: 'Chaotic',
-    description: 'Urgence, instabilité forte',
+    description: 'Lacking constraints — de-coupled',
     responseStrategy: 'Act → Sense → Respond',
     suggestedPosture: 'Agir immédiatement',
+    practiceLabel: 'Novel Practice',
+    bgColor: '#1e2433',
+    textColor: '#ffffff',
   },
   disorder: {
     label: 'Disorder',
     description: 'Domaine non identifié',
     responseStrategy: 'Identifier le bon domaine',
     suggestedPosture: 'Diagnostiquer',
+    practiceLabel: '',
+    bgColor: '#e05c4b',
+    textColor: '#ffffff',
   },
 }
 
@@ -89,7 +107,7 @@ type Dragging =
   | { type: 'situation'; situationId: string }
   | null
 
-function CynefinZone({
+function CynefinQuad({
   zoneId, placed, result, onDrop, onDragStart,
 }: {
   zoneId: CynefinDomain
@@ -105,28 +123,36 @@ function CynefinZone({
     <div
       data-zone={zoneId}
       className={[
-        'cf-zone',
-        `cf-zone--${zoneId}`,
-        placed ? 'cf-zone--filled' : 'cf-zone--empty',
-        verified ? (correct ? 'cf-zone--correct' : 'cf-zone--wrong') : '',
+        'cf-quad',
+        `cf-quad--${zoneId}`,
+        verified ? (correct ? 'cf-quad--correct' : 'cf-quad--wrong') : '',
       ].filter(Boolean).join(' ')}
-      onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('cf-zone--hover') }}
-      onDragLeave={e => e.currentTarget.classList.remove('cf-zone--hover')}
-      onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('cf-zone--hover'); onDrop(zoneId) }}
+      style={{ backgroundColor: meta.bgColor, color: meta.textColor }}
+      onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('cf-quad--hover') }}
+      onDragLeave={e => e.currentTarget.classList.remove('cf-quad--hover')}
+      onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('cf-quad--hover'); onDrop(zoneId) }}
     >
-      <span className="cf-zone__strategy">{meta.responseStrategy}</span>
-      {placed ? (
-        <div
-          data-domain={placed}
-          className="cf-domain-card cf-domain-card--placed"
-          draggable
-          onDragStart={() => onDragStart(placed)}
-        >
-          <strong className="cf-domain-card__name">{DOMAIN_META[placed].label}</strong>
-          <span className="cf-domain-card__desc">{DOMAIN_META[placed].description}</span>
-        </div>
-      ) : (
-        <span className="cf-zone__placeholder">Déposer ici</span>
+      <div className="cf-quad__meta">
+        <strong className="cf-quad__label">{meta.label.toUpperCase()}</strong>
+        <span className="cf-quad__desc">{meta.description}</span>
+        <span className="cf-quad__strategy">{meta.responseStrategy}</span>
+      </div>
+      <div className="cf-quad__drop-area">
+        {placed ? (
+          <div
+            data-domain={placed}
+            className="cf-domain-placed-card"
+            draggable
+            onDragStart={() => onDragStart(placed)}
+          >
+            <strong>{DOMAIN_META[placed].label}</strong>
+          </div>
+        ) : (
+          <span className="cf-quad__placeholder">Déposer ici</span>
+        )}
+      </div>
+      {meta.practiceLabel && (
+        <span className="cf-quad__practice">{meta.practiceLabel}</span>
       )}
     </div>
   )
@@ -257,17 +283,6 @@ export function CynefinFrameworkAtelier() {
   const phase3AllCoherent = phase3Result !== null && Object.values(phase3Result).every(r => r.postureOk)
   const finalBadgeGreen = phase2Score !== null && phase2Score >= 13 && phase3AllCoherent
 
-  const zone = (id: CynefinDomain) => (
-    <CynefinZone
-      key={id}
-      zoneId={id}
-      placed={frameworkZones[id]}
-      result={phase1Result}
-      onDrop={handleDropOnZone}
-      onDragStart={handleDragStartDomain}
-    />
-  )
-
   return (
     <>
     <div className="atelier-page">
@@ -285,16 +300,43 @@ export function CynefinFrameworkAtelier() {
         <>
           <div className="cf-phase1-layout">
             <div className="cf-diagram">
-              <div className="cf-diagram-row">
-                {zone('complex')}
-                {zone('complicated')}
+              <div className="cf-diagram-grid">
+                {(['complex', 'complicated', 'chaotic', 'clear'] as CynefinDomain[]).map(id => (
+                  <CynefinQuad
+                    key={id}
+                    zoneId={id}
+                    placed={frameworkZones[id]}
+                    result={phase1Result}
+                    onDrop={handleDropOnZone}
+                    onDragStart={handleDragStartDomain}
+                  />
+                ))}
               </div>
-              <div className="cf-diagram-center">
-                {zone('disorder')}
-              </div>
-              <div className="cf-diagram-row">
-                {zone('chaotic')}
-                {zone('clear')}
+              <div className="cf-center">
+                <div
+                  data-zone="disorder"
+                  className={[
+                    'cf-disorder-zone',
+                    phase1Result !== null
+                      ? (phase1Result['disorder'] ? 'cf-disorder-zone--correct' : 'cf-disorder-zone--wrong')
+                      : '',
+                  ].filter(Boolean).join(' ')}
+                  onDragOver={e => e.preventDefault()}
+                  onDrop={e => { e.preventDefault(); handleDropOnZone('disorder') }}
+                >
+                  {frameworkZones['disorder'] ? (
+                    <div
+                      data-domain={frameworkZones['disorder']}
+                      className="cf-domain-placed-card cf-domain-placed-card--center"
+                      draggable
+                      onDragStart={() => handleDragStartDomain(frameworkZones['disorder'] as CynefinDomain)}
+                    >
+                      <strong>{DOMAIN_META[frameworkZones['disorder'] as CynefinDomain].label}</strong>
+                    </div>
+                  ) : (
+                    <span className="cf-disorder-zone__label">⬧<br />Disorder</span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -342,36 +384,71 @@ export function CynefinFrameworkAtelier() {
 
       {phase === 2 && (
         <>
-          <div className="cf-domain-columns">
-            {DOMAIN_IDS.map(domain => {
-              const col = SITUATIONS.filter(s => situationAssignments[s.id] === domain)
-              return (
-                <div
-                  key={domain}
-                  data-domain-zone={domain}
-                  className={`cf-domain-col cf-domain-col--${domain}`}
-                  onDragOver={e => e.preventDefault()}
-                  onDrop={() => handleDropOnDomainZone(domain)}
-                >
-                  <p className="cf-domain-col__header">{DOMAIN_META[domain].label}</p>
-                  <p className="cf-domain-col__strategy">{DOMAIN_META[domain].responseStrategy}</p>
-                  <div className="cf-domain-col__cards">
-                    {col.map(s => (
-                      <div
-                        key={s.id}
-                        data-situation={s.id}
-                        className={'cf-situation-card' + (phase2Result ? (phase2Result[s.id] ? ' cf-situation-card--correct' : ' cf-situation-card--wrong') : '')}
-                        draggable
-                        onDragStart={() => handleDragStartSituation(s.id)}
-                      >
-                        {s.text}
-                      </div>
-                    ))}
-                    {col.length === 0 && <span className="cf-domain-col__placeholder">Déposer ici</span>}
+          <div className="cf-diagram cf-diagram--p2">
+            <div className="cf-diagram-grid cf-diagram-grid--p2">
+              {(['complex', 'complicated', 'chaotic', 'clear'] as CynefinDomain[]).map(domain => {
+                const col = SITUATIONS.filter(s => situationAssignments[s.id] === domain)
+                return (
+                  <div
+                    key={domain}
+                    data-domain-zone={domain}
+                    className={`cf-quad cf-quad--${domain} cf-quad--p2`}
+                    style={{ backgroundColor: DOMAIN_META[domain].bgColor, color: DOMAIN_META[domain].textColor }}
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => handleDropOnDomainZone(domain)}
+                  >
+                    <div className="cf-quad__header">
+                      <strong className="cf-quad__label">{DOMAIN_META[domain].label.toUpperCase()}</strong>
+                      <span className="cf-quad__strategy">{DOMAIN_META[domain].responseStrategy}</span>
+                    </div>
+                    <div className="cf-quad__cards">
+                      {col.map(s => (
+                        <div
+                          key={s.id}
+                          data-situation={s.id}
+                          className={'cf-sit-card' + (phase2Result ? (phase2Result[s.id] ? ' cf-sit-card--correct' : ' cf-sit-card--wrong') : '')}
+                          draggable
+                          onDragStart={() => handleDragStartSituation(s.id)}
+                        >
+                          {s.text}
+                        </div>
+                      ))}
+                      {col.length === 0 && <span className="cf-quad__placeholder">Déposer ici</span>}
+                    </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
+
+            <div className="cf-center">
+              <div
+                data-domain-zone="disorder"
+                className="cf-disorder-zone cf-disorder-zone--p2"
+                onDragOver={e => e.preventDefault()}
+                onDrop={() => handleDropOnDomainZone('disorder')}
+              >
+                {(() => {
+                  const disorderCards = SITUATIONS.filter(s => situationAssignments[s.id] === 'disorder')
+                  return disorderCards.length === 0 ? (
+                    <span className="cf-disorder-zone__label">⬧<br />Disorder</span>
+                  ) : (
+                    <div className="cf-disorder-zone__cards">
+                      {disorderCards.map(s => (
+                        <div
+                          key={s.id}
+                          data-situation={s.id}
+                          className={'cf-sit-card cf-sit-card--tiny' + (phase2Result ? (phase2Result[s.id] ? ' cf-sit-card--correct' : ' cf-sit-card--wrong') : '')}
+                          draggable
+                          onDragStart={() => handleDragStartSituation(s.id)}
+                        >
+                          {s.text.length > 28 ? s.text.slice(0, 28) + '…' : s.text}
+                        </div>
+                      ))}
+                    </div>
+                  )
+                })()}
+              </div>
+            </div>
           </div>
 
           <div className="cf-pool" onDragOver={e => e.preventDefault()} onDrop={handleDropOnPool2}>
@@ -381,7 +458,7 @@ export function CynefinFrameworkAtelier() {
                 <div
                   key={s.id}
                   data-situation={s.id}
-                  className="cf-situation-card"
+                  className="cf-sit-card"
                   draggable
                   onDragStart={() => handleDragStartSituation(s.id)}
                 >
@@ -428,7 +505,7 @@ export function CynefinFrameworkAtelier() {
               const r3 = phase3Result?.[s.id]
 
               return (
-                <div key={s.id} className={`cf-phase3-item${isSelected ? ' cf-phase3-item--selected' : ''}`}>
+                <div key={s.id} className={`cf-phase3-item cf-phase3-item--${assignedDomain}${isSelected ? ' cf-phase3-item--selected' : ''}`}>
                   <div className="cf-phase3-item__header">
                     <input
                       type="checkbox"

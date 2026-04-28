@@ -2445,6 +2445,7 @@ body {
    ══════════════════════════════════════════════════════════ */
 
 /* Phase 1 — diagram + palette */
+/* ── Cynefin Phase 1 — Diagram layout ───────────────────── */
 .cf-phase1-layout {
   display: flex;
   gap: 2rem;
@@ -2454,54 +2455,92 @@ body {
   align-items: flex-start;
 }
 .cf-diagram {
+  position: relative;
+  flex: 1;
+  min-width: 320px;
+}
+.cf-diagram-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Quadrant */
+.cf-quad {
+  padding: 1rem 1.1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  flex: 1;
-  min-width: 340px;
+  min-height: 160px;
+  transition: filter 0.15s;
 }
-.cf-diagram-row { display: flex; gap: 0.5rem; }
-.cf-diagram-row .cf-zone { flex: 1; }
-.cf-diagram-center { display: flex; justify-content: center; }
-.cf-diagram-center .cf-zone { width: 200px; }
+.cf-quad--hover   { filter: brightness(1.12); }
+.cf-quad--correct { outline: 3px solid var(--color-ok);     outline-offset: -3px; }
+.cf-quad--wrong   { outline: 3px solid var(--color-danger); outline-offset: -3px; }
 
-/* Zone — drop target on diagram */
-.cf-zone {
-  min-height: 100px;
-  border: 2px dashed var(--color-border);
+.cf-quad__meta     { display: flex; flex-direction: column; gap: 0.15rem; }
+.cf-quad__label    { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.07em; }
+.cf-quad__desc     { font-size: 0.67rem; opacity: 0.75; line-height: 1.3; }
+.cf-quad__strategy { font-size: 0.63rem; opacity: 0.65; font-style: italic; }
+
+.cf-quad__drop-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+}
+.cf-quad__placeholder { font-size: 0.68rem; opacity: 0.45; font-style: italic; }
+.cf-quad__practice    { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; opacity: 0.8; text-transform: uppercase; }
+
+/* Domain card placed inside a quadrant */
+.cf-domain-placed-card {
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.35);
   border-radius: var(--radius);
-  padding: 0.6rem 0.75rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: grab;
+  color: inherit;
+  text-align: center;
+}
+.cf-domain-placed-card--center { font-size: 0.65rem; padding: 0.2rem 0.4rem; }
+
+/* Center — Disorder circle */
+.cf-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.cf-disorder-zone {
+  width: 82px; height: 82px;
+  background: #e05c4b;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  background: var(--color-surface);
-  transition: border-color 0.15s, background 0.15s;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  cursor: default;
+  transition: filter 0.15s;
+  line-height: 1.2;
 }
-.cf-zone--filled  { border-style: solid; }
-.cf-zone--hover   { border-color: var(--color-primary); background: rgba(99,102,241,0.05); }
-.cf-zone--correct { border-color: var(--color-ok); background: rgba(20,83,45,0.12); }
-.cf-zone--wrong   { border-color: var(--color-danger); background: rgba(127,29,29,0.12); }
+.cf-disorder-zone--correct { outline: 3px solid var(--color-ok);     }
+.cf-disorder-zone--wrong   { outline: 3px solid var(--color-danger);  }
+.cf-disorder-zone__label   { font-size: 0.62rem; line-height: 1.3; opacity: 0.9; }
 
-.cf-zone--complex     { border-color: rgba(168,85,247,0.35); }
-.cf-zone--complicated { border-color: rgba(59,130,246,0.35); }
-.cf-zone--chaotic     { border-color: rgba(239,68,68,0.35); }
-.cf-zone--clear       { border-color: rgba(34,197,94,0.35); }
-.cf-zone--disorder    { border-color: rgba(148,163,184,0.35); }
+/* Palette (sidebar) */
+.cf-palette        { min-width: 200px; flex: 0 0 auto; }
+.cf-palette__cards { display: flex; flex-direction: column; gap: 0.5rem; }
 
-.cf-zone__strategy {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.cf-zone__placeholder {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  font-style: italic;
-}
-
-/* Domain card — draggable */
+/* Palette domain cards */
 .cf-domain-card {
   display: flex;
   flex-direction: column;
@@ -2513,76 +2552,45 @@ body {
   cursor: grab;
 }
 .cf-domain-card:hover { border-color: var(--color-primary); }
-.cf-domain-card--placed { background: transparent; border-color: transparent; padding: 0; cursor: grab; }
 .cf-domain-card__name { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
 .cf-domain-card__desc { font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.3; }
 
-/* Palette */
-.cf-palette {
-  min-width: 220px;
-  flex: 0 0 auto;
-}
-.cf-palette__cards { display: flex; flex-direction: column; gap: 0.5rem; }
-
 /* Phase 2 — 5 domain columns */
-.cf-domain-columns {
-  display: flex;
-  gap: 0.5rem;
-  max-width: 1200px;
-  margin: 0.75rem auto 0;
-  flex-wrap: wrap;
-}
-.cf-domain-col {
-  flex: 1;
-  min-width: 160px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 0.6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  min-height: 180px;
-}
-.cf-domain-col--complex     { border-top: 3px solid #a855f7; }
-.cf-domain-col--complicated { border-top: 3px solid #3b82f6; }
-.cf-domain-col--chaotic     { border-top: 3px solid #ef4444; }
-.cf-domain-col--clear       { border-top: 3px solid #22c55e; }
-.cf-domain-col--disorder    { border-top: 3px solid #94a3b8; }
+/* ── Cynefin Phase 2 — Diagram as drop zones ────────────── */
+.cf-diagram--p2   { margin-bottom: 0.75rem; }
+.cf-diagram-grid--p2 { grid-template-rows: auto auto; }
 
-.cf-domain-col__header {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--color-text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.cf-domain-col__strategy {
-  font-size: 0.62rem;
-  color: var(--color-text-muted);
-  font-style: italic;
-  margin-bottom: 0.2rem;
-}
-.cf-domain-col__cards { display: flex; flex-direction: column; gap: 0.3rem; flex: 1; }
-.cf-domain-col__placeholder { color: var(--color-text-muted); font-size: 0.7rem; }
+.cf-quad--p2 { min-height: 200px; overflow-y: auto; }
+.cf-quad__header { display: flex; flex-direction: column; gap: 0.1rem; margin-bottom: 0.4rem; }
+.cf-quad__cards  { display: flex; flex-direction: column; gap: 0.3rem; }
 
-.cf-situation-card {
+.cf-disorder-zone--p2 {
+  width: 110px; height: 110px;
+  overflow-y: auto;
+  padding: 0.4rem;
+  gap: 0.2rem;
+}
+.cf-disorder-zone__cards { display: flex; flex-direction: column; gap: 0.2rem; width: 100%; }
+
+/* Situation cards */
+.cf-sit-card {
   padding: 0.4rem 0.55rem;
-  background: var(--color-bg);
-  border: 1.5px solid var(--color-border);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
   border-radius: calc(var(--radius) - 2px);
-  font-size: 0.78rem;
-  color: var(--color-text);
+  font-size: 0.76rem;
+  color: inherit;
   cursor: grab;
   line-height: 1.4;
 }
-.cf-situation-card:hover { border-color: var(--color-primary); }
-.cf-situation-card--correct { border-color: var(--color-ok); background: rgba(20,83,45,0.13); }
-.cf-situation-card--wrong   { border-color: var(--color-danger); background: rgba(127,29,29,0.13); }
+.cf-sit-card--tiny  { font-size: 0.6rem; padding: 0.2rem 0.3rem; line-height: 1.25; }
+.cf-sit-card:hover  { border-color: rgba(255,255,255,0.5); }
+.cf-sit-card--correct { border-color: var(--color-ok);     background: rgba(20,83,45,0.35); }
+.cf-sit-card--wrong   { border-color: var(--color-danger); background: rgba(127,29,29,0.35); }
 
+/* Pool (unassigned situations) */
 .cf-pool {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0.75rem auto 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -2590,8 +2598,10 @@ body {
   padding: 0.75rem 1rem;
 }
 .cf-pool__cards { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cf-pool .cf-sit-card { background: var(--color-bg); border-color: var(--color-border); color: var(--color-text); }
+.cf-pool .cf-sit-card:hover { border-color: var(--color-primary); }
 
-/* Phase 3 — posture selection */
+/* ── Cynefin Phase 3 — Domain-colored posture cards ─────── */
 .cf-phase3-intro {
   max-width: 760px;
   margin: 0.5rem auto 0.75rem;
@@ -2608,11 +2618,19 @@ body {
 .cf-phase3-item {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-left-width: 4px;
   border-radius: var(--radius);
   padding: 0.6rem 0.75rem;
 }
+.cf-phase3-item--complex     { border-left-color: #3d4f63; }
+.cf-phase3-item--complicated { border-left-color: #94a3b8; }
+.cf-phase3-item--chaotic     { border-left-color: #1e2433; }
+.cf-phase3-item--clear       { border-left-color: #64748b; }
+.cf-phase3-item--disorder    { border-left-color: #e05c4b; }
 .cf-phase3-item--selected {
-  border-color: var(--color-primary);
+  border-top-color: var(--color-primary);
+  border-right-color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
   background: rgba(99,102,241,0.04);
 }
 .cf-phase3-item__header {
@@ -2639,10 +2657,10 @@ body {
   flex-direction: column;
   gap: 0.5rem;
 }
-.cf-field-row { display: flex; flex-direction: column; gap: 0.25rem; }
+.cf-field-row   { display: flex; flex-direction: column; gap: 0.25rem; }
 .cf-field-label { font-size: 0.78rem; font-weight: 600; color: var(--color-text-muted); }
 
-/* Domain badges */
+/* Domain badges — Cynefin color system */
 .cf-domain-badge {
   display: inline-block;
   flex-shrink: 0;
@@ -2652,8 +2670,8 @@ body {
   border-radius: 999px;
   white-space: nowrap;
 }
-.cf-domain-badge--clear       { background: rgba(34,197,94,0.15);  color: #22c55e; }
-.cf-domain-badge--complicated { background: rgba(59,130,246,0.15); color: #60a5fa; }
-.cf-domain-badge--complex     { background: rgba(168,85,247,0.15); color: #c084fc; }
-.cf-domain-badge--chaotic     { background: rgba(239,68,68,0.15);  color: #f87171; }
-.cf-domain-badge--disorder    { background: rgba(148,163,184,0.15);color: #94a3b8; }
+.cf-domain-badge--clear       { background: #f5f7fa; color: #1e2433; border: 1px solid #64748b; }
+.cf-domain-badge--complicated { background: #d6dde6; color: #1e2433; }
+.cf-domain-badge--complex     { background: #3d4f63; color: #ffffff; }
+.cf-domain-badge--chaotic     { background: #1e2433; color: #ffffff; }
+.cf-domain-badge--disorder    { background: #e05c4b; color: #ffffff; }
