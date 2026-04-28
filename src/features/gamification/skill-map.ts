@@ -1,0 +1,48 @@
+// src/features/gamification/skill-map.ts
+import type { SkillContribution } from './types'
+
+export const CONTENT_SKILL_MAP: Record<string, SkillContribution[]> = {
+  // existing ateliers
+  'thomas-kilmann':     [{ skill: 'conflict', weight: 0.7 }, { skill: 'communication', weight: 0.2 }, { skill: 'leadership', weight: 0.1 }],
+  'sbi':                [{ skill: 'feedback', weight: 0.6 }, { skill: 'communication', weight: 0.3 }, { skill: 'conflict', weight: 0.1 }],
+  'grow-model':         [{ skill: 'coaching', weight: 0.7 }, { skill: 'communication', weight: 0.2 }, { skill: 'leadership', weight: 0.1 }],
+  'ask-vs-tell':        [{ skill: 'coaching', weight: 0.6 }, { skill: 'facilitation', weight: 0.2 }, { skill: 'leadership', weight: 0.2 }],
+  'stakeholder-mapping':[{ skill: 'stakeholder_management', weight: 0.8 }, { skill: 'communication', weight: 0.2 }],
+  'delegation-poker':   [{ skill: 'management_3_0', weight: 0.5 }, { skill: 'leadership', weight: 0.3 }, { skill: 'decision_making', weight: 0.2 }],
+  'moving-motivators':  [{ skill: 'management_3_0', weight: 0.6 }, { skill: 'team_health', weight: 0.3 }, { skill: 'coaching', weight: 0.1 }],
+  'ishikawa':           [{ skill: 'problem_solving', weight: 0.7 }, { skill: 'systems_thinking', weight: 0.3 }],
+  'troika-consulting':  [{ skill: 'facilitation', weight: 0.6 }, { skill: 'coaching', weight: 0.3 }, { skill: 'communication', weight: 0.1 }],
+  'triz':               [{ skill: 'problem_solving', weight: 0.5 }, { skill: 'facilitation', weight: 0.3 }, { skill: 'systems_thinking', weight: 0.2 }],
+  'cynefin-framework':  [{ skill: 'systems_thinking', weight: 0.6 }, { skill: 'decision_making', weight: 0.3 }, { skill: 'leadership', weight: 0.1 }],
+  'scrum-guide':        [{ skill: 'facilitation', weight: 0.4 }, { skill: 'team_health', weight: 0.4 }, { skill: 'delivery_excellence', weight: 0.2 }],
+  // quiz exams
+  'exam-1':             [{ skill: 'facilitation', weight: 0.4 }, { skill: 'team_health', weight: 0.3 }, { skill: 'delivery_excellence', weight: 0.3 }],
+  'exam-2':             [{ skill: 'coaching', weight: 0.4 }, { skill: 'leadership', weight: 0.3 }, { skill: 'management_3_0', weight: 0.3 }],
+  'exam-3':             [{ skill: 'problem_solving', weight: 0.4 }, { skill: 'systems_thinking', weight: 0.3 }, { skill: 'decision_making', weight: 0.3 }],
+  // coming-soon — referenced in badges and paths
+  'nonviolent-communication': [{ skill: 'communication', weight: 0.5 }, { skill: 'conflict', weight: 0.3 }, { skill: 'feedback', weight: 0.2 }],
+  'ladder-of-inference':      [{ skill: 'conflict', weight: 0.5 }, { skill: 'communication', weight: 0.4 }, { skill: 'coaching', weight: 0.1 }],
+  'facilitation-canvas':      [{ skill: 'facilitation', weight: 0.8 }, { skill: 'decision_making', weight: 0.2 }],
+  '1-2-4-all':                [{ skill: 'facilitation', weight: 0.7 }, { skill: 'team_health', weight: 0.3 }],
+  'dot-voting':               [{ skill: 'facilitation', weight: 0.6 }, { skill: 'decision_making', weight: 0.4 }],
+  'active-listening':         [{ skill: 'coaching', weight: 0.6 }, { skill: 'communication', weight: 0.4 }],
+  'powerful-questions':       [{ skill: 'coaching', weight: 0.7 }, { skill: 'facilitation', weight: 0.3 }],
+  '5-whys':                   [{ skill: 'problem_solving', weight: 0.8 }, { skill: 'systems_thinking', weight: 0.2 }],
+  'root-cause-analysis':      [{ skill: 'problem_solving', weight: 0.7 }, { skill: 'systems_thinking', weight: 0.3 }],
+  'delegation-board':         [{ skill: 'management_3_0', weight: 0.6 }, { skill: 'decision_making', weight: 0.4 }],
+  'celebration-grid':         [{ skill: 'management_3_0', weight: 0.5 }, { skill: 'team_health', weight: 0.5 }],
+  'fist-of-five':             [{ skill: 'facilitation', weight: 0.7 }, { skill: 'decision_making', weight: 0.3 }],
+  'lean-coffee':              [{ skill: 'facilitation', weight: 0.8 }, { skill: 'retrospective', weight: 0.2 }],
+  'team-health-check':        [{ skill: 'team_health', weight: 0.8 }, { skill: 'facilitation', weight: 0.2 }],
+  'psychological-safety':     [{ skill: 'team_health', weight: 0.7 }, { skill: 'leadership', weight: 0.3 }],
+  'working-agreements':       [{ skill: 'team_health', weight: 0.6 }, { skill: 'facilitation', weight: 0.4 }],
+  'empathy-map':              [{ skill: 'stakeholder_management', weight: 0.6 }, { skill: 'coaching', weight: 0.4 }],
+  'customer-journey-mapping': [{ skill: 'stakeholder_management', weight: 0.7 }, { skill: 'product_discovery', weight: 0.3 }],
+  'kanban':                   [{ skill: 'flow', weight: 0.7 }, { skill: 'systems_thinking', weight: 0.3 }],
+  'value-stream-mapping':     [{ skill: 'flow', weight: 0.6 }, { skill: 'systems_thinking', weight: 0.4 }],
+  'dependency-mapping':       [{ skill: 'flow', weight: 0.5 }, { skill: 'organization_design', weight: 0.5 }],
+  'circle-of-influence':      [{ skill: 'leadership', weight: 0.6 }, { skill: 'coaching', weight: 0.4 }],
+  'situational-leadership':   [{ skill: 'leadership', weight: 0.7 }, { skill: 'management_3_0', weight: 0.3 }],
+  'desc':                     [{ skill: 'feedback', weight: 0.6 }, { skill: 'communication', weight: 0.4 }],
+  'feedforward':              [{ skill: 'feedback', weight: 0.7 }, { skill: 'coaching', weight: 0.3 }],
+}
