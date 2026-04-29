@@ -50,6 +50,15 @@ describe('checkBadgeCriteria', () => {
       ]
       expect(checkBadgeCriteria(badge, events, [])).toBe(true)
     })
+
+    it('returns false when all content completed but no events have a score', () => {
+      const events = [
+        makeCompletedEvent('thomas-kilmann'),
+        makeCompletedEvent('ladder-of-inference'),
+        makeCompletedEvent('nonviolent-communication'),
+      ]
+      expect(checkBadgeCriteria(badge, events, [])).toBe(false)
+    })
   })
 
   describe('feedback-crafter badge', () => {

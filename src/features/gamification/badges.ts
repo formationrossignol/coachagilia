@@ -80,10 +80,11 @@ export function checkBadgeCriteria(
     if (!criteria.completedContent.every(slug => completedSlugs.has(slug))) return false
   }
 
-  if (criteria.minAverageScore !== undefined && criteria.completedContent) {
+  if (criteria.minAverageScore !== undefined) {
+    const slugFilter = criteria.completedContent
     const relevant = events.filter(
       e => isCompleted(e) &&
-        criteria.completedContent!.includes(e.contentSlug ?? '') &&
+        (!slugFilter || slugFilter.includes(e.contentSlug ?? '')) &&
         e.score !== undefined
     )
     if (relevant.length === 0) return false
