@@ -45,4 +45,10 @@ export const CONTENT_SKILL_MAP: Record<string, SkillContribution[]> = {
   'situational-leadership':   [{ skill: 'leadership', weight: 0.7 }, { skill: 'management_3_0', weight: 0.3 }],
   'desc':                     [{ skill: 'feedback', weight: 0.6 }, { skill: 'communication', weight: 0.4 }],
   'feedforward':              [{ skill: 'feedback', weight: 0.7 }, { skill: 'coaching', weight: 0.3 }],
+  // path quizzes — cover all skills in their learning path
+  'conflict-management-quiz': [{ skill: 'conflict', weight: 0.6 }, { skill: 'communication', weight: 0.4 }],
+  'facilitation-quiz':        [{ skill: 'facilitation', weight: 0.7 }, { skill: 'decision_making', weight: 0.3 }],
+  'coaching-quiz':            [{ skill: 'coaching', weight: 0.7 }, { skill: 'communication', weight: 0.3 }],
+  'management-3-0-quiz':      [{ skill: 'management_3_0', weight: 0.5 }, { skill: 'team_health', weight: 0.3 }, { skill: 'leadership', weight: 0.2 }],
+  'problem-solving-quiz':     [{ skill: 'problem_solving', weight: 0.7 }, { skill: 'systems_thinking', weight: 0.3 }],
 }
