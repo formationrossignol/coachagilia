@@ -30,6 +30,18 @@ describe('getMasteryLevel', () => {
   it('returns transmission above 3000 xp', () => {
     expect(getMasteryLevel(5000)).toBe('transmission')
   })
+
+  it('returns practice for 899 xp (below proficiency)', () => {
+    expect(getMasteryLevel(899)).toBe('practice')
+  })
+
+  it('returns proficiency for 1799 xp (below field_application)', () => {
+    expect(getMasteryLevel(1799)).toBe('proficiency')
+  })
+
+  it('returns field_application for 2999 xp (below transmission)', () => {
+    expect(getMasteryLevel(2999)).toBe('field_application')
+  })
 })
 
 describe('computeSkillXp', () => {

@@ -7,7 +7,7 @@ export function getMasteryLevel(xp: number): MasteryLevel {
   for (const level of ordered) {
     if (xp >= MASTERY_THRESHOLDS[level]) return level
   }
-  return 'discovery'
+  return 'discovery' // xp < 0 fallback
 }
 
 export function computeSkillXp(events: GamificationEvent[]): Partial<Record<SkillArea, number>> {
@@ -29,6 +29,7 @@ export function computeSkillImpacts(
   const contributions = CONTENT_SKILL_MAP[contentSlug]
   if (!contributions) return {}
   const impacts: Partial<Record<SkillArea, number>> = {}
+  // Skill XP and total XP are tracked on separate ledgers — rounding drift is acceptable
   for (const { skill, weight } of contributions) {
     impacts[skill] = Math.round(xpAwarded * weight)
   }
