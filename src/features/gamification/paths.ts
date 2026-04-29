@@ -37,7 +37,7 @@ export const LEARNING_PATHS: LearningPath[] = [
   {
     id: 'path-coaching',
     slug: 'coaching-scrum-master',
-    title: 'Postura de coach',
+    title: 'Posture de coach',
     description: "Développez une posture de coaching fondée sur les questions et l'écoute.",
     level: 'intermediate',
     skillAreas: ['coaching', 'communication'],
