@@ -1,11 +1,12 @@
 import { useLocation, Link } from 'react-router-dom'
-import { Zap, FileCheck, BookOpen, Sun, Moon, Layers } from 'lucide-react'
+import { Zap, FileCheck, BookOpen, TrendingUp, Sun, Moon, Layers } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
 
 const NAV_LINKS = [
   { to: '/simulation', label: 'Simulation', Icon: Zap },
   { to: '/quiz', label: 'Quiz PSM-1', Icon: FileCheck },
   { to: '/ateliers', label: 'Ateliers', Icon: BookOpen },
+  { to: '/progress', label: 'Progression', Icon: TrendingUp },
 ] as const
 
 export function NavBar() {

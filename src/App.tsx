@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider, Outlet, Navigate } from 'react-router-dom'
 import { NavBar } from './components/NavBar'
+import { GamificationToast } from './components/gamification/GamificationToast'
 import { Home } from './components/Home'
 import { ScenarioSelector } from './components/ScenarioSelector'
 import { SimulationScreen } from './components/SimulationScreen'
@@ -21,11 +22,19 @@ import { TroikaConsultingAtelier } from './components/TroikaConsultingAtelier'
 import { SBIAtelier } from './components/SBIAtelier'
 import { TRIZAtelier } from './components/TRIZAtelier'
 import { CynefinFrameworkAtelier } from './components/CynefinFrameworkAtelier'
+import { ProgressPage } from './pages/gamification/ProgressPage'
+import { SkillsPage } from './pages/gamification/SkillsPage'
+import { BadgesPage } from './pages/gamification/BadgesPage'
+import { PathsPage } from './pages/gamification/PathsPage'
+import { PathDetailPage } from './pages/gamification/PathDetailPage'
+import { ChallengesPage } from './pages/gamification/ChallengesPage'
+import { PortfolioPage } from './pages/gamification/PortfolioPage'
 
 function Layout() {
   return (
     <>
       <NavBar />
+      <GamificationToast />
       <Outlet />
     </>
   )
@@ -56,6 +65,13 @@ const router = createBrowserRouter([
       { path: '/ateliers/triz', element: <TRIZAtelier /> },
       { path: '/ateliers/cynefin-framework', element: <CynefinFrameworkAtelier /> },
       { path: '/ateliers/categories/:slug', element: <WorkshopCategoryPage /> },
+      { path: '/progress', element: <ProgressPage /> },
+      { path: '/skills', element: <SkillsPage /> },
+      { path: '/badges', element: <BadgesPage /> },
+      { path: '/paths', element: <PathsPage /> },
+      { path: '/paths/:slug', element: <PathDetailPage /> },
+      { path: '/challenges', element: <ChallengesPage /> },
+      { path: '/portfolio', element: <PortfolioPage /> },
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },

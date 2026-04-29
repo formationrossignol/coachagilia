@@ -29,4 +29,10 @@ describe('NavBar', () => {
     const quizLink = screen.getByRole('link', { name: /quiz psm-1/i })
     expect(quizLink).toHaveAttribute('aria-current', 'page')
   })
+
+  it('renders a Progression nav link to /progress', () => {
+    render(<MemoryRouter><NavBar /></MemoryRouter>)
+    const link = screen.getByRole('link', { name: /progression/i })
+    expect(link).toHaveAttribute('href', '/progress')
+  })
 })
