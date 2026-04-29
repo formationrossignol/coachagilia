@@ -61,5 +61,10 @@ export function isChallengeCompletedBy(
       return events.some(e =>
         isCompleted(e) && e.contentSlug === criteria.contentSlug && (e.score ?? 0) >= criteria.score
       )
+    default: {
+      const _exhaustive: never = criteria
+      void _exhaustive
+      return false
+    }
   }
 }
