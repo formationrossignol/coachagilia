@@ -1,12 +1,13 @@
+import { useShallow } from 'zustand/react/shallow'
 import { useGamificationStore } from '../../features/gamification'
 import { getRecommendations } from '../../features/gamification/recommendations'
 import { SkillProgressCard } from '../../components/gamification/SkillProgressCard'
 import { SKILL_AREAS } from '../../components/gamification/constants'
 
 export function SkillsPage() {
-  const allSkillXp = useGamificationStore(s => s.getAllSkillXp())
+  const allSkillXp = useGamificationStore(useShallow(s => s.getAllSkillXp()))
   const getMasteryLevelForSkill = useGamificationStore(s => s.getMasteryLevelForSkill)
-  const completedSlugs = useGamificationStore(s => s.getCompletedContentSlugs())
+  const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
 
   const skillData = SKILL_AREAS
     .map(skill => ({

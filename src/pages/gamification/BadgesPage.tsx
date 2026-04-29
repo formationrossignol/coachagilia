@@ -1,8 +1,9 @@
+import { useShallow } from 'zustand/react/shallow'
 import { useGamificationStore, BADGES } from '../../features/gamification'
 import { BadgeGrid } from '../../components/gamification/BadgeGrid'
 
 export function BadgesPage() {
-  const unlockedIds = useGamificationStore(s => s.getUnlockedBadgeIds())
+  const unlockedIds = useGamificationStore(useShallow(s => s.getUnlockedBadgeIds()))
   const events = useGamificationStore(s => s.events)
 
   return (

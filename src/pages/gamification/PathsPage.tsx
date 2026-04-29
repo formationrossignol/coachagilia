@@ -1,8 +1,9 @@
+import { useShallow } from 'zustand/react/shallow'
 import { useGamificationStore, LEARNING_PATHS, computePathProgress } from '../../features/gamification'
 import { LearningPathCard } from '../../components/gamification/LearningPathCard'
 
 export function PathsPage() {
-  const completedSlugs = useGamificationStore(s => s.getCompletedContentSlugs())
+  const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
 
   return (
     <div className="gamification-page">

@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom'
+import { useShallow } from 'zustand/react/shallow'
 import { useGamificationStore, LEARNING_PATHS, BADGES, computePathProgress } from '../../features/gamification'
 import { LearningPathTimeline } from '../../components/gamification/LearningPathTimeline'
 import { BadgeCard } from '../../components/gamification/BadgeCard'
 
 export function PathDetailPage() {
   const { slug } = useParams<{ slug: string }>()
-  const completedSlugs = useGamificationStore(s => s.getCompletedContentSlugs())
+  const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
   const events = useGamificationStore(s => s.events)
 
   const path = LEARNING_PATHS.find(p => p.slug === slug)

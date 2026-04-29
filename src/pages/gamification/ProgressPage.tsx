@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useShallow } from 'zustand/react/shallow'
 import { useGamificationStore, LEARNING_PATHS, BADGES, computePathProgress } from '../../features/gamification'
 import { XpSummaryCard } from '../../components/gamification/XpSummaryCard'
 import { SkillRadar } from '../../components/gamification/SkillRadar'
@@ -9,11 +10,11 @@ import { ArtifactGrid } from '../../components/gamification/ArtifactGrid'
 
 export function ProgressPage() {
   const totalXp = useGamificationStore(s => s.getTotalXp())
-  const allSkillXp = useGamificationStore(s => s.getAllSkillXp())
+  const allSkillXp = useGamificationStore(useShallow(s => s.getAllSkillXp()))
   const events = useGamificationStore(s => s.events)
   const artifacts = useGamificationStore(s => s.artifacts)
-  const unlockedIds = useGamificationStore(s => s.getUnlockedBadgeIds())
-  const completedSlugs = useGamificationStore(s => s.getCompletedContentSlugs())
+  const unlockedIds = useGamificationStore(useShallow(s => s.getUnlockedBadgeIds()))
+  const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
   const deleteArtifact = useGamificationStore(s => s.deleteArtifact)
   const markArtifactExported = useGamificationStore(s => s.markArtifactExported)
 
