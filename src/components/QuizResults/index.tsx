@@ -24,7 +24,6 @@ export function QuizResults() {
   const navigate = useNavigate()
   const { exam, answers, startedAt, submittedAt, resetQuiz, startQuiz } = useQuizStore()
 
-  const recordEvent = useGamificationStore(s => s.recordEvent)
   const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
 
   // Compute pct early so it can be used in useEffect
@@ -40,8 +39,8 @@ export function QuizResults() {
   useEffect(() => {
     if (!exam || !submittedAt || !examId) return
     if (completedSlugs.includes(examId)) return
-    recordEvent({ type: 'QUIZ_COMPLETED', contentSlug: examId, score: pct })
-  }, [submittedAt])
+    useGamificationStore.getState().recordEvent({ type: 'QUIZ_COMPLETED', contentSlug: examId, score: pct })
+  }, [submittedAt, examId, completedSlugs, pct])
 
   if (!exam || !submittedAt) {
     return (
