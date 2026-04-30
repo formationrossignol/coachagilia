@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { QuizResults } from './index'
 import { useQuizStore } from '../../store/quizStore'
+import { useGamificationStore } from '../../features/gamification'
 
 function setup() {
   useQuizStore.getState().startQuiz('exam-2')
@@ -22,8 +23,15 @@ function renderResults() {
   )
 }
 
-beforeEach(() => { setup() })
-afterEach(() => { useQuizStore.getState().resetQuiz() })
+beforeEach(() => {
+  setup()
+  localStorage.clear()
+  useGamificationStore.setState({ events: [], artifacts: [], toastQueue: [] }, true)
+})
+afterEach(() => {
+  useQuizStore.getState().resetQuiz()
+  useGamificationStore.setState({ events: [], artifacts: [], toastQueue: [] }, true)
+})
 
 describe('QuizResults', () => {
   it('displays a score out of the total number of questions', () => {
@@ -47,5 +55,16 @@ describe('QuizResults', () => {
     renderResults()
     const items = screen.getAllByRole('listitem')
     expect(items.length).toBeGreaterThan(0)
+  })
+
+  it('calls recordEvent with QUIZ_COMPLETED and score when component mounts', () => {
+    const recordEvent = vi.spyOn(useGamificationStore.getState(), 'recordEvent')
+    renderResults()
+    expect(recordEvent).toHaveBeenCalledWith({
+      type: 'QUIZ_COMPLETED',
+      contentSlug: 'exam-2',
+      score: expect.any(Number),
+    })
+    recordEvent.mockRestore()
   })
 })

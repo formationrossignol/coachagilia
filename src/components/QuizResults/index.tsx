@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useShallow } from 'zustand/react/shallow'
 import { useQuizStore } from '../../store/quizStore'
+import { useGamificationStore } from '../../features/gamification'
 
 function formatElapsed(startedAt: number | null, submittedAt: number | null): string {
   if (!startedAt || !submittedAt) return '—'
@@ -21,6 +24,25 @@ export function QuizResults() {
   const navigate = useNavigate()
   const { exam, answers, startedAt, submittedAt, resetQuiz, startQuiz } = useQuizStore()
 
+  const recordEvent = useGamificationStore(s => s.recordEvent)
+  const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
+
+  // Compute pct early so it can be used in useEffect
+  let pct = 0
+  if (exam && answers) {
+    const questions = exam.questions
+    const correctCount = questions.filter(q =>
+      isCorrect(answers[q.id] ?? [], q.correctAnswer)
+    ).length
+    pct = Math.round((correctCount / questions.length) * 100)
+  }
+
+  useEffect(() => {
+    if (!exam || !submittedAt || !examId) return
+    if (completedSlugs.includes(examId)) return
+    recordEvent({ type: 'QUIZ_COMPLETED', contentSlug: examId, score: pct })
+  }, [submittedAt])
+
   if (!exam || !submittedAt) {
     return (
       <div className="debrief-empty">
@@ -36,7 +58,7 @@ export function QuizResults() {
   const correctCount = questions.filter(q =>
     isCorrect(answers[q.id] ?? [], q.correctAnswer)
   ).length
-  const pct = Math.round((correctCount / questions.length) * 100)
+  pct = Math.round((correctCount / questions.length) * 100)
   const passed = pct >= 85
 
   function handleRestart() {
