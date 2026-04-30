@@ -1,10 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
+import { useShallow } from 'zustand/react/shallow'
 import { WORKSHOP_CATEGORIES } from '../../data/workshops/categories'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops/definitions'
 import { WorkshopCard } from '../WorkshopCard'
+import { useGamificationStore } from '../../features/gamification'
 
 export function WorkshopCategoryPage() {
   const { slug } = useParams<{ slug: string }>()
+  const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
   const category = WORKSHOP_CATEGORIES.find(c => c.slug === slug)
 
   if (!category) {
@@ -35,7 +38,7 @@ export function WorkshopCategoryPage() {
       )}
 
       <div className="ateliers-grid">
-        {workshops.map(w => <WorkshopCard key={w.id} workshop={w} />)}
+        {workshops.map(w => <WorkshopCard key={w.id} workshop={w} isCompleted={completedSlugs.includes(w.slug)} />)}
       </div>
     </div>
   )

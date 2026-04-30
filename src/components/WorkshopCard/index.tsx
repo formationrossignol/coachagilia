@@ -6,9 +6,10 @@ import { WORKSHOP_CATEGORIES } from '../../data/workshops/categories'
 
 interface Props {
   workshop: WorkshopDefinition
+  isCompleted?: boolean
 }
 
-export function WorkshopCard({ workshop }: Props) {
+export function WorkshopCard({ workshop, isCompleted }: Props) {
   const category = WORKSHOP_CATEGORIES.find(c => c.slug === workshop.categorySlug)
 
   if (workshop.comingSoon) {
@@ -34,6 +35,7 @@ export function WorkshopCard({ workshop }: Props) {
           <Clock size={11} strokeWidth={2.2} />
           {workshop.durationMinutes} min
         </span>
+        {isCompleted && <span className="workshop-card__completed">✓ Complété</span>}
       </div>
       <div className="workshop-card__body">
         <h2 className="workshop-card__title">{workshop.title}</h2>
@@ -44,7 +46,7 @@ export function WorkshopCard({ workshop }: Props) {
           {LEVEL_LABELS[workshop.level]}
         </span>
         <span className="workshop-card__type">{INTERACTION_TYPE_LABELS[workshop.interactionType]}</span>
-        <Link to={workshop.route} className="workshop-card__cta">Lancer →</Link>
+        <Link to={workshop.route} className="workshop-card__cta">{isCompleted ? 'Revoir →' : 'Lancer →'}</Link>
       </div>
     </article>
   )
