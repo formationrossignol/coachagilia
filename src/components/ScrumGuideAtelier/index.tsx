@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { LucideIcon } from 'lucide-react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import {
   User, Compass, Code, Calendar, ClipboardList, MessageSquare, BarChart2,
   RotateCcw, List, ListChecks, Package, Target, Flag, FileCheck,
@@ -118,6 +119,7 @@ function DropZone({
 }
 
 export function ScrumGuideAtelier() {
+  const { markComplete } = useWorkshopCompletion('scrum-guide')
   const [zones, setZones] = useState<ZoneState>(() =>
     Object.fromEntries(ZONE_IDS.map(id => [id, '']))
   )
@@ -153,6 +155,7 @@ export function ScrumGuideAtelier() {
   }
 
   function handleVerify() {
+    markComplete()
     const result: VerifyState = {}
     for (const zoneId of ZONE_IDS) {
       result[zoneId] = zones[zoneId] === ZONE_CONFIG[zoneId].answer

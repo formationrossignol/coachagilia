@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -69,6 +70,7 @@ type BehaviorSelection = Record<string, { selected: boolean; frequency: Frequenc
 type ActionPlan = Record<string, { stopAction: string; alternative: string }>
 
 export function TRIZAtelier() {
+  const { markComplete } = useWorkshopCompletion('triz')
   const [phase, setPhase] = useState<Phase>(1)
 
   const [antiGoal, setAntiGoal] = useState('')
@@ -126,6 +128,7 @@ export function TRIZAtelier() {
   )
 
   function verifyPhase4() {
+    markComplete()
     const result: Record<string, ActionEval> = {}
     selectedBehaviors.forEach(b => {
       result[b.id] = analyzeAction(actionPlan[b.id].stopAction, actionPlan[b.id].alternative)

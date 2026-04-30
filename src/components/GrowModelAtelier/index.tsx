@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -86,6 +87,7 @@ function ScaleSlot({ slotId, stepKey, result, onDrop, onDragStart, slotNumber }:
 }
 
 export function GrowModelAtelier() {
+  const { markComplete } = useWorkshopCompletion('grow-model')
   const [phase, setPhase] = useState<1 | 2>(1)
 
   const [slots, setSlots] = useState<Record<string, string>>(() =>
@@ -168,6 +170,7 @@ export function GrowModelAtelier() {
   }
 
   function handleVerifyPhase2() {
+    markComplete()
     const result: Record<string, boolean> = {}
     for (const q of QUESTIONS) {
       result[q.id] = assignments[q.id] === q.step

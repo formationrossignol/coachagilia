@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -161,6 +162,7 @@ function CynefinQuad({
 const EMPTY_ZONES: ZoneMap = Object.fromEntries(DOMAIN_IDS.map(d => [d, ''])) as ZoneMap
 
 export function CynefinFrameworkAtelier() {
+  const { markComplete } = useWorkshopCompletion('cynefin-framework')
   const [phase, setPhase] = useState<Phase>(1)
 
   // Phase 1 — place 5 domain cards on the diagram
@@ -267,6 +269,7 @@ export function CynefinFrameworkAtelier() {
     setPhase3Result(null)
   }
   function verifyPhase3() {
+    markComplete()
     const result: Record<string, { postureOk: boolean }> = {}
     for (const id of selectedSituations) {
       const domain = situationAssignments[id] ?? SITUATIONS.find(s => s.id === id)!.domain

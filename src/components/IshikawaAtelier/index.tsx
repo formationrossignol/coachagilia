@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -125,6 +126,7 @@ function BranchZone({ branch, placed, result, onDrop, onDragStart }: {
 }
 
 export function IshikawaAtelier() {
+  const { markComplete } = useWorkshopCompletion('ishikawa')
   const [phase, setPhase] = useState<Phase>(1)
 
   // Phase 1
@@ -426,7 +428,7 @@ export function IshikawaAtelier() {
 
           <div className="scrum-actions">
             {!phase3Verified && (
-              <button className="btn btn--primary" onClick={() => setPhase3Verified(true)} disabled={!phase3Valid}>
+              <button className="btn btn--primary" onClick={() => { setPhase3Verified(true); markComplete() }} disabled={!phase3Valid}>
                 Valider mon analyse
               </button>
             )}

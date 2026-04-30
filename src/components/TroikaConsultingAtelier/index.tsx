@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -65,6 +66,7 @@ type DraggingState =
   | null
 
 export function TroikaConsultingAtelier() {
+  const { markComplete } = useWorkshopCompletion('troika-consulting')
   const [phase, setPhase] = useState<Phase>(1)
 
   // Phase 1
@@ -150,6 +152,7 @@ export function TroikaConsultingAtelier() {
   const phase3AllFilled = questions[0].trim().length > 0 && questions[1].trim().length > 0 && advice.trim().length > 0
 
   function verifyPhase3() {
+    markComplete()
     setPhase3Eval({ q1: analyzeQuestion(questions[0]), q2: analyzeQuestion(questions[1]), advice: analyzeAdvice(advice) })
   }
   function resetPhase3() { setQuestions(['', '']); setAdvice(''); setPhase3Eval(null) }

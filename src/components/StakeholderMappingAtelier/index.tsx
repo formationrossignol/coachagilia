@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -74,6 +75,7 @@ function MatrixZone({ zoneId, label, result, onDrop, onDragStart }: {
 }
 
 export function StakeholderMappingAtelier() {
+  const { markComplete } = useWorkshopCompletion('stakeholder-mapping')
   const [phase, setPhase] = useState<1 | 2>(1)
 
   const [matrixZones, setMatrixZones] = useState<Record<string, string>>(() =>
@@ -156,6 +158,7 @@ export function StakeholderMappingAtelier() {
   }
 
   function handleVerifyPhase2() {
+    markComplete()
     const result: Record<string, boolean> = {}
     for (const s of STAKEHOLDERS) {
       result[s.id] = assignments[s.id] === s.zone

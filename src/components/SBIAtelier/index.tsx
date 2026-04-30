@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -65,6 +66,7 @@ type DraggingState =
   | null
 
 export function SBIAtelier() {
+  const { markComplete } = useWorkshopCompletion('sbi')
   const [phase, setPhase] = useState<Phase>(1)
 
   const [ranking, setRanking] = useState<(SBIType | null)[]>(Array(3).fill(null))
@@ -142,6 +144,7 @@ export function SBIAtelier() {
 
   const phase3AllFilled = feedback.situation.trim().length > 0 && feedback.behavior.trim().length > 0 && feedback.impact.trim().length > 0
   function verifyPhase3() {
+    markComplete()
     setPhase3Eval(analyzeFeedback(feedback.situation, feedback.behavior, feedback.impact))
   }
   function resetPhase3() { setFeedback({ situation: '', behavior: '', impact: '' }); setPhase3Eval(null) }

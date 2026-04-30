@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -97,6 +98,7 @@ function StanceZone({ zoneId, label, result, onDrop, onDragStart }: {
 }
 
 export function AskTellAtelier() {
+  const { markComplete } = useWorkshopCompletion('ask-vs-tell')
   const [phase, setPhase] = useState<1 | 2 | 3>(1)
 
   // Phase 1
@@ -188,6 +190,7 @@ export function AskTellAtelier() {
   const phase3AllFilled = DIRECTIVE_PHRASES.every(p => reformulations[p.id].trim().length > 0)
 
   function handleVerifyPhase3() {
+    markComplete()
     const result: Record<string, AnalysisResult> = {}
     for (const p of DIRECTIVE_PHRASES) {
       result[p.id] = analyzeReformulation(reformulations[p.id])

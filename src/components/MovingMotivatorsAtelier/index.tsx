@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { LucideIcon } from 'lucide-react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import {
   Compass, Shield, Heart, Award, Zap, Wind, Users, LayoutGrid, Target, Star,
   ChevronUp, ChevronDown, Minus,
@@ -86,6 +87,7 @@ function MotivatorCard({ motivator, satLevel, isCritical, draggable, onDragStart
 }
 
 export function MovingMotivatorsAtelier() {
+  const { markComplete } = useWorkshopCompletion('moving-motivators')
   const [phase, setPhase] = useState<Phase>(1)
   const [ranking, setRanking] = useState<(Motivator | null)[]>(Array(10).fill(null))
   const isDirty = phase > 1 || ranking.some(m => m !== null)
@@ -393,7 +395,7 @@ export function MovingMotivatorsAtelier() {
 
           <div className="scrum-actions">
             {criticalMotivators.length > 0 && !phase3Verified && (
-              <button className="btn btn--primary" onClick={() => setPhase3Verified(true)} disabled={!phase3AllFilled}>
+              <button className="btn btn--primary" onClick={() => { setPhase3Verified(true); markComplete() }} disabled={!phase3AllFilled}>
                 Valider mon plan d'action
               </button>
             )}

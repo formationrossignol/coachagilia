@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -90,6 +91,7 @@ function ScaleSlot({ slotId, levelKey, result, onDrop, onDragStart, slotNumber }
 }
 
 export function DelegationPokerAtelier() {
+  const { markComplete } = useWorkshopCompletion('delegation-poker')
   const [phase, setPhase] = useState<1 | 2>(1)
 
   const [slots, setSlots] = useState<Record<string, string>>(() =>
@@ -172,6 +174,7 @@ export function DelegationPokerAtelier() {
   }
 
   function handleVerifyPhase2() {
+    markComplete()
     const result: Record<string, boolean> = {}
     for (const s of SITUATIONS) {
       result[s.id] = assignments[s.id] === s.level

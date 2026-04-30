@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useWorkshopCompletion } from '../../hooks/useWorkshopCompletion'
 import { WORKSHOP_DEFINITIONS } from '../../data/workshops'
 import { WorkshopPedagogyPanel } from '../WorkshopPedagogyPanel'
 import { useExitGuard } from '../../hooks/useExitGuard'
@@ -67,6 +68,7 @@ function DiagramZone({ zoneId, label, result, onDrop, onDragStart }: {
 }
 
 export function ConflictAtelier() {
+  const { markComplete } = useWorkshopCompletion('thomas-kilmann')
   const [phase, setPhase] = useState<1 | 2>(1)
 
   const [diagramZones, setDiagramZones] = useState<Record<string, string>>(() =>
@@ -149,6 +151,7 @@ export function ConflictAtelier() {
   }
 
   function handleVerifyPhase2() {
+    markComplete()
     const result: Record<string, boolean> = {}
     for (const s of SITUATIONS) {
       result[s.id] = assignments[s.id] === s.mode
