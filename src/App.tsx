@@ -30,6 +30,7 @@ import { PathDetailPage } from './pages/gamification/PathDetailPage'
 import { ChallengesPage } from './pages/gamification/ChallengesPage'
 import { PortfolioPage } from './pages/gamification/PortfolioPage'
 
+import { AdminPage } from './pages/AdminPage'
 function Layout() {
   return (
     <>
@@ -72,6 +73,7 @@ const router = createBrowserRouter([
       { path: '/paths/:slug', element: <PathDetailPage /> },
       { path: '/challenges', element: <ChallengesPage /> },
       { path: '/portfolio', element: <PortfolioPage /> },
+      { path: '/admin', element: <AdminPage /> },
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },
