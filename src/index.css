@@ -853,7 +853,7 @@ body {
 }
 .intention-nav__tile--active {
   border-color: var(--color-primary);
-  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  background: rgba(99,102,241,0.10);
 }
 .intention-nav__emoji {
   font-size: 1.25rem;
