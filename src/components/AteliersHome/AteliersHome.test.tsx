@@ -90,4 +90,12 @@ describe('AteliersHome', () => {
     expect(screen.getByText('SBI — Situation Behavior Impact')).toBeInTheDocument()
     expect(screen.getByText('Modèle GROW')).toBeInTheDocument()
   })
+
+  it('closes modal when switching views', () => {
+    render(<MemoryRouter><AteliersHome /></MemoryRouter>)
+    fireEvent.click(screen.getByRole('button', { name: /Gérer un conflit/ }))
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /Liste complète/ }))
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
 })

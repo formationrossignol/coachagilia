@@ -30,6 +30,7 @@ export function AteliersHome() {
   function handleViewChange(next: AteliersView) {
     setView(next)
     setActiveCategory(null)
+    setModalIntention(null)
     localStorage.setItem(VIEW_KEY, next)
   }
 
