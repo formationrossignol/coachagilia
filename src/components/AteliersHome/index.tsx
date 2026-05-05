@@ -26,6 +26,11 @@ export function AteliersHome() {
   const [activeIntention, setActiveIntention] = useState<string | null>(null)
   const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
 
+  // Toggle intention on/off when clicked
+  function handleIntentionSelect(slug: string) {
+    setActiveIntention(activeIntention === slug ? null : slug)
+  }
+
   function handleViewChange(next: AteliersView) {
     setView(next)
     setActiveCategory(null)
@@ -68,8 +73,7 @@ export function AteliersHome() {
           intentions={WORKSHOP_INTENTIONS}
           workshopMap={INTENTION_WORKSHOP_MAP}
           workshops={WORKSHOP_DEFINITIONS}
-          activeIntention={activeIntention}
-          onSelect={setActiveIntention}
+          onSelect={handleIntentionSelect}
         />
       ) : (
         <WorkshopCategoryNav

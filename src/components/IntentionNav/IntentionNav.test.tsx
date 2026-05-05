@@ -17,7 +17,6 @@ describe('IntentionNav', () => {
         intentions={WORKSHOP_INTENTIONS}
         workshopMap={INTENTION_WORKSHOP_MAP}
         workshops={WORKSHOP_DEFINITIONS}
-        activeIntention={null}
         onSelect={onSelect}
       />
     )
@@ -33,7 +32,6 @@ describe('IntentionNav', () => {
         intentions={WORKSHOP_INTENTIONS}
         workshopMap={INTENTION_WORKSHOP_MAP}
         workshops={WORKSHOP_DEFINITIONS}
-        activeIntention={null}
         onSelect={onSelect}
       />
     )
@@ -41,31 +39,34 @@ describe('IntentionNav', () => {
     expect(tile.textContent).toMatch(/\d+ ateliers?/)
   })
 
-  it('calls onSelect with intention slug on click', () => {
+  it('calls onSelect with intention slug on every click', () => {
     render(
       <IntentionNav
         intentions={WORKSHOP_INTENTIONS}
         workshopMap={INTENTION_WORKSHOP_MAP}
         workshops={WORKSHOP_DEFINITIONS}
-        activeIntention={null}
         onSelect={onSelect}
       />
     )
     fireEvent.click(screen.getByRole('button', { name: /Gérer un conflit/ }))
     expect(onSelect).toHaveBeenCalledWith('gerer-conflit')
+
+    // second click still fires with slug, not null
+    fireEvent.click(screen.getByRole('button', { name: /Gérer un conflit/ }))
+    expect(onSelect).toHaveBeenCalledTimes(2)
+    expect(onSelect).toHaveBeenNthCalledWith(2, 'gerer-conflit')
   })
 
-  it('calls onSelect with null when active tile is re-clicked', () => {
+  it('renders the short label for each tile', () => {
     render(
       <IntentionNav
         intentions={WORKSHOP_INTENTIONS}
         workshopMap={INTENTION_WORKSHOP_MAP}
         workshops={WORKSHOP_DEFINITIONS}
-        activeIntention="gerer-conflit"
         onSelect={onSelect}
       />
     )
-    fireEvent.click(screen.getByRole('button', { name: /Gérer un conflit/ }))
-    expect(onSelect).toHaveBeenCalledWith(null)
+    expect(screen.getByText('Conflits')).toBeInTheDocument()
+    expect(screen.getByText('Coaching')).toBeInTheDocument()
   })
 })
