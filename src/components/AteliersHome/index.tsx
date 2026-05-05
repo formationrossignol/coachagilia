@@ -3,6 +3,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { WORKSHOP_CATEGORIES, WORKSHOP_DEFINITIONS, WORKSHOP_INTENTIONS, INTENTION_WORKSHOP_MAP } from '../../data/workshops'
 import { WorkshopCategoryNav } from '../WorkshopCategoryNav'
 import { IntentionNav } from '../IntentionNav'
+import { IntentionModal } from '../IntentionModal'
 import { WorkshopCard } from '../WorkshopCard'
 import type { WorkshopCategorySlug } from '../../data/workshops/types'
 import { useGamificationStore } from '../../features/gamification'
@@ -23,28 +24,22 @@ function readView(): AteliersView {
 export function AteliersHome() {
   const [view, setView] = useState<AteliersView>(readView)
   const [activeCategory, setActiveCategory] = useState<WorkshopCategorySlug | null>(null)
-  const [activeIntention, setActiveIntention] = useState<string | null>(null)
+  const [modalIntention, setModalIntention] = useState<string | null>(null)
   const completedSlugs = useGamificationStore(useShallow(s => s.getCompletedContentSlugs()))
-
-  // Toggle intention on/off when clicked
-  function handleIntentionSelect(slug: string) {
-    setActiveIntention(activeIntention === slug ? null : slug)
-  }
 
   function handleViewChange(next: AteliersView) {
     setView(next)
     setActiveCategory(null)
-    setActiveIntention(null)
     localStorage.setItem(VIEW_KEY, next)
   }
 
-  const visible = view === 'list'
-    ? (activeCategory
-        ? WORKSHOP_DEFINITIONS.filter(w => w.categorySlug === activeCategory)
-        : WORKSHOP_DEFINITIONS)
-    : (activeIntention
-        ? WORKSHOP_DEFINITIONS.filter(w => (INTENTION_WORKSHOP_MAP[activeIntention] ?? []).includes(w.slug))
-        : WORKSHOP_DEFINITIONS)
+  const visibleList = activeCategory
+    ? WORKSHOP_DEFINITIONS.filter(w => w.categorySlug === activeCategory)
+    : WORKSHOP_DEFINITIONS
+
+  const activeIntentionData = modalIntention
+    ? WORKSHOP_INTENTIONS.find(i => i.slug === modalIntention) ?? null
+    : null
 
   return (
     <div className="ateliers-home">
@@ -73,21 +68,29 @@ export function AteliersHome() {
           intentions={WORKSHOP_INTENTIONS}
           workshopMap={INTENTION_WORKSHOP_MAP}
           workshops={WORKSHOP_DEFINITIONS}
-          onSelect={handleIntentionSelect}
+          onSelect={setModalIntention}
         />
       ) : (
-        <WorkshopCategoryNav
-          categories={WORKSHOP_CATEGORIES}
-          workshops={WORKSHOP_DEFINITIONS}
-          activeCategory={activeCategory}
-          onSelect={setActiveCategory}
+        <>
+          <WorkshopCategoryNav
+            categories={WORKSHOP_CATEGORIES}
+            workshops={WORKSHOP_DEFINITIONS}
+            activeCategory={activeCategory}
+            onSelect={setActiveCategory}
+          />
+          <div className="ateliers-grid">
+            {visibleList.map(w => (
+              <WorkshopCard key={w.id} workshop={w} isCompleted={completedSlugs.includes(w.slug)} />
+            ))}
+          </div>
+        </>
+      )}
+      {activeIntentionData && (
+        <IntentionModal
+          intention={activeIntentionData}
+          onClose={() => setModalIntention(null)}
         />
       )}
-      <div className="ateliers-grid">
-        {visible.map(w => (
-          <WorkshopCard key={w.id} workshop={w} isCompleted={completedSlugs.includes(w.slug)} />
-        ))}
-      </div>
     </div>
   )
 }
