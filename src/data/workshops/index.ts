@@ -1,5 +1,7 @@
 export { WORKSHOP_CATEGORIES } from './categories'
 export { WORKSHOP_DEFINITIONS } from './definitions'
+export { WORKSHOP_INTENTIONS, INTENTION_WORKSHOP_MAP } from './intentions'
+export type { WorkshopIntention } from './intentions'
 export type {
   WorkshopDefinition,
   WorkshopCategory,

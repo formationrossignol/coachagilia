@@ -794,6 +794,93 @@ body {
 /* ── Ateliers Home ── */
 .ateliers-home { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
 .ateliers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+
+.ateliers-home__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+/* ── View Toggle Pill ── */
+.view-toggle {
+  display: inline-flex;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 3px;
+  gap: 2px;
+}
+.view-toggle__btn {
+  background: none;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.view-toggle__btn--active {
+  background: var(--color-primary);
+  color: #fff;
+}
+.view-toggle__btn:hover:not(.view-toggle__btn--active) {
+  background: var(--color-border);
+}
+
+/* ── Intention Nav ── */
+.intention-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.intention-nav__tile {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.875rem 1rem;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: border-color 0.15s, background 0.15s;
+}
+.intention-nav__tile:hover {
+  border-color: var(--color-primary);
+}
+.intention-nav__tile--active {
+  border-color: var(--color-primary);
+  background: rgba(99,102,241,0.10);
+}
+.intention-nav__emoji {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.intention-nav__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+.intention-nav__tile--active .intention-nav__name {
+  color: var(--color-primary);
+}
+.intention-nav__subtitle {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+.intention-nav__count {
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  margin-top: 4px;
+}
+
 .atelier-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
