@@ -54,7 +54,9 @@ describe('IntentionModal', () => {
   it('calls onClose when backdrop is clicked', () => {
     const onClose = vi.fn()
     renderModal(onClose)
-    fireEvent.click(document.querySelector('.intention-modal__backdrop')!)
+    const backdrop = document.querySelector('.intention-modal__backdrop')
+    expect(backdrop).not.toBeNull()
+    fireEvent.click(backdrop!)
     expect(onClose).toHaveBeenCalledOnce()
   })
 
