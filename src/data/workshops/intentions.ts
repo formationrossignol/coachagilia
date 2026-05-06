@@ -1,19 +1,20 @@
 export interface WorkshopIntention {
   slug: string
   name: string
+  label: string
   emoji: string
   subtitle: string
 }
 
 export const WORKSHOP_INTENTIONS: WorkshopIntention[] = [
-  { slug: 'gerer-conflit',             name: 'Gérer un conflit',              emoji: '⚡', subtitle: 'Tensions, feedback, négociation' },
-  { slug: 'faciliter-decision',        name: 'Faciliter une décision',        emoji: '⚖️', subtitle: 'Consensus, vote, arbitrage' },
-  { slug: 'debloquer-equipe',          name: 'Débloquer une équipe',          emoji: '🧩', subtitle: 'Co-dev, facilitation, résilience' },
-  { slug: 'preparer-retro',            name: 'Préparer une rétrospective',    emoji: '🔄', subtitle: 'Formats, techniques, animation' },
-  { slug: 'cause-racine',              name: 'Trouver une cause racine',      emoji: '🔍', subtitle: 'Analyse, Ishikawa, TRIZ' },
-  { slug: 'aligner-parties-prenantes', name: 'Aligner les parties prenantes', emoji: '🤝', subtitle: 'Cartographie, engagement' },
-  { slug: 'ameliorer-flow',            name: 'Améliorer le flow',             emoji: '📈', subtitle: 'Systèmes, flux, livraison' },
-  { slug: 'preparer-coaching',         name: 'Préparer un coaching',          emoji: '🎯', subtitle: 'Questions, posture, GROW' },
+  { slug: 'gerer-conflit',             label: 'Conflits',        name: 'Gérer un conflit',              emoji: '⚡', subtitle: 'Tensions, feedback, négociation' },
+  { slug: 'faciliter-decision',        label: 'Décision',        name: 'Faciliter une décision',        emoji: '⚖️', subtitle: 'Consensus, vote, arbitrage' },
+  { slug: 'debloquer-equipe',          label: 'Équipe',          name: 'Débloquer une équipe',          emoji: '🧩', subtitle: 'Co-dev, facilitation, résilience' },
+  { slug: 'preparer-retro',            label: 'Rétrospective',   name: 'Préparer une rétrospective',    emoji: '🔄', subtitle: 'Formats, techniques, animation' },
+  { slug: 'cause-racine',              label: 'Diagnostic',      name: 'Trouver une cause racine',      emoji: '🔍', subtitle: 'Analyse, Ishikawa, TRIZ' },
+  { slug: 'aligner-parties-prenantes', label: 'Alignement',      name: 'Aligner les parties prenantes', emoji: '🤝', subtitle: 'Cartographie, engagement' },
+  { slug: 'ameliorer-flow',            label: 'Flow',            name: 'Améliorer le flow',             emoji: '📈', subtitle: 'Systèmes, flux, livraison' },
+  { slug: 'preparer-coaching',         label: 'Coaching',        name: 'Préparer un coaching',          emoji: '🎯', subtitle: 'Questions, posture, GROW' },
 ]
 
 export const INTENTION_WORKSHOP_MAP: Record<string, string[]> = {
