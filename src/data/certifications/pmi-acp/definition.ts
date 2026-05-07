@@ -21,9 +21,9 @@ export const pmiacpDefinition: CertDefinition = {
     { slug: 'xp-lean', label: 'XP & Lean' },
   ],
   examDefs: [
-    { id: 'pmi-acp-full-1', title: 'PMI-ACP — Examen complet', questionCount: 80, durationMinutes: 60, mode: 'full' },
-    { id: 'pmi-acp-quick', title: 'PMI-ACP — Examen rapide', questionCount: 40, durationMinutes: 30, mode: 'quick' },
-    { id: 'pmi-acp-random', title: 'PMI-ACP — Aléatoire', questionCount: 80, durationMinutes: 60, mode: 'random' },
+    { id: 'pmi-acp-full-1', title: 'PMI-ACP — Examen complet', questionCount: 12, durationMinutes: 20, mode: 'full' },
+    { id: 'pmi-acp-quick', title: 'PMI-ACP — Examen rapide', questionCount: 10, durationMinutes: 15, mode: 'quick' },
+    { id: 'pmi-acp-random', title: 'PMI-ACP — Aléatoire', questionCount: 12, durationMinutes: 20, mode: 'random' },
   ],
   questions: pmiacpQuestions,
   resources: pmiacpResources,

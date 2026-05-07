@@ -22,9 +22,9 @@ export const safeDefinition: CertDefinition = {
     { slug: 'transformation', label: 'Transformation SAFe' },
   ],
   examDefs: [
-    { id: 'safe-full-1', title: 'SAFe SA — Examen complet', questionCount: 80, durationMinutes: 60, mode: 'full' },
-    { id: 'safe-quick', title: 'SAFe SA — Examen rapide', questionCount: 40, durationMinutes: 30, mode: 'quick' },
-    { id: 'safe-random', title: 'SAFe SA — Aléatoire', questionCount: 80, durationMinutes: 60, mode: 'random' },
+    { id: 'safe-full-1', title: 'SAFe SA — Examen complet', questionCount: 12, durationMinutes: 20, mode: 'full' },
+    { id: 'safe-quick', title: 'SAFe SA — Examen rapide', questionCount: 10, durationMinutes: 15, mode: 'quick' },
+    { id: 'safe-random', title: 'SAFe SA — Aléatoire', questionCount: 12, durationMinutes: 20, mode: 'random' },
   ],
   questions: safeQuestions,
   resources: safeResources,

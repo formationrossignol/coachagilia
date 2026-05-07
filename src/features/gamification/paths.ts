@@ -89,7 +89,7 @@ export const LEARNING_PATHS: LearningPath[] = [
     title: 'Préparation PSM I',
     description: 'Préparez-vous à la certification Professional Scrum Master niveau I.',
     level: 'intermediate',
-    skillAreas: ['facilitation', 'facilitation'],
+    skillAreas: ['facilitation', 'coaching'],
     estimatedMinutes: 120,
     completionBadgeId: 'psm-certified',
     steps: [

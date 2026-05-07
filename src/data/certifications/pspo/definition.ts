@@ -19,9 +19,9 @@ export const pspoDefinition: CertDefinition = {
     { slug: 'metrics', label: 'Métriques & ROI' },
   ],
   examDefs: [
-    { id: 'pspo-full-1', title: 'PSPO I — Examen complet', questionCount: 80, durationMinutes: 60, mode: 'full' },
-    { id: 'pspo-quick', title: 'PSPO I — Examen rapide', questionCount: 40, durationMinutes: 30, mode: 'quick' },
-    { id: 'pspo-random', title: 'PSPO I — Aléatoire', questionCount: 80, durationMinutes: 60, mode: 'random' },
+    { id: 'pspo-full-1', title: 'PSPO I — Examen complet', questionCount: 15, durationMinutes: 20, mode: 'full' },
+    { id: 'pspo-quick', title: 'PSPO I — Examen rapide', questionCount: 10, durationMinutes: 15, mode: 'quick' },
+    { id: 'pspo-random', title: 'PSPO I — Aléatoire', questionCount: 15, durationMinutes: 20, mode: 'random' },
   ],
   questions: pspoQuestions,
   resources: pspoResources,
