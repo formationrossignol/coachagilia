@@ -55,6 +55,7 @@ export interface BadgeCriteria {
   completedContent?: string[]
   minAverageScore?: number
   minArtifactsCreated?: number
+  minScoreOnAny?: number  // passes if ANY event in completedContent has score >= this value
 }
 
 export interface BadgeDefinition {

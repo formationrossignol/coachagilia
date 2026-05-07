@@ -2,6 +2,10 @@ import { describe, it, expect } from 'vitest'
 import { BADGES, checkBadgeCriteria } from './badges'
 import type { GamificationEvent, Artifact } from './types'
 
+function makeQuizEvent(slug: string, score: number): GamificationEvent {
+  return { id: slug, type: 'QUIZ_COMPLETED', contentSlug: slug, xpAwarded: 80, score, createdAt: new Date().toISOString() }
+}
+
 function makeCompletedEvent(contentSlug: string, score?: number): GamificationEvent {
   return {
     id: crypto.randomUUID(),
@@ -14,8 +18,8 @@ function makeCompletedEvent(contentSlug: string, score?: number): GamificationEv
 }
 
 describe('BADGES', () => {
-  it('exports 9 badge definitions', () => {
-    expect(BADGES).toHaveLength(9)
+  it('exports 13 badge definitions', () => {
+    expect(BADGES).toHaveLength(13)
   })
 
   it('each badge has a unique id', () => {
@@ -88,5 +92,31 @@ describe('checkBadgeCriteria', () => {
       ]
       expect(checkBadgeCriteria(badge, events, artifacts)).toBe(true)
     })
+  })
+})
+
+describe('cert badge — minScoreOnAny', () => {
+  const psmBadge = BADGES.find(b => b.id === 'psm-certified')!
+
+  it('unlocks when score >= 85 on any PSM exam', () => {
+    const events = [makeQuizEvent('psm-full-1', 90)]
+    expect(checkBadgeCriteria(psmBadge, events, [])).toBe(true)
+  })
+
+  it('does not unlock when score < 85', () => {
+    const events = [makeQuizEvent('psm-full-1', 70)]
+    expect(checkBadgeCriteria(psmBadge, events, [])).toBe(false)
+  })
+
+  it('does not unlock when no PSM exam attempted', () => {
+    const events = [makeQuizEvent('pspo-full-1', 95)]
+    expect(checkBadgeCriteria(psmBadge, events, [])).toBe(false)
+  })
+
+  it('all 4 cert badges exist in BADGES', () => {
+    expect(BADGES.find(b => b.id === 'psm-certified')).toBeDefined()
+    expect(BADGES.find(b => b.id === 'pspo-certified')).toBeDefined()
+    expect(BADGES.find(b => b.id === 'pmi-acp-certified')).toBeDefined()
+    expect(BADGES.find(b => b.id === 'safe-certified')).toBeDefined()
   })
 })

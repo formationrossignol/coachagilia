@@ -64,6 +64,46 @@ export const BADGES: BadgeDefinition[] = [
     skillArea: 'leadership',
     criteria: { completedContent: ['delegation-poker', 'circle-of-influence', 'situational-leadership'], minAverageScore: 75 },
   },
+  {
+    id: 'psm-certified',
+    name: 'PSM Certifié',
+    description: 'A réussi un examen PSM complet avec ≥ 85%.',
+    skillArea: 'facilitation',
+    criteria: {
+      completedContent: ['psm-full-1', 'psm-quick', 'psm-random'],
+      minScoreOnAny: 85,
+    },
+  },
+  {
+    id: 'pspo-certified',
+    name: 'PSPO Certifié',
+    description: 'A réussi un examen PSPO complet avec ≥ 85%.',
+    skillArea: 'product_discovery',
+    criteria: {
+      completedContent: ['pspo-full-1', 'pspo-quick', 'pspo-random'],
+      minScoreOnAny: 85,
+    },
+  },
+  {
+    id: 'pmi-acp-certified',
+    name: 'PMI-ACP Certifié',
+    description: 'A réussi un examen PMI-ACP avec ≥ 85%.',
+    skillArea: 'delivery_excellence',
+    criteria: {
+      completedContent: ['pmi-acp-full-1', 'pmi-acp-quick', 'pmi-acp-random'],
+      minScoreOnAny: 85,
+    },
+  },
+  {
+    id: 'safe-certified',
+    name: 'SAFe Certifié',
+    description: 'A réussi un examen SAFe avec ≥ 85%.',
+    skillArea: 'organization_design',
+    criteria: {
+      completedContent: ['safe-full-1', 'safe-quick', 'safe-random'],
+      minScoreOnAny: 85,
+    },
+  },
 ]
 
 export function checkBadgeCriteria(
@@ -75,7 +115,7 @@ export function checkBadgeCriteria(
   const isCompleted = (e: GamificationEvent) =>
     e.type === 'WORKSHOP_COMPLETED' || e.type === 'QUIZ_COMPLETED'
 
-  if (criteria.completedContent) {
+  if (criteria.completedContent && criteria.minScoreOnAny === undefined) {
     const completedSlugs = new Set(events.filter(isCompleted).map(e => e.contentSlug))
     if (!criteria.completedContent.every(slug => completedSlugs.has(slug))) return false
   }
@@ -94,6 +134,16 @@ export function checkBadgeCriteria(
 
   if (criteria.minArtifactsCreated !== undefined) {
     if (artifacts.length < criteria.minArtifactsCreated) return false
+  }
+
+  if (criteria.minScoreOnAny !== undefined) {
+    const slugFilter = criteria.completedContent
+    const anyHighScore = events.some(
+      e => isCompleted(e) &&
+        (!slugFilter || slugFilter.includes(e.contentSlug ?? '')) &&
+        (e.score ?? 0) >= (criteria.minScoreOnAny ?? 0)
+    )
+    if (!anyHighScore) return false
   }
 
   return true
