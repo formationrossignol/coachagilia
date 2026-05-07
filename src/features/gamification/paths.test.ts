@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { LEARNING_PATHS, computePathProgress } from './paths'
 
 describe('LEARNING_PATHS', () => {
-  it('exports 5 learning paths', () => {
-    expect(LEARNING_PATHS).toHaveLength(5)
+  it('exports 9 learning paths', () => {
+    expect(LEARNING_PATHS).toHaveLength(9)
   })
 
   it('each path has a unique slug', () => {
@@ -54,5 +54,26 @@ describe('computePathProgress', () => {
   it('includes the correct path slug in result', () => {
     const result = computePathProgress(path, [])
     expect(result.slug).toBe('resolution-de-problemes')
+  })
+})
+
+describe('cert learning paths', () => {
+  it('PSM path exists with correct completionBadgeId', () => {
+    const path = LEARNING_PATHS.find(p => p.id === 'path-psm')
+    expect(path).toBeDefined()
+    expect(path!.completionBadgeId).toBe('psm-certified')
+    expect(path!.steps.length).toBeGreaterThan(0)
+  })
+
+  it('PSPO path exists', () => {
+    expect(LEARNING_PATHS.find(p => p.id === 'path-pspo')).toBeDefined()
+  })
+
+  it('PMI-ACP path exists', () => {
+    expect(LEARNING_PATHS.find(p => p.id === 'path-pmi-acp')).toBeDefined()
+  })
+
+  it('SAFe path exists', () => {
+    expect(LEARNING_PATHS.find(p => p.id === 'path-safe')).toBeDefined()
   })
 })
