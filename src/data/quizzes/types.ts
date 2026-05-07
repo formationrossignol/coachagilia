@@ -9,6 +9,8 @@ export interface QuizQuestion {
   options: QuizOption[]
   correctAnswer: string[]   // always array: ['A'] for single, ['A', 'D'] for multiple
   isMultiple: boolean
+  topic?: string
+  certificationId?: string
 }
 
 export interface QuizExam {
