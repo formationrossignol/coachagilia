@@ -31,6 +31,9 @@ import { ChallengesPage } from './pages/gamification/ChallengesPage'
 import { PortfolioPage } from './pages/gamification/PortfolioPage'
 
 import { AdminPage } from './pages/AdminPage'
+import { CertificationHub } from './components/CertificationHub'
+import { CertificationPortal } from './components/CertificationPortal'
+import { TopicPracticeScreen } from './components/TopicPracticeScreen'
 function Layout() {
   return (
     <>
@@ -49,9 +52,12 @@ const router = createBrowserRouter([
       { path: '/simulation', element: <ScenarioSelector /> },
       { path: '/simulation/:id', element: <SimulationScreen /> },
       { path: '/debrief', element: <Debrief /> },
-      { path: '/quiz', element: <QuizSelector /> },
+      { path: '/quiz', element: <Navigate to="/certifications" replace /> },
       { path: '/quiz/:examId', element: <QuizScreen /> },
       { path: '/quiz/:examId/results', element: <QuizResults /> },
+      { path: '/certifications', element: <CertificationHub /> },
+      { path: '/certifications/:certId', element: <CertificationPortal /> },
+      { path: '/certifications/:certId/topic/:topicSlug', element: <TopicPracticeScreen /> },
       { path: '/ateliers', element: <AteliersHome /> },
       { path: '/ateliers/scrum-guide', element: <ScrumGuideAtelier /> },
       { path: '/ateliers/conflits', element: <ConflictAtelier /> },

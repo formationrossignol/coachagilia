@@ -4,7 +4,7 @@ import { useTheme } from '../../hooks/useTheme'
 
 const NAV_LINKS = [
   { to: '/simulation', label: 'Simulation', Icon: Zap },
-  { to: '/quiz', label: 'Quiz PSM-1', Icon: FileCheck },
+  { to: '/certifications', label: 'Certifications', Icon: FileCheck },
   { to: '/ateliers', label: 'Ateliers', Icon: BookOpen },
   { to: '/progress', label: 'Progression', Icon: TrendingUp },
 ] as const
