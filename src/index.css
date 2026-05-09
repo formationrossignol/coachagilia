@@ -2873,3 +2873,128 @@ body {
 .cf-domain-badge--complex     { background: #3d4f63; color: #ffffff; }
 .cf-domain-badge--chaotic     { background: #1e2433; color: #ffffff; }
 .cf-domain-badge--disorder    { background: #e05c4b; color: #ffffff; }
+
+/* ══════════════════════════════════════════════════════════
+   GAMIFICATION PAGES
+   ══════════════════════════════════════════════════════════ */
+.gamification-page {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+.gamification-page__header { margin-bottom: 2rem; }
+.gamification-page__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.25rem;
+}
+.gamification-page__subtitle { font-size: 0.875rem; color: var(--color-text-muted); }
+.gamification-page__section { margin-bottom: 2rem; }
+.gamification-page__section-title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-subtle);
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+}
+
+.gamification-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.gamification-stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  display: flex; flex-direction: column; gap: 0.25rem;
+}
+.gamification-stat-card__value {
+  font-size: 1.75rem; font-weight: 700;
+  font-family: var(--font-mono); letter-spacing: -0.04em;
+  color: var(--color-text);
+}
+.gamification-stat-card__label {
+  font-size: 0.6875rem; color: var(--color-text-subtle);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  font-family: var(--font-mono);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: 0.75rem;
+}
+.paths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+.challenges-layout { display: flex; flex-direction: column; gap: 1.5rem; }
+
+/* ══════════════════════════════════════════════════════════
+   LIGHT THEME OVERRIDES
+   ══════════════════════════════════════════════════════════ */
+[data-theme="light"] .home-card         { background: #ffffff; }
+[data-theme="light"] .workshop-card     { background: #ffffff; }
+[data-theme="light"] .cert-card         { background: #ffffff; }
+[data-theme="light"] .quiz-exam-card    { background: #ffffff; }
+[data-theme="light"] .quiz-option:hover { background: var(--color-surface-3); border-color: var(--color-border-2); }
+[data-theme="light"] .quiz-option--selected { background: var(--color-primary-subtle); }
+[data-theme="light"] .scene-narrative   { background: var(--color-surface-2); border-color: var(--color-border); }
+[data-theme="light"] .navbar__link:hover { background: rgba(0,0,0,0.04); }
+[data-theme="light"] .navbar__brand:hover { color: var(--color-text-muted); }
+[data-theme="light"] .gamification-stat-card { background: #ffffff; }
+[data-theme="light"] .badge-card        { background: #ffffff; }
+[data-theme="light"] .learning-path-card { background: #ffffff; }
+[data-theme="light"] .challenge-card   { background: #ffffff; }
+[data-theme="light"] .skill-progress-card { background: #ffffff; }
+[data-theme="light"] .xp-summary-card  { background: #ffffff; }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+
+/* Tablet: ≤ 768px */
+@media (max-width: 768px) {
+  .navbar { padding: 0 1rem; }
+  .navbar__links { gap: 0; }
+  .navbar__link { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
+
+  .home { padding: 3rem 1.25rem 2.5rem; }
+  .home__grid { grid-template-columns: 1fr; gap: 0.75rem; }
+
+  .quiz-exam-grid  { grid-template-columns: 1fr; }
+  .cert-hub-grid   { grid-template-columns: 1fr; }
+  .ateliers-grid   { grid-template-columns: 1fr; }
+  .badge-grid      { grid-template-columns: 1fr; }
+  .skills-grid     { grid-template-columns: 1fr; }
+  .paths-grid      { grid-template-columns: 1fr; }
+  .gamification-stats-row { grid-template-columns: repeat(2, 1fr); }
+
+  .simulation-layout { grid-template-columns: 1fr; height: auto; }
+  .simulation-sidebar { border-left: none; border-top: 1px solid var(--color-border); }
+
+  .quiz-body     { grid-template-columns: 1fr; }
+  .quiz-sidebar  { border-left: none; border-top: 1px solid var(--color-border); }
+  .quiz-main     { padding: 1.25rem 1rem; }
+
+  .intention-nav { grid-template-columns: repeat(2, 1fr); }
+  .debrief       { padding: 2rem 1.25rem; }
+}
+
+/* Mobile: ≤ 480px */
+@media (max-width: 480px) {
+  .navbar__brand span { display: none; }
+  .home { padding: 2rem 1rem; }
+  .home__title { font-size: 1.75rem; }
+  .gamification-stats-row { grid-template-columns: 1fr; }
+  .quiz-header { padding: 0.5rem 1rem; }
+  .quiz-exam-title { display: none; }
+  .atelier-page { padding: 1.5rem 1rem; }
+}
