@@ -89,7 +89,10 @@ export function TopicPracticeScreen() {
           <p>{correctCount} / {questions.length} correctes ({score}%)</p>
         </header>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <button className="btn btn--primary" onClick={() => { setIndex(0); setAnswers({ selected: [], revealed: false }); setDone(false); setCorrectCount(0) }}>
+          <button
+            className="btn btn--primary"
+            onClick={() => { setIndex(0); setAnswers({ selected: [], revealed: false }); setDone(false); setCorrectCount(0) }}
+          >
             Recommencer
           </button>
           <Link to={`/certifications/${certId}`} className="btn btn--secondary" style={{ textDecoration: 'none' }}>
@@ -109,23 +112,27 @@ export function TopicPracticeScreen() {
         <p>Question {index + 1} / {questions.length}</p>
       </header>
 
-      <article className="quiz-exam-card" style={{ marginBottom: '1rem' }}>
-        <p style={{ fontWeight: 500 }}>{current.text}</p>
-        {current.isMultiple && <p style={{ fontSize: '0.8rem', opacity: 0.6 }}>Plusieurs réponses possibles</p>}
+      <article className="topic-practice-card">
+        <p className="topic-practice__statement">{current.text}</p>
+        {current.isMultiple && (
+          <span className="topic-practice__hint">Plusieurs réponses possibles</span>
+        )}
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1rem' }}>
+        <div className="topic-practice__options">
           {current.options.map(opt => {
             const isSelected = answers.selected.includes(opt.letter)
             const isRightAnswer = current.correctAnswer.includes(opt.letter)
-            let bg = 'transparent'
-            if (answers.revealed && isRightAnswer) bg = 'rgba(16,185,129,0.15)'
-            else if (answers.revealed && isSelected && !isRightAnswer) bg = 'rgba(239,68,68,0.15)'
+            let modifier = ''
+            if (answers.revealed && isRightAnswer) modifier = ' topic-practice__option--correct'
+            else if (answers.revealed && isSelected && !isRightAnswer) modifier = ' topic-practice__option--wrong'
+            else if (isSelected) modifier = ' topic-practice__option--selected'
 
             return (
               <button
                 key={opt.letter}
+                className={`topic-practice__option${modifier}`}
                 onClick={() => handleSelect(opt.letter)}
-                style={{ textAlign: 'left', padding: '0.6rem 0.75rem', border: `1px solid ${isSelected ? 'var(--accent, #6366f1)' : 'var(--border, #e5e7eb)'}`, borderRadius: 6, background: bg, cursor: answers.revealed ? 'default' : 'pointer', fontWeight: isSelected ? 600 : 400 }}
+                disabled={answers.revealed}
               >
                 {opt.letter}. {opt.text}
               </button>
@@ -134,8 +141,8 @@ export function TopicPracticeScreen() {
         </div>
 
         {answers.revealed && (
-          <p style={{ marginTop: '0.75rem', fontWeight: 600, color: correct ? '#10b981' : '#ef4444' }}>
-            {correct ? '✓ Correct' : '✗ Incorrect'} — Bonne réponse : {current.correctAnswer.join(', ')}
+          <p className={`topic-practice__feedback topic-practice__feedback--${correct ? 'correct' : 'wrong'}`}>
+            {correct ? '✓ Correct' : `✗ Incorrect — Bonne réponse : ${current.correctAnswer.join(', ')}`}
           </p>
         )}
       </article>

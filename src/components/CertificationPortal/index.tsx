@@ -34,34 +34,26 @@ export function CertificationPortal() {
   ]
 
   return (
-    <div className="quiz-selector">
-      <header className="selector-header" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <div style={{ width: 40, height: 40, background: cert.color, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '0.8rem', flexShrink: 0 }}>
-          {cert.shortName}
-        </div>
+    <div
+      className="cert-portal"
+      style={{ '--cert-portal-color': cert.color } as React.CSSProperties}
+    >
+      <header className="cert-portal__header">
+        <div className="cert-portal__icon">{cert.shortName}</div>
         <div>
-          <h1 style={{ margin: 0 }}>{cert.name}</h1>
-          <p style={{ margin: 0, opacity: 0.6, fontSize: '0.85rem' }}>{cert.issuer} · {cert.levels.join(' · ')}</p>
+          <h1 className="cert-portal__name">{cert.name}</h1>
+          <p className="cert-portal__issuer">{cert.issuer} · {cert.levels.join(' · ')}</p>
         </div>
       </header>
 
-      <div role="tablist" style={{ display: 'flex', gap: '0.25rem', borderBottom: '1px solid var(--border, #e5e7eb)', marginBottom: '1.5rem' }}>
+      <div role="tablist" className="cert-portal__tabs">
         {tabs.map(t => (
           <button
             key={t.id}
             role="tab"
             aria-selected={tab === t.id}
             onClick={() => setTab(t.id)}
-            style={{
-              padding: '0.5rem 1rem',
-              background: 'none',
-              border: 'none',
-              borderBottom: tab === t.id ? `2px solid ${cert.color}` : '2px solid transparent',
-              color: tab === t.id ? cert.color : 'inherit',
-              fontWeight: tab === t.id ? 600 : 400,
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-            }}
+            className={`cert-portal__tab${tab === t.id ? ' cert-portal__tab--active' : ''}`}
           >
             {t.label}
           </button>
@@ -69,14 +61,17 @@ export function CertificationPortal() {
       </div>
 
       {tab === 'examens' && (
-        <div className="quiz-exam-grid" style={{ gridTemplateColumns: '1fr' }}>
+        <div className="cert-exam-list">
           {cert.examDefs.map(examDef => {
             const done = completedSlugs.includes(examDef.id)
             return (
-              <article key={examDef.id} className="quiz-exam-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <article key={examDef.id} className="cert-exam-row">
                 <div>
-                  <h2 className="quiz-exam-card__title">{examDef.title}</h2>
-                  <p className="quiz-exam-card__meta">{examDef.questionCount} questions · {examDef.durationMinutes} min{done ? ' · ✓ Complété' : ''}</p>
+                  <div className="cert-exam-row__title">{examDef.title}</div>
+                  <div className="cert-exam-row__meta">
+                    {examDef.questionCount} questions · {examDef.durationMinutes} min
+                    {done && <span className="cert-exam-row__done"> · ✓ Complété</span>}
+                  </div>
                 </div>
                 <button className="btn btn--primary" onClick={() => handleStartExam(examDef.id)}>
                   {done ? 'Recommencer' : 'Démarrer'}
@@ -89,8 +84,8 @@ export function CertificationPortal() {
 
       {tab === 'themes' && (
         <div>
-          <p style={{ opacity: 0.6, marginBottom: '1rem', fontSize: '0.875rem' }}>Entraîne-toi thème par thème avec feedback immédiat après chaque réponse.</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <p className="cert-themes__intro">Entraîne-toi thème par thème avec feedback immédiat après chaque réponse.</p>
+          <div className="cert-themes__grid">
             {cert.topics.map(topic => (
               <Link
                 key={topic.slug}
@@ -106,14 +101,12 @@ export function CertificationPortal() {
       )}
 
       {tab === 'ressources' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className="cert-resources">
           {cert.resources.map(resource => (
-            <article key={resource.id} className="quiz-exam-card">
-              <h2 className="quiz-exam-card__title">{resource.title}</h2>
-              <p className="quiz-exam-card__meta" style={{ textTransform: 'capitalize' }}>{resource.type}</p>
-              <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', whiteSpace: 'pre-wrap', opacity: 0.8 }}>
-                {resource.content}
-              </div>
+            <article key={resource.id} className="cert-resource-card">
+              <span className="cert-resource-card__type">{resource.type}</span>
+              <h2 className="cert-resource-card__title">{resource.title}</h2>
+              <div className="cert-resource-card__content">{resource.content}</div>
             </article>
           ))}
         </div>
@@ -121,16 +114,21 @@ export function CertificationPortal() {
 
       {tab === 'progression' && (
         <div>
-          <p style={{ opacity: 0.6, marginBottom: '1rem', fontSize: '0.875rem' }}>
+          <p className="cert-progress__intro">
             Examens complétés : {cert.examDefs.filter(e => completedSlugs.includes(e.id)).length} / {cert.examDefs.length}
           </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {cert.examDefs.map(e => (
-              <div key={e.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
-                <span>{e.title}</span>
-                <span>{completedSlugs.includes(e.id) ? '✓' : '—'}</span>
-              </div>
-            ))}
+          <div className="cert-progress__list">
+            {cert.examDefs.map(e => {
+              const done = completedSlugs.includes(e.id)
+              return (
+                <div key={e.id} className="cert-progress__row">
+                  <span>{e.title}</span>
+                  {done
+                    ? <span className="cert-progress__check">✓ Complété</span>
+                    : <span className="cert-progress__pending">—</span>}
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
