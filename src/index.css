@@ -662,6 +662,44 @@ body {
 .home-card__cta:hover { color: var(--color-text); }
 .home-card:hover .home-card__cta { color: var(--home-card-accent); }
 
+/* ── Certification Hub ── */
+.cert-hub { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+.cert-hub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+
+.cert-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 2px solid var(--cert-card-color, var(--color-primary));
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  text-decoration: none; color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cert-card:hover { transform: translateY(-2px); border-color: var(--cert-card-color, var(--color-primary)); }
+[data-theme="light"] .cert-card { background: #ffffff; }
+
+.cert-card__header { display: flex; align-items: center; gap: 0.75rem; }
+.cert-card__icon {
+  width: 36px; height: 36px;
+  background: var(--cert-card-color, var(--color-primary));
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 0.6875rem;
+  flex-shrink: 0; font-family: var(--font-mono);
+}
+.cert-card__title { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+.cert-card__subtitle { margin: 0; font-size: 0.75rem; color: var(--color-text-muted); }
+.cert-card__meta { color: var(--color-text-muted); font-size: 0.8125rem; }
+
+.cert-card__progress-track {
+  height: 3px; background: var(--color-surface-3); border-radius: 2px; overflow: hidden; margin-top: 0.25rem;
+}
+.cert-card__progress-fill {
+  height: 100%; background: var(--cert-card-color, var(--color-primary)); border-radius: 2px; transition: width 0.4s ease;
+}
+
 /* ── Quiz Selector ── */
 .quiz-selector { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
 .selector-header { margin-bottom: 2.5rem; }
