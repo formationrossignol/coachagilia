@@ -100,12 +100,50 @@ body {
 .scenario-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
+.scenario-card::before {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 14px; height: 14px;
+  border-top: 1.5px solid rgba(255,255,255,0.08);
+  border-left: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 2px 0 0 0;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  pointer-events: none;
+}
+.scenario-card::after {
+  content: '';
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 14px; height: 14px;
+  border-bottom: 1.5px solid rgba(255,255,255,0.08);
+  border-right: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 0 0 2px 0;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  pointer-events: none;
+}
+.scenario-card:hover {
+  border-color: var(--color-border-2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+.scenario-card:hover::before,
+.scenario-card:hover::after {
+  width: 20px; height: 20px;
+  border-color: rgba(99,102,241,0.45);
+}
+.scenario-card > * { position: relative; z-index: 1; }
 .scenario-card .btn { margin-top: auto; }
 .scenario-card__meta { display: flex; justify-content: space-between; align-items: center; }
 .scenario-card__title { font-size: 1.25rem; font-weight: 600; }
@@ -677,7 +715,42 @@ body {
   text-decoration: none; color: inherit;
   transition: border-color 0.2s, transform 0.2s;
 }
-.cert-card:hover { transform: translateY(-2px); border-color: var(--cert-card-color, var(--color-primary)); }
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 14px; height: 14px;
+  border-top: 1.5px solid rgba(255,255,255,0.08);
+  border-left: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 2px 0 0 0;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  pointer-events: none;
+}
+.cert-card::after {
+  content: '';
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 14px; height: 14px;
+  border-bottom: 1.5px solid rgba(255,255,255,0.08);
+  border-right: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 0 0 2px 0;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  pointer-events: none;
+}
+.cert-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--cert-card-color, var(--color-primary));
+  box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+.cert-card:hover::before,
+.cert-card:hover::after {
+  width: 20px; height: 20px;
+  border-color: var(--cert-card-color, var(--color-primary));
+  opacity: 0.5;
+}
+.cert-card > * { position: relative; z-index: 1; }
 [data-theme="light"] .cert-card { background: #ffffff; }
 
 .cert-card__header { display: flex; align-items: center; gap: 0.75rem; }
@@ -717,8 +790,40 @@ body {
   transition: border-color 0.2s, transform 0.2s;
   text-decoration: none; color: inherit;
 }
-.quiz-exam-card::before { display: none; }
-.quiz-exam-card:hover { border-color: var(--color-border-2); transform: translateY(-2px); }
+.quiz-exam-card::before {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 14px; height: 14px;
+  border-top: 1.5px solid rgba(255,255,255,0.08);
+  border-left: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 2px 0 0 0;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  pointer-events: none;
+}
+.quiz-exam-card::after {
+  content: '';
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 14px; height: 14px;
+  border-bottom: 1.5px solid rgba(255,255,255,0.08);
+  border-right: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 0 0 2px 0;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  pointer-events: none;
+}
+.quiz-exam-card:hover {
+  border-color: var(--color-border-2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+.quiz-exam-card:hover::before,
+.quiz-exam-card:hover::after {
+  width: 20px; height: 20px;
+  border-color: rgba(99,102,241,0.45);
+}
 .quiz-exam-card > * { position: relative; z-index: 1; }
 .quiz-exam-card .btn { margin-top: auto; }
 [data-theme="light"] .quiz-exam-card { background: #ffffff; }
@@ -876,8 +981,40 @@ body {
   cursor: pointer; overflow: hidden;
   transition: transform 0.2s, border-color 0.2s;
 }
-.intention-nav__tile::before { display: none; }
-.intention-nav__tile:hover { transform: translateY(-2px); border-color: var(--tile-acc); }
+.intention-nav__tile::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 12px; height: 12px;
+  border-top: 1.5px solid rgba(255,255,255,0.08);
+  border-left: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 2px 0 0 0;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  pointer-events: none;
+}
+.intention-nav__tile::after {
+  content: '';
+  position: absolute;
+  bottom: 8px; right: 8px;
+  width: 12px; height: 12px;
+  border-bottom: 1.5px solid rgba(255,255,255,0.08);
+  border-right: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 0 0 2px 0;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  pointer-events: none;
+}
+.intention-nav__tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--tile-acc);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+.intention-nav__tile:hover::before,
+.intention-nav__tile:hover::after {
+  width: 16px; height: 16px;
+  border-color: var(--tile-acc);
+  opacity: 0.5;
+}
 .intention-nav__tile:focus-visible { outline: 2px solid var(--tile-acc); outline-offset: 2px; }
 
 .intention-nav__emoji {
