@@ -12,6 +12,7 @@ import { trizDataset } from './datasets/triz'
 import { stakeholderMappingDataset } from './datasets/stakeholder-mapping'
 import { scrumGuideDataset } from './datasets/scrum-guide'
 import { powerfulQuestionsDataset } from './datasets/powerful-questions'
+import { solutionFocusedDataset } from './datasets/solution-focused'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -404,10 +405,42 @@ const EXISTING: WorkshopDefinition[] = [
       ],
       expectedOutput: [
         'Distinction maîtrisée entre question fermée, orientée et puissante',
-        'Capacité à choisir une question selon l'intention de coaching',
+        'Capacité à choisir une question selon l\'intention de coaching',
       ],
     },
     dataset: powerfulQuestionsDataset,
+  },
+  {
+    id: 'solution-focused-coaching',
+    slug: 'solution-focused-coaching',
+    title: 'Solution Focused Coaching',
+    route: '/ateliers/solution-focused',
+    categorySlug: 'coaching-and-posture',
+    toolName: 'Solution Focused Coaching',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Distinguez les familles de questions Solution Focused, puis associez des situations Scrum à la bonne intention : futur souhaité, progression, exceptions, ressources ou petit pas.",
+    pedagogy: {
+      objectives: [
+        'Distinguer les principales familles de questions Solution Focused',
+        'Formuler une question orientée solution plutôt que centrée problème',
+        'Repérer les exceptions où la situation fonctionne déjà mieux',
+        "Aider une équipe à mesurer son niveau actuel sans jugement",
+        "Transformer une difficulté large en prochain petit pas concret",
+      ],
+      toolExplanation: "Le Solution Focused Coaching (de Shazer, Berg) déplace la conversation du problème vers les ressources : il aide la personne ou l'équipe à décrire ce qu'elle veut voir apparaître, à repérer ce qui fonctionne déjà et à avancer par petits pas. Ses outils principaux : la question miracle (futur souhaité), la question d'échelle (progression), la question d'exception (moments où ça va mieux) et la question de ressources (forces disponibles).",
+      whenToUse: [
+        "Pour déplacer une rétrospective d'une liste de problèmes vers des pistes d'action",
+        "Quand une équipe est dans un jugement global négatif (\"rien ne marche\")",
+        "Pour coacher un membre de l'équipe sans lui imposer une solution",
+      ],
+      expectedOutput: [
+        'Maîtrise des 4 familles de questions Solution Focused',
+        "Capacité à choisir une question selon l'intention : futur, progression, exception, ressources ou petit pas",
+      ],
+    },
+    dataset: solutionFocusedDataset,
   },
 ]
 
@@ -442,7 +475,7 @@ const COMING_SOON: WorkshopDefinition[] = [
   { id: 'difficult-conversations', slug: 'difficult-conversations', title: 'Conversations difficiles', route: '/ateliers/difficult-conversations', categorySlug: 'conflict-and-communication', toolName: 'Difficult Conversations', level: 'advanced', durationMinutes: 20, interactionType: 'guided-form', summary: 'Framework pour aborder les conversations délicates avec empathie et clarté.', comingSoon: true },
 
   // Coaching and posture — additions
-  { id: 'solution-focused-coaching', slug: 'solution-focused-coaching', title: 'Solution Focused Coaching', route: '/ateliers/solution-focused-coaching', categorySlug: 'coaching-and-posture', toolName: 'Solution Focused Coaching', level: 'intermediate', durationMinutes: 20, interactionType: 'dialogue', summary: 'Orienter le coaching vers les solutions plutôt que les problèmes.', comingSoon: true },
+
   { id: 'clean-language', slug: 'clean-language', title: 'Clean Language', route: '/ateliers/clean-language', categorySlug: 'coaching-and-posture', toolName: 'Clean Language', level: 'advanced', durationMinutes: 20, interactionType: 'guided-form', summary: "Utiliser des questions neutres pour explorer les métaphores et croyances de l'interlocuteur.", comingSoon: true },
   { id: 'systemic-coaching', slug: 'systemic-coaching', title: 'Coaching systémique', route: '/ateliers/systemic-coaching', categorySlug: 'coaching-and-posture', toolName: 'Systemic Coaching', level: 'advanced', durationMinutes: 25, interactionType: 'canvas', summary: "Comprendre les dynamiques systémiques d'une équipe ou organisation.", comingSoon: true },
   { id: 'orsc', slug: 'orsc', title: 'ORSC — Organization and Relationship Systems Coaching', route: '/ateliers/orsc', categorySlug: 'coaching-and-posture', toolName: 'ORSC', level: 'advanced', durationMinutes: 25, interactionType: 'canvas', summary: 'Accompagner les systèmes relationnels (équipes, organisations) en coaching.', comingSoon: true },
