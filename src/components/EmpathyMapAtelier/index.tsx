@@ -365,7 +365,7 @@ export function EmpathyMapAtelier() {
               <button className="btn btn--primary" onClick={handleVerifyPhase2} disabled={!phase2AllPlaced}>
                 Vérifier
               </button>
-              {phase2Result && (
+              {phase2Result && phase2Score !== 15 && (
                 <button className="btn btn--secondary" onClick={handleResetPhase2}>Réessayer phase 2</button>
               )}
             </div>
