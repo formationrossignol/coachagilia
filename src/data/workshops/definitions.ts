@@ -11,6 +11,7 @@ import { troikaConsultingDataset } from './datasets/troika-consulting'
 import { trizDataset } from './datasets/triz'
 import { stakeholderMappingDataset } from './datasets/stakeholder-mapping'
 import { scrumGuideDataset } from './datasets/scrum-guide'
+import { powerfulQuestionsDataset } from './datasets/powerful-questions'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -376,6 +377,38 @@ const EXISTING: WorkshopDefinition[] = [
     },
     dataset: cynefinFrameworkDataset,
   },
+  {
+    id: 'powerful-questions',
+    slug: 'powerful-questions',
+    title: 'Powerful Questions',
+    route: '/ateliers/powerful-questions',
+    categorySlug: 'coaching-and-posture',
+    toolName: 'Powerful Questions',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Distinguez questions fermées, orientées et puissantes, puis associez des situations Scrum à la meilleure intention de coaching.",
+    pedagogy: {
+      objectives: [
+        'Distinguer une question fermée, orientée et puissante',
+        'Éviter les questions qui jugent, accusent ou induisent une réponse',
+        'Choisir une question adaptée à une situation Scrum',
+        "Relier une question à une intention de coaching",
+        "Favoriser l'autonomie de l'équipe plutôt que résoudre à sa place",
+      ],
+      toolExplanation: "Les Powerful Questions (ICF) sont des questions ouvertes qui aident l'autre à penser plus clairement, voir autrement, choisir ou agir. Elles s'opposent aux questions fermées (oui/non) et aux questions orientées (qui induisent une réponse). En coaching Scrum, chaque question doit servir une intention : clarifier, explorer, responsabiliser, décider ou passer à l'action.",
+      whenToUse: [
+        "Pour accompagner un membre de l'équipe sans lui imposer une solution",
+        'En rétrospective ou Sprint Planning pour débloquer une situation',
+        "Pour développer l'autonomie de l'équipe",
+      ],
+      expectedOutput: [
+        'Distinction maîtrisée entre question fermée, orientée et puissante',
+        'Capacité à choisir une question selon l'intention de coaching',
+      ],
+    },
+    dataset: powerfulQuestionsDataset,
+  },
 ]
 
 const COMING_SOON: WorkshopDefinition[] = [
@@ -392,8 +425,7 @@ const COMING_SOON: WorkshopDefinition[] = [
   { id: 'dot-voting', slug: 'dot-voting', title: 'Dot Voting', route: '/ateliers/dot-voting', categorySlug: 'facilitation', toolName: 'Dot Voting', level: 'beginner', durationMinutes: 10, interactionType: 'voting', summary: 'Prioriser collectivement des options en distribuant des points de vote.', comingSoon: true },
   { id: 'roman-voting', slug: 'roman-voting', title: 'Roman Voting', route: '/ateliers/roman-voting', categorySlug: 'facilitation', toolName: 'Roman Voting', level: 'beginner', durationMinutes: 10, interactionType: 'voting', summary: "Recueillir rapidement l'avis d'un groupe : pouce levé, baissé ou horizontal.", comingSoon: true },
   { id: 'facilitation-canvas', slug: 'facilitation-canvas', title: 'Facilitation Canvas', route: '/ateliers/facilitation-canvas', categorySlug: 'facilitation', toolName: 'Facilitation Canvas', level: 'intermediate', durationMinutes: 20, interactionType: 'canvas', summary: "Préparer une session de facilitation avec un canvas structuré.", comingSoon: true },
-  { id: 'powerful-questions', slug: 'powerful-questions', title: 'Powerful Questions', route: '/ateliers/powerful-questions', categorySlug: 'coaching-and-posture', toolName: 'Powerful Questions', level: 'intermediate', durationMinutes: 15, interactionType: 'guided-form', summary: 'Construire des questions ouvertes, non directives et orientées solution.', comingSoon: true },
-  { id: 'reframing', slug: 'reframing', title: 'Recadrage cognitif', route: '/ateliers/reframing', categorySlug: 'coaching-and-posture', toolName: 'Reframing', level: 'advanced', durationMinutes: 20, interactionType: 'guided-form', summary: 'Transformer une croyance limitante en perspective constructive.', comingSoon: true },
+{ id: 'reframing', slug: 'reframing', title: 'Recadrage cognitif', route: '/ateliers/reframing', categorySlug: 'coaching-and-posture', toolName: 'Reframing', level: 'advanced', durationMinutes: 20, interactionType: 'guided-form', summary: 'Transformer une croyance limitante en perspective constructive.', comingSoon: true },
   { id: 'working-agreements', slug: 'working-agreements', title: 'Working Agreements', route: '/ateliers/working-agreements', categorySlug: 'team-intelligence', toolName: 'Working Agreements', level: 'beginner', durationMinutes: 15, interactionType: 'canvas', summary: "Construire collectivement les règles de fonctionnement d'une équipe.", comingSoon: true },
   { id: 'team-charter', slug: 'team-charter', title: 'Team Charter', route: '/ateliers/team-charter', categorySlug: 'team-intelligence', toolName: 'Team Charter', level: 'intermediate', durationMinutes: 25, interactionType: 'canvas', summary: "Définir l'identité, les valeurs et les engagements d'une équipe.", comingSoon: true },
   { id: 'empathy-map', slug: 'empathy-map', title: 'Empathy Map', route: '/ateliers/empathy-map', categorySlug: 'team-intelligence', toolName: 'Empathy Map', level: 'intermediate', durationMinutes: 20, interactionType: 'canvas', summary: "Mieux comprendre les besoins et émotions d'un utilisateur ou d'un membre d'équipe.", comingSoon: true },
