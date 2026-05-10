@@ -13,6 +13,7 @@ import { stakeholderMappingDataset } from './datasets/stakeholder-mapping'
 import { scrumGuideDataset } from './datasets/scrum-guide'
 import { powerfulQuestionsDataset } from './datasets/powerful-questions'
 import { solutionFocusedDataset } from './datasets/solution-focused'
+import { empathyMapDataset } from './datasets/empathy-map'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -442,6 +443,38 @@ const EXISTING: WorkshopDefinition[] = [
     },
     dataset: solutionFocusedDataset,
   },
+  {
+    id: 'empathy-map',
+    slug: 'empathy-map',
+    title: 'Empathy Map',
+    route: '/ateliers/empathy-map',
+    categorySlug: 'team-intelligence',
+    toolName: 'Empathy Map',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Identifiez les zones de l'Empathy Map, puis classez des observations utilisateur ou équipe dans la bonne zone : Dit, Pense, Fait, Ressent ou Besoin.",
+    pedagogy: {
+      objectives: [
+        "Distinguer un verbatim, une pensée supposée, un comportement observable et une émotion",
+        "Structurer une situation utilisateur ou équipe avec une Empathy Map",
+        "Éviter de confondre observation et interprétation",
+        "Identifier des besoins à partir de signaux concrets",
+        "Utiliser l'Empathy Map pour améliorer une discussion produit, une rétrospective ou une analyse stakeholder",
+      ],
+      toolExplanation: "L'Empathy Map (Dave Gray / XPLANE) aide les équipes à développer une compréhension partagée d'une personne ou d'un groupe. Elle distingue ce que la personne Dit (verbatims explicites), Pense (croyances, anticipations, craintes), Fait (comportements observables) et Ressent (émotions, tensions). La version enrichie ajoute les Besoins, déduits des observations et émotions.",
+      whenToUse: [
+        "Pour mieux comprendre un stakeholder avant un Sprint Review ou une présentation produit",
+        "En rétrospective pour cartographier l'expérience vécue par l'équipe",
+        "Pour préparer une conversation difficile avec un membre de l'équipe ou un client",
+      ],
+      expectedOutput: [
+        "Distinction maîtrisée entre Dit, Pense, Fait, Ressent et Besoin",
+        "Capacité à structurer une situation avec une Empathy Map pour faire émerger les besoins",
+      ],
+    },
+    dataset: empathyMapDataset,
+  },
 ]
 
 const COMING_SOON: WorkshopDefinition[] = [
@@ -461,8 +494,7 @@ const COMING_SOON: WorkshopDefinition[] = [
 { id: 'reframing', slug: 'reframing', title: 'Recadrage cognitif', route: '/ateliers/reframing', categorySlug: 'coaching-and-posture', toolName: 'Reframing', level: 'advanced', durationMinutes: 20, interactionType: 'guided-form', summary: 'Transformer une croyance limitante en perspective constructive.', comingSoon: true },
   { id: 'working-agreements', slug: 'working-agreements', title: 'Working Agreements', route: '/ateliers/working-agreements', categorySlug: 'team-intelligence', toolName: 'Working Agreements', level: 'beginner', durationMinutes: 15, interactionType: 'canvas', summary: "Construire collectivement les règles de fonctionnement d'une équipe.", comingSoon: true },
   { id: 'team-charter', slug: 'team-charter', title: 'Team Charter', route: '/ateliers/team-charter', categorySlug: 'team-intelligence', toolName: 'Team Charter', level: 'intermediate', durationMinutes: 25, interactionType: 'canvas', summary: "Définir l'identité, les valeurs et les engagements d'une équipe.", comingSoon: true },
-  { id: 'empathy-map', slug: 'empathy-map', title: 'Empathy Map', route: '/ateliers/empathy-map', categorySlug: 'team-intelligence', toolName: 'Empathy Map', level: 'intermediate', durationMinutes: 20, interactionType: 'canvas', summary: "Mieux comprendre les besoins et émotions d'un utilisateur ou d'un membre d'équipe.", comingSoon: true },
-  { id: 'personal-maps', slug: 'personal-maps', title: 'Personal Maps', route: '/ateliers/personal-maps', categorySlug: 'management-3-0', toolName: 'Personal Maps', level: 'beginner', durationMinutes: 15, interactionType: 'canvas', summary: 'Créer une carte mentale personnelle pour mieux se connaître et se faire connaître.', comingSoon: true },
+{ id: 'personal-maps', slug: 'personal-maps', title: 'Personal Maps', route: '/ateliers/personal-maps', categorySlug: 'management-3-0', toolName: 'Personal Maps', level: 'beginner', durationMinutes: 15, interactionType: 'canvas', summary: 'Créer une carte mentale personnelle pour mieux se connaître et se faire connaître.', comingSoon: true },
   { id: 'celebration-grid', slug: 'celebration-grid', title: 'Celebration Grid', route: '/ateliers/celebration-grid', categorySlug: 'management-3-0', toolName: 'Celebration Grid', level: 'intermediate', durationMinutes: 15, interactionType: 'matrix', summary: 'Distinguer succès et échecs liés aux pratiques vs à la chance pour célébrer intelligemment.', comingSoon: true },
   { id: 'team-health-check', slug: 'team-health-check', title: 'Team Health Check', route: '/ateliers/team-health-check', categorySlug: 'management-3-0', toolName: 'Team Health Check', level: 'intermediate', durationMinutes: 20, interactionType: 'voting', summary: "Évaluer collectivement la santé de l'équipe sur plusieurs dimensions.", comingSoon: true },
   { id: '5-whys', slug: '5-whys', title: '5 Pourquoi', route: '/ateliers/5-whys', categorySlug: 'problem-solving', toolName: '5 Whys', level: 'beginner', durationMinutes: 15, interactionType: 'guided-form', summary: 'Identifier la cause racine d\'un problème en posant 5 fois la question "Pourquoi ?".', comingSoon: true },
