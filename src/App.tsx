@@ -22,6 +22,7 @@ import { SBIAtelier } from './components/SBIAtelier'
 import { TRIZAtelier } from './components/TRIZAtelier'
 import { CynefinFrameworkAtelier } from './components/CynefinFrameworkAtelier'
 import { PowerfulQuestionsAtelier } from './components/PowerfulQuestionsAtelier'
+import { SolutionFocusedAtelier } from './components/SolutionFocusedAtelier'
 import { ProgressPage } from './pages/gamification/ProgressPage'
 import { SkillsPage } from './pages/gamification/SkillsPage'
 import { BadgesPage } from './pages/gamification/BadgesPage'
@@ -72,6 +73,7 @@ const router = createBrowserRouter([
       { path: '/ateliers/triz', element: <TRIZAtelier /> },
       { path: '/ateliers/cynefin-framework', element: <CynefinFrameworkAtelier /> },
       { path: '/ateliers/powerful-questions', element: <PowerfulQuestionsAtelier /> },
+      { path: '/ateliers/solution-focused', element: <SolutionFocusedAtelier /> },
       { path: '/ateliers/categories/:slug', element: <WorkshopCategoryPage /> },
       { path: '/progress', element: <ProgressPage /> },
       { path: '/skills', element: <SkillsPage /> },
