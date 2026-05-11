@@ -25,6 +25,7 @@ import { PowerfulQuestionsAtelier } from './components/PowerfulQuestionsAtelier'
 import { SolutionFocusedAtelier } from './components/SolutionFocusedAtelier'
 import { EmpathyMapAtelier } from './components/EmpathyMapAtelier'
 import { JohariWindowAtelier } from './components/JohariWindowAtelier'
+import { SixHatsAtelier } from './components/SixHatsAtelier'
 import { ProgressPage } from './pages/gamification/ProgressPage'
 import { SkillsPage } from './pages/gamification/SkillsPage'
 import { BadgesPage } from './pages/gamification/BadgesPage'
@@ -78,6 +79,7 @@ const router = createBrowserRouter([
       { path: '/ateliers/solution-focused', element: <SolutionFocusedAtelier /> },
       { path: '/ateliers/empathy-map', element: <EmpathyMapAtelier /> },
       { path: '/ateliers/johari-window', element: <JohariWindowAtelier /> },
+      { path: '/ateliers/six-hats', element: <SixHatsAtelier /> },
       { path: '/ateliers/categories/:slug', element: <WorkshopCategoryPage /> },
       { path: '/progress', element: <ProgressPage /> },
       { path: '/skills', element: <SkillsPage /> },
