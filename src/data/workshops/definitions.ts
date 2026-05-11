@@ -15,6 +15,7 @@ import { powerfulQuestionsDataset } from './datasets/powerful-questions'
 import { solutionFocusedDataset } from './datasets/solution-focused'
 import { empathyMapDataset } from './datasets/empathy-map'
 import { johariWindowDataset } from './datasets/johari-window'
+import { sixHatsDataset } from './datasets/six-hats'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -509,6 +510,38 @@ const EXISTING: WorkshopDefinition[] = [
     },
     dataset: johariWindowDataset,
   },
+  {
+    id: 'six-hats',
+    slug: 'six-hats',
+    title: 'Six Chapeaux de Bono',
+    route: '/ateliers/six-hats',
+    categorySlug: 'facilitation',
+    toolName: 'Six Thinking Hats',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Identifiez les 6 perspectives de pensée, puis associez des situations Scrum au bon chapeau : faits, ressentis, risques, bénéfices, idées ou pilotage.",
+    pedagogy: {
+      objectives: [
+        "Distinguer les 6 chapeaux et leur rôle",
+        "Éviter de mélanger faits, ressentis, risques, bénéfices, idées et pilotage",
+        "Choisir la bonne perspective selon une situation d'équipe",
+        "Structurer une discussion collective sans tomber dans le débat désorganisé",
+        "Utiliser les chapeaux pour améliorer une rétrospective, une décision produit ou une résolution de problème",
+      ],
+      toolExplanation: "Les Six Chapeaux de Bono (Edward de Bono, 1985) structurent la réflexion collective en demandant au groupe d'explorer successivement 6 perspectives : les faits (blanc), les émotions (rouge), les risques (noir), les bénéfices (jaune), les idées nouvelles (vert) et le pilotage de la discussion (bleu). En séparant les registres de pensée, la méthode réduit les débats confus et améliore la qualité des décisions collectives.",
+      whenToUse: [
+        "En rétrospective pour explorer un sujet complexe sans mélanger les registres",
+        "Pour structurer une décision produit ou une session de résolution de problème",
+        "Quand une discussion devient émotionnelle ou part dans plusieurs directions à la fois",
+      ],
+      expectedOutput: [
+        "Distinction maîtrisée des 6 perspectives de Bono",
+        "Capacité à choisir le bon chapeau selon la situation et le besoin de la discussion",
+      ],
+    },
+    dataset: sixHatsDataset,
+  },
 ]
 
 const COMING_SOON: WorkshopDefinition[] = [
@@ -555,8 +588,7 @@ const COMING_SOON: WorkshopDefinition[] = [
   { id: 'open-space-technology', slug: 'open-space-technology', title: 'Open Space Technology', route: '/ateliers/open-space-technology', categorySlug: 'facilitation', toolName: 'Open Space Technology', level: 'intermediate', durationMinutes: 25, interactionType: 'canvas', summary: 'Organiser une grande réunion auto-organisée autour des thèmes qui émergent des participants.', comingSoon: true },
   { id: 'world-cafe', slug: 'world-cafe', title: 'World Café', route: '/ateliers/world-cafe', categorySlug: 'facilitation', toolName: 'World Café', level: 'beginner', durationMinutes: 20, interactionType: 'canvas', summary: "Faciliter des conversations profondes en petits groupes tournants autour d'une question centrale.", comingSoon: true },
   { id: 'appreciative-inquiry', slug: 'appreciative-inquiry', title: 'Appreciative Inquiry', route: '/ateliers/appreciative-inquiry', categorySlug: 'facilitation', toolName: 'Appreciative Inquiry', level: 'intermediate', durationMinutes: 20, interactionType: 'canvas', summary: "Construire sur les forces et les succès passés pour imaginer l'avenir positif.", comingSoon: true },
-  { id: 'six-thinking-hats', slug: 'six-thinking-hats', title: 'Six Chapeaux de Bono', route: '/ateliers/six-thinking-hats', categorySlug: 'facilitation', toolName: 'Six Thinking Hats', level: 'intermediate', durationMinutes: 20, interactionType: 'ranking', summary: 'Structurer la réflexion collective en explorant 6 perspectives distinctes.', comingSoon: true },
-  { id: 'fishbowl-discussion', slug: 'fishbowl-discussion', title: 'Fishbowl Discussion', route: '/ateliers/fishbowl-discussion', categorySlug: 'facilitation', toolName: 'Fishbowl Discussion', level: 'intermediate', durationMinutes: 20, interactionType: 'dialogue', summary: 'Faciliter un débat entre un petit groupe au centre observé par le reste des participants.', comingSoon: true },
+{ id: 'fishbowl-discussion', slug: 'fishbowl-discussion', title: 'Fishbowl Discussion', route: '/ateliers/fishbowl-discussion', categorySlug: 'facilitation', toolName: 'Fishbowl Discussion', level: 'intermediate', durationMinutes: 20, interactionType: 'dialogue', summary: 'Faciliter un débat entre un petit groupe au centre observé par le reste des participants.', comingSoon: true },
   { id: 'confidence-vote', slug: 'confidence-vote', title: 'Confidence Vote', route: '/ateliers/confidence-vote', categorySlug: 'facilitation', toolName: 'Confidence Vote', level: 'beginner', durationMinutes: 10, interactionType: 'voting', summary: "Mesurer le niveau de confiance d'un groupe envers une décision ou un plan.", comingSoon: true },
 
   // Retrospectives (new category)
