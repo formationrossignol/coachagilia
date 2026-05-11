@@ -14,6 +14,7 @@ import { scrumGuideDataset } from './datasets/scrum-guide'
 import { powerfulQuestionsDataset } from './datasets/powerful-questions'
 import { solutionFocusedDataset } from './datasets/solution-focused'
 import { empathyMapDataset } from './datasets/empathy-map'
+import { johariWindowDataset } from './datasets/johari-window'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -475,6 +476,39 @@ const EXISTING: WorkshopDefinition[] = [
     },
     dataset: empathyMapDataset,
   },
+  {
+    id: 'johari-window',
+    slug: 'johari-window',
+    title: 'Fenêtre de Johari',
+    route: '/ateliers/johari-window',
+    categorySlug: 'conflict-and-communication',
+    toolName: 'Johari Window',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Identifiez les 4 zones de la Fenêtre de Johari, puis diagnostiquez des situations d'équipe en distinguant zone ouverte, aveugle, cachée, inconnue et mouvement vers l'ouverture.",
+    pedagogy: {
+      objectives: [
+        "Distinguer les 4 zones de la Fenêtre de Johari",
+        "Repérer une zone aveugle dans une situation d'équipe",
+        "Comprendre le rôle du feedback dans la réduction des angles morts",
+        "Comprendre le rôle du partage volontaire dans la réduction de la zone cachée",
+        "Identifier les situations où l'expérimentation révèle des compétences ou réactions inconnues",
+        "Utiliser le modèle pour améliorer la communication, la confiance et la connaissance mutuelle dans une équipe",
+      ],
+      toolExplanation: "La Fenêtre de Johari (Luft & Ingham, 1955) est un modèle de connaissance de soi et de dynamique de groupe. Elle distingue 4 zones : la zone ouverte (connue de soi et des autres), la zone aveugle (perçue par les autres mais pas par soi), la zone cachée (connue de soi mais non partagée) et la zone inconnue (ni connue de soi, ni des autres). Le feedback réduit la zone aveugle, l'auto-divulgation maîtrisée réduit la zone cachée, et l'expérimentation révèle la zone inconnue.",
+      whenToUse: [
+        "En rétrospective pour améliorer la communication et le feedback dans l'équipe",
+        "Pour accompagner un membre de l'équipe sur ses angles morts",
+        "Pour développer une culture de feedback psychologiquement sécurisante",
+      ],
+      expectedOutput: [
+        "Distinction maîtrisée des 4 zones de Johari",
+        "Capacité à diagnostiquer une situation d'équipe et à identifier comment agrandir la zone ouverte",
+      ],
+    },
+    dataset: johariWindowDataset,
+  },
 ]
 
 const COMING_SOON: WorkshopDefinition[] = [
@@ -503,7 +537,6 @@ const COMING_SOON: WorkshopDefinition[] = [
   // Conflict and communication — additions
   { id: 'radical-candor', slug: 'radical-candor', title: 'Radical Candor', route: '/ateliers/radical-candor', categorySlug: 'conflict-and-communication', toolName: 'Radical Candor', level: 'intermediate', durationMinutes: 15, interactionType: 'guided-form', summary: 'Apprendre à défier directement tout en montrant que vous vous souciez personnellement.', comingSoon: true },
   { id: 'crucial-conversations', slug: 'crucial-conversations', title: 'Crucial Conversations', route: '/ateliers/crucial-conversations', categorySlug: 'conflict-and-communication', toolName: 'Crucial Conversations', level: 'advanced', durationMinutes: 20, interactionType: 'dialogue', summary: 'Gérer les conversations à enjeux élevés avec sécurité et clarté.', comingSoon: true },
-  { id: 'johari-window', slug: 'johari-window', title: 'Fenêtre de Johari', route: '/ateliers/johari-window', categorySlug: 'conflict-and-communication', toolName: 'Johari Window', level: 'intermediate', durationMinutes: 15, interactionType: 'matrix', summary: "Comprendre les zones d'aveuglement et améliorer la connaissance de soi dans l'équipe.", comingSoon: true },
   { id: 'difficult-conversations', slug: 'difficult-conversations', title: 'Conversations difficiles', route: '/ateliers/difficult-conversations', categorySlug: 'conflict-and-communication', toolName: 'Difficult Conversations', level: 'advanced', durationMinutes: 20, interactionType: 'guided-form', summary: 'Framework pour aborder les conversations délicates avec empathie et clarté.', comingSoon: true },
 
   // Coaching and posture — additions
