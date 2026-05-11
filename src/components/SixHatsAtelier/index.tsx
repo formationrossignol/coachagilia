@@ -99,12 +99,14 @@ export function SixHatsAtelier() {
 
   function handleDropOnHat(hat: SixHat) {
     if (!dragging || dragging.type !== 'hat-card') return
+    const fromHat = dragging.fromHat
+    const cardId = dragging.cardId
     setHatZones(prev => {
       const next = { ...prev }
-      if (dragging.fromHat) {
-        next[dragging.fromHat] = next[dragging.fromHat].filter(id => id !== dragging.cardId)
+      if (fromHat) {
+        next[fromHat] = next[fromHat].filter(id => id !== cardId)
       }
-      if (!next[hat].includes(dragging.cardId)) next[hat] = [...next[hat], dragging.cardId]
+      if (!next[hat].includes(cardId)) next[hat] = [...next[hat], cardId]
       return next
     })
     setDragging(null)
@@ -112,9 +114,11 @@ export function SixHatsAtelier() {
 
   function handleDropOnCardPalette() {
     if (!dragging || dragging.type !== 'hat-card' || !dragging.fromHat) { setDragging(null); return }
+    const fromHat = dragging.fromHat
+    const cardId = dragging.cardId
     setHatZones(prev => ({
       ...prev,
-      [dragging.fromHat!]: prev[dragging.fromHat!].filter(id => id !== dragging.cardId),
+      [fromHat]: prev[fromHat].filter(id => id !== cardId),
     }))
     setDragging(null)
   }
