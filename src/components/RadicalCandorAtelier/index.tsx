@@ -279,8 +279,9 @@ export function RadicalCandorAtelier() {
                         (placed ? ' tki-zone--filled' : '') +
                         (verified ? (correct ? ' tki-zone--correct' : ' tki-zone--wrong') : '')
                       }
-                      onDragOver={e => e.preventDefault()}
-                      onDrop={() => handleDropOnDiagramZone(pos)}
+                      onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('tki-zone--hover') }}
+                      onDragLeave={e => e.currentTarget.classList.remove('tki-zone--hover')}
+                      onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('tki-zone--hover'); handleDropOnDiagramZone(pos) }}
                     >
                       {quadrant ? (
                         <span
