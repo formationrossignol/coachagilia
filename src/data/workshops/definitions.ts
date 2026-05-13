@@ -16,6 +16,7 @@ import { solutionFocusedDataset } from './datasets/solution-focused'
 import { empathyMapDataset } from './datasets/empathy-map'
 import { johariWindowDataset } from './datasets/johari-window'
 import { sixHatsDataset } from './datasets/six-hats'
+import { radicalCandorDataset } from './datasets/radical-candor'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -542,6 +543,38 @@ const EXISTING: WorkshopDefinition[] = [
     },
     dataset: sixHatsDataset,
   },
+  {
+    id: 'radical-candor',
+    slug: 'radical-candor',
+    title: 'Radical Candor',
+    route: '/ateliers/radical-candor',
+    categorySlug: 'conflict-and-communication',
+    toolName: 'Radical Candor',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Distinguez les 4 postures du modèle Radical Candor, puis identifiez la posture appropriée dans 15 situations Scrum et Agile.",
+    pedagogy: {
+      objectives: [
+        'Distinguer les 4 quadrants du modèle Radical Candor',
+        'Reconnaître un feedback trop vague, trop brutal ou insincère',
+        "Formuler un feedback direct sans attaquer la personne",
+        "Montrer une intention d'aide explicite",
+        'Utiliser Radical Candor dans une rétrospective, une revue de code ou un accompagnement Scrum Master',
+      ],
+      toolExplanation: "Radical Candor (Kim Scott) repose sur deux dimensions : montrer que l'on se soucie personnellement de la personne (Care Personally) et la défier directement (Challenge Directly). Le quadrant cible combine les deux. Les autres quadrants — Ruinous Empathy (care sans challenge), Obnoxious Aggression (challenge sans care) et Manipulative Insincerity (ni l'un ni l'autre) — décrivent des postures à éviter.",
+      whenToUse: [
+        'Pour donner un feedback individuel à la fois direct et humain',
+        'En rétrospective pour nommer un comportement sans attaquer la personne',
+        'Pour accompagner un Scrum Master sur sa posture de feedback',
+      ],
+      expectedOutput: [
+        'Positionnement maîtrisé des 4 postures sur le diagramme',
+        "Capacité à identifier et reformuler un feedback trop vague, brutal ou insincère",
+      ],
+    },
+    dataset: radicalCandorDataset,
+  },
 ]
 
 const COMING_SOON: WorkshopDefinition[] = [
@@ -568,7 +601,6 @@ const COMING_SOON: WorkshopDefinition[] = [
   { id: 'root-cause-analysis', slug: 'root-cause-analysis', title: 'Analyse des causes racines', route: '/ateliers/root-cause-analysis', categorySlug: 'problem-solving', toolName: 'Root Cause Analysis', level: 'intermediate', durationMinutes: 20, interactionType: 'diagram', summary: "Méthode structurée pour remonter des symptômes aux causes profondes d'un problème.", comingSoon: true },
 
   // Conflict and communication — additions
-  { id: 'radical-candor', slug: 'radical-candor', title: 'Radical Candor', route: '/ateliers/radical-candor', categorySlug: 'conflict-and-communication', toolName: 'Radical Candor', level: 'intermediate', durationMinutes: 15, interactionType: 'guided-form', summary: 'Apprendre à défier directement tout en montrant que vous vous souciez personnellement.', comingSoon: true },
   { id: 'crucial-conversations', slug: 'crucial-conversations', title: 'Crucial Conversations', route: '/ateliers/crucial-conversations', categorySlug: 'conflict-and-communication', toolName: 'Crucial Conversations', level: 'advanced', durationMinutes: 20, interactionType: 'dialogue', summary: 'Gérer les conversations à enjeux élevés avec sécurité et clarté.', comingSoon: true },
   { id: 'difficult-conversations', slug: 'difficult-conversations', title: 'Conversations difficiles', route: '/ateliers/difficult-conversations', categorySlug: 'conflict-and-communication', toolName: 'Difficult Conversations', level: 'advanced', durationMinutes: 20, interactionType: 'guided-form', summary: 'Framework pour aborder les conversations délicates avec empathie et clarté.', comingSoon: true },
 
