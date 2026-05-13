@@ -1552,6 +1552,51 @@ body {
   gap: 0.5rem;
   min-height: 240px;
 }
+/* ── Radical Candor Phase 1 Axis Diagram ── */
+.rc-diagram {
+  position: relative;
+  max-width: 540px;
+  margin: 2rem auto;
+}
+.rc-diagram__top-label {
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+.rc-diagram__container {
+  position: relative;
+}
+.rc-diagram__axes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 0;
+}
+.rc-diagram__zones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.75rem;
+  min-height: 280px;
+  position: relative;
+  z-index: 1;
+}
+.rc-diagram__right-label {
+  text-align: right;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-top: 0.25rem;
+}
 .tki-zone {
   background: var(--color-surface);
   border: 2px dashed var(--color-border);

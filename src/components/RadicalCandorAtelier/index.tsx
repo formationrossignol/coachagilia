@@ -262,44 +262,62 @@ export function RadicalCandorAtelier() {
 
         {phase === 1 && (
           <>
-            <div className="tki-diagram">
-              <div className="tki-axis tki-axis--y">Care Personally ↑</div>
-              <div className="rc-grid">
-                {DIAGRAM_POSITIONS.map(pos => {
-                  const placed = diagramZones[pos]
-                  const quadrant = placed ? QUADRANTS.find(q => q.id === placed) : null
-                  const verified = phase1Result !== null
-                  const correct = phase1Result?.[pos]
-                  return (
-                    <div
-                      key={pos}
-                      data-zone={pos}
-                      className={
-                        'tki-zone' +
-                        (placed ? ' tki-zone--filled' : '') +
-                        (verified ? (correct ? ' tki-zone--correct' : ' tki-zone--wrong') : '')
-                      }
-                      onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('tki-zone--hover') }}
-                      onDragLeave={e => e.currentTarget.classList.remove('tki-zone--hover')}
-                      onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('tki-zone--hover'); handleDropOnDiagramZone(pos) }}
-                    >
-                      {quadrant ? (
-                        <span
-                          data-label={quadrant.id}
-                          className="scrum-label scrum-label--placed"
-                          draggable
-                          onDragStart={() => handleLabelDragStart(quadrant.id, pos)}
-                        >
-                          {quadrant.label}
-                        </span>
-                      ) : (
-                        <span className="scrum-zone__placeholder">?</span>
-                      )}
-                    </div>
-                  )
-                })}
+            <div className="rc-diagram">
+              <div className="rc-diagram__top-label">Care Personally ↑</div>
+              <div className="rc-diagram__container">
+                <svg
+                  className="rc-diagram__axes"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <marker id="rc-arr-r" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                      <path d="M0,0 L0,6 L6,3 z" fill="var(--color-border)" />
+                    </marker>
+                    <marker id="rc-arr-u" markerWidth="6" markerHeight="6" refX="3" refY="1" orient="auto">
+                      <path d="M0,6 L6,6 L3,0 z" fill="var(--color-border)" />
+                    </marker>
+                  </defs>
+                  <line x1="0" y1="50%" x2="100%" y2="50%" stroke="var(--color-border)" strokeWidth="1.5" markerEnd="url(#rc-arr-r)" />
+                  <line x1="50%" y1="100%" x2="50%" y2="0" stroke="var(--color-border)" strokeWidth="1.5" markerEnd="url(#rc-arr-u)" />
+                </svg>
+                <div className="rc-diagram__zones">
+                  {DIAGRAM_POSITIONS.map(pos => {
+                    const placed = diagramZones[pos]
+                    const quadrant = placed ? QUADRANTS.find(q => q.id === placed) : null
+                    const verified = phase1Result !== null
+                    const correct = phase1Result?.[pos]
+                    return (
+                      <div
+                        key={pos}
+                        data-zone={pos}
+                        className={
+                          'tki-zone' +
+                          (placed ? ' tki-zone--filled' : '') +
+                          (verified ? (correct ? ' tki-zone--correct' : ' tki-zone--wrong') : '')
+                        }
+                        onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('tki-zone--hover') }}
+                        onDragLeave={e => e.currentTarget.classList.remove('tki-zone--hover')}
+                        onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('tki-zone--hover'); handleDropOnDiagramZone(pos) }}
+                      >
+                        {quadrant ? (
+                          <span
+                            data-label={quadrant.id}
+                            className="scrum-label scrum-label--placed"
+                            draggable
+                            onDragStart={() => handleLabelDragStart(quadrant.id, pos)}
+                          >
+                            {quadrant.label}
+                          </span>
+                        ) : (
+                          <span className="scrum-zone__placeholder">?</span>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
-              <div className="tki-axis tki-axis--x">Challenge Directly →</div>
+              <div className="rc-diagram__right-label">Challenge Directly →</div>
             </div>
 
             {phase1Result && (
