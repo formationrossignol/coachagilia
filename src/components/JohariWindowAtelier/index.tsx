@@ -194,38 +194,82 @@ export function JohariWindowAtelier() {
 
         {phase === 1 && (
           <>
-            <div className="tki-columns">
-              {JOHARI_ZONES.map(zone => (
-                <div
-                  key={zone.id}
-                  data-zone={zone.id}
-                  className="tki-column"
-                  onDragOver={e => e.preventDefault()}
-                  onDrop={() => handleDropOnJohariZone(zone.id)}
-                >
-                  <h3 className="tki-column__title">{zone.label}</h3>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{zone.description}</p>
-                  <div className="tki-column__cards">
-                    {johariZones[zone.id].map(cardId => {
-                      const card = ZONE_CARDS.find(x => x.id === cardId)!
-                      const resultClass = phase1Result !== null
-                        ? phase1Result[card.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
-                        : ''
-                      return (
-                        <div
-                          key={card.id}
-                          data-card={card.id}
-                          className={`tki-situation-card${resultClass}`}
-                          draggable
-                          onDragStart={() => handleCardDragStart(card.id, zone.id)}
-                        >
-                          {card.text}
-                        </div>
-                      )
-                    })}
+            <div className="johari-matrix">
+              <div />
+              <div className="johari-matrix__col-header">Connu de soi</div>
+              <div className="johari-matrix__col-header">Inconnu de soi</div>
+
+              <div className="johari-matrix__row-header">Connu des autres</div>
+              {(['open', 'blind'] as const).map(zoneId => {
+                const zoneDef = JOHARI_ZONES.find(z => z.id === zoneId)!
+                return (
+                  <div
+                    key={zoneId}
+                    data-zone={zoneId}
+                    className="johari-matrix__cell"
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => handleDropOnJohariZone(zoneId)}
+                  >
+                    <h3 className="tki-column__title">{zoneDef.label}</h3>
+                    <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>{zoneDef.description}</p>
+                    <div className="tki-column__cards">
+                      {johariZones[zoneId].map(cardId => {
+                        const card = ZONE_CARDS.find(x => x.id === cardId)!
+                        const resultClass = phase1Result !== null
+                          ? phase1Result[card.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                          : ''
+                        return (
+                          <div
+                            key={card.id}
+                            data-card={card.id}
+                            className={`tki-situation-card${resultClass}`}
+                            draggable
+                            onDragStart={() => handleCardDragStart(card.id, zoneId)}
+                          >
+                            {card.text}
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
+
+              <div className="johari-matrix__row-header">Inconnu des autres</div>
+              {(['hidden', 'unknown'] as const).map(zoneId => {
+                const zoneDef = JOHARI_ZONES.find(z => z.id === zoneId)!
+                return (
+                  <div
+                    key={zoneId}
+                    data-zone={zoneId}
+                    className="johari-matrix__cell"
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => handleDropOnJohariZone(zoneId)}
+                  >
+                    <h3 className="tki-column__title">{zoneDef.label}</h3>
+                    <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>{zoneDef.description}</p>
+                    <div className="tki-column__cards">
+                      {johariZones[zoneId].map(cardId => {
+                        const card = ZONE_CARDS.find(x => x.id === cardId)!
+                        const resultClass = phase1Result !== null
+                          ? phase1Result[card.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                          : ''
+                        return (
+                          <div
+                            key={card.id}
+                            data-card={card.id}
+                            className={`tki-situation-card${resultClass}`}
+                            draggable
+                            onDragStart={() => handleCardDragStart(card.id, zoneId)}
+                          >
+                            {card.text}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
 
             {phase1Result && (
@@ -281,42 +325,125 @@ export function JohariWindowAtelier() {
 
         {phase === 2 && (
           <>
-            <div className="tki-columns">
-              {JOHARI_EXTENDED_ZONES.map(zone => (
-                <div
-                  key={zone.id}
-                  data-zone={zone.id}
-                  className="tki-column"
-                  onDragOver={e => e.preventDefault()}
-                  onDrop={() => handleDropOnExtendedZone(zone.id)}
-                >
-                  <h3 className="tki-column__title">{zone.label}</h3>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{zone.description}</p>
-                  <div className="tki-column__cards">
-                    {SITUATIONS.filter(s => situationZones[s.id] === zone.id).map(s => {
-                      const resultClass = phase2Result !== null
-                        ? phase2Result[s.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
-                        : ''
-                      return (
-                        <div
-                          key={s.id}
-                          data-situation={s.id}
-                          className={`tki-situation-card${resultClass}`}
-                          draggable
-                          onDragStart={() => handleSituationDragStart(s.id, zone.id)}
-                        >
-                          {s.text}
-                          {s.transformation && (
-                            <em style={{ fontSize: '0.8em', color: 'var(--color-text-muted)', display: 'block', marginTop: '0.25rem' }}>
-                              → {s.transformation}
-                            </em>
-                          )}
-                        </div>
-                      )
-                    })}
+            <div className="johari-matrix">
+              <div />
+              <div className="johari-matrix__col-header">Connu de soi</div>
+              <div className="johari-matrix__col-header">Inconnu de soi</div>
+
+              <div className="johari-matrix__row-header">Connu des autres</div>
+              {(['open', 'blind'] as const).map(zoneId => {
+                const zoneDef = JOHARI_EXTENDED_ZONES.find(z => z.id === zoneId)!
+                return (
+                  <div
+                    key={zoneId}
+                    data-zone={zoneId}
+                    className="johari-matrix__cell"
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => handleDropOnExtendedZone(zoneId)}
+                  >
+                    <h3 className="tki-column__title">{zoneDef.label}</h3>
+                    <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>{zoneDef.description}</p>
+                    <div className="tki-column__cards">
+                      {SITUATIONS.filter(s => situationZones[s.id] === zoneId).map(s => {
+                        const resultClass = phase2Result !== null
+                          ? phase2Result[s.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                          : ''
+                        return (
+                          <div
+                            key={s.id}
+                            data-situation={s.id}
+                            className={`tki-situation-card${resultClass}`}
+                            draggable
+                            onDragStart={() => handleSituationDragStart(s.id, zoneId)}
+                          >
+                            {s.text}
+                            {s.transformation && (
+                              <em style={{ fontSize: '0.8em', color: 'var(--color-text-muted)', display: 'block', marginTop: '0.25rem' }}>
+                                → {s.transformation}
+                              </em>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
+
+              <div className="johari-matrix__row-header">Inconnu des autres</div>
+              {(['hidden', 'unknown'] as const).map(zoneId => {
+                const zoneDef = JOHARI_EXTENDED_ZONES.find(z => z.id === zoneId)!
+                return (
+                  <div
+                    key={zoneId}
+                    data-zone={zoneId}
+                    className="johari-matrix__cell"
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => handleDropOnExtendedZone(zoneId)}
+                  >
+                    <h3 className="tki-column__title">{zoneDef.label}</h3>
+                    <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>{zoneDef.description}</p>
+                    <div className="tki-column__cards">
+                      {SITUATIONS.filter(s => situationZones[s.id] === zoneId).map(s => {
+                        const resultClass = phase2Result !== null
+                          ? phase2Result[s.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                          : ''
+                        return (
+                          <div
+                            key={s.id}
+                            data-situation={s.id}
+                            className={`tki-situation-card${resultClass}`}
+                            draggable
+                            onDragStart={() => handleSituationDragStart(s.id, zoneId)}
+                          >
+                            {s.text}
+                            {s.transformation && (
+                              <em style={{ fontSize: '0.8em', color: 'var(--color-text-muted)', display: 'block', marginTop: '0.25rem' }}>
+                                → {s.transformation}
+                              </em>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            <div
+              data-zone="towards-open"
+              className="johari-towards-open"
+              onDragOver={e => e.preventDefault()}
+              onDrop={() => handleDropOnExtendedZone('towards-open')}
+            >
+              <h3 className="tki-column__title">Vers zone ouverte</h3>
+              <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>
+                Situation où le feedback, le partage ou l'expérimentation agrandit la zone ouverte.
+              </p>
+              <div className="tki-column__cards">
+                {SITUATIONS.filter(s => situationZones[s.id] === 'towards-open').map(s => {
+                  const resultClass = phase2Result !== null
+                    ? phase2Result[s.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                    : ''
+                  return (
+                    <div
+                      key={s.id}
+                      data-situation={s.id}
+                      className={`tki-situation-card${resultClass}`}
+                      draggable
+                      onDragStart={() => handleSituationDragStart(s.id, 'towards-open')}
+                    >
+                      {s.text}
+                      {s.transformation && (
+                        <em style={{ fontSize: '0.8em', color: 'var(--color-text-muted)', display: 'block', marginTop: '0.25rem' }}>
+                          → {s.transformation}
+                        </em>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
 
             {phase2Result && (
