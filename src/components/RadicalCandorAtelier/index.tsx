@@ -263,23 +263,23 @@ export function RadicalCandorAtelier() {
         {phase === 1 && (
           <>
             <div className="rc-diagram">
-              <div className="rc-diagram__top-label">Care Personally ↑</div>
-              <div className="rc-diagram__container">
-                <svg
-                  className="rc-diagram__axes"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
+              <div className="rc-diagram__top-label">CARE PERSONALLY</div>
+              <div className="rc-diagram__pad">
+                <svg className="rc-diagram__axes" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <defs>
-                    <marker id="rc-arr-r" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                      <path d="M0,0 L0,6 L6,3 z" fill="var(--color-border)" />
-                    </marker>
-                    <marker id="rc-arr-u" markerWidth="6" markerHeight="6" refX="3" refY="1" orient="auto">
-                      <path d="M0,6 L6,6 L3,0 z" fill="var(--color-border)" />
+                    <marker id="rc-arr" markerWidth="12" markerHeight="9" refX="11" refY="4.5"
+                      orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+                      <path d="M0,0 L0,9 L12,4.5 z" fill="var(--color-text)" />
                     </marker>
                   </defs>
-                  <line x1="0" y1="50%" x2="100%" y2="50%" stroke="var(--color-border)" strokeWidth="1.5" markerEnd="url(#rc-arr-r)" />
-                  <line x1="50%" y1="100%" x2="50%" y2="0" stroke="var(--color-border)" strokeWidth="1.5" markerEnd="url(#rc-arr-u)" />
+                  <line x1="0" y1="50%" x2="100%" y2="50%"
+                    stroke="var(--color-text)" strokeWidth="2.5"
+                    markerStart="url(#rc-arr)" markerEnd="url(#rc-arr)" />
+                  <line x1="50%" y1="100%" x2="50%" y2="0"
+                    stroke="var(--color-text)" strokeWidth="2.5"
+                    markerStart="url(#rc-arr)" markerEnd="url(#rc-arr)" />
+                  <text x="100%" y="50%" dx="10" textAnchor="start" dominantBaseline="middle" fontSize="11" fontWeight="700"
+                    fill="var(--color-primary)" letterSpacing="1">CHALLENGE DIRECTLY</text>
                 </svg>
                 <div className="rc-diagram__zones">
                   {DIAGRAM_POSITIONS.map(pos => {
@@ -317,7 +317,6 @@ export function RadicalCandorAtelier() {
                   })}
                 </div>
               </div>
-              <div className="rc-diagram__right-label">Challenge Directly →</div>
             </div>
 
             {phase1Result && (
