@@ -203,38 +203,41 @@ export function EmpathyMapAtelier() {
 
         {phase === 1 && (
           <>
-            <div className="tki-columns">
-              {CORE_ZONES.map(zone => (
-                <div
-                  key={zone.id}
-                  data-zone={zone.id}
-                  className="tki-column"
-                  onDragOver={e => e.preventDefault()}
-                  onDrop={() => handleDropOnCoreZone(zone.id)}
-                >
-                  <h3 className="tki-column__title">{zone.label}</h3>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{zone.description}</p>
-                  <div className="tki-column__cards">
-                    {coreZones[zone.id].map(cardId => {
-                      const card = CORE_CARDS.find(x => x.id === cardId)!
-                      const resultClass = phase1Result !== null
-                        ? phase1Result[card.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
-                        : ''
-                      return (
-                        <div
-                          key={card.id}
-                          data-card={card.id}
-                          className={`tki-situation-card${resultClass}`}
-                          draggable
-                          onDragStart={() => handleCoreDragStart(card.id, zone.id)}
-                        >
-                          {card.text}
-                        </div>
-                      )
-                    })}
+            <div className="empathy-matrix">
+              {(['says', 'thinks', 'does', 'feels'] as const).map(zoneId => {
+                const zoneDef = CORE_ZONES.find(z => z.id === zoneId)!
+                return (
+                  <div
+                    key={zoneId}
+                    data-zone={zoneId}
+                    className="johari-matrix__cell"
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => handleDropOnCoreZone(zoneId)}
+                  >
+                    <h3 className="tki-column__title">{zoneDef.label}</h3>
+                    <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>{zoneDef.description}</p>
+                    <div className="tki-column__cards">
+                      {coreZones[zoneId].map(cardId => {
+                        const card = CORE_CARDS.find(x => x.id === cardId)!
+                        const resultClass = phase1Result !== null
+                          ? phase1Result[card.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                          : ''
+                        return (
+                          <div
+                            key={card.id}
+                            data-card={card.id}
+                            className={`tki-situation-card${resultClass}`}
+                            draggable
+                            onDragStart={() => handleCoreDragStart(card.id, zoneId)}
+                          >
+                            {card.text}
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             {phase1Result && (
@@ -290,38 +293,72 @@ export function EmpathyMapAtelier() {
 
         {phase === 2 && (
           <>
-            <div className="tki-columns">
-              {EXTENDED_ZONES.map(zone => (
-                <div
-                  key={zone.id}
-                  data-zone={zone.id}
-                  className="tki-column"
-                  onDragOver={e => e.preventDefault()}
-                  onDrop={() => handleDropOnExtendedZone(zone.id)}
-                >
-                  <h3 className="tki-column__title">{zone.label}</h3>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{zone.description}</p>
-                  <div className="tki-column__cards">
-                    {extendedZones[zone.id].map(cardId => {
-                      const card = EXTENDED_CARDS.find(x => x.id === cardId)!
-                      const resultClass = phase2Result !== null
-                        ? phase2Result[card.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
-                        : ''
-                      return (
-                        <div
-                          key={card.id}
-                          data-card={card.id}
-                          className={`tki-situation-card${resultClass}`}
-                          draggable
-                          onDragStart={() => handleExtendedDragStart(card.id, zone.id)}
-                        >
-                          {card.text}
-                        </div>
-                      )
-                    })}
+            <div className="empathy-matrix">
+              {(['says', 'thinks', 'does', 'feels'] as const).map(zoneId => {
+                const zoneDef = EXTENDED_ZONES.find(z => z.id === zoneId)!
+                return (
+                  <div
+                    key={zoneId}
+                    data-zone={zoneId}
+                    className="johari-matrix__cell"
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={() => handleDropOnExtendedZone(zoneId)}
+                  >
+                    <h3 className="tki-column__title">{zoneDef.label}</h3>
+                    <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '0.25rem' }}>{zoneDef.description}</p>
+                    <div className="tki-column__cards">
+                      {extendedZones[zoneId].map(cardId => {
+                        const card = EXTENDED_CARDS.find(x => x.id === cardId)!
+                        const resultClass = phase2Result !== null
+                          ? phase2Result[card.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                          : ''
+                        return (
+                          <div
+                            key={card.id}
+                            data-card={card.id}
+                            className={`tki-situation-card${resultClass}`}
+                            draggable
+                            onDragStart={() => handleExtendedDragStart(card.id, zoneId)}
+                          >
+                            {card.text}
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
+            </div>
+
+            <div
+              data-zone="needs"
+              className="empathy-needs"
+              onDragOver={e => e.preventDefault()}
+              onDrop={() => handleDropOnExtendedZone('needs')}
+            >
+              <h3 className="tki-column__title">Besoin</h3>
+              <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>
+                Besoin profond à déduire des observations, verbatims et émotions.
+              </p>
+              <div className="tki-column__cards">
+                {extendedZones.needs.map(cardId => {
+                  const card = EXTENDED_CARDS.find(x => x.id === cardId)!
+                  const resultClass = phase2Result !== null
+                    ? phase2Result[card.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                    : ''
+                  return (
+                    <div
+                      key={card.id}
+                      data-card={card.id}
+                      className={`tki-situation-card${resultClass}`}
+                      draggable
+                      onDragStart={() => handleExtendedDragStart(card.id, 'needs')}
+                    >
+                      {card.text}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
 
             {phase2Result && (

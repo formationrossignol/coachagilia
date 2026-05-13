@@ -1666,6 +1666,27 @@ body {
   gap: 0.5rem;
 }
 
+/* ── Empathy Map Matrix ── */
+.empathy-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.625rem;
+  margin: 2rem 0;
+}
+.empathy-needs {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.875rem 1rem;
+  margin-bottom: 0.75rem;
+}
+.empathy-needs .tki-column__cards {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 /* ── Delegation Poker Scale (Phase 1) ── */
 .dp-scale {
   max-width: 520px;
