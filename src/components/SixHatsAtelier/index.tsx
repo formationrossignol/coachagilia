@@ -28,6 +28,37 @@ const INTENTS: { id: SixHatIntent; label: string; description: string }[] = [
   { id: 'structure', label: 'Structurer',  description: 'Piloter la réflexion, choisir la séquence, synthétiser et conclure.' },
 ]
 
+const HAT_COLORS: Record<SixHat, string> = {
+  white:  '#c8c8c8',
+  red:    '#d32f2f',
+  black:  '#1c1c1c',
+  yellow: '#f9c200',
+  green:  '#43a047',
+  blue:   '#00a8d8',
+}
+
+const INTENT_TO_HAT: Record<SixHatIntent, SixHat> = {
+  objectify: 'white',
+  feel:      'red',
+  secure:    'black',
+  value:     'yellow',
+  imagine:   'green',
+  structure: 'blue',
+}
+
+function TopHat({ hat, size = 52 }: { hat: SixHat; size?: number }) {
+  const color = HAT_COLORS[hat]
+  const bandColor = hat === 'white' ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.35)'
+  return (
+    <svg viewBox="0 0 100 88" width={size} height={size} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="50" cy="75" rx="48" ry="11" fill={color} />
+      <rect x="24" y="14" width="52" height="62" rx="3" fill={color} />
+      <ellipse cx="50" cy="14" rx="26" ry="7" fill={color} />
+      <rect x="24" y="62" width="52" height="9" fill={bandColor} />
+    </svg>
+  )
+}
+
 type HatCard = { id: string; text: string; correctHat: SixHat }
 
 const HAT_CARDS: HatCard[] = [
@@ -210,6 +241,9 @@ export function SixHatsAtelier() {
                   onDragOver={e => e.preventDefault()}
                   onDrop={() => handleDropOnHat(hat.id)}
                 >
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.25rem' }}>
+                    <TopHat hat={hat.id} />
+                  </div>
                   <h3 className="tki-column__title">{hat.label}</h3>
                   <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{hat.description}</p>
                   <div className="tki-column__cards">
@@ -297,6 +331,9 @@ export function SixHatsAtelier() {
                   onDragOver={e => e.preventDefault()}
                   onDrop={() => handleDropOnIntent(intent.id)}
                 >
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.25rem' }}>
+                    <TopHat hat={INTENT_TO_HAT[intent.id]} size={40} />
+                  </div>
                   <h3 className="tki-column__title">{intent.label}</h3>
                   <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{intent.description}</p>
                   <div className="tki-column__cards">
