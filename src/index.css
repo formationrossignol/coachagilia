@@ -1543,6 +1543,15 @@ body {
   min-height: 240px;
 }
 .tki-cell--empty { background: transparent; }
+.rc-grid {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.5rem;
+  min-height: 240px;
+}
 .tki-zone {
   background: var(--color-surface);
   border: 2px dashed var(--color-border);
