@@ -23,6 +23,14 @@ const ZONES_DEF: { id: SailboatZone; label: string; description: string }[] = [
   { id: 'sun',    label: 'Soleil',          description: "Ce qui donne de l'énergie : motivation, satisfaction, fierté ou signaux positifs." },
 ]
 
+const SCENE_ZONES: { id: SailboatZone; icon: string; label: string; desc: string }[] = [
+  { id: 'wind',   icon: '💨', label: 'Vent',            desc: "Ce qui pousse l'équipe vers l'avant" },
+  { id: 'sun',    icon: '☀️', label: 'Soleil',          desc: "Ce qui donne de l'énergie" },
+  { id: 'island', icon: '🏝️', label: 'Île',             desc: "La destination, l'objectif visé" },
+  { id: 'anchor', icon: '⚓', label: 'Ancre',           desc: "Ce qui ralentit l'équipe" },
+  { id: 'rocks',  icon: '🪨', label: 'Récif / rochers', desc: "Risques et obstacles à venir" },
+]
+
 type SailboatCard = { id: string; text: string; correctZone: SailboatZone }
 type Situation = { id: string; situation: string; correctZone: SailboatZone }
 
@@ -181,19 +189,21 @@ export function SailboatRetrospectiveAtelier() {
 
         {phase === 1 && (
           <>
-            <div className="tki-columns">
-              {ZONES_DEF.map(zone => (
+            <div className="sb-scene">
+              {SCENE_ZONES.map(zone => (
                 <div
                   key={zone.id}
                   data-column={zone.id}
-                  className="tki-column"
-                  onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('tki-column--hover') }}
-                  onDragLeave={e => e.currentTarget.classList.remove('tki-column--hover')}
-                  onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('tki-column--hover'); handleDropOnZone(zone.id) }}
+                  className={`sb-zone sb-zone--${zone.id}`}
+                  onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('sb-zone--hover') }}
+                  onDragLeave={e => e.currentTarget.classList.remove('sb-zone--hover')}
+                  onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('sb-zone--hover'); handleDropOnZone(zone.id) }}
                 >
-                  <h3 className="tki-column__title">{zone.label}</h3>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{zone.description}</p>
-                  <div className="tki-column__cards">
+                  <div className="sb-zone__header">
+                    <span>{zone.icon}</span>{zone.label}
+                  </div>
+                  <p className="sb-zone__desc">{zone.desc}</p>
+                  <div className="sb-zone__cards">
                     {sailboatZones[zone.id].map(cardId => {
                       const card = PHASE1_CARDS.find(c => c.id === cardId)!
                       const resultClass = phase1Result !== null
@@ -214,6 +224,9 @@ export function SailboatRetrospectiveAtelier() {
                   </div>
                 </div>
               ))}
+              <div className="sb-boat-area" aria-hidden="true">
+                <span className="sb-boat-emoji">⛵</span>
+              </div>
             </div>
 
             {phase1Result !== null && (

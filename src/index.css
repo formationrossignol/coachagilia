@@ -3409,3 +3409,96 @@ body {
   .quiz-exam-title { display: none; }
   .atelier-page { padding: 1.5rem 1rem; }
 }
+
+/* === Sailboat Retrospective scene === */
+.sb-scene {
+  display: grid;
+  grid-template-columns: 1fr 160px 1fr;
+  grid-template-rows: 1fr 1fr auto;
+  grid-template-areas:
+    "wind  boat  sun"
+    "wind  boat  island"
+    "anchor boat rocks";
+  gap: 0.75rem;
+  background: linear-gradient(to bottom, #bfdbfe 0%, #93c5fd 58%, #1d4ed8 58%, #1e3a8a 100%);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  min-height: 420px;
+}
+
+.sb-zone {
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px dashed #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 110px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.sb-zone--wind   { grid-area: wind; }
+.sb-zone--sun    { grid-area: sun; }
+.sb-zone--island { grid-area: island; }
+.sb-zone--anchor { grid-area: anchor; }
+.sb-zone--rocks  { grid-area: rocks; }
+
+.sb-boat-area {
+  grid-area: boat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.sb-boat-emoji {
+  font-size: 5rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.35));
+}
+
+.sb-zone__header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.sb-zone__desc {
+  font-size: 0.68rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.sb-zone__cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.sb-zone--hover {
+  border-color: var(--color-primary);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+@media (max-width: 700px) {
+  .sb-scene {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas:
+      "wind   sun"
+      "island rocks"
+      "anchor anchor";
+    background: linear-gradient(to bottom, #bfdbfe 0%, #1e3a8a 100%);
+    min-height: unset;
+  }
+  .sb-boat-area { display: none; }
+}
