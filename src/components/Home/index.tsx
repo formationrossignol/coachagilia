@@ -1,41 +1,48 @@
 import { Link } from 'react-router-dom'
-import {
-  Activity,
-  BarChart3,
-  CheckCircle2,
-  ClipboardCheck,
-  Clock3,
-  Gauge,
-  GitBranch,
-  Handshake,
-  MessageSquareWarning,
-  Radar,
-  ShieldCheck,
-  Target,
-  UsersRound,
-} from 'lucide-react'
+import { FileCheck, Puzzle, Route, Sparkles, Zap } from 'lucide-react'
 
-const boardColumns = [
+const MODES = [
   {
-    title: 'Décider',
-    focus: 'Arbitrages sous contrainte',
-    items: ['Sprint Review sous tension', 'Dette technique vs démo', 'Scope urgent du manager'],
-    metric: '3 décisions',
-    Icon: GitBranch,
+    to: '/simulation',
+    Icon: Zap,
+    title: 'Mode Simulation',
+    description: 'Prenez des décisions dans des situations Scrum réalistes.',
+    detailsLabel: 'Idéal pour',
+    details: 'Conflits · Sprint Planning · Review · Daily · Rétrospective',
+    cta: 'Lancer une situation',
+    preview: 'Décision terrain',
+    subPreview: 'Sprint Review · Confiance +12',
+    progress: undefined,
+    accent: '#60a5fa',
+    accentRgb: '96, 165, 250',
   },
   {
-    title: 'Faciliter',
-    focus: 'Créer un cadre utile',
-    items: ['Daily qui dérive', 'Rétro silencieuse', 'Atelier d’alignement PO'],
-    metric: '2 ateliers',
-    Icon: UsersRound,
+    to: '/certifications',
+    Icon: FileCheck,
+    title: 'Mode Certification',
+    description: 'Préparez vos examens avec des quiz chronométrés et des feedbacks ciblés.',
+    detailsLabel: 'Certifications',
+    details: 'PSM · PSPO · PMI-ACP · SAFe',
+    cta: 'Choisir une certification',
+    preview: 'PSM I readiness',
+    progress: 72,
+    subPreview: undefined,
+    accent: '#fb923c',
+    accentRgb: '251, 146, 60',
   },
   {
-    title: 'Coach',
-    focus: 'Posture et feedback',
-    items: ['Question puissante', 'Feedback SBI', 'Conflit développeur / PO'],
-    metric: '4 réflexes',
-    Icon: MessageSquareWarning,
+    to: '/ateliers',
+    Icon: Puzzle,
+    title: 'Mode Atelier',
+    description: 'Manipulez les concepts pour les ancrer durablement.',
+    detailsLabel: 'Formats',
+    details: 'Cartes · Classement · Matrice · Diagramme · Puzzle',
+    cta: 'Explorer les ateliers',
+    preview: 'Dernier atelier',
+    subPreview: 'Delegation Poker · 15 min · Intermédiaire',
+    progress: undefined,
+    accent: '#34d399',
+    accentRgb: '52, 211, 153',
   },
   {
     title: 'Certifier',
@@ -61,154 +68,107 @@ const recommendedPaths = [
   { title: 'Facilitation d’équipe', meta: '7 ateliers · 2 simulations · challenge final', progress: 18 },
 ] as const
 
+const recommendations = [
+  'Gestion des conflits — score communication faible',
+  'PSM I — Scrum Events pour la certification',
+  'Delegation Poker — renforcer leadership',
+]
+
 export function Home() {
   return (
-    <main className="training-desk" aria-labelledby="home-title">
-      <header className="training-desk__header">
-        <div>
-          <span className="training-desk__label">Training Desk</span>
-          <strong>Scrum Master Sim</strong>
-        </div>
-        <div className="training-desk__header-status" aria-label="État du cockpit">
-          <span>Session prête</span>
-          <i />
-        </div>
-      </header>
-
-      <section className="training-hero">
-        <div className="training-hero__copy">
-          <span className="training-hero__kicker">Cockpit d’entraînement professionnel</span>
-          <h1 id="home-title">Devenez plus solide quand Scrum devient difficile.</h1>
-          <p>
-            Un simulateur d’entraînement pour pratiquer les décisions, postures et facilitation d’un Scrum Master en situation réelle.
+    <div className="home">
+      <section className="home-hero" aria-labelledby="home-title">
+        <div className="home-hero__content">
+          <p className="home__eyebrow">Plateforme d’entraînement agile</p>
+          <h1 id="home-title" className="home__title">Entraînez-vous à agir comme un vrai Scrum Master</h1>
+          <p className="home__subtitle">
+            Simulations, ateliers pratiques et examens blancs pour développer des réflexes terrain, pas seulement mémoriser Scrum.
           </p>
-          <div className="training-hero__actions">
-            <Link to="/simulation" className="training-btn training-btn--primary">Lancer la situation du jour</Link>
-            <Link to="/paths" className="training-btn training-btn--ghost">Voir les parcours</Link>
+          <div className="home-hero__actions">
+            <Link to="/simulation" className="btn btn--primary home-hero__cta">Commencer une simulation</Link>
+            <Link to="/ateliers" className="btn btn--secondary home-hero__cta">Explorer les ateliers</Link>
           </div>
         </div>
 
-        <article className="daily-situation" aria-label="Situation du jour">
-          <div className="daily-situation__rail" aria-hidden="true">
-            <span>Sprint 3</span>
-            <i />
-            <span>Review</span>
-            <i />
-            <span>Arbitrage</span>
+        <aside className="hero-mockup" aria-label="Aperçu d'une simulation Scrum">
+          <div className="hero-mockup__topline">
+            <span>Situation en cours</span>
+            <Sparkles size={16} aria-hidden="true" />
           </div>
-          <div className="daily-situation__header">
-            <div>
-              <span className="training-desk__label">Situation du jour</span>
-              <h2>Sprint Review sous tension</h2>
-            </div>
-            <div className="daily-situation__score">
-              <Gauge size={18} aria-hidden="true" />
-              <span>Impact 86</span>
-            </div>
+          <h2>Sprint Review sous tension</h2>
+          <p className="hero-mockup__label">Décision à prendre :</p>
+          <p className="hero-mockup__context">Le PO veut ajouter du scope avant la fin du sprint…</p>
+          <div className="hero-mockup__choices">
+            <button>Protéger le sprint</button>
+            <button>Négocier un arbitrage</button>
+            <button>Accepter la demande</button>
           </div>
-          <p className="daily-situation__context">
-            Le client remet en cause la valeur livrée. Le Product Owner défend l’équipe, mais un manager demande d’ajouter trois fonctionnalités immédiatement.
-          </p>
-          <div className="daily-situation__objective">
-            <Target size={17} aria-hidden="true" />
-            <span>Protéger le cadre Scrum sans fermer le dialogue.</span>
-          </div>
-          <div className="daily-situation__choices" aria-label="Choix disponibles">
-            <button>Clarifier le but de la Review</button>
-            <button>Ouvrir un échange cadré après la Review</button>
-            <button>Reporter l’arbitrage au Sprint Planning</button>
-          </div>
-          <div className="impact-ledger" aria-label="Impacts estimés">
-            <div><span>Confiance équipe</span><strong className="impact-ledger__positive">+8</strong></div>
-            <div><span>Clarté produit</span><strong className="impact-ledger__positive">+6</strong></div>
-            <div><span>Tension stakeholder</span><strong className="impact-ledger__risk">-2</strong></div>
-          </div>
-        </article>
+          <div className="hero-mockup__impact">Impact équipe : <strong>+12 confiance</strong></div>
+        </aside>
       </section>
 
-      <section className="resume-training" aria-labelledby="resume-title">
-        <div className="resume-training__note" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
+      <section className="resume-panel" aria-labelledby="resume-title">
         <div>
-          <span className="training-desk__label">Session en cours</span>
-          <h2 id="resume-title">Reprendre votre entraînement</h2>
-          <h3>Parcours PSM-1 · Scrum Events</h3>
-          <p>Dernière session : 18 min · score 74 % · prochaine action : arbitrer une Review difficile.</p>
+          <span className="resume-panel__label">Reprendre là où vous vous êtes arrêté</span>
+          <h2 id="resume-title">Parcours PSM-1</h2>
+          <p>52 % terminé · Prochaine étape : Scrum Events</p>
         </div>
-        <Link to="/paths/preparation-psm" className="training-link">Continuer l’exercice</Link>
+        <Link to="/paths/preparation-psm" className="resume-panel__cta">Continuer →</Link>
       </section>
 
-      <section className="training-section training-section--board" aria-labelledby="week-title">
-        <div className="training-section__header">
-          <span className="training-desk__label">Votre entraînement cette semaine</span>
-          <h2 id="week-title">Un board de pratique, pas un catalogue.</h2>
+      <section className="home-section" aria-labelledby="modes-title">
+        <div className="home-section__header">
+          <p className="home-section__eyebrow">Modes d’entraînement</p>
+          <h2 id="modes-title">Choisissez votre terrain de pratique</h2>
         </div>
-        <div className="training-board">
-          {boardColumns.map(({ title, focus, items, metric, Icon }) => (
-            <article key={title} className="training-board__column">
-              <div className="training-board__topline">
-                <Icon size={18} aria-hidden="true" />
-                <span>{metric}</span>
+        <div className="home__grid">
+          {MODES.map(({ to, Icon, title, description, detailsLabel, details, cta, preview, subPreview, progress, accent, accentRgb }) => (
+            <article
+              key={to}
+              className="home-card"
+              style={{ '--home-card-accent': accent, '--home-card-accent-rgb': accentRgb } as React.CSSProperties}
+            >
+              <div className="home-card__header">
+                <div className="home-card__icon-wrap">
+                  <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
+                </div>
+                <span className="status-pill status-pill--recommended">Recommandé</span>
               </div>
-              <h3>{title}</h3>
-              <p>{focus}</p>
-              <ul>
-                {items.map(item => <li key={item}>{item}</li>)}
-              </ul>
+              <h3 className="home-card__title">{title}</h3>
+              <p className="home-card__description">{description}</p>
+              <div className="home-card__details">
+                <span>{detailsLabel}</span>
+                <p>{details}</p>
+              </div>
+              <div className="home-card__preview">
+                <span>{preview}</span>
+                {typeof progress === 'number' ? (
+                  <div className="mini-readiness">
+                    <div className="mini-readiness__bar"><i style={{ width: `${progress}%` }} /></div>
+                    <strong>{progress} %</strong>
+                  </div>
+                ) : (
+                  <strong>{subPreview ?? 'Sprint Review · Confiance +12'}</strong>
+                )}
+              </div>
+              <Link to={to} className="home-card__cta">
+                {cta} →
+              </Link>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="training-section skills-field" aria-labelledby="skills-title">
-        <div className="training-section__header skills-field__intro">
-          <span className="training-desk__label">Ce que vous entraînez vraiment</span>
-          <h2 id="skills-title">Des réflexes terrain observables.</h2>
-          <p>Chaque exercice fait bouger une compétence métier, pas seulement un score de quiz.</p>
+      <section className="today-panel" aria-labelledby="today-title">
+        <div className="today-panel__header">
+          <Route size={18} aria-hidden="true" />
+          <h2 id="today-title">Aujourd’hui, entraînez-vous sur :</h2>
         </div>
-        <div className="skills-field__grid">
-          {fieldSkills.map(({ label, detail, Icon }) => (
-            <article key={label} className="skill-strip">
-              <Icon size={19} aria-hidden="true" />
-              <div>
-                <h3>{label}</h3>
-                <p>{detail}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <ol>
+          {recommendations.map(item => <li key={item}>{item}</li>)}
+        </ol>
+        <Link to="/ateliers" className="today-panel__link">Voir les recommandations →</Link>
       </section>
-
-      <section className="training-section paths-desk" aria-labelledby="paths-title">
-        <div className="training-section__header">
-          <span className="training-desk__label">Parcours recommandés</span>
-          <h2 id="paths-title">Des plans courts pour progresser sans dispersion.</h2>
-        </div>
-        <div className="paths-desk__list">
-          {recommendedPaths.map(path => (
-            <article key={path.title} className="path-row">
-              <div>
-                <h3>{path.title}</h3>
-                <p>{path.meta}</p>
-              </div>
-              <div className="path-row__progress" aria-label={`${path.progress} % terminé`}>
-                <span>{path.progress} %</span>
-                <i><b style={{ width: `${path.progress}%` }} /></i>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="progress-brief" aria-label="Résumé progression">
-        <div><Clock3 size={18} aria-hidden="true" /><span>4 h 20</span><p>pratique ce mois</p></div>
-        <div><CheckCircle2 size={18} aria-hidden="true" /><span>12</span><p>situations jouées</p></div>
-        <div><BarChart3 size={18} aria-hidden="true" /><span>78 %</span><p>score moyen</p></div>
-        <div><Activity size={18} aria-hidden="true" /><span>+14</span><p>clarté gagnée</p></div>
-      </section>
-    </main>
+    </div>
   )
 }

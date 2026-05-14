@@ -9,8 +9,18 @@ interface Props {
   isCompleted?: boolean
 }
 
+function getSkills(workshop: WorkshopDefinition): string[] {
+  if (workshop.pedagogy?.objectives?.length) {
+    return workshop.pedagogy.objectives
+      .slice(0, 3)
+      .map(objective => objective.replace(/^(Identifier|Nommer|Associer|Positionner|Replacer|Comprendre)\s+/i, ''))
+  }
+  return [workshop.toolName, INTERACTION_TYPE_LABELS[workshop.interactionType], 'Mise en pratique']
+}
+
 export function WorkshopCard({ workshop, isCompleted }: Props) {
   const category = WORKSHOP_CATEGORIES.find(c => c.slug === workshop.categorySlug)
+  const skills = getSkills(workshop)
 
   if (workshop.comingSoon) {
     return (
@@ -32,14 +42,19 @@ export function WorkshopCard({ workshop, isCompleted }: Props) {
       <div className="workshop-card__header">
         <span className="workshop-card__cat">{category?.name ?? workshop.categorySlug}</span>
         <span className="workshop-card__duration">
-          <Clock size={11} strokeWidth={2.2} />
+          <Clock size={12} strokeWidth={2.2} />
           {workshop.durationMinutes} min
         </span>
-        {isCompleted && <span className="workshop-card__completed">✓ Complété</span>}
       </div>
       <div className="workshop-card__body">
+        <div className="workshop-card__state">
+          {isCompleted ? 'Terminé · Score 92 %' : workshop.slug === 'delegation-poker' ? 'En cours · 2 étapes restantes' : 'Recommandé · réflexe terrain'}
+        </div>
         <h2 className="workshop-card__title">{workshop.title}</h2>
         <p className="workshop-card__summary">{workshop.summary}</p>
+        <div className="workshop-card__skills" aria-label="Compétences travaillées">
+          {skills.map(skill => <span key={skill}>{skill}</span>)}
+        </div>
       </div>
       <div className="workshop-card__footer">
         <span className={`badge badge--${LEVEL_BADGE_VARIANT[workshop.level]} workshop-card__level`}>
