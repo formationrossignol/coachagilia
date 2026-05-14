@@ -688,7 +688,7 @@ const COMING_SOON: WorkshopDefinition[] = [
 
   // Retrospectives (new category)
   { id: 'start-stop-continue', slug: 'start-stop-continue', title: 'Start/Stop/Continue', route: '/ateliers/start-stop-continue', categorySlug: 'retrospectives', toolName: 'Start/Stop/Continue', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: "Identifier ce que l'équipe devrait commencer, arrêter et continuer de faire.", comingSoon: true },
-  { id: 'starfish', slug: 'starfish', title: 'Starfish Retrospective', route: '/ateliers/starfish', categorySlug: 'retrospectives', toolName: 'Starfish', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: 'Explorer 5 dimensions : More of, Less of, Start, Stop, Keep.', comingSoon: true },
+
   { id: 'mad-sad-glad', slug: 'mad-sad-glad', title: 'Mad/Sad/Glad', route: '/ateliers/mad-sad-glad', categorySlug: 'retrospectives', toolName: 'Mad/Sad/Glad', level: 'beginner', durationMinutes: 20, interactionType: 'canvas', summary: "Explorer les émotions de l'équipe autour du sprint.", comingSoon: true },
   { id: '4-ls', slug: '4-ls', title: '4Ls — Liked, Learned, Lacked, Longed For', route: '/ateliers/4-ls', categorySlug: 'retrospectives', toolName: '4Ls', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: 'Rétrospective structurée en 4 catégories pour un feedback équilibré.', comingSoon: true },
   { id: 'timeline-retro', slug: 'timeline-retro', title: 'Timeline Retrospective', route: '/ateliers/timeline-retro', categorySlug: 'retrospectives', toolName: 'Timeline', level: 'intermediate', durationMinutes: 40, interactionType: 'canvas', summary: 'Reconstituer la chronologie du sprint ou de la release pour identifier les moments clés.', comingSoon: true },
