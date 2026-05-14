@@ -17,6 +17,7 @@ import { empathyMapDataset } from './datasets/empathy-map'
 import { johariWindowDataset } from './datasets/johari-window'
 import { sixHatsDataset } from './datasets/six-hats'
 import { radicalCandorDataset } from './datasets/radical-candor'
+import { sailboatRetrospectiveDataset } from './datasets/sailboat-retrospective'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -575,6 +576,36 @@ const EXISTING: WorkshopDefinition[] = [
     },
     dataset: radicalCandorDataset,
   },
+  {
+    id: 'sailboat',
+    slug: 'sailboat',
+    title: 'Sailboat Retrospective',
+    route: '/ateliers/sailboat',
+    categorySlug: 'retrospectives',
+    toolName: 'Sailboat / Speed Boat',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Visualiser ce qui propulse et ce qui freine l'équipe comme un voilier : vent, ancre, risques, destination et énergie.",
+    pedagogy: {
+      objectives: [
+        "Identifier les 5 zones de la Sailboat Retrospective",
+        "Distinguer un frein actuel d'un risque futur",
+        "Reconnaître les moteurs, la destination et les sources d'énergie positive",
+      ],
+      toolExplanation: "La Sailboat Retrospective aide l'équipe à visualiser sa situation comme un voilier : le vent représente ce qui pousse l'équipe, l'ancre ce qui la freine, les rochers les risques à anticiper, l'île la destination et le soleil ce qui donne de l'énergie.",
+      whenToUse: [
+        "En rétrospective de Sprint pour structurer le diagnostic d'équipe",
+        "Pour rendre visible ce qui aide, freine et menace l'équipe",
+        "Pour aligner l'équipe sur un objectif commun",
+      ],
+      expectedOutput: [
+        "Identification correcte des 5 zones du voilier",
+        "Classement de situations Scrum dans les zones appropriées",
+      ],
+    },
+    dataset: sailboatRetrospectiveDataset,
+  },
 ]
 
 const COMING_SOON: WorkshopDefinition[] = [
@@ -626,7 +657,6 @@ const COMING_SOON: WorkshopDefinition[] = [
   // Retrospectives (new category)
   { id: 'start-stop-continue', slug: 'start-stop-continue', title: 'Start/Stop/Continue', route: '/ateliers/start-stop-continue', categorySlug: 'retrospectives', toolName: 'Start/Stop/Continue', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: "Identifier ce que l'équipe devrait commencer, arrêter et continuer de faire.", comingSoon: true },
   { id: 'starfish', slug: 'starfish', title: 'Starfish Retrospective', route: '/ateliers/starfish', categorySlug: 'retrospectives', toolName: 'Starfish', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: 'Explorer 5 dimensions : More of, Less of, Start, Stop, Keep.', comingSoon: true },
-  { id: 'sailboat', slug: 'sailboat', title: 'Sailboat Retrospective', route: '/ateliers/sailboat', categorySlug: 'retrospectives', toolName: 'Sailboat / Speed Boat', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: "Visualiser ce qui propulse et ce qui freine l'équipe comme un voilier.", comingSoon: true },
   { id: 'mad-sad-glad', slug: 'mad-sad-glad', title: 'Mad/Sad/Glad', route: '/ateliers/mad-sad-glad', categorySlug: 'retrospectives', toolName: 'Mad/Sad/Glad', level: 'beginner', durationMinutes: 20, interactionType: 'canvas', summary: "Explorer les émotions de l'équipe autour du sprint.", comingSoon: true },
   { id: '4-ls', slug: '4-ls', title: '4Ls — Liked, Learned, Lacked, Longed For', route: '/ateliers/4-ls', categorySlug: 'retrospectives', toolName: '4Ls', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: 'Rétrospective structurée en 4 catégories pour un feedback équilibré.', comingSoon: true },
   { id: 'timeline-retro', slug: 'timeline-retro', title: 'Timeline Retrospective', route: '/ateliers/timeline-retro', categorySlug: 'retrospectives', toolName: 'Timeline', level: 'intermediate', durationMinutes: 40, interactionType: 'canvas', summary: 'Reconstituer la chronologie du sprint ou de la release pour identifier les moments clés.', comingSoon: true },

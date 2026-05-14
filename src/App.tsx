@@ -27,6 +27,7 @@ import { EmpathyMapAtelier } from './components/EmpathyMapAtelier'
 import { JohariWindowAtelier } from './components/JohariWindowAtelier'
 import { SixHatsAtelier } from './components/SixHatsAtelier'
 import { RadicalCandorAtelier } from './components/RadicalCandorAtelier'
+import { SailboatRetrospectiveAtelier } from './components/SailboatRetrospectiveAtelier'
 import { ProgressPage } from './pages/gamification/ProgressPage'
 import { SkillsPage } from './pages/gamification/SkillsPage'
 import { BadgesPage } from './pages/gamification/BadgesPage'
@@ -82,6 +83,7 @@ const router = createBrowserRouter([
       { path: '/ateliers/johari-window', element: <JohariWindowAtelier /> },
       { path: '/ateliers/six-hats', element: <SixHatsAtelier /> },
       { path: '/ateliers/radical-candor', element: <RadicalCandorAtelier /> },
+      { path: '/ateliers/sailboat', element: <SailboatRetrospectiveAtelier /> },
       { path: '/ateliers/categories/:slug', element: <WorkshopCategoryPage /> },
       { path: '/progress', element: <ProgressPage /> },
       { path: '/skills', element: <SkillsPage /> },
