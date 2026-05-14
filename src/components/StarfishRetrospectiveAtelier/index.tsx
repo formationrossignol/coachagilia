@@ -324,7 +324,7 @@ export function StarfishRetrospectiveAtelier() {
                 <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginTop: '0.5rem' }}>
                   {phase2Score === SITUATIONS.length
                     ? "Tu sais utiliser Starfish pour transformer une rétrospective en décisions d'amélioration plus précises."
-                    : "À consolider : certaines dimensions sont proches, mais il faut mieux distinguer réduire, arrêter, ampli fier et conserver."}
+                    : "À consolider : certaines dimensions sont proches, mais il faut mieux distinguer réduire, arrêter, amplifier et conserver."}
                 </p>
               </div>
             )}
