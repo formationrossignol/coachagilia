@@ -187,8 +187,9 @@ export function SailboatRetrospectiveAtelier() {
                   key={zone.id}
                   data-column={zone.id}
                   className="tki-column"
-                  onDragOver={e => e.preventDefault()}
-                  onDrop={() => handleDropOnZone(zone.id)}
+                  onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('tki-column--hover') }}
+                  onDragLeave={e => e.currentTarget.classList.remove('tki-column--hover')}
+                  onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('tki-column--hover'); handleDropOnZone(zone.id) }}
                 >
                   <h3 className="tki-column__title">{zone.label}</h3>
                   <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{zone.description}</p>
@@ -274,8 +275,9 @@ export function SailboatRetrospectiveAtelier() {
                   key={zone.id}
                   data-column={zone.id}
                   className="tki-column"
-                  onDragOver={e => e.preventDefault()}
-                  onDrop={() => handleDropOnColumn(zone.id)}
+                  onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('tki-column--hover') }}
+                  onDragLeave={e => e.currentTarget.classList.remove('tki-column--hover')}
+                  onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('tki-column--hover'); handleDropOnColumn(zone.id) }}
                 >
                   <h3 className="tki-column__title">{zone.label}</h3>
                   <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>{zone.description}</p>

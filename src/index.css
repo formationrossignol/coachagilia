@@ -1622,6 +1622,7 @@ body {
   gap: 0.5rem;
   min-height: 200px;
 }
+.tki-column--hover { border-color: var(--color-primary); background: var(--color-primary-subtle, rgba(99,102,241,.08)); }
 .tki-column__title {
   font-size: 0.9rem;
   font-weight: 600;
