@@ -6,7 +6,9 @@ import { Home } from './index'
 describe('Home', () => {
   it('renders three mode cards', () => {
     render(<MemoryRouter><Home /></MemoryRouter>)
-    expect(screen.getAllByRole('article')).toHaveLength(3)
+    expect(screen.getByRole('heading', { name: /Devenez plus solide quand Scrum devient difficile/i })).toBeInTheDocument()
+    expect(screen.getByText(/Un simulateur d’entraînement/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Sprint Review sous tension/i })).toBeInTheDocument()
   })
 
   it('displays the redesigned training modes and immersive hero', () => {

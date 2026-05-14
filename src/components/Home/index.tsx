@@ -44,6 +44,28 @@ const MODES = [
     accent: '#34d399',
     accentRgb: '52, 211, 153',
   },
+  {
+    title: 'Certifier',
+    focus: 'Vérifier les acquis',
+    items: ['Scrum Events', 'Accountability', 'Empiricism'],
+    metric: '72 % readiness',
+    Icon: ClipboardCheck,
+  },
+] as const
+
+const fieldSkills = [
+  { label: 'Lire une tension', detail: 'Repérer le vrai signal derrière la demande.', Icon: Radar },
+  { label: 'Protéger le cadre', detail: 'Tenir Scrum sans devenir rigide.', Icon: ShieldCheck },
+  { label: 'Faciliter une décision', detail: 'Faire avancer le groupe quand ça bloque.', Icon: GitBranch },
+  { label: 'Coacher sans imposer', detail: 'Questionner avant de prescrire.', Icon: MessageSquareWarning },
+  { label: 'Aligner les parties prenantes', detail: 'Rendre les compromis explicites.', Icon: Handshake },
+  { label: 'Mesurer l’impact', detail: 'Suivre confiance, clarté et tension.', Icon: Gauge },
+] as const
+
+const recommendedPaths = [
+  { title: 'Préparer PSM-1 en 7 jours', meta: '10 quiz · 3 examens · 8 thèmes', progress: 52 },
+  { title: 'Gérer les conflits d’équipe', meta: '6 ateliers · 3 mises en situation', progress: 34 },
+  { title: 'Facilitation d’équipe', meta: '7 ateliers · 2 simulations · challenge final', progress: 18 },
 ] as const
 
 const recommendations = [
