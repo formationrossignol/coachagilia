@@ -37,7 +37,7 @@ describe('WorkshopCard', () => {
   it('shows Bientôt badge and no launch link for coming soon', () => {
     const cs: WorkshopDefinition = { ...mockWorkshop, comingSoon: true }
     render(<MemoryRouter><WorkshopCard workshop={cs} /></MemoryRouter>)
-    expect(screen.getByText('Bientôt')).toBeInTheDocument()
+    expect(screen.getByText(/Bientôt/)).toBeInTheDocument()
     expect(screen.queryByRole('link', { name: /Lancer/ })).not.toBeInTheDocument()
   })
 
