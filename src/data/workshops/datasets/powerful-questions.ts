@@ -15,7 +15,7 @@ export const powerfulQuestionsDataset: ClassificationDataset = {
     { id: 'q6',  text: "Pourquoi vous n'avez pas anticipé cette dépendance ?",                                  expectedZone: 'leading' },
     { id: 'q7',  text: "Tu ne penses pas que le Daily est trop long parce que l'équipe manque de discipline ?", expectedZone: 'leading' },
     { id: 'q8',  text: 'Est-ce que la bonne solution ne serait pas de reprendre le backlog à zéro ?',           expectedZone: 'leading' },
-    { id: 'q9',  text: 'Qu'est-ce qui te manque pour avancer sereinement ?',                              expectedZone: 'powerful' },
+    { id: 'q9',  text: 'Qu\'est-ce qui te manque pour avancer sereinement ?',                              expectedZone: 'powerful' },
     { id: 'q10', text: "Qu'est-ce qui rend cette décision difficile pour l'équipe ?",                           expectedZone: 'powerful' },
     { id: 'q11', text: 'Quelle option créerait le plus de valeur avec le moins de risque ?',                    expectedZone: 'powerful' },
     { id: 'q12', text: "Qu'est-ce que l'équipe pourrait expérimenter dès le prochain Sprint ?",                 expectedZone: 'powerful' },
