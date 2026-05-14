@@ -6,7 +6,7 @@ import { useExitGuard } from '../../hooks/useExitGuard'
 import { ConfirmLeaveModal } from '../ui/ConfirmLeaveModal'
 
 type MadSadGladZone = 'mad' | 'sad' | 'glad'
-type MadSadGladZones = Record<MadSadGladZone, string[]>
+type EmotionZones = Record<MadSadGladZone, string[]>
 type SituationZones = Record<string, MadSadGladZone>
 type DraggingItem =
   | { type: 'emotion-card'; cardId: string; fromZone?: MadSadGladZone }
@@ -63,13 +63,13 @@ const SITUATIONS: Situation[] = [
   { id: 's15', situation: "Un incident a été traité collectivement, sans recherche de coupable.",                                                            correctZone: 'glad' },
 ]
 
-const EMPTY_ZONES: MadSadGladZones = { mad: [], sad: [], glad: [] }
+const EMPTY_ZONES: EmotionZones = { mad: [], sad: [], glad: [] }
 
 export function MadSadGladAtelier() {
   const { markComplete } = useWorkshopCompletion('mad-sad-glad')
   const [phase, setPhase] = useState<1 | 2>(1)
 
-  const [emotionZones, setEmotionZones] = useState<MadSadGladZones>({ ...EMPTY_ZONES })
+  const [emotionZones, setEmotionZones] = useState<EmotionZones>({ ...EMPTY_ZONES })
   const [situationZones, setSituationZones] = useState<SituationZones>({})
   const [dragging, setDragging] = useState<DraggingItem>(null)
   const [phase1Result, setPhase1Result] = useState<Record<string, boolean> | null>(null)
