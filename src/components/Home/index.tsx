@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FileCheck, Puzzle, Route, Sparkles, Zap } from 'lucide-react'
+import { ClipboardCheck, FileCheck, Gauge, GitBranch, Handshake, MessageSquareWarning, Puzzle, Radar, Route, ShieldCheck, Sparkles, Zap } from 'lucide-react'
 
 const MODES = [
   {
