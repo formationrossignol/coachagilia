@@ -670,6 +670,36 @@ const EXISTING: WorkshopDefinition[] = [
     },
     dataset: madSadGladDataset,
   },
+  {
+    id: 'celebration-grid',
+    slug: 'celebration-grid',
+    title: 'Celebration Grid',
+    route: '/ateliers/celebration-grid',
+    categorySlug: 'management-3-0',
+    toolName: 'Celebration Grid',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'matrix',
+    summary: 'Distinguer succès et échecs liés aux pratiques vs à la chance pour célébrer intelligemment.',
+    pedagogy: {
+      objectives: [
+        "Distinguer erreur, expérimentation et bonne pratique dans le contexte Scrum",
+        "Différencier un succès fiable d'un succès obtenu par chance",
+        "Identifier ce qui mérite vraiment d'être célébré en rétrospective",
+        "Éviter la culture du blâme en distinguant résultat et comportement",
+      ],
+      toolExplanation: "La Celebration Grid (Jurgen Appelo, Management 3.0) aide l'équipe à réfléchir aux liens entre comportements et résultats. Elle distingue les erreurs évitables, les expérimentations utiles et les bonnes pratiques — qu'elles mènent à un succès ou à un échec. L'objectif est de célébrer les apprentissages, pas seulement les réussites visibles.",
+      whenToUse: [
+        "En rétrospective pour analyser les succès et échecs du Sprint sans blâmer",
+        "Pour développer une culture d'apprentissage et d'expérimentation dans l'équipe",
+        "Quand l'équipe confond résultats positifs et bonnes pratiques",
+      ],
+      expectedOutput: [
+        "Classification correcte de 12 cartes dans les 6 zones de la grille",
+        "Association de 15 situations Scrum aux zones Behavior × Outcome",
+      ],
+    },
+  },
 ]
 
 const COMING_SOON: WorkshopDefinition[] = [
@@ -690,7 +720,6 @@ const COMING_SOON: WorkshopDefinition[] = [
   { id: 'working-agreements', slug: 'working-agreements', title: 'Working Agreements', route: '/ateliers/working-agreements', categorySlug: 'team-intelligence', toolName: 'Working Agreements', level: 'beginner', durationMinutes: 15, interactionType: 'canvas', summary: "Construire collectivement les règles de fonctionnement d'une équipe.", comingSoon: true },
   { id: 'team-charter', slug: 'team-charter', title: 'Team Charter', route: '/ateliers/team-charter', categorySlug: 'team-intelligence', toolName: 'Team Charter', level: 'intermediate', durationMinutes: 25, interactionType: 'canvas', summary: "Définir l'identité, les valeurs et les engagements d'une équipe.", comingSoon: true },
 { id: 'personal-maps', slug: 'personal-maps', title: 'Personal Maps', route: '/ateliers/personal-maps', categorySlug: 'management-3-0', toolName: 'Personal Maps', level: 'beginner', durationMinutes: 15, interactionType: 'canvas', summary: 'Créer une carte mentale personnelle pour mieux se connaître et se faire connaître.', comingSoon: true },
-  { id: 'celebration-grid', slug: 'celebration-grid', title: 'Celebration Grid', route: '/ateliers/celebration-grid', categorySlug: 'management-3-0', toolName: 'Celebration Grid', level: 'intermediate', durationMinutes: 15, interactionType: 'matrix', summary: 'Distinguer succès et échecs liés aux pratiques vs à la chance pour célébrer intelligemment.', comingSoon: true },
   { id: 'team-health-check', slug: 'team-health-check', title: 'Team Health Check', route: '/ateliers/team-health-check', categorySlug: 'management-3-0', toolName: 'Team Health Check', level: 'intermediate', durationMinutes: 20, interactionType: 'voting', summary: "Évaluer collectivement la santé de l'équipe sur plusieurs dimensions.", comingSoon: true },
   { id: '5-whys', slug: '5-whys', title: '5 Pourquoi', route: '/ateliers/5-whys', categorySlug: 'problem-solving', toolName: '5 Whys', level: 'beginner', durationMinutes: 15, interactionType: 'guided-form', summary: 'Identifier la cause racine d\'un problème en posant 5 fois la question "Pourquoi ?".', comingSoon: true },
   { id: 'root-cause-analysis', slug: 'root-cause-analysis', title: 'Analyse des causes racines', route: '/ateliers/root-cause-analysis', categorySlug: 'problem-solving', toolName: 'Root Cause Analysis', level: 'intermediate', durationMinutes: 20, interactionType: 'diagram', summary: "Méthode structurée pour remonter des symptômes aux causes profondes d'un problème.", comingSoon: true },
