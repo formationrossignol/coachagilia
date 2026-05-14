@@ -1,11 +1,28 @@
 import type { GamificationEvent } from '../../features/gamification'
 
+const SLUG_LABELS: Record<string, string> = {
+  conflict: 'Gestion des conflits',
+  'thomas-kilmann': 'Gestion des conflits',
+  'sprint-planning-tension': 'Sprint Planning sous tension',
+  'grow-model': 'Modèle GROW',
+  'delegation-poker': 'Delegation Poker',
+  'psm-full-1': 'PSM I blanc',
+}
+
+function prettySlug(slug?: string): string {
+  if (!slug) return ''
+  return SLUG_LABELS[slug] ?? slug.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
+}
+
+
 function eventLabel(event: GamificationEvent): string {
   switch (event.type) {
+    case 'WORKSHOP_STARTED':
+      return `Atelier démarré${event.contentSlug ? ` — ${prettySlug(event.contentSlug)}` : ''}`
     case 'WORKSHOP_COMPLETED':
-      return `Atelier complété${event.contentSlug ? ` : ${event.contentSlug}` : ''}`
+      return `Atelier terminé${event.contentSlug ? ` — ${prettySlug(event.contentSlug)}` : ''}`
     case 'QUIZ_COMPLETED':
-      return `Quiz complété${event.contentSlug ? ` : ${event.contentSlug}` : ''}`
+      return `Quiz terminé${event.contentSlug ? ` — ${prettySlug(event.contentSlug)}` : ''}`
     case 'ARTIFACT_CREATED':
       return 'Artefact créé'
     case 'BADGE_UNLOCKED':
@@ -37,7 +54,7 @@ export function RecentProgressFeed({ events }: Props) {
   }
 
   return (
-    <ul className="progress-feed" aria-label="Activité récente">
+    <ul className="progress-feed" aria-label="Journal d’entraînement">
       {recent.map(event => (
         <li key={event.id} className="progress-feed__item">
           <span className="progress-feed__label">{eventLabel(event)}</span>

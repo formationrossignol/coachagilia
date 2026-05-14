@@ -388,3 +388,11 @@
   padding: 0.15rem 0.45rem;
   border-radius: 999px;
 }
+
+/* Premium path cards */
+.learning-path-card { border-radius: 18px; box-shadow: var(--card-shadow-premium, 0 24px 80px rgba(0,0,0,0.35)); transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; }
+.learning-path-card:hover { transform: translateY(-4px); border-color: rgba(108,99,255,0.45); box-shadow: var(--card-hover-premium, 0 24px 80px rgba(108,99,255,0.12)); }
+.learning-path-card__title::before { content: 'Parcours recommandé'; display: block; color: var(--color-primary-hover); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+.learning-path-card__cta { border-radius: 12px; padding: 0.55rem 0.9rem; }
+.progress-feed__item { border-radius: 14px; padding: 0.75rem 0.9rem; }
+.progress-feed__xp { color: var(--color-primary-hover); }

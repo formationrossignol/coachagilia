@@ -4,24 +4,25 @@ import { MemoryRouter } from 'react-router-dom'
 import { Home } from './index'
 
 describe('Home', () => {
-  it('renders three section cards', () => {
+  it('renders three mode cards', () => {
     render(<MemoryRouter><Home /></MemoryRouter>)
     expect(screen.getAllByRole('article')).toHaveLength(3)
   })
 
-  it('displays Simulation, Quiz PSM-1 and Ateliers cards', () => {
+  it('displays the redesigned training modes and immersive hero', () => {
     render(<MemoryRouter><Home /></MemoryRouter>)
-    expect(screen.getByText(/simulation/i)).toBeInTheDocument()
-    expect(screen.getByText(/quiz psm-1/i)).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /ateliers/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Mode Simulation/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Mode Certification/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Mode Atelier/i })).toBeInTheDocument()
+    expect(screen.getByText(/Sprint Review sous tension/i)).toBeInTheDocument()
   })
 
-  it('renders links to /simulation, /quiz and /ateliers', () => {
+  it('renders primary navigation links for simulation, certifications and workshops', () => {
     render(<MemoryRouter><Home /></MemoryRouter>)
     const links = screen.getAllByRole('link')
     const hrefs = links.map(l => l.getAttribute('href'))
     expect(hrefs).toContain('/simulation')
-    expect(hrefs).toContain('/quiz')
+    expect(hrefs).toContain('/certifications')
     expect(hrefs).toContain('/ateliers')
   })
 })
