@@ -27,21 +27,18 @@ const ZONE_IDS: CelebrationGridZone[] = [
   'practice-success', 'practice-failure',
 ]
 
-const ZONE_DEFS: {
-  id: CelebrationGridZone
+const GRID_COLS: {
+  id: string
   label: string
-  color: string
-  bg: string
+  successZone: CelebrationGridZone
+  failureZone: CelebrationGridZone
+  successFlex: number
+  failureFlex: number
 }[] = [
-  { id: 'mistake-success',    label: 'Erreur + succès',          color: '#64748b', bg: '#f1f5f9' },
-  { id: 'mistake-failure',    label: 'Erreur + échec',           color: '#dc2626', bg: '#fee2e2' },
-  { id: 'experiment-success', label: 'Expérimentation + succès', color: '#0d9488', bg: '#ccfbf1' },
-  { id: 'experiment-failure', label: 'Expérimentation + échec',  color: '#0d9488', bg: '#d1fae5' },
-  { id: 'practice-success',   label: 'Pratique + succès',        color: '#16a34a', bg: '#dcfce7' },
-  { id: 'practice-failure',   label: 'Pratique + échec',         color: '#64748b', bg: '#f1f5f9' },
+  { id: 'mistake',    label: 'Erreurs',          successZone: 'mistake-success',    failureZone: 'mistake-failure',    successFlex: 1, failureFlex: 2 },
+  { id: 'experiment', label: 'Expérimentations', successZone: 'experiment-success', failureZone: 'experiment-failure', successFlex: 1, failureFlex: 1 },
+  { id: 'practice',   label: 'Pratiques',        successZone: 'practice-success',   failureZone: 'practice-failure',   successFlex: 2, failureFlex: 1 },
 ]
-
-const ZONE_DEF_MAP = Object.fromEntries(ZONE_DEFS.map(z => [z.id, z])) as Record<CelebrationGridZone, typeof ZONE_DEFS[0]>
 
 type GridCard = { id: string; text: string; correctZone: CelebrationGridZone }
 type Situation = { id: string; situation: string; correctZone: CelebrationGridZone }
@@ -85,20 +82,66 @@ const EMPTY_GRID_ZONES: GridZones = {
   'practice-success': [], 'practice-failure': [],
 }
 
-const GRID_ROWS: { id: string; label: string; labelClass: string; zones: CelebrationGridZone[] }[] = [
-  {
-    id: 'success',
-    label: 'Succès',
-    labelClass: 'cg-row-label--success',
-    zones: ['mistake-success', 'experiment-success', 'practice-success'],
-  },
-  {
-    id: 'failure',
-    label: 'Échec',
-    labelClass: 'cg-row-label--failure',
-    zones: ['mistake-failure', 'experiment-failure', 'practice-failure'],
-  },
-]
+function CelebrationGridVisual({
+  cols,
+  renderSuccessZone,
+  renderFailureZone,
+}: {
+  cols: typeof GRID_COLS
+  renderSuccessZone: (col: typeof GRID_COLS[0]) => React.ReactNode
+  renderFailureZone: (col: typeof GRID_COLS[0]) => React.ReactNode
+}) {
+  return (
+    <div className="cg-visual">
+      {/* BEHAVIOR HEADER */}
+      <div className="cg-header-row">
+        <div className="cg-axis-spacer" />
+        <div className="cg-behavior-band">COMPORTEMENT</div>
+        <div className="cg-right-spacer" />
+      </div>
+
+      {/* COLUMN LABELS — outside the colored grid */}
+      <div className="cg-labels-row">
+        <div className="cg-axis-spacer" />
+        <div className="cg-col-labels">
+          {cols.map(col => (
+            <div key={col.id} className="cg-col-label">{col.label}</div>
+          ))}
+        </div>
+        <div className="cg-right-spacer" />
+      </div>
+
+      {/* MAIN GRID */}
+      <div className="cg-main">
+        <div className="cg-outcome-axis"><span>RÉSULTAT</span></div>
+        <div className="cg-col-grid">
+          {cols.map(col => (
+            <div key={col.id} className={`cg-col-group cg-col-group--${col.id}`}>
+              {renderSuccessZone(col)}
+              <div className="cg-diag" />
+              {renderFailureZone(col)}
+            </div>
+          ))}
+        </div>
+        <div className="cg-outcome-right">
+          <div className="cg-outcome-label--success">Succès</div>
+          <div className="cg-outcome-label--failure">Échec</div>
+        </div>
+      </div>
+
+      {/* LEARNING FOOTER */}
+      <div className="cg-footer-row">
+        <div className="cg-axis-spacer" />
+        <div className="cg-learning-row">
+          <div className="cg-no-learning">Pas d'apprentissage</div>
+          <div className="cg-learning-title">APPRENTISSAGE</div>
+          <div className="cg-no-learning">Pas d'apprentissage</div>
+        </div>
+        <div className="cg-right-spacer" />
+      </div>
+    </div>
+  )
+}
 
 export function CelebrationGridAtelier() {
   const { markComplete } = useWorkshopCompletion('celebration-grid')
@@ -221,75 +264,57 @@ export function CelebrationGridAtelier() {
         {/* ── PHASE 1 ── */}
         {phase === 1 && (
           <>
-            <div className="cg-visual">
-              <div className="cg-top">
-                <div className="cg-axis-spacer" />
-                <div className="cg-behavior-band">COMPORTEMENT</div>
-              </div>
-
-              <div className="cg-middle">
-                <div className="cg-outcome-axis"><span>RÉSULTAT</span></div>
-                <div className="cg-matrix">
-                  <div className="cg-matrix-row cg-matrix-row--headers">
-                    <div className="cg-row-spacer" />
-                    <div className="cg-col-header cg-col-header--mistake">Erreurs</div>
-                    <div className="cg-col-header cg-col-header--experiment">Expérimentations</div>
-                    <div className="cg-col-header cg-col-header--practice">Pratiques</div>
+            <CelebrationGridVisual
+              cols={GRID_COLS}
+              renderSuccessZone={col => (
+                <div
+                  data-zone={col.successZone}
+                  className="cg-zone cg-zone--success"
+                  style={{ flex: col.successFlex }}
+                  onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('cg-zone--hover') }}
+                  onDragLeave={e => e.currentTarget.classList.remove('cg-zone--hover')}
+                  onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('cg-zone--hover'); handleDropOnZone(col.successZone) }}
+                >
+                  <div className="cg-zone-cards">
+                    {gridZones[col.successZone].map(cardId => {
+                      const card = PHASE1_CARDS.find(c => c.id === cardId)!
+                      const resultClass = phase1Result !== null
+                        ? phase1Result[cardId] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                        : ' tki-situation-card--default'
+                      return (
+                        <div key={cardId} data-card={cardId} className={`tki-situation-card${resultClass}`} draggable onDragStart={() => handleCardDragStart(cardId, col.successZone)}>
+                          {card.text}
+                        </div>
+                      )
+                    })}
                   </div>
-
-                  {GRID_ROWS.map(row => (
-                    <div key={row.id} className="cg-matrix-row">
-                      <div className={`cg-row-label ${row.labelClass}`}>{row.label}</div>
-                      {row.zones.map(zoneId => {
-                        const def = ZONE_DEF_MAP[zoneId]
-                        return (
-                          <div
-                            key={zoneId}
-                            data-zone={zoneId}
-                            className="cg-zone"
-                            style={{ '--cg-zone-color': def.color, '--cg-zone-bg': def.bg } as React.CSSProperties}
-                            onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('cg-zone--hover') }}
-                            onDragLeave={e => e.currentTarget.classList.remove('cg-zone--hover')}
-                            onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('cg-zone--hover'); handleDropOnZone(zoneId) }}
-                          >
-                            <div className="cg-zone-label">{def.label}</div>
-                            <div className="cg-zone-cards">
-                              {gridZones[zoneId].map(cardId => {
-                                const card = PHASE1_CARDS.find(c => c.id === cardId)!
-                                const resultClass = phase1Result !== null
-                                  ? phase1Result[cardId] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
-                                  : ' tki-situation-card--default'
-                                return (
-                                  <div
-                                    key={cardId}
-                                    data-card={cardId}
-                                    className={`tki-situation-card${resultClass}`}
-                                    draggable
-                                    onDragStart={() => handleCardDragStart(cardId, zoneId)}
-                                  >
-                                    {card.text}
-                                  </div>
-                                )
-                              })}
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  ))}
                 </div>
-              </div>
-
-              <div className="cg-bottom">
-                <div className="cg-axis-spacer" />
-                <div className="cg-learning-row">
-                  <div className="cg-row-spacer" />
-                  <div className="cg-no-learning">Pas d'apprentissage</div>
-                  <div className="cg-learning-title">APPRENTISSAGE</div>
-                  <div className="cg-no-learning">Pas d'apprentissage</div>
+              )}
+              renderFailureZone={col => (
+                <div
+                  data-zone={col.failureZone}
+                  className="cg-zone cg-zone--failure"
+                  style={{ flex: col.failureFlex }}
+                  onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('cg-zone--hover') }}
+                  onDragLeave={e => e.currentTarget.classList.remove('cg-zone--hover')}
+                  onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('cg-zone--hover'); handleDropOnZone(col.failureZone) }}
+                >
+                  <div className="cg-zone-cards">
+                    {gridZones[col.failureZone].map(cardId => {
+                      const card = PHASE1_CARDS.find(c => c.id === cardId)!
+                      const resultClass = phase1Result !== null
+                        ? phase1Result[cardId] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                        : ' tki-situation-card--default'
+                      return (
+                        <div key={cardId} data-card={cardId} className={`tki-situation-card${resultClass}`} draggable onDragStart={() => handleCardDragStart(cardId, col.failureZone)}>
+                          {card.text}
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
-              </div>
-            </div>
+              )}
+            />
 
             {phase1Result !== null && (
               <div className="scrum-score-banner">
@@ -304,40 +329,22 @@ export function CelebrationGridAtelier() {
               </div>
             )}
 
-            <div
-              className="tki-pool"
-              onDragOver={e => e.preventDefault()}
-              onDrop={handleDropOnPool1}
-            >
+            <div className="tki-pool" onDragOver={e => e.preventDefault()} onDrop={handleDropOnPool1}>
               <p className="scrum-palette__title">Cartes à classer</p>
               <div className="tki-pool__cards">
                 {poolCards.map(card => (
-                  <div
-                    key={card.id}
-                    data-card={card.id}
-                    className="tki-situation-card tki-situation-card--default"
-                    draggable
-                    onDragStart={() => handleCardDragStart(card.id)}
-                  >
+                  <div key={card.id} data-card={card.id} className="tki-situation-card tki-situation-card--default" draggable onDragStart={() => handleCardDragStart(card.id)}>
                     {card.text}
                   </div>
                 ))}
-                {poolCards.length === 0 && (
-                  <span className="scrum-palette__empty">Toutes les cartes ont été placées</span>
-                )}
+                {poolCards.length === 0 && <span className="scrum-palette__empty">Toutes les cartes ont été placées</span>}
               </div>
             </div>
 
             <div className="scrum-actions">
-              <button className="btn btn--primary" onClick={handleVerifyPhase1} disabled={!phase1AllPlaced}>
-                Vérifier
-              </button>
-              {phase1Result && !phase1Perfect && (
-                <button className="btn btn--secondary" onClick={handleResetPhase1}>Réessayer</button>
-              )}
-              {phase1Perfect && (
-                <button className="btn btn--primary" onClick={() => setPhase(2)}>Phase suivante →</button>
-              )}
+              <button className="btn btn--primary" onClick={handleVerifyPhase1} disabled={!phase1AllPlaced}>Vérifier</button>
+              {phase1Result && !phase1Perfect && <button className="btn btn--secondary" onClick={handleResetPhase1}>Réessayer</button>}
+              {phase1Perfect && <button className="btn btn--primary" onClick={() => setPhase(2)}>Phase suivante →</button>}
             </div>
           </>
         )}
@@ -345,75 +352,61 @@ export function CelebrationGridAtelier() {
         {/* ── PHASE 2 ── */}
         {phase === 2 && (
           <>
-            <div className="cg-visual">
-              <div className="cg-top">
-                <div className="cg-axis-spacer" />
-                <div className="cg-behavior-band">COMPORTEMENT</div>
-              </div>
-
-              <div className="cg-middle">
-                <div className="cg-outcome-axis"><span>RÉSULTAT</span></div>
-                <div className="cg-matrix">
-                  <div className="cg-matrix-row cg-matrix-row--headers">
-                    <div className="cg-row-spacer" />
-                    <div className="cg-col-header cg-col-header--mistake">Erreurs</div>
-                    <div className="cg-col-header cg-col-header--experiment">Expérimentations</div>
-                    <div className="cg-col-header cg-col-header--practice">Pratiques</div>
-                  </div>
-
-                  {GRID_ROWS.map(row => (
-                    <div key={row.id} className="cg-matrix-row">
-                      <div className={`cg-row-label ${row.labelClass}`}>{row.label}</div>
-                      {row.zones.map(zoneId => {
-                        const def = ZONE_DEF_MAP[zoneId]
-                        const zoneSituations = PHASE2_SITUATIONS.filter(s => situationZones[s.id] === zoneId)
+            <CelebrationGridVisual
+              cols={GRID_COLS}
+              renderSuccessZone={col => {
+                const situations = PHASE2_SITUATIONS.filter(s => situationZones[s.id] === col.successZone)
+                return (
+                  <div
+                    data-zone={col.successZone}
+                    className="cg-zone cg-zone--success"
+                    style={{ flex: col.successFlex }}
+                    onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('cg-zone--hover') }}
+                    onDragLeave={e => e.currentTarget.classList.remove('cg-zone--hover')}
+                    onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('cg-zone--hover'); handleDropSituationOnZone(col.successZone) }}
+                  >
+                    <div className="cg-zone-cards">
+                      {situations.map(s => {
+                        const resultClass = phase2Result !== null
+                          ? phase2Result[s.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                          : ' tki-situation-card--default'
                         return (
-                          <div
-                            key={zoneId}
-                            data-zone={zoneId}
-                            className="cg-zone"
-                            style={{ '--cg-zone-color': def.color, '--cg-zone-bg': def.bg } as React.CSSProperties}
-                            onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('cg-zone--hover') }}
-                            onDragLeave={e => e.currentTarget.classList.remove('cg-zone--hover')}
-                            onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('cg-zone--hover'); handleDropSituationOnZone(zoneId) }}
-                          >
-                            <div className="cg-zone-label">{def.label}</div>
-                            <div className="cg-zone-cards">
-                              {zoneSituations.map(s => {
-                                const resultClass = phase2Result !== null
-                                  ? phase2Result[s.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
-                                  : ' tki-situation-card--default'
-                                return (
-                                  <div
-                                    key={s.id}
-                                    data-situation={s.id}
-                                    className={`tki-situation-card${resultClass}`}
-                                    draggable
-                                    onDragStart={() => handleSituationDragStart(s.id, zoneId)}
-                                  >
-                                    {s.situation}
-                                  </div>
-                                )
-                              })}
-                            </div>
+                          <div key={s.id} data-situation={s.id} className={`tki-situation-card${resultClass}`} draggable onDragStart={() => handleSituationDragStart(s.id, col.successZone)}>
+                            {s.situation}
                           </div>
                         )
                       })}
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="cg-bottom">
-                <div className="cg-axis-spacer" />
-                <div className="cg-learning-row">
-                  <div className="cg-row-spacer" />
-                  <div className="cg-no-learning">Pas d'apprentissage</div>
-                  <div className="cg-learning-title">APPRENTISSAGE</div>
-                  <div className="cg-no-learning">Pas d'apprentissage</div>
-                </div>
-              </div>
-            </div>
+                  </div>
+                )
+              }}
+              renderFailureZone={col => {
+                const situations = PHASE2_SITUATIONS.filter(s => situationZones[s.id] === col.failureZone)
+                return (
+                  <div
+                    data-zone={col.failureZone}
+                    className="cg-zone cg-zone--failure"
+                    style={{ flex: col.failureFlex }}
+                    onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add('cg-zone--hover') }}
+                    onDragLeave={e => e.currentTarget.classList.remove('cg-zone--hover')}
+                    onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove('cg-zone--hover'); handleDropSituationOnZone(col.failureZone) }}
+                  >
+                    <div className="cg-zone-cards">
+                      {situations.map(s => {
+                        const resultClass = phase2Result !== null
+                          ? phase2Result[s.id] ? ' tki-situation-card--correct' : ' tki-situation-card--wrong'
+                          : ' tki-situation-card--default'
+                        return (
+                          <div key={s.id} data-situation={s.id} className={`tki-situation-card${resultClass}`} draggable onDragStart={() => handleSituationDragStart(s.id, col.failureZone)}>
+                            {s.situation}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              }}
+            />
 
             {phase2Result !== null && (
               <div className="scrum-score-banner">
@@ -428,37 +421,21 @@ export function CelebrationGridAtelier() {
               </div>
             )}
 
-            <div
-              className="tki-pool"
-              onDragOver={e => e.preventDefault()}
-              onDrop={handleDropOnPool2}
-            >
+            <div className="tki-pool" onDragOver={e => e.preventDefault()} onDrop={handleDropOnPool2}>
               <p className="scrum-palette__title">Situations à classer</p>
               <div className="tki-pool__cards">
                 {poolSituations.map(s => (
-                  <div
-                    key={s.id}
-                    data-situation={s.id}
-                    className="tki-situation-card tki-situation-card--default"
-                    draggable
-                    onDragStart={() => handleSituationDragStart(s.id)}
-                  >
+                  <div key={s.id} data-situation={s.id} className="tki-situation-card tki-situation-card--default" draggable onDragStart={() => handleSituationDragStart(s.id)}>
                     {s.situation}
                   </div>
                 ))}
-                {poolSituations.length === 0 && (
-                  <span className="scrum-palette__empty">Toutes les situations ont été classées</span>
-                )}
+                {poolSituations.length === 0 && <span className="scrum-palette__empty">Toutes les situations ont été classées</span>}
               </div>
             </div>
 
             <div className="scrum-actions">
-              <button className="btn btn--primary" onClick={handleVerifyPhase2} disabled={!phase2AllPlaced}>
-                Vérifier
-              </button>
-              {phase2Result && !phase2Perfect && (
-                <button className="btn btn--secondary" onClick={handleResetPhase2}>Réessayer phase 2</button>
-              )}
+              <button className="btn btn--primary" onClick={handleVerifyPhase2} disabled={!phase2AllPlaced}>Vérifier</button>
+              {phase2Result && !phase2Perfect && <button className="btn btn--secondary" onClick={handleResetPhase2}>Réessayer phase 2</button>}
             </div>
           </>
         )}

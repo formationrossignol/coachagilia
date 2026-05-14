@@ -1,0 +1,120 @@
+<h2>Diagramme complet — tête, corps, queue, arêtes</h2>
+<p class="subtitle">Aperçu de l'approche C avec tête de poisson (effet) et queue. Les zones pointillées sont les drop zones interactives.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Phase 1 — Positionnez les 6 catégories (aperçu interactif)</div>
+  <div class="mockup-body" style="background:#0f172a;padding:2rem 1rem;overflow-x:auto;">
+    <div style="position:relative;width:820px;height:280px;margin:0 auto;">
+
+      <!-- ══════════════ SVG DÉCOR (lignes uniquement) ══════════════ -->
+      <svg viewBox="0 0 820 280" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
+
+        <!-- Queue (V-shape gauche) -->
+        <polyline points="30,140 70,100 70,180 30,140" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linejoin="round"/>
+
+        <!-- Colonne vertébrale -->
+        <line x1="70" y1="140" x2="680" y2="140" stroke="#6366f1" stroke-width="3.5"/>
+
+        <!-- Tête de poisson (droite) -->
+        <path d="M680,100 Q760,100 780,140 Q760,180 680,180 Z" fill="none" stroke="#6366f1" stroke-width="2.5"/>
+        <!-- Oeil du poisson -->
+        <circle cx="730" cy="130" r="6" fill="none" stroke="#a5b4fc" stroke-width="2"/>
+        <circle cx="730" cy="130" r="2" fill="#a5b4fc"/>
+
+        <!-- ── Arêtes du haut (3) ── -->
+        <!-- Arête top-1: jonction à x=200, montant vers x=130, y=30 -->
+        <line x1="200" y1="140" x2="130" y2="30" stroke="#475569" stroke-width="2.5"/>
+        <!-- Arête top-2: jonction à x=370, montant vers x=300, y=30 -->
+        <line x1="370" y1="140" x2="300" y2="30" stroke="#475569" stroke-width="2.5"/>
+        <!-- Arête top-3: jonction à x=540, montant vers x=475, y=30 -->
+        <line x1="540" y1="140" x2="475" y2="30" stroke="#475569" stroke-width="2.5"/>
+
+        <!-- ── Arêtes du bas (3) ── -->
+        <!-- Arête bottom-1: jonction à x=200, descendant vers x=130, y=250 -->
+        <line x1="200" y1="140" x2="130" y2="250" stroke="#475569" stroke-width="2.5"/>
+        <!-- Arête bottom-2: jonction à x=370, descendant vers x=300, y=250 -->
+        <line x1="370" y1="140" x2="300" y2="250" stroke="#475569" stroke-width="2.5"/>
+        <!-- Arête bottom-3: jonction à x=540, descendant vers x=475, y=250 -->
+        <line x1="540" y1="140" x2="475" y2="250" stroke="#475569" stroke-width="2.5"/>
+
+      </svg>
+
+      <!-- ══════════════ HTML — DROP ZONES & LABELS ══════════════ -->
+
+      <!-- Étiquette queue -->
+      <div style="position:absolute;left:4px;top:120px;font-size:9px;color:#64748b;font-style:italic;writing-mode:vertical-rl;line-height:1">cause</div>
+
+      <!-- Tête : label effet -->
+      <div style="position:absolute;right:28px;top:118px;width:92px;text-align:center;">
+        <div style="background:#312e81;border:2px solid #6366f1;border-radius:8px;padding:6px 4px;font-size:10px;font-weight:700;color:#e0e7ff;line-height:1.3;">Vélocité<br>insuffisante</div>
+      </div>
+
+      <!-- ── Drop zones du HAUT ── -->
+      <!-- Zone haut-1 (People) -->
+      <div style="position:absolute;left:60px;top:10px;width:110px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;cursor:grab;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">People</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+      <!-- Zone haut-2 (Process) -->
+      <div style="position:absolute;left:228px;top:10px;width:110px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;cursor:grab;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Process</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+      <!-- Zone haut-3 (Tools) -->
+      <div style="position:absolute;left:400px;top:10px;width:110px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;cursor:grab;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Tools</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+
+      <!-- ── Drop zones du BAS ── -->
+      <!-- Zone bas-1 (Product) -->
+      <div style="position:absolute;left:60px;top:228px;width:110px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;cursor:grab;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Product</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+      <!-- Zone bas-2 (Environment) -->
+      <div style="position:absolute;left:222px;top:228px;width:126px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;cursor:grab;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Environment</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+      <!-- Zone bas-3 (Management) -->
+      <div style="position:absolute;left:400px;top:228px;width:118px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;cursor:grab;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Management</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Ce que ça implique pour les 3 phases</h3>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:0.75rem;">
+    <div style="background:var(--surface,#1e293b);border:1px solid #334155;border-radius:8px;padding:1rem;">
+      <div class="label">Phase 1</div>
+      <p style="font-size:0.85rem;margin:0.5rem 0 0;">Glisser les 6 étiquettes de catégorie depuis la palette vers les 6 drop zones aux extrémités des arêtes.</p>
+    </div>
+    <div style="background:var(--surface,#1e293b);border:1px solid #334155;border-radius:8px;padding:1rem;">
+      <div class="label">Phase 2</div>
+      <p style="font-size:0.85rem;margin:0.5rem 0 0;">La structure fishbone reste visible. Les zones s'élargissent pour accueillir les cartes-causes le long de chaque arête.</p>
+    </div>
+    <div style="background:var(--surface,#1e293b);border:1px solid #334155;border-radius:8px;padding:1rem;">
+      <div class="label">Phase 3</div>
+      <p style="font-size:0.85rem;margin:0.5rem 0 0;">Vue liste enrichie. Le fishbone peut rester en arrière-plan ou être remplacé par le panneau de sélection des causes racines.</p>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:1.5rem;">Est-ce que cette structure te convient ? Ou tu veux ajuster l'angle des arêtes, la forme de la tête/queue, ou la disposition ?</p>

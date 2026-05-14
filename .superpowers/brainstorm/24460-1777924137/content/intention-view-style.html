@@ -1,0 +1,82 @@
+<h2>Comment fonctionne la vue "par intentions" ?</h2>
+<p class="subtitle">Deux façons d'organiser les ateliers par intention d'usage</p>
+
+<div class="cards">
+  <div class="card" data-choice="sections" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f1117;border-radius:8px;padding:16px;font-size:11px;color:#c9d1d9;font-family:system-ui">
+        <div style="background:#161b22;border-radius:6px;padding:6px 10px;margin-bottom:10px;display:flex;gap:12px;font-size:10px">
+          <span style="background:#238636;color:#fff;padding:2px 8px;border-radius:4px;font-weight:600">Par intention</span>
+          <span style="color:#8b949e">Liste complète</span>
+        </div>
+        <!-- Section 1 -->
+        <div style="margin-bottom:12px">
+          <div style="font-size:10px;font-weight:700;color:#e6edf3;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+            <span style="font-size:14px">⚡</span> Gérer un conflit
+            <span style="color:#8b949e;font-weight:400;font-size:9px">· 8 ateliers</span>
+          </div>
+          <div style="display:flex;gap:6px;overflow:hidden">
+            <div style="background:#161b22;border-radius:4px;padding:6px 8px;min-width:80px;font-size:9px;color:#c9d1d9;border:1px solid #30363d">Thomas-Kilmann</div>
+            <div style="background:#161b22;border-radius:4px;padding:6px 8px;min-width:80px;font-size:9px;color:#c9d1d9;border:1px solid #30363d">SBI</div>
+            <div style="background:#161b22;border-radius:4px;padding:6px 8px;min-width:80px;font-size:9px;color:#8b949e;border:1px solid #21262d;opacity:.7">CNV →</div>
+          </div>
+        </div>
+        <!-- Section 2 -->
+        <div style="margin-bottom:12px">
+          <div style="font-size:10px;font-weight:700;color:#e6edf3;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+            <span style="font-size:14px">🔍</span> Trouver une cause racine
+            <span style="color:#8b949e;font-weight:400;font-size:9px">· 6 ateliers</span>
+          </div>
+          <div style="display:flex;gap:6px;overflow:hidden">
+            <div style="background:#161b22;border-radius:4px;padding:6px 8px;min-width:80px;font-size:9px;color:#c9d1d9;border:1px solid #30363d">Ishikawa</div>
+            <div style="background:#161b22;border-radius:4px;padding:6px 8px;min-width:80px;font-size:9px;color:#c9d1d9;border:1px solid #30363d">TRIZ</div>
+            <div style="background:#161b22;border-radius:4px;padding:6px 8px;min-width:80px;font-size:9px;color:#8b949e;border:1px solid #21262d;opacity:.7">5 Pourquoi →</div>
+          </div>
+        </div>
+        <!-- Section 3 partial -->
+        <div style="opacity:.5">
+          <div style="font-size:10px;font-weight:700;color:#e6edf3;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+            <span style="font-size:14px">🎯</span> Préparer un coaching
+            <span style="color:#8b949e;font-weight:400;font-size:9px">· 5 ateliers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Sections déroulantes</h3>
+      <p>Chaque intention forme une section sur la page. On scrolle pour tout voir, les workshops s'affichent en ligne par groupe.</p>
+      <p style="margin-top:8px;font-size:12px;color:#8b949e">+ Vue complète sans clic<br>+ Facile à scanner<br>– Page longue avec beaucoup d'intentions</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="filter" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f1117;border-radius:8px;padding:16px;font-size:11px;color:#c9d1d9;font-family:system-ui">
+        <div style="background:#161b22;border-radius:6px;padding:6px 10px;margin-bottom:10px;display:flex;gap:12px;font-size:10px">
+          <span style="background:#238636;color:#fff;padding:2px 8px;border-radius:4px;font-weight:600">Par intention</span>
+          <span style="color:#8b949e">Liste complète</span>
+        </div>
+        <!-- Intention tiles -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
+          <div style="background:#238636;border-radius:6px;padding:8px;font-size:9px;font-weight:600;color:#fff;cursor:pointer">⚡ Gérer un conflit<br><span style="font-weight:400;opacity:.8">8 ateliers</span></div>
+          <div style="background:#161b22;border-radius:6px;padding:8px;font-size:9px;font-weight:600;color:#e6edf3;border:1px solid #30363d;cursor:pointer">🔍 Cause racine<br><span style="font-weight:400;color:#8b949e">6 ateliers</span></div>
+          <div style="background:#161b22;border-radius:6px;padding:8px;font-size:9px;font-weight:600;color:#e6edf3;border:1px solid #30363d;cursor:pointer">🎯 Coaching<br><span style="font-weight:400;color:#8b949e">5 ateliers</span></div>
+          <div style="background:#161b22;border-radius:6px;padding:8px;font-size:9px;font-weight:600;color:#e6edf3;border:1px solid #30363d;cursor:pointer">🤝 Aligner<br><span style="font-weight:400;color:#8b949e">4 ateliers</span></div>
+        </div>
+        <!-- Selected category workshops -->
+        <div style="font-size:9px;color:#8b949e;margin-bottom:4px">Ateliers — Gérer un conflit</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+          <div style="background:#161b22;border-radius:4px;padding:6px 8px;font-size:9px;color:#c9d1d9;border:1px solid #30363d">Thomas-Kilmann</div>
+          <div style="background:#161b22;border-radius:4px;padding:6px 8px;font-size:9px;color:#c9d1d9;border:1px solid #30363d">SBI</div>
+          <div style="background:#161b22;border-radius:4px;padding:6px 8px;font-size:9px;color:#8b949e;border:1px solid #21262d;opacity:.7">CNV (bientôt)</div>
+          <div style="background:#161b22;border-radius:4px;padding:6px 8px;font-size:9px;color:#8b949e;border:1px solid #21262d;opacity:.7">DESC (bientôt)</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Tuiles d'intention + grille filtrée</h3>
+      <p>Les intentions s'affichent comme des tuiles cliquables en haut. On clique une intention pour voir les ateliers correspondants en grille en dessous.</p>
+      <p style="margin-top:8px;font-size:12px;color:#8b949e">+ Compact, moins de scroll<br>+ Pattern familier (actuel)<br>– 1 clic de plus pour voir les ateliers</p>
+    </div>
+  </div>
+</div>

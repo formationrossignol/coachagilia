@@ -1,0 +1,167 @@
+<h2>Tuiles — Hybride A+C</h2>
+<p class="subtitle">Grille 4 colonnes + style carte accent couleur de A. Clique pour confirmer.</p>
+
+<style>
+  .demo {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface-2: #232636;
+    --border: rgba(255,255,255,0.08);
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+  }
+
+  .tiles-hybrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+
+  .tile-h {
+    --acc: #6366f1;
+    --acc-rgb: 99,102,241;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.45rem;
+    padding: 1.35rem 0.85rem 1.1rem;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(var(--acc-rgb), 0.12) 0%, transparent 65%),
+      linear-gradient(160deg, #1b1f33 0%, #0f1117 65%);
+    border: 1px solid rgba(255,255,255,0.065);
+    border-top: 2px solid var(--acc);
+    border-radius: 14px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.055),
+      0 4px 16px rgba(0,0,0,0.32);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tile-h::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 13px 13px 0 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.045) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .tile-h:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 20px 48px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(var(--acc-rgb),0.35);
+  }
+
+  .tile-h[data-int="conflit"]       { --acc: #f87171; --acc-rgb: 248,113,113; }
+  .tile-h[data-int="decision"]      { --acc: #60a5fa; --acc-rgb: 96,165,250;  }
+  .tile-h[data-int="equipe"]        { --acc: #34d399; --acc-rgb: 52,211,153;  }
+  .tile-h[data-int="retro"]         { --acc: #a78bfa; --acc-rgb: 167,139,250; }
+  .tile-h[data-int="cause"]         { --acc: #fbbf24; --acc-rgb: 251,191,36;  }
+  .tile-h[data-int="prenantes"]     { --acc: #38bdf8; --acc-rgb: 56,189,248;  }
+  .tile-h[data-int="flow"]          { --acc: #fb923c; --acc-rgb: 251,146,60;  }
+  .tile-h[data-int="coaching"]      { --acc: #6366f1; --acc-rgb: 99,102,241;  }
+
+  .tile-h__emoji {
+    font-size: 2rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 10px rgba(var(--acc-rgb), 0.45));
+  }
+  .tile-h__label {
+    font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--acc);
+    text-shadow: 0 0 10px rgba(var(--acc-rgb), 0.5);
+    position: relative; z-index: 1;
+  }
+  .tile-h__name {
+    font-size: 0.8rem; font-weight: 700; color: var(--text);
+    line-height: 1.3; position: relative; z-index: 1;
+  }
+  .tile-h__sub {
+    font-size: 0.68rem; color: var(--muted);
+    line-height: 1.35; position: relative; z-index: 1;
+  }
+  .tile-h__count {
+    font-size: 0.65rem; font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    background: rgba(var(--acc-rgb), 0.15);
+    color: var(--acc);
+    border-radius: 999px;
+    margin-top: 4px;
+    position: relative; z-index: 1;
+  }
+</style>
+
+<div class="demo">
+  <div class="options" style="flex-direction:column">
+    <div class="option" data-choice="hybrid" onclick="toggleSelect(this)" style="padding:1.5rem">
+      <div class="letter">✓</div>
+      <div class="content" style="width:100%">
+        <div class="tiles-hybrid">
+          <div class="tile-h" data-int="conflit">
+            <div class="tile-h__emoji">⚡</div>
+            <div class="tile-h__label">Conflits</div>
+            <div class="tile-h__name">Gérer un conflit</div>
+            <div class="tile-h__sub">Tensions, feedback, négociation</div>
+            <div class="tile-h__count">2 ateliers</div>
+          </div>
+          <div class="tile-h" data-int="decision">
+            <div class="tile-h__emoji">⚖️</div>
+            <div class="tile-h__label">Décision</div>
+            <div class="tile-h__name">Faciliter une décision</div>
+            <div class="tile-h__sub">Consensus, vote, arbitrage</div>
+            <div class="tile-h__count">3 ateliers</div>
+          </div>
+          <div class="tile-h" data-int="equipe">
+            <div class="tile-h__emoji">🧩</div>
+            <div class="tile-h__label">Équipe</div>
+            <div class="tile-h__name">Débloquer une équipe</div>
+            <div class="tile-h__sub">Co-dev, facilitation, résilience</div>
+            <div class="tile-h__count">4 ateliers</div>
+          </div>
+          <div class="tile-h" data-int="retro">
+            <div class="tile-h__emoji">🔄</div>
+            <div class="tile-h__label">Rétrospective</div>
+            <div class="tile-h__name">Préparer une rétrospective</div>
+            <div class="tile-h__sub">Formats, techniques, animation</div>
+            <div class="tile-h__count">3 ateliers</div>
+          </div>
+          <div class="tile-h" data-int="cause">
+            <div class="tile-h__emoji">🔍</div>
+            <div class="tile-h__label">Diagnostic</div>
+            <div class="tile-h__name">Trouver une cause racine</div>
+            <div class="tile-h__sub">Analyse, Ishikawa, TRIZ</div>
+            <div class="tile-h__count">2 ateliers</div>
+          </div>
+          <div class="tile-h" data-int="prenantes">
+            <div class="tile-h__emoji">🤝</div>
+            <div class="tile-h__label">Alignement</div>
+            <div class="tile-h__name">Aligner les parties prenantes</div>
+            <div class="tile-h__sub">Cartographie, engagement</div>
+            <div class="tile-h__count">1 atelier</div>
+          </div>
+          <div class="tile-h" data-int="flow">
+            <div class="tile-h__emoji">📈</div>
+            <div class="tile-h__label">Flow</div>
+            <div class="tile-h__name">Améliorer le flow</div>
+            <div class="tile-h__sub">Systèmes, flux, livraison</div>
+            <div class="tile-h__count">1 atelier</div>
+          </div>
+          <div class="tile-h" data-int="coaching">
+            <div class="tile-h__emoji">🎯</div>
+            <div class="tile-h__label">Coaching</div>
+            <div class="tile-h__name">Préparer un coaching</div>
+            <div class="tile-h__sub">Questions, posture, GROW</div>
+            <div class="tile-h__count">2 ateliers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

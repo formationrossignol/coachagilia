@@ -227,6 +227,9 @@ export function StarfishRetrospectiveAtelier() {
                   </div>
                 </div>
               ))}
+              <div className="sf-starfish-center" aria-hidden="true">
+                <img src="/etoile_mer.svg" alt="" className="sf-starfish-img" />
+              </div>
             </div>
 
             {phase1Result !== null && (

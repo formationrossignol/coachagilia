@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium v2 — Scrum Master Sim</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&display=swap');
+
+  :root {
+    --bg:        #08080c;
+    --s1:        #0e0e14;
+    --s2:        #141419;
+    --s3:        #1a1a22;
+    --b1:        rgba(255,255,255,0.055);
+    --b2:        rgba(255,255,255,0.095);
+    --t1:        #ededf0;
+    --t2:        #9292a8;
+    --t3:        #52526a;
+    --p:         #6366f1;
+    --ph:        #7577f5;
+    --ps:        rgba(99,102,241,0.11);
+    --pb:        rgba(99,102,241,0.22);
+    --ok:        #22c55e;
+    --warn:      #f59e0b;
+    --danger:    #ef4444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--t1);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 2.5rem;
+  }
+
+  h1 { font-size: 1rem; font-weight: 600; letter-spacing: -0.025em; color: var(--t1); margin-bottom: 0.2rem; }
+  .sub { font-size: 0.78rem; color: var(--t3); margin-bottom: 3rem; }
+
+  .block { margin-bottom: 3rem; }
+  .label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--t3);
+    margin-bottom: 1.25rem;
+  }
+  .row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body>
+
+<h1>Composants — Niveau premium</h1>
+<p class="sub">Détails, matière, hiérarchie — tout ce qui distingue un outil pro</p>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════ -->
+<div class="block">
+  <div class="label">NavBar — 52px · frosted · Linear-style</div>
+  <div style="
+    display: flex; align-items: center; gap: 0; height: 52px;
+    background: rgba(8,8,12,0.78);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.055);
+    border-radius: 10px;
+    padding: 0 1rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 2px 16px rgba(0,0,0,0.4);
+  ">
+    <!-- Brand -->
+    <a style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;padding:0 0.6rem 0 0.2rem;margin-right:0.25rem;">
+      <div style="width:20px;height:20px;border-radius:5px;background:linear-gradient(135deg,#818cf8 0%,#6366f1 60%,#4f46e5 100%);box-shadow:0 0 12px rgba(99,102,241,0.35),inset 0 1px 0 rgba(255,255,255,0.2);flex-shrink:0;"></div>
+      <span style="font-size:0.82rem;font-weight:700;color:var(--t1);letter-spacing:-0.025em;white-space:nowrap;">Scrum Master Sim</span>
+    </a>
+
+    <!-- Separator -->
+    <div style="width:1px;height:18px;background:rgba(255,255,255,0.07);margin:0 0.5rem;flex-shrink:0;"></div>
+
+    <!-- Nav links -->
+    <div style="display:flex;gap:0.05rem;flex:1;">
+      <!-- Active -->
+      <a style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.32rem 0.72rem;border-radius:6px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.18);color:#a5b4fc;font-size:0.78rem;font-weight:500;text-decoration:none;letter-spacing:-0.01em;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Simulation
+      </a>
+      <a style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.32rem 0.72rem;border-radius:6px;color:var(--t3);font-size:0.78rem;font-weight:500;text-decoration:none;letter-spacing:-0.01em;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Certifications
+      </a>
+      <a style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.32rem 0.72rem;border-radius:6px;color:var(--t3);font-size:0.78rem;font-weight:500;text-decoration:none;letter-spacing:-0.01em;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Ateliers
+      </a>
+      <a style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.32rem 0.72rem;border-radius:6px;color:var(--t3);font-size:0.78rem;font-weight:500;text-decoration:none;letter-spacing:-0.01em;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Progression
+      </a>
+    </div>
+
+    <!-- Theme toggle -->
+    <button style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:5px;background:transparent;border:1px solid rgba(255,255,255,0.065);color:var(--t3);cursor:pointer;flex-shrink:0;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BUTTONS
+═══════════════════════════════════════════ -->
+<div class="block">
+  <div class="label">Boutons</div>
+  <div class="row">
+    <!-- Primary -->
+    <button style="
+      display:inline-flex;align-items:center;gap:0.4rem;
+      padding:0.46rem 1.05rem;border-radius:6px;
+      background:linear-gradient(180deg,#7577f5 0%,#5f61e8 100%);
+      color:#fff;border:none;
+      font-size:0.8rem;font-weight:600;letter-spacing:-0.015em;
+      cursor:pointer;
+      box-shadow:0 1px 2px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.18),0 0 0 1px rgba(99,102,241,0.4);
+    ">Commencer</button>
+
+    <!-- Ghost indigo -->
+    <button style="
+      display:inline-flex;align-items:center;gap:0.4rem;
+      padding:0.46rem 1.05rem;border-radius:6px;
+      background:rgba(99,102,241,0.08);
+      color:#a5b4fc;
+      border:1px solid rgba(99,102,241,0.2);
+      font-size:0.8rem;font-weight:500;letter-spacing:-0.015em;cursor:pointer;
+    ">Action</button>
+
+    <!-- Neutral -->
+    <button style="
+      display:inline-flex;align-items:center;gap:0.4rem;
+      padding:0.46rem 1.05rem;border-radius:6px;
+      background:var(--s2);
+      color:var(--t2);
+      border:1px solid var(--b1);
+      font-size:0.8rem;font-weight:500;letter-spacing:-0.015em;cursor:pointer;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.03);
+    ">Annuler</button>
+
+    <!-- Danger -->
+    <button style="
+      display:inline-flex;align-items:center;gap:0.4rem;
+      padding:0.46rem 1.05rem;border-radius:6px;
+      background:rgba(239,68,68,0.08);
+      color:#fca5a5;
+      border:1px solid rgba(239,68,68,0.18);
+      font-size:0.8rem;font-weight:500;letter-spacing:-0.015em;cursor:pointer;
+    ">Quitter</button>
+
+    <!-- Icon btn -->
+    <button style="
+      display:flex;align-items:center;justify-content:center;
+      width:28px;height:28px;border-radius:5px;
+      background:transparent;border:1px solid var(--b1);
+      color:var(--t3);cursor:pointer;
+    ">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CARDS — avec matière et profondeur
+═══════════════════════════════════════════ -->
+<div class="block">
+  <div class="label">Cards — matière, profondeur, états</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;max-width:720px;">
+
+    <!-- Card home standard -->
+    <div style="
+      background: linear-gradient(160deg, var(--s2) 0%, var(--s1) 100%);
+      border: 1px solid var(--b1);
+      border-top: 1px solid rgba(255,255,255,0.09);
+      border-radius: 10px;
+      padding: 1.1rem;
+      display: flex; flex-direction: column; gap: 0.65rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+      position: relative; overflow: hidden;
+    ">
+      <!-- Icon -->
+      <div style="width:32px;height:32px;border-radius:7px;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.18);display:flex;align-items:center;justify-content:center;color:#60a5fa;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <span style="padding:0.14rem 0.48rem;border-radius:4px;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.16);color:#93c5fd;font-size:0.65rem;font-weight:600;align-self:flex-start;">Décisionnel</span>
+      <div style="font-size:0.92rem;font-weight:700;color:var(--t1);letter-spacing:-0.02em;">Simulation</div>
+      <div style="font-size:0.77rem;color:var(--t2);line-height:1.55;flex:1;">Incarnez un Scrum Master. Prenez des décisions en temps réel et observez les conséquences.</div>
+      <a style="align-self:flex-start;display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.72rem;border-radius:5px;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.16);color:#93c5fd;font-size:0.74rem;font-weight:600;text-decoration:none;">Choisir un scénario →</a>
+    </div>
+
+    <!-- Card hover state — accent indigo -->
+    <div style="
+      background: linear-gradient(160deg, var(--s2) 0%, var(--s1) 100%);
+      border: 1px solid rgba(99,102,241,0.28);
+      border-top: 1px solid rgba(99,102,241,0.4);
+      border-radius: 10px;
+      padding: 1.1rem;
+      display: flex; flex-direction: column; gap: 0.65rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(99,102,241,0.12), inset 0 1px 0 rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+      position: relative; overflow: hidden;
+    ">
+      <div style="width:32px;height:32px;border-radius:7px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.22);display:flex;align-items:center;justify-content:center;color:#a5b4fc;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <span style="padding:0.14rem 0.48rem;border-radius:4px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:#a5b4fc;font-size:0.65rem;font-weight:600;align-self:flex-start;">Certification</span>
+      <div style="font-size:0.92rem;font-weight:700;color:var(--t1);letter-spacing:-0.02em;">Certifications</div>
+      <div style="font-size:0.77rem;color:var(--t2);line-height:1.55;flex:1;">Préparez PSM-I, SAFe, AgilePM avec des examens blancs chronométrés.</div>
+      <a style="align-self:flex-start;display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.72rem;border-radius:5px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.22);color:#a5b4fc;font-size:0.74rem;font-weight:600;text-decoration:none;">Commencer un examen →</a>
+      <div style="position:absolute;bottom:0;right:0;width:80px;height:80px;background:radial-gradient(ellipse at 100% 100%,rgba(99,102,241,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+    </div>
+
+    <!-- Card coming soon -->
+    <div style="
+      background: var(--s1);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 1.1rem;
+      display: flex; flex-direction: column; gap: 0.65rem;
+      opacity: 0.45;
+    ">
+      <div style="width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--t3);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <span style="padding:0.14rem 0.48rem;border-radius:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:var(--t3);font-size:0.65rem;font-weight:600;align-self:flex-start;">Pratique</span>
+      <div style="font-size:0.92rem;font-weight:700;color:var(--t2);letter-spacing:-0.02em;">Ateliers</div>
+      <div style="font-size:0.77rem;color:var(--t3);line-height:1.55;flex:1;">Cartes interactives, drag & drop, puzzles, outils de coaching.</div>
+      <span style="align-self:flex-start;padding:0.3rem 0.72rem;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:var(--t3);font-size:0.74rem;font-weight:500;">Bientôt disponible</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODAL
+═══════════════════════════════════════════ -->
+<div class="block">
+  <div class="label">Modale — premium · radius 12px · shadows précises</div>
+  <div style="
+    background: linear-gradient(160deg, var(--s2) 0%, var(--s1) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 0;
+    max-width: 400px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.65), 0 8px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+  ">
+    <!-- Header -->
+    <div style="padding:1.25rem 1.25rem 0.85rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.055);">
+      <span style="font-size:0.88rem;font-weight:700;color:var(--t1);letter-spacing:-0.02em;">Quitter la simulation ?</span>
+      <button style="width:24px;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:var(--t3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.68rem;">✕</button>
+    </div>
+    <!-- Body -->
+    <div style="padding:1rem 1.25rem 1.25rem;">
+      <p style="font-size:0.8rem;color:var(--t2);line-height:1.65;margin-bottom:1.25rem;">Ta progression dans ce scénario sera <strong style="color:var(--t1);font-weight:600;">perdue</strong>. Cette action est irréversible.</p>
+      <div style="display:flex;gap:0.5rem;justify-content:flex-end;">
+        <button style="padding:0.42rem 0.9rem;border-radius:5px;background:transparent;border:1px solid var(--b1);color:var(--t2);font-size:0.78rem;font-weight:500;cursor:pointer;">Rester</button>
+        <button style="padding:0.42rem 0.9rem;border-radius:5px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.22);color:#fca5a5;font-size:0.78rem;font-weight:600;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);">Quitter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BADGE CARD GAMIFICATION
+═══════════════════════════════════════════ -->
+<div class="block">
+  <div class="label">Badge cards — gamification · débloqué / verrouillé</div>
+  <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+
+    <!-- Unlocked -->
+    <div style="
+      background: linear-gradient(160deg, var(--s2) 0%, var(--s1) 100%);
+      border: 1px solid rgba(99,102,241,0.2);
+      border-top: 1px solid rgba(99,102,241,0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      width: 200px;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(99,102,241,0.08);
+    ">
+      <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(99,102,241,0.08));border:1px solid rgba(99,102,241,0.25);display:flex;align-items:center;justify-content:center;color:#a5b4fc;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--t1);letter-spacing:-0.02em;margin-bottom:0.2rem;">Premier Sprint</div>
+        <div style="font-size:0.72rem;color:var(--t2);line-height:1.45;">Terminer votre première simulation complète.</div>
+      </div>
+      <div style="font-size:0.65rem;color:var(--p);font-weight:600;display:flex;align-items:center;gap:0.3rem;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Débloqué le 09 mai 2026
+      </div>
+    </div>
+
+    <!-- Locked -->
+    <div style="
+      background: var(--s1);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 1rem;
+      width: 200px;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      opacity: 0.5;
+    ">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;color:var(--t3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--t2);letter-spacing:-0.02em;margin-bottom:0.2rem;">Maître du Daily</div>
+        <div style="font-size:0.72rem;color:var(--t3);line-height:1.45;">Compléter 3 scénarios Daily Scrum.</div>
+      </div>
+      <div style="font-size:0.65rem;color:var(--t3);display:flex;align-items:center;gap:0.3rem;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        0 / 3 scénarios
+      </div>
+    </div>
+
+    <!-- XP card -->
+    <div style="
+      background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(99,102,241,0.04) 100%);
+      border: 1px solid rgba(99,102,241,0.18);
+      border-radius: 10px;
+      padding: 1.25rem 1rem;
+      width: 180px;
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      box-shadow: inset 0 1px 0 rgba(99,102,241,0.12);
+    ">
+      <div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(165,180,252,0.6);">XP Total</div>
+      <div style="font-size:2.2rem;font-weight:800;color:#a5b4fc;letter-spacing:-0.04em;line-height:1;font-family:monospace;">1 240</div>
+      <div style="font-size:0.7rem;color:rgba(165,180,252,0.5);margin-top:0.1rem;">Niveau 3 · Practitioner</div>
+      <div style="width:100%;height:4px;background:rgba(99,102,241,0.12);border-radius:999px;overflow:hidden;margin-top:0.4rem;">
+        <div style="width:62%;height:100%;background:linear-gradient(90deg,#6366f1,#818cf8);border-radius:999px;"></div>
+      </div>
+      <div style="font-size:0.62rem;color:rgba(165,180,252,0.4);">760 XP → Niveau 4</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PROGRESS BARS + METRICS
+═══════════════════════════════════════════ -->
+<div class="block">
+  <div class="label">Métriques simulation — dense & lisible</div>
+  <div style="
+    background: linear-gradient(160deg, var(--s2) 0%, var(--s1) 100%);
+    border: 1px solid var(--b1);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    max-width: 240px;
+    display: flex; flex-direction: column; gap: 0.7rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  ">
+    <div style="font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--t3);margin-bottom:0.1rem;">État de l'équipe</div>
+
+    <div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:0.28rem;">
+        <span style="font-size:0.75rem;font-weight:500;color:var(--t2);">Vélocité</span>
+        <span style="font-size:0.7rem;font-weight:600;color:var(--t1);font-family:monospace;">72%</span>
+      </div>
+      <div style="height:4px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden;">
+        <div style="width:72%;height:100%;background:#6366f1;border-radius:999px;"></div>
+      </div>
+    </div>
+
+    <div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:0.28rem;">
+        <span style="font-size:0.75rem;font-weight:500;color:var(--t2);">Moral</span>
+        <span style="font-size:0.7rem;font-weight:600;color:#22c55e;font-family:monospace;">+8</span>
+      </div>
+      <div style="height:4px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden;">
+        <div style="width:85%;height:100%;background:#22c55e;border-radius:999px;"></div>
+      </div>
+    </div>
+
+    <div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:0.28rem;">
+        <span style="font-size:0.75rem;font-weight:500;color:var(--t2);">Confiance PO</span>
+        <span style="font-size:0.7rem;font-weight:600;color:#ef4444;font-family:monospace;">−12</span>
+      </div>
+      <div style="height:4px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden;">
+        <div style="width:38%;height:100%;background:#ef4444;border-radius:999px;"></div>
+      </div>
+    </div>
+
+    <div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:0.28rem;">
+        <span style="font-size:0.75rem;font-weight:500;color:var(--t2);">Dette tech</span>
+        <span style="font-size:0.7rem;font-weight:600;color:#f59e0b;font-family:monospace;">54%</span>
+      </div>
+      <div style="height:4px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden;">
+        <div style="width:54%;height:100%;background:#f59e0b;border-radius:999px;"></div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:0.6rem;margin-top:0.1rem;">
+      <div style="font-size:0.65rem;color:var(--t3);">Sprint 2 · Scène 4/8</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     INPUTS
+═══════════════════════════════════════════ -->
+<div class="block">
+  <div class="label">Inputs & quiz options</div>
+  <div style="display:flex;flex-direction:column;gap:0.6rem;max-width:380px;">
+    <!-- Input normal -->
+    <input style="
+      background: var(--s2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.82rem; color: var(--t1);
+      outline: none; width: 100%;
+      font-family: inherit;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+    " placeholder="Rechercher un scénario...">
+
+    <!-- Input focus -->
+    <input style="
+      background: var(--s2);
+      border: 1px solid rgba(99,102,241,0.45);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.82rem; color: var(--t1);
+      outline: none; width: 100%;
+      font-family: inherit;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.08), inset 0 1px 2px rgba(0,0,0,0.2);
+    " value="Communication non-violente">
+
+    <!-- Quiz option non-sélectionné -->
+    <div style="
+      background: var(--s1);
+      border: 1px solid var(--b1);
+      border-radius: 7px;
+      padding: 0.75rem 1rem;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      cursor: pointer;
+    ">
+      <div style="min-width:22px;height:22px;border-radius:5px;background:var(--s2);border:1px solid rgba(255,255,255,0.09);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:var(--t3);flex-shrink:0;">A</div>
+      <span style="font-size:0.82rem;line-height:1.5;color:var(--t2);">Organiser une rétrospective pour identifier les obstacles.</span>
+    </div>
+
+    <!-- Quiz option sélectionné -->
+    <div style="
+      background: rgba(99,102,241,0.07);
+      border: 1px solid rgba(99,102,241,0.28);
+      border-radius: 7px;
+      padding: 0.75rem 1rem;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      cursor: pointer;
+    ">
+      <div style="min-width:22px;height:22px;border-radius:5px;background:#6366f1;border:1px solid rgba(99,102,241,0.4);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#fff;flex-shrink:0;">B</div>
+      <span style="font-size:0.82rem;line-height:1.5;color:var(--t1);">Faciliter un dialogue direct entre les membres en conflit en utilisant la méthode SBI.</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

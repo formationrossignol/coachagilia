@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Tokens — Scrum Master Sim</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #09090d;
+    --surface-1: #111116;
+    --surface-2: #18181f;
+    --surface-3: #1e1e28;
+    --border-1: rgba(255,255,255,0.06);
+    --border-2: rgba(255,255,255,0.10);
+    --text-1: #f4f4f6;
+    --text-2: #a1a1b5;
+    --text-3: #62627a;
+    --accent: #6366f1;
+    --accent-hover: #7577f5;
+    --accent-subtle: rgba(99,102,241,0.12);
+    --accent-border: rgba(99,102,241,0.25);
+    --ok: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --radius-sm: 4px;
+    --radius: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0c0c14;
+    color: #f4f4f6;
+    font-family: 'Inter', system-ui, sans-serif;
+    padding: 2rem;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+  .subtitle { font-size: 0.8rem; color: #a1a1b5; margin-bottom: 2rem; }
+
+  .section { margin-bottom: 2rem; }
+  .section-title {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #62627a;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* Color swatches */
+  .swatches { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.65rem;
+    background: #111116;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 6px;
+    min-width: 180px;
+  }
+  .swatch-dot { width: 22px; height: 22px; border-radius: 4px; flex-shrink: 0; }
+  .swatch-info { display: flex; flex-direction: column; gap: 1px; }
+  .swatch-name { font-size: 0.72rem; font-weight: 600; color: #f4f4f6; }
+  .swatch-value { font-size: 0.65rem; color: #62627a; font-family: 'Courier New', monospace; }
+
+  /* Typography scale */
+  .type-scale { display: flex; flex-direction: column; gap: 0.75rem; }
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.6rem 0.75rem;
+    background: #111116;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+  }
+  .type-meta { font-size: 0.58rem; color: #62627a; font-family: monospace; min-width: 110px; flex-shrink: 0; }
+  .type-sample { color: #f4f4f6; }
+
+  /* Radius scale */
+  .radius-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .radius-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .radius-box {
+    width: 44px; height: 44px;
+    background: rgba(99,102,241,0.12);
+    border: 1px solid rgba(99,102,241,0.25);
+  }
+  .radius-label { font-size: 0.6rem; color: #62627a; text-align: center; }
+
+  /* Spacing scale */
+  .spacing-row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: flex-end; }
+  .spacing-item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+  .spacing-bar { width: 24px; background: rgba(99,102,241,0.25); border: 1px solid rgba(99,102,241,0.3); border-radius: 2px; }
+  .spacing-label { font-size: 0.58rem; color: #62627a; text-align: center; }
+
+  /* Shadows */
+  .shadows-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .shadow-item {
+    width: 80px; height: 60px;
+    background: #18181f;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.4rem;
+  }
+  .shadow-label { font-size: 0.58rem; color: #62627a; text-align: center; }
+</style>
+</head>
+<body>
+<h1>Design Tokens — Scrum Master Sim</h1>
+<p class="subtitle">Couche fondamentale : couleurs, typographie, espacements, radii</p>
+
+<!-- COLORS -->
+<div class="section">
+  <div class="section-title">Couleurs — Backgrounds & Surfaces</div>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#09090d; border:1px solid rgba(255,255,255,0.12);"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-bg</span>
+        <span class="swatch-value">#09090d (quasi-noir froid)</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#111116;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-surface</span>
+        <span class="swatch-value">#111116 (surface primaire)</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#18181f;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-surface-2</span>
+        <span class="swatch-value">#18181f (surface secondaire)</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#1e1e28;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-surface-3</span>
+        <span class="swatch-value">#1e1e28 (surface tertiaire)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Couleurs — Borders</div>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-dot" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.3);"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-border</span>
+        <span class="swatch-value">rgba(255,255,255,0.06) — subtle</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.3);"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-border-strong</span>
+        <span class="swatch-value">rgba(255,255,255,0.10) — hover/focus</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Couleurs — Texte</div>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#f4f4f6;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-text</span>
+        <span class="swatch-value">#f4f4f6 — texte principal</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#a1a1b5;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-text-muted</span>
+        <span class="swatch-value">#a1a1b5 — secondaire (gris-bleu)</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#62627a;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-text-subtle</span>
+        <span class="swatch-value">#62627a — labels, placeholders</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Couleurs — Accent & Sémantiques</div>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#6366f1;"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-primary</span>
+        <span class="swatch-value">#6366f1 — indigo (CTAs, actifs)</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.25);"></div>
+      <div class="swatch-info">
+        <span class="swatch-name">--color-primary-subtle</span>
+        <span class="swatch-value">rgba(99,102,241,0.12) — fond actif</span>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#22c55e;"></div>
+      <div class="swatch-info"><span class="swatch-name">--color-ok</span><span class="swatch-value">#22c55e</span></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#f59e0b;"></div>
+      <div class="swatch-info"><span class="swatch-name">--color-warning</span><span class="swatch-value">#f59e0b</span></div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-dot" style="background:#ef4444;"></div>
+      <div class="swatch-info"><span class="swatch-name">--color-danger</span><span class="swatch-value">#ef4444</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="section">
+  <div class="section-title">Typographie — Geist Sans (UI) + Geist Mono (technique)</div>
+  <div class="type-scale">
+    <div class="type-row">
+      <span class="type-meta">28px / 700 / -0.03em</span>
+      <span class="type-sample" style="font-size:28px;font-weight:700;letter-spacing:-0.03em;line-height:1.15;">Titre de page</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">20px / 600 / -0.025em</span>
+      <span class="type-sample" style="font-size:20px;font-weight:600;letter-spacing:-0.025em;">Section heading</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">15px / 500 / -0.01em</span>
+      <span class="type-sample" style="font-size:15px;font-weight:500;letter-spacing:-0.01em;">Texte principal, corps de card</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">13px / 400 / 0</span>
+      <span class="type-sample" style="font-size:13px;font-weight:400;color:#a1a1b5;">Texte secondaire, descriptions, muted</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">11px / 600 / +0.06em · CAPS</span>
+      <span class="type-sample" style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#62627a;">LABEL, SECTION HEADER</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">Mono — 12px / 400</span>
+      <span class="type-sample" style="font-size:12px;font-family:monospace;color:#a1a1b5;">76% · PSM-1 · #abc-123 · ⌘K</span>
+    </div>
+  </div>
+</div>
+
+<!-- RADIUS -->
+<div class="section">
+  <div class="section-title">Radius</div>
+  <div class="radius-row">
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:4px;"></div>
+      <div class="radius-label">--radius-sm<br>4px<br><span style="color:#4f4f65;">badges, dots</span></div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:6px;"></div>
+      <div class="radius-label">--radius<br>6px<br><span style="color:#4f4f65;">buttons, inputs</span></div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:8px;"></div>
+      <div class="radius-label">--radius-md<br>8px<br><span style="color:#4f4f65;">cards, panels</span></div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:12px;"></div>
+      <div class="radius-label">--radius-lg<br>12px<br><span style="color:#4f4f65;">modales</span></div>
+    </div>
+    <div class="radius-item">
+      <div class="radius-box" style="border-radius:999px; width:60px; height:28px;"></div>
+      <div class="radius-label">--radius-full<br>999px<br><span style="color:#4f4f65;">pills, toggles</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SPACING -->
+<div class="section">
+  <div class="section-title">Échelle d'espacement</div>
+  <div class="spacing-row">
+    <div class="spacing-item">
+      <div class="spacing-bar" style="height:4px;"></div>
+      <div class="spacing-label">4px<br>xs</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="height:8px;"></div>
+      <div class="spacing-label">8px<br>sm</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="height:12px;"></div>
+      <div class="spacing-label">12px<br>md</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="height:16px;"></div>
+      <div class="spacing-label">16px<br>lg</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="height:24px;"></div>
+      <div class="spacing-label">24px<br>xl</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="height:32px;"></div>
+      <div class="spacing-label">32px<br>2xl</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="height:48px;"></div>
+      <div class="spacing-label">48px<br>3xl</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-bar" style="height:64px;"></div>
+      <div class="spacing-label">64px<br>4xl</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

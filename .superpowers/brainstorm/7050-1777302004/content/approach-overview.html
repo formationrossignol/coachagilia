@@ -1,0 +1,138 @@
+<h2>Trois approches pour le diagramme en arête de poisson</h2>
+<p class="subtitle">Comment rendre la structure fishbone pour l'Ishikawa ? Clique sur une approche pour la sélectionner.</p>
+
+<div class="cards">
+
+  <!-- Option A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>A — SVG pur</h3>
+      <p>Les arêtes et la colonne vertébrale sont dessinées en SVG. Les zones de dépôt sont des éléments HTML positionnés par-dessus.</p>
+    </div>
+    <div class="card-image" style="padding:1.5rem;background:#0f172a;border-top:1px solid #1e293b;">
+      <svg viewBox="0 0 400 160" style="width:100%;height:auto;">
+        <!-- Spine -->
+        <line x1="20" y1="80" x2="340" y2="80" stroke="#6366f1" stroke-width="3"/>
+        <polygon points="340,80 328,74 328,86" fill="#6366f1"/>
+        <!-- Effect box -->
+        <rect x="340" y="62" width="55" height="36" rx="6" fill="#6366f1"/>
+        <text x="367" y="83" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Effet</text>
+        <!-- Top bones -->
+        <line x1="80" y1="80" x2="110" y2="30" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="68" y="15" width="70" height="22" rx="4" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="103" y="30" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="600">People</text>
+        <!-- Sub-bones top left -->
+        <line x1="88" y1="63" x2="102" y2="30" stroke="#475569" stroke-width="1"/>
+        <line x1="96" y1="70" x2="110" y2="48" stroke="#475569" stroke-width="1"/>
+
+        <line x1="160" y1="80" x2="185" y2="30" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="148" y="15" width="70" height="22" rx="4" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="183" y="30" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="600">Process</text>
+
+        <line x1="240" y1="80" x2="260" y2="30" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="228" y="15" width="60" height="22" rx="4" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="258" y="30" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="600">Tools</text>
+
+        <!-- Bottom bones -->
+        <line x1="80" y1="80" x2="110" y2="130" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="68" y="125" width="75" height="22" rx="4" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="105" y="140" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="600">Product</text>
+
+        <line x1="160" y1="80" x2="185" y2="130" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="148" y="125" width="80" height="22" rx="4" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="188" y="140" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="600">Environment</text>
+
+        <line x1="240" y1="80" x2="260" y2="130" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="228" y="125" width="72" height="22" rx="4" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="264" y="140" text-anchor="middle" fill="#a5b4fc" font-size="8" font-weight="600">Management</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="pros-cons" style="margin:0">
+        <div class="pros"><h4>+</h4><ul><li>Rendu fidèle à l'original</li><li>Arêtes vraiment diagonales</li></ul></div>
+        <div class="cons"><h4>−</h4><ul><li>Drag-and-drop en SVG plus complexe</li><li>Responsive difficile</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>B — CSS + transforms</h3>
+      <p>Les arêtes sont des <code>&lt;div&gt;</code> avec <code>transform: rotate(±40deg)</code>. Les zones de dépôt restent des éléments HTML standards.</p>
+    </div>
+    <div class="card-image" style="padding:1.5rem;background:#0f172a;border-top:1px solid #1e293b;position:relative;min-height:140px;">
+      <!-- Simplified CSS fishbone mockup -->
+      <div style="position:relative;width:100%;height:120px;">
+        <!-- Spine line -->
+        <div style="position:absolute;top:50%;left:5%;width:78%;height:3px;background:#6366f1;transform:translateY(-50%)"></div>
+        <!-- Effect box -->
+        <div style="position:absolute;top:50%;right:2%;transform:translateY(-50%);background:#6366f1;padding:4px 10px;border-radius:6px;font-size:9px;font-weight:700;color:white;white-space:nowrap">Effet</div>
+        <!-- Top-left bone -->
+        <div style="position:absolute;top:24%;left:18%;width:28%;height:2.5px;background:#94a3b8;transform:rotate(-38deg);transform-origin:right center"></div>
+        <div style="position:absolute;top:4%;left:3%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">People</div>
+        <!-- Top-mid bone -->
+        <div style="position:absolute;top:22%;left:38%;width:24%;height:2.5px;background:#94a3b8;transform:rotate(-38deg);transform-origin:right center"></div>
+        <div style="position:absolute;top:2%;left:30%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Process</div>
+        <!-- Top-right bone -->
+        <div style="position:absolute;top:23%;left:57%;width:22%;height:2.5px;background:#94a3b8;transform:rotate(-38deg);transform-origin:right center"></div>
+        <div style="position:absolute;top:3%;left:55%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Tools</div>
+        <!-- Bottom-left bone -->
+        <div style="position:absolute;top:52%;left:18%;width:28%;height:2.5px;background:#94a3b8;transform:rotate(38deg);transform-origin:right center"></div>
+        <div style="position:absolute;top:77%;left:3%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Product</div>
+        <!-- Bottom-mid bone -->
+        <div style="position:absolute;top:52%;left:38%;width:24%;height:2.5px;background:#94a3b8;transform:rotate(38deg);transform-origin:right center"></div>
+        <div style="position:absolute;top:79%;left:28%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Environment</div>
+        <!-- Bottom-right bone -->
+        <div style="position:absolute;top:52%;left:57%;width:22%;height:2.5px;background:#94a3b8;transform:rotate(38deg);transform-origin:right center"></div>
+        <div style="position:absolute;top:78%;left:55%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Management</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pros-cons" style="margin:0">
+        <div class="pros"><h4>+</h4><ul><li>Drag-and-drop standard HTML5</li><li>Responsive plus facile</li></ul></div>
+        <div class="cons"><h4>−</h4><ul><li>Alignement précis délicat</li><li>Placement des causes sur les arêtes complexe en phase 2</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-body">
+      <h3>C — SVG décoratif + HTML fonctionnel</h3>
+      <p>SVG uniquement pour dessiner les lignes diagonales (décor). Les zones de dépôt et cartes sont des div HTML positionnés par-dessus.</p>
+    </div>
+    <div class="card-image" style="padding:1.5rem;background:#0f172a;border-top:1px solid #1e293b;position:relative;min-height:140px;">
+      <div style="position:relative;width:100%;">
+        <!-- SVG lines only -->
+        <svg viewBox="0 0 400 160" style="width:100%;height:auto;position:absolute;top:0;left:0;pointer-events:none;">
+          <line x1="20" y1="80" x2="340" y2="80" stroke="#6366f1" stroke-width="3"/>
+          <polygon points="340,80 328,74 328,86" fill="#6366f1"/>
+          <line x1="80" y1="80" x2="110" y2="30" stroke="#475569" stroke-width="2"/>
+          <line x1="165" y1="80" x2="188" y2="30" stroke="#475569" stroke-width="2"/>
+          <line x1="245" y1="80" x2="262" y2="30" stroke="#475569" stroke-width="2"/>
+          <line x1="80" y1="80" x2="110" y2="130" stroke="#475569" stroke-width="2"/>
+          <line x1="165" y1="80" x2="188" y2="130" stroke="#475569" stroke-width="2"/>
+          <line x1="245" y1="80" x2="262" y2="130" stroke="#475569" stroke-width="2"/>
+        </svg>
+        <!-- HTML drop zones on top -->
+        <div style="position:relative;width:100%;height:160px;">
+          <div style="position:absolute;top:4%;left:3%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">People</div>
+          <div style="position:absolute;top:4%;left:32%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Process</div>
+          <div style="position:absolute;top:4%;left:57%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Tools</div>
+          <div style="position:absolute;top:78%;left:3%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Product</div>
+          <div style="position:absolute;top:79%;left:28%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Environment</div>
+          <div style="position:absolute;top:79%;left:55%;background:#1e293b;border:1.5px dashed #6366f1;border-radius:5px;padding:3px 8px;font-size:8px;color:#a5b4fc;font-weight:600">Management</div>
+          <div style="position:absolute;top:44%;right:2%;background:#6366f1;border-radius:6px;padding:4px 10px;font-size:9px;color:white;font-weight:700;white-space:nowrap">Effet →</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pros-cons" style="margin:0">
+        <div class="pros"><h4>+</h4><ul><li>Meilleur des deux mondes</li><li>Drag-and-drop HTML natif</li><li>Lignes fidèles au vrai fishbone</li></ul></div>
+        <div class="cons"><h4>−</h4><ul><li>Positionnement absolu à calibrer</li><li>Phase 2 : causes le long des arêtes complexes</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>

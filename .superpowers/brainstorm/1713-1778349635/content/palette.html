@@ -1,0 +1,134 @@
+<h2>Quelle palette d'accent ?</h2>
+<p class="subtitle">Toutes sur fond dark. L'accent colore les éléments actifs, CTAs, highlights — le reste est monochrome.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="indigo-refined" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0f; border-radius:8px; padding:1.25rem; font-family:system-ui;">
+      <!-- Navbar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(255,255,255,0.07);">
+        <span style="color:#f8fafc;font-size:0.75rem;font-weight:700;letter-spacing:-0.02em;">Scrum Master Sim</span>
+        <div style="display:flex;gap:0.4rem;">
+          <span style="padding:0.18rem 0.6rem;border-radius:5px;background:rgba(99,102,241,0.14);color:#a5b4fc;font-size:0.6rem;font-weight:600;border:1px solid rgba(99,102,241,0.2);">Simulation</span>
+          <span style="padding:0.18rem 0.6rem;border-radius:5px;color:rgba(148,163,184,0.5);font-size:0.6rem;">Ateliers</span>
+        </div>
+      </div>
+      <!-- KPI row -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem;margin-bottom:0.6rem;">
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(148,163,184,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">XP Total</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#a5b4fc;">1 240</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(148,163,184,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">Badges</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#f8fafc;">4 / 12</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(148,163,184,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">Score PSM</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#f8fafc;">76%</div>
+        </div>
+      </div>
+      <!-- CTA button -->
+      <button style="width:100%;background:rgba(99,102,241,0.9);color:#fff;border:none;border-radius:6px;padding:0.45rem;font-size:0.68rem;font-weight:600;cursor:pointer;letter-spacing:-0.01em;">Commencer une simulation →</button>
+      <!-- Color swatches -->
+      <div style="display:flex;gap:0.35rem;margin-top:0.65rem;align-items:center;">
+        <div style="width:18px;height:18px;border-radius:4px;background:#6366f1;"></div>
+        <div style="width:18px;height:18px;border-radius:4px;background:#818cf8;"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:#0a0a0f;border:1px solid rgba(255,255,255,0.15);"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:#111118;border:1px solid rgba(255,255,255,0.1);"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);"></div>
+        <span style="font-size:0.55rem;color:rgba(148,163,184,0.5);margin-left:0.2rem;">Indigo raffiné</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Indigo raffiné (actuel amélioré)</h3>
+      <p>Conserver #6366f1 comme seul accent, mais fond plus sombre (#0a0a0f vs #0f1117), moins de couleur en surface. Accent uniquement sur les éléments actifs — tout le reste en zinc monochrome. Style Linear.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="white-accent" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#000000; border-radius:8px; padding:1.25rem; font-family:system-ui;">
+      <!-- Navbar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(255,255,255,0.08);">
+        <span style="color:#ffffff;font-size:0.75rem;font-weight:700;letter-spacing:-0.02em;">Scrum Master Sim</span>
+        <div style="display:flex;gap:0.4rem;">
+          <span style="padding:0.18rem 0.6rem;border-radius:5px;background:rgba(255,255,255,0.1);color:#fff;font-size:0.6rem;font-weight:600;border:1px solid rgba(255,255,255,0.15);">Simulation</span>
+          <span style="padding:0.18rem 0.6rem;border-radius:5px;color:rgba(255,255,255,0.3);font-size:0.6rem;">Ateliers</span>
+        </div>
+      </div>
+      <!-- KPI row -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem;margin-bottom:0.6rem;">
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">XP Total</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#ffffff;">1 240</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">Badges</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#ffffff;">4 / 12</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">Score PSM</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#ffffff;">76%</div>
+        </div>
+      </div>
+      <!-- CTA button -->
+      <button style="width:100%;background:#ffffff;color:#000;border:none;border-radius:6px;padding:0.45rem;font-size:0.68rem;font-weight:700;cursor:pointer;letter-spacing:-0.01em;">Commencer une simulation →</button>
+      <!-- Color swatches -->
+      <div style="display:flex;gap:0.35rem;margin-top:0.65rem;align-items:center;">
+        <div style="width:18px;height:18px;border-radius:4px;background:#ffffff;"></div>
+        <div style="width:18px;height:18px;border-radius:4px;background:rgba(255,255,255,0.6);"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:#000000;border:1px solid rgba(255,255,255,0.2);"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:#111111;border:1px solid rgba(255,255,255,0.1);"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);"></div>
+        <span style="font-size:0.55rem;color:rgba(255,255,255,0.3);margin-left:0.2rem;">Blanc sur noir pur</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Blanc / monochrome (Vercel-style)</h3>
+      <p>Fond #000, blanc comme unique accent pour les CTAs primaires, zincs pour tout le reste. Zéro couleur additionnelle. Maximalisme de la sobriété — très premium, mais perd les couleurs sémantiques actuelles.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="indigo-warm" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0c0c10; border-radius:8px; padding:1.25rem; font-family:system-ui;">
+      <!-- Navbar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(255,255,255,0.06);">
+        <span style="color:#fafafa;font-size:0.75rem;font-weight:700;letter-spacing:-0.02em;">Scrum Master Sim</span>
+        <div style="display:flex;gap:0.4rem;">
+          <span style="padding:0.18rem 0.6rem;border-radius:5px;background:rgba(139,92,246,0.15);color:#c4b5fd;font-size:0.6rem;font-weight:600;border:1px solid rgba(139,92,246,0.2);">Simulation</span>
+          <span style="padding:0.18rem 0.6rem;border-radius:5px;color:rgba(161,161,170,0.45);font-size:0.6rem;">Ateliers</span>
+        </div>
+      </div>
+      <!-- KPI row -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem;margin-bottom:0.6rem;">
+        <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(161,161,170,0.45);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">XP Total</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#c4b5fd;">1 240</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(161,161,170,0.45);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">Badges</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#fafafa;">4 / 12</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:7px;padding:0.55rem 0.65rem;">
+          <div style="font-size:0.58rem;color:rgba(161,161,170,0.45);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem;">Score PSM</div>
+          <div style="font-size:0.95rem;font-weight:700;color:#fafafa;">76%</div>
+        </div>
+      </div>
+      <!-- CTA button -->
+      <button style="width:100%;background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;border:none;border-radius:6px;padding:0.45rem;font-size:0.68rem;font-weight:600;cursor:pointer;letter-spacing:-0.01em;">Commencer une simulation →</button>
+      <!-- Color swatches -->
+      <div style="display:flex;gap:0.35rem;margin-top:0.65rem;align-items:center;">
+        <div style="width:18px;height:18px;border-radius:4px;background:linear-gradient(135deg,#7c3aed,#6366f1);"></div>
+        <div style="width:18px;height:18px;border-radius:4px;background:#c4b5fd;"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:#0c0c10;border:1px solid rgba(255,255,255,0.12);"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:#17171f;border:1px solid rgba(255,255,255,0.07);"></div>
+        <span style="font-size:0.55rem;color:rgba(161,161,170,0.4);margin-left:0.2rem;">Violet profond (Raycast)</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Violet profond (Raycast-style)</h3>
+      <p>Fond quasi-noir (#0c0c10), accent violet-indigo légèrement déplacé vers le chaud (#7c3aed → #6366f1 gradient). Plus de profondeur, accent plus prononcé sur les éléments clés. Style Raycast / Arc.</p>
+    </div>
+  </div>
+
+</div>

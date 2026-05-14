@@ -1,0 +1,144 @@
+<h2>Design des tuiles d'intention</h2>
+<p class="subtitle">Comment les 8 intentions s'affichent avant que l'utilisateur en choisisse une</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="pills" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f1117;border-radius:8px;padding:14px;font-family:system-ui">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+          <div style="background:#161b22;border-radius:20px;padding:3px;border:1px solid #30363d;display:inline-flex;gap:2px">
+            <span style="background:#238636;color:#fff;border-radius:16px;padding:4px 12px;font-size:10px;font-weight:600">Par intention</span>
+            <span style="color:#8b949e;border-radius:16px;padding:4px 12px;font-size:10px">Liste complète</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <button style="background:#161b22;border:1px solid #30363d;border-radius:20px;color:#e6edf3;font-size:10px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px">⚡ Gérer un conflit <span style="background:#21262d;border-radius:10px;padding:1px 6px;font-size:9px;color:#8b949e">8</span></button>
+          <button style="background:#161b22;border:1px solid #30363d;border-radius:20px;color:#e6edf3;font-size:10px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px">🤝 Aligner les parties prenantes <span style="background:#21262d;border-radius:10px;padding:1px 6px;font-size:9px;color:#8b949e">5</span></button>
+          <button style="background:#161b22;border:1px solid #30363d;border-radius:20px;color:#e6edf3;font-size:10px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px">🎯 Préparer un coaching <span style="background:#21262d;border-radius:10px;padding:1px 6px;font-size:9px;color:#8b949e">6</span></button>
+          <button style="background:#161b22;border:1px solid #30363d;border-radius:20px;color:#e6edf3;font-size:10px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px">🔍 Cause racine <span style="background:#21262d;border-radius:10px;padding:1px 6px;font-size:9px;color:#8b949e">7</span></button>
+          <button style="background:#161b22;border:1px solid #30363d;border-radius:20px;color:#e6edf3;font-size:10px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px">🧩 Débloquer une équipe <span style="background:#21262d;border-radius:10px;padding:1px 6px;font-size:9px;color:#8b949e">6</span></button>
+          <button style="background:#161b22;border:1px solid #30363d;border-radius:20px;color:#e6edf3;font-size:10px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px">🔄 Rétrospective <span style="background:#21262d;border-radius:10px;padding:1px 6px;font-size:9px;color:#8b949e">10</span></button>
+          <button style="background:#161b22;border:1px solid #30363d;border-radius:20px;color:#e6edf3;font-size:10px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px">⚖️ Faciliter une décision <span style="background:#21262d;border-radius:10px;padding:1px 6px;font-size:9px;color:#8b949e">9</span></button>
+          <button style="background:#161b22;border:1px solid #30363d;border-radius:20px;color:#e6edf3;font-size:10px;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px">📈 Améliorer le flow <span style="background:#21262d;border-radius:10px;padding:1px 6px;font-size:9px;color:#8b949e">8</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Pills avec compteur</h3>
+      <p>Comme la navigation catégorie actuelle mais avec icon + compteur. Compact, toutes les intentions visibles sans scroll.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="tiles-compact" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f1117;border-radius:8px;padding:14px;font-family:system-ui">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+          <div style="background:#161b22;border-radius:20px;padding:3px;border:1px solid #30363d;display:inline-flex;gap:2px">
+            <span style="background:#238636;color:#fff;border-radius:16px;padding:4px 12px;font-size:10px;font-weight:600">Par intention</span>
+            <span style="color:#8b949e;border-radius:16px;padding:4px 12px;font-size:10px">Liste complète</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">⚡</div>
+            <div style="font-size:9px;font-weight:600;color:#e6edf3;line-height:1.3">Gérer un conflit</div>
+            <div style="font-size:9px;color:#8b949e;margin-top:2px">8</div>
+          </div>
+          <div style="background:#0d1117;border:1px solid #58a6ff;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">🤝</div>
+            <div style="font-size:9px;font-weight:600;color:#58a6ff;line-height:1.3">Aligner</div>
+            <div style="font-size:9px;color:#58a6ff;margin-top:2px">5</div>
+          </div>
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">🎯</div>
+            <div style="font-size:9px;font-weight:600;color:#e6edf3;line-height:1.3">Coaching</div>
+            <div style="font-size:9px;color:#8b949e;margin-top:2px">6</div>
+          </div>
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">🔍</div>
+            <div style="font-size:9px;font-weight:600;color:#e6edf3;line-height:1.3">Cause racine</div>
+            <div style="font-size:9px;color:#8b949e;margin-top:2px">7</div>
+          </div>
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">🧩</div>
+            <div style="font-size:9px;font-weight:600;color:#e6edf3;line-height:1.3">Débloquer</div>
+            <div style="font-size:9px;color:#8b949e;margin-top:2px">6</div>
+          </div>
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">🔄</div>
+            <div style="font-size:9px;font-weight:600;color:#e6edf3;line-height:1.3">Rétrospective</div>
+            <div style="font-size:9px;color:#8b949e;margin-top:2px">10</div>
+          </div>
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">⚖️</div>
+            <div style="font-size:9px;font-weight:600;color:#e6edf3;line-height:1.3">Décision</div>
+            <div style="font-size:9px;color:#8b949e;margin-top:2px">9</div>
+          </div>
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">📈</div>
+            <div style="font-size:9px;font-weight:600;color:#e6edf3;line-height:1.3">Flow</div>
+            <div style="font-size:9px;color:#8b949e;margin-top:2px">8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Tuiles carrées (4×2)</h3>
+      <p>Grille visuelle 4 colonnes avec emoji + label + compteur. Plus impactant visuellement, facile à scanner. L'une est sélectionnée (en bleu).</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="tiles-rich" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f1117;border-radius:8px;padding:14px;font-family:system-ui">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+          <div style="background:#161b22;border-radius:20px;padding:3px;border:1px solid #30363d;display:inline-flex;gap:2px">
+            <span style="background:#238636;color:#fff;border-radius:16px;padding:4px 12px;font-size:10px;font-weight:600">Par intention</span>
+            <span style="color:#8b949e;border-radius:16px;padding:4px 12px;font-size:10px">Liste complète</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 12px;cursor:pointer;display:flex;align-items:flex-start;gap:8px">
+            <span style="font-size:16px;flex-shrink:0;margin-top:1px">⚡</span>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:#e6edf3">Gérer un conflit</div>
+              <div style="font-size:9px;color:#8b949e;line-height:1.4;margin-top:2px">Tensions, feedback, négociation</div>
+              <div style="font-size:9px;color:#58a6ff;margin-top:4px">8 ateliers</div>
+            </div>
+          </div>
+          <div style="background:#0d1117;border:1px solid #58a6ff;border-radius:8px;padding:10px 12px;cursor:pointer;display:flex;align-items:flex-start;gap:8px">
+            <span style="font-size:16px;flex-shrink:0;margin-top:1px">🎯</span>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:#58a6ff">Préparer un coaching</div>
+              <div style="font-size:9px;color:#58a6ff;opacity:.7;line-height:1.4;margin-top:2px">Questions, posture, GROW</div>
+              <div style="font-size:9px;color:#58a6ff;margin-top:4px">6 ateliers</div>
+            </div>
+          </div>
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 12px;cursor:pointer;display:flex;align-items:flex-start;gap:8px">
+            <span style="font-size:16px;flex-shrink:0;margin-top:1px">🔍</span>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:#e6edf3">Trouver une cause racine</div>
+              <div style="font-size:9px;color:#8b949e;line-height:1.4;margin-top:2px">Analyse, Ishikawa, TRIZ</div>
+              <div style="font-size:9px;color:#58a6ff;margin-top:4px">7 ateliers</div>
+            </div>
+          </div>
+          <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 12px;cursor:pointer;display:flex;align-items:flex-start;gap:8px">
+            <span style="font-size:16px;flex-shrink:0;margin-top:1px">🧩</span>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:#e6edf3">Débloquer une équipe</div>
+              <div style="font-size:9px;color:#8b949e;line-height:1.4;margin-top:2px">Co-dev, facilitation, résilience</div>
+              <div style="font-size:9px;color:#58a6ff;margin-top:4px">6 ateliers</div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:9px;color:#8b949e;margin-top:8px;text-align:center">+ 4 autres intentions…</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Tuiles larges avec sous-titre</h3>
+      <p>2 colonnes, chaque tuile montre un sous-titre contextuel (mots-clés). Plus d'espace, plus lisible, idéal pour des intentions aux noms longs.</p>
+    </div>
+  </div>
+
+</div>

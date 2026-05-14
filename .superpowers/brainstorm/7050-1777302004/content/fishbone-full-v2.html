@@ -1,0 +1,84 @@
+<h2>Diagramme — queue corrigée</h2>
+<p class="subtitle">Le V de la queue s'ouvre maintenant vers la gauche, comme une vraie queue de poisson.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Phase 1 — Positionnez les 6 catégories</div>
+  <div class="mockup-body" style="background:#0f172a;padding:2rem 1rem;overflow-x:auto;">
+    <div style="position:relative;width:820px;height:280px;margin:0 auto;">
+
+      <!-- SVG DÉCOR -->
+      <svg viewBox="0 0 820 280" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;">
+
+        <!-- Queue : V ouvert vers la gauche, pointe raccordée à la colonne -->
+        <polyline points="70,140 20,100 20,180 70,140" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linejoin="round"/>
+
+        <!-- Colonne vertébrale -->
+        <line x1="70" y1="140" x2="680" y2="140" stroke="#6366f1" stroke-width="3.5"/>
+
+        <!-- Tête de poisson -->
+        <path d="M680,100 Q760,100 780,140 Q760,180 680,180 Z" fill="none" stroke="#6366f1" stroke-width="2.5"/>
+        <circle cx="730" cy="130" r="6" fill="none" stroke="#a5b4fc" stroke-width="2"/>
+        <circle cx="730" cy="130" r="2" fill="#a5b4fc"/>
+
+        <!-- Arêtes haut -->
+        <line x1="200" y1="140" x2="130" y2="30" stroke="#475569" stroke-width="2.5"/>
+        <line x1="370" y1="140" x2="300" y2="30" stroke="#475569" stroke-width="2.5"/>
+        <line x1="540" y1="140" x2="475" y2="30" stroke="#475569" stroke-width="2.5"/>
+
+        <!-- Arêtes bas -->
+        <line x1="200" y1="140" x2="130" y2="250" stroke="#475569" stroke-width="2.5"/>
+        <line x1="370" y1="140" x2="300" y2="250" stroke="#475569" stroke-width="2.5"/>
+        <line x1="540" y1="140" x2="475" y2="250" stroke="#475569" stroke-width="2.5"/>
+
+      </svg>
+
+      <!-- Tête : label effet -->
+      <div style="position:absolute;right:28px;top:118px;width:92px;text-align:center;">
+        <div style="background:#312e81;border:2px solid #6366f1;border-radius:8px;padding:6px 4px;font-size:10px;font-weight:700;color:#e0e7ff;line-height:1.3;">Vélocité<br>insuffisante</div>
+      </div>
+
+      <!-- Drop zones haut -->
+      <div style="position:absolute;left:60px;top:10px;width:110px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">People</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+      <div style="position:absolute;left:228px;top:10px;width:110px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Process</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+      <div style="position:absolute;left:400px;top:10px;width:110px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Tools</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+
+      <!-- Drop zones bas -->
+      <div style="position:absolute;left:60px;top:228px;width:110px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Product</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+      <div style="position:absolute;left:222px;top:228px;width:126px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Environment</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+      <div style="position:absolute;left:400px;top:228px;width:118px;">
+        <div style="background:#1e293b;border:2px dashed #6366f1;border-radius:8px;padding:8px 10px;text-align:center;">
+          <span style="font-size:11px;font-weight:700;color:#a5b4fc;">Management</span>
+          <div style="font-size:8px;color:#475569;margin-top:2px;">Déposer ici</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:1.5rem;">Ça te convient ? On valide ce design et on passe à la rédaction du plan d'implémentation.</p>

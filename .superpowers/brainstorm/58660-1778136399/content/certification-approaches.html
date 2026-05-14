@@ -1,0 +1,66 @@
+<h2>3 approches pour la section Certification</h2>
+<p class="subtitle">Chaque approche a une philosophie différente — choisis celle qui correspond à ta vision</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Portails de certification dédiés</h3>
+      <p>Chaque certification (PSM, PSPO, PMI-ACP, SAFe) devient un espace autonome avec ses propres examens, sa progression et son badge. Le quiz selector devient un hub avec 4 cartes d'entrée distinctes.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Avantages</h4><ul>
+          <li>Expérience immersive et ciblée par cert</li>
+          <li>Chaque cert peut évoluer indépendamment</li>
+          <li>Parfaitement aligné avec la gamification existante</li>
+        </ul></div>
+        <div class="cons"><h4>Inconvénients</h4><ul>
+          <li>Plus de contenu à créer (4× questions + UI)</li>
+          <li>Navigation plus profonde</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Banque de questions avec filtres</h3>
+      <p>Toutes les questions sont taguées par certification. L'utilisateur choisit un filtre (PSM, PSPO…) avant de lancer un examen. Structure actuelle préservée, contenu enrichi.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Avantages</h4><ul>
+          <li>Implémentation rapide sur la base existante</li>
+          <li>Mode "mix" possible (ex: PSM + PSPO ensemble)</li>
+          <li>Moins de refactoring</li>
+        </ul></div>
+        <div class="cons"><h4>Inconvénients</h4><ul>
+          <li>Moins d'identité visuelle par certification</li>
+          <li>Engagement plus faible — ressemble à un simple filtre</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Mode entraînement + Examen complet</h3>
+      <p>Deux modes par certification : <strong>Practice</strong> (thème par thème, feedback immédiat) et <strong>Exam</strong> (simulation chrono, format réel). Navigation par certification puis par mode.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Avantages</h4><ul>
+          <li>Pédagogiquement le plus efficace</li>
+          <li>Progression claire : entraîne-toi puis valide</li>
+          <li>Très différenciant vs simulateurs existants</li>
+        </ul></div>
+        <div class="cons"><h4>Inconvénients</h4><ul>
+          <li>Complexité la plus élevée</li>
+          <li>Nécessite de structurer les questions par thème</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:1.5rem;padding:1rem;background:rgba(99,102,241,0.08);border-radius:8px;border-left:3px solid var(--accent)">
+  <p class="label">Ma recommandation</p>
+  <p>Commencer par <strong>A (Portails dédiés)</strong> puis enrichir avec le mode Practice de <strong>C</strong> — c'est l'approche qui maximise l'engagement et s'intègre naturellement à la gamification déjà en place (learning paths, badges par cert).</p>
+</div>

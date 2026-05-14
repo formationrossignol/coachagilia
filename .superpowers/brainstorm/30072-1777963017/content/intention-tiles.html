@@ -1,0 +1,219 @@
+<h2>Redesign des tuiles d'intention</h2>
+<p class="subtitle">3 directions — même contenu, design différent. Clique pour sélectionner.</p>
+
+<style>
+  /* Base tokens (dark mode) */
+  .demo {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface-2: #232636;
+    --border: rgba(255,255,255,0.08);
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+  }
+
+  /* ── Option A — Card accent (cohérent avec WorkshopCard) ── */
+  .tiles-a {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .tile-a {
+    --acc: #6366f1;
+    --acc-rgb: 99,102,241;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.1rem 1.15rem;
+    background:
+      radial-gradient(ellipse at 85% -10%, rgba(var(--acc-rgb), 0.10) 0%, transparent 55%),
+      linear-gradient(160deg, #1b1f33 0%, #0f1117 65%);
+    border: 1px solid rgba(255,255,255,0.065);
+    border-top: 2px solid var(--acc);
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.055), 0 4px 16px rgba(0,0,0,0.32);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tile-a:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(var(--acc-rgb),0.35);
+  }
+  .tile-a[data-int="conflit"]       { --acc: #f87171; --acc-rgb: 248,113,113; }
+  .tile-a[data-int="decision"]      { --acc: #60a5fa; --acc-rgb: 96,165,250;  }
+  .tile-a[data-int="equipe"]        { --acc: #34d399; --acc-rgb: 52,211,153;  }
+  .tile-a[data-int="retro"]         { --acc: #a78bfa; --acc-rgb: 167,139,250; }
+  .tile-a[data-int="cause"]         { --acc: #fbbf24; --acc-rgb: 251,191,36;  }
+  .tile-a[data-int="prenantes"]     { --acc: #38bdf8; --acc-rgb: 56,189,248;  }
+  .tile-a[data-int="flow"]          { --acc: #fb923c; --acc-rgb: 251,146,60;  }
+  .tile-a[data-int="coaching"]      { --acc: #6366f1; --acc-rgb: 99,102,241;  }
+  .tile-a__emoji { font-size: 1.6rem; line-height: 1; }
+  .tile-a__label {
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--acc);
+    text-shadow: 0 0 12px rgba(var(--acc-rgb),0.55);
+  }
+  .tile-a__name { font-size: 0.9rem; font-weight: 700; color: var(--text); line-height: 1.25; }
+  .tile-a__sub  { font-size: 0.75rem; color: var(--muted); line-height: 1.3; }
+  .tile-a__count { font-size: 0.72rem; color: var(--acc); margin-top: 2px; }
+
+  /* ── Option B — Horizontale large avec barre latérale colorée ── */
+  .tiles-b {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .tile-b {
+    --acc: #6366f1;
+    --acc-rgb: 99,102,241;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--acc);
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .tile-b:hover { background: var(--surface-2); }
+  .tile-b[data-int="conflit"]   { --acc: #f87171; --acc-rgb: 248,113,113; }
+  .tile-b[data-int="decision"]  { --acc: #60a5fa; --acc-rgb: 96,165,250;  }
+  .tile-b[data-int="equipe"]    { --acc: #34d399; --acc-rgb: 52,211,153;  }
+  .tile-b[data-int="retro"]     { --acc: #a78bfa; --acc-rgb: 167,139,250; }
+  .tile-b[data-int="cause"]     { --acc: #fbbf24; --acc-rgb: 251,191,36;  }
+  .tile-b[data-int="prenantes"] { --acc: #38bdf8; --acc-rgb: 56,189,248;  }
+  .tile-b[data-int="flow"]      { --acc: #fb923c; --acc-rgb: 251,146,60;  }
+  .tile-b[data-int="coaching"]  { --acc: #6366f1; --acc-rgb: 99,102,241;  }
+  .tile-b__emoji { font-size: 1.75rem; flex-shrink: 0; }
+  .tile-b__body { flex: 1; min-width: 0; }
+  .tile-b__name { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+  .tile-b__sub  { font-size: 0.74rem; color: var(--muted); margin-top: 2px; }
+  .tile-b__count {
+    flex-shrink: 0; font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.55rem;
+    background: rgba(var(--acc-rgb),0.12); color: var(--acc); border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ── Option C — Grande tuile verticale centrée ── */
+  .tiles-c {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+  .tile-c {
+    --acc: #6366f1;
+    --acc-rgb: 99,102,241;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 1.25rem 0.75rem 1rem;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(var(--acc-rgb),0.12) 0%, transparent 65%),
+      var(--surface);
+    border: 1px solid rgba(var(--acc-rgb),0.18);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .tile-c:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(var(--acc-rgb),0.3);
+  }
+  .tile-c[data-int="conflit"]   { --acc: #f87171; --acc-rgb: 248,113,113; }
+  .tile-c[data-int="decision"]  { --acc: #60a5fa; --acc-rgb: 96,165,250;  }
+  .tile-c[data-int="equipe"]    { --acc: #34d399; --acc-rgb: 52,211,153;  }
+  .tile-c[data-int="retro"]     { --acc: #a78bfa; --acc-rgb: 167,139,250; }
+  .tile-c[data-int="cause"]     { --acc: #fbbf24; --acc-rgb: 251,191,36;  }
+  .tile-c[data-int="prenantes"] { --acc: #38bdf8; --acc-rgb: 56,189,248;  }
+  .tile-c[data-int="flow"]      { --acc: #fb923c; --acc-rgb: 251,146,60;  }
+  .tile-c[data-int="coaching"]  { --acc: #6366f1; --acc-rgb: 99,102,241;  }
+  .tile-c__emoji { font-size: 2rem; }
+  .tile-c__name { font-size: 0.78rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .tile-c__sub  { font-size: 0.67rem; color: var(--muted); line-height: 1.3; }
+  .tile-c__count {
+    font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.45rem;
+    background: rgba(var(--acc-rgb),0.15); color: var(--acc); border-radius: 999px;
+    margin-top: 2px;
+  }
+
+  .opt-label {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; margin-top: 0;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .opt-label span {
+    background: var(--surface-2); padding: 0.15rem 0.5rem; border-radius: 4px;
+    color: var(--text);
+  }
+  .option-block { padding: 1.25rem; border-radius: 12px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05); }
+</style>
+
+<div class="demo">
+  <div class="options" style="flex-direction:column;gap:1.25rem">
+
+    <!-- Option A -->
+    <div class="option option-block" data-choice="a" onclick="toggleSelect(this)">
+      <div class="letter">A</div>
+      <div class="content" style="width:100%">
+        <p class="opt-label"><span>Cartes avec accent couleur</span> — cohérent avec les WorkshopCard</p>
+        <div class="tiles-a">
+          <div class="tile-a" data-int="conflit"><div class="tile-a__emoji">⚡</div><div class="tile-a__label">Conflits &amp; Feedback</div><div class="tile-a__name">Gérer un conflit</div><div class="tile-a__sub">Tensions, feedback, négociation</div><div class="tile-a__count">2 ateliers</div></div>
+          <div class="tile-a" data-int="decision"><div class="tile-a__emoji">⚖️</div><div class="tile-a__label">Décision</div><div class="tile-a__name">Faciliter une décision</div><div class="tile-a__sub">Consensus, vote, arbitrage</div><div class="tile-a__count">3 ateliers</div></div>
+          <div class="tile-a" data-int="equipe"><div class="tile-a__emoji">🧩</div><div class="tile-a__label">Équipe</div><div class="tile-a__name">Débloquer une équipe</div><div class="tile-a__sub">Co-dev, facilitation, résilience</div><div class="tile-a__count">4 ateliers</div></div>
+          <div class="tile-a" data-int="retro"><div class="tile-a__emoji">🔄</div><div class="tile-a__label">Rétrospective</div><div class="tile-a__name">Préparer une rétrospective</div><div class="tile-a__sub">Formats, techniques, animation</div><div class="tile-a__count">3 ateliers</div></div>
+          <div class="tile-a" data-int="cause"><div class="tile-a__emoji">🔍</div><div class="tile-a__label">Diagnostic</div><div class="tile-a__name">Trouver une cause racine</div><div class="tile-a__sub">Analyse, Ishikawa, TRIZ</div><div class="tile-a__count">2 ateliers</div></div>
+          <div class="tile-a" data-int="prenantes"><div class="tile-a__emoji">🤝</div><div class="tile-a__label">Alignement</div><div class="tile-a__name">Aligner les parties prenantes</div><div class="tile-a__sub">Cartographie, engagement</div><div class="tile-a__count">1 atelier</div></div>
+          <div class="tile-a" data-int="flow"><div class="tile-a__emoji">📈</div><div class="tile-a__label">Flow</div><div class="tile-a__name">Améliorer le flow</div><div class="tile-a__sub">Systèmes, flux, livraison</div><div class="tile-a__count">1 atelier</div></div>
+          <div class="tile-a" data-int="coaching"><div class="tile-a__emoji">🎯</div><div class="tile-a__label">Coaching</div><div class="tile-a__name">Préparer un coaching</div><div class="tile-a__sub">Questions, posture, GROW</div><div class="tile-a__count">2 ateliers</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option B -->
+    <div class="option option-block" data-choice="b" onclick="toggleSelect(this)">
+      <div class="letter">B</div>
+      <div class="content" style="width:100%">
+        <p class="opt-label"><span>Rangées avec barre latérale</span> — lisibilité maximale</p>
+        <div class="tiles-b">
+          <div class="tile-b" data-int="conflit"><div class="tile-b__emoji">⚡</div><div class="tile-b__body"><div class="tile-b__name">Gérer un conflit</div><div class="tile-b__sub">Tensions, feedback, négociation</div></div><div class="tile-b__count">2 ateliers</div></div>
+          <div class="tile-b" data-int="decision"><div class="tile-b__emoji">⚖️</div><div class="tile-b__body"><div class="tile-b__name">Faciliter une décision</div><div class="tile-b__sub">Consensus, vote, arbitrage</div></div><div class="tile-b__count">3 ateliers</div></div>
+          <div class="tile-b" data-int="equipe"><div class="tile-b__emoji">🧩</div><div class="tile-b__body"><div class="tile-b__name">Débloquer une équipe</div><div class="tile-b__sub">Co-dev, facilitation, résilience</div></div><div class="tile-b__count">4 ateliers</div></div>
+          <div class="tile-b" data-int="retro"><div class="tile-b__emoji">🔄</div><div class="tile-b__body"><div class="tile-b__name">Préparer une rétrospective</div><div class="tile-b__sub">Formats, techniques, animation</div></div><div class="tile-b__count">3 ateliers</div></div>
+          <div class="tile-b" data-int="cause"><div class="tile-b__emoji">🔍</div><div class="tile-b__body"><div class="tile-b__name">Trouver une cause racine</div><div class="tile-b__sub">Analyse, Ishikawa, TRIZ</div></div><div class="tile-b__count">2 ateliers</div></div>
+          <div class="tile-b" data-int="prenantes"><div class="tile-b__emoji">🤝</div><div class="tile-b__body"><div class="tile-b__name">Aligner les parties prenantes</div><div class="tile-b__sub">Cartographie, engagement</div></div><div class="tile-b__count">1 atelier</div></div>
+          <div class="tile-b" data-int="flow"><div class="tile-b__emoji">📈</div><div class="tile-b__body"><div class="tile-b__name">Améliorer le flow</div><div class="tile-b__sub">Systèmes, flux, livraison</div></div><div class="tile-b__count">1 atelier</div></div>
+          <div class="tile-b" data-int="coaching"><div class="tile-b__emoji">🎯</div><div class="tile-b__body"><div class="tile-b__name">Préparer un coaching</div><div class="tile-b__sub">Questions, posture, GROW</div></div><div class="tile-b__count">2 ateliers</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option C -->
+    <div class="option option-block" data-choice="c" onclick="toggleSelect(this)">
+      <div class="letter">C</div>
+      <div class="content" style="width:100%">
+        <p class="opt-label"><span>Grille 4 colonnes centrée</span> — mise en avant de l'intention</p>
+        <div class="tiles-c">
+          <div class="tile-c" data-int="conflit"><div class="tile-c__emoji">⚡</div><div class="tile-c__name">Gérer un conflit</div><div class="tile-c__sub">Tensions, feedback, négociation</div><div class="tile-c__count">2 ateliers</div></div>
+          <div class="tile-c" data-int="decision"><div class="tile-c__emoji">⚖️</div><div class="tile-c__name">Faciliter une décision</div><div class="tile-c__sub">Consensus, vote, arbitrage</div><div class="tile-c__count">3 ateliers</div></div>
+          <div class="tile-c" data-int="equipe"><div class="tile-c__emoji">🧩</div><div class="tile-c__name">Débloquer une équipe</div><div class="tile-c__sub">Co-dev, facilitation, résilience</div><div class="tile-c__count">4 ateliers</div></div>
+          <div class="tile-c" data-int="retro"><div class="tile-c__emoji">🔄</div><div class="tile-c__name">Préparer une rétrospective</div><div class="tile-c__sub">Formats, techniques, animation</div><div class="tile-c__count">3 ateliers</div></div>
+          <div class="tile-c" data-int="cause"><div class="tile-c__emoji">🔍</div><div class="tile-c__name">Trouver une cause racine</div><div class="tile-c__sub">Analyse, Ishikawa, TRIZ</div><div class="tile-c__count">2 ateliers</div></div>
+          <div class="tile-c" data-int="prenantes"><div class="tile-c__emoji">🤝</div><div class="tile-c__name">Aligner les parties prenantes</div><div class="tile-c__sub">Cartographie, engagement</div><div class="tile-c__count">1 atelier</div></div>
+          <div class="tile-c" data-int="flow"><div class="tile-c__emoji">📈</div><div class="tile-c__name">Améliorer le flow</div><div class="tile-c__sub">Systèmes, flux, livraison</div><div class="tile-c__count">1 atelier</div></div>
+          <div class="tile-c" data-int="coaching"><div class="tile-c__emoji">🎯</div><div class="tile-c__name">Préparer un coaching</div><div class="tile-c__sub">Questions, posture, GROW</div><div class="tile-c__count">2 ateliers</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
