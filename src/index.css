@@ -3530,3 +3530,80 @@ body {
   }
   .sb-boat-area { display: none; }
 }
+
+/* ── Starfish Retrospective ──────────────────────────────────── */
+.sf-scene {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    ". more-of ."
+    "start . less-of"
+    "keep . stop";
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  min-height: 420px;
+}
+
+.sf-zone {
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px dashed #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 110px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.sf-zone--more-of { grid-area: more-of; }
+.sf-zone--less-of { grid-area: less-of; }
+.sf-zone--start   { grid-area: start; }
+.sf-zone--stop    { grid-area: stop; }
+.sf-zone--keep    { grid-area: keep; }
+
+.sf-zone__header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.sf-zone__desc {
+  font-size: 0.68rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.sf-zone__cards {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  align-content: flex-start;
+}
+
+.sf-zone--hover {
+  border-color: var(--color-primary);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+@media (max-width: 700px) {
+  .sf-scene {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "more-of more-of"
+      "start   less-of"
+      "keep    stop";
+    min-height: unset;
+  }
+}
