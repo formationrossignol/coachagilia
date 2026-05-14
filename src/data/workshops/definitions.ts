@@ -19,6 +19,7 @@ import { sixHatsDataset } from './datasets/six-hats'
 import { radicalCandorDataset } from './datasets/radical-candor'
 import { sailboatRetrospectiveDataset } from './datasets/sailboat-retrospective'
 import { starfishRetrospectiveDataset } from './datasets/starfish-retrospective'
+import { madSadGladDataset } from './datasets/mad-sad-glad'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -638,6 +639,37 @@ const EXISTING: WorkshopDefinition[] = [
     },
     dataset: starfishRetrospectiveDataset,
   },
+  {
+    id: 'mad-sad-glad',
+    slug: 'mad-sad-glad',
+    title: 'Mad / Sad / Glad',
+    route: '/ateliers/mad-sad-glad',
+    categorySlug: 'retrospectives',
+    toolName: 'Mad/Sad/Glad',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Explorer les émotions de l'équipe autour du Sprint : colère, déception et satisfaction.",
+    pedagogy: {
+      objectives: [
+        "Distinguer colère, déception et satisfaction dans une rétrospective",
+        "Nommer une émotion sans juger la personne qui l'exprime",
+        "Relier une émotion à une situation concrète de Sprint",
+        "Transformer les émotions exprimées en apprentissages et pistes d'amélioration",
+      ],
+      toolExplanation: "Mad / Sad / Glad aide l'équipe à mettre des mots sur ce qu'elle a ressenti pendant le Sprint. L'objectif n'est pas de se plaindre, mais de comprendre ce qui crée de la tension, de la déception ou de l'énergie positive — et de transformer ces ressentis en apprentissages utiles.",
+      whenToUse: [
+        "En rétrospective de Sprint pour explorer les émotions de l'équipe",
+        "Quand le climat émotionnel est tendu et qu'il faut nommer ce qui se passe",
+        "Pour sortir d'une rétrospective purement fonctionnelle et accueillir le vécu humain",
+      ],
+      expectedOutput: [
+        "Identification correcte des 3 registres émotionnels : Mad, Sad, Glad",
+        "Classification de situations Scrum dans les 3 registres",
+      ],
+    },
+    dataset: madSadGladDataset,
+  },
 ]
 
 const COMING_SOON: WorkshopDefinition[] = [
@@ -689,7 +721,6 @@ const COMING_SOON: WorkshopDefinition[] = [
   // Retrospectives (new category)
   { id: 'start-stop-continue', slug: 'start-stop-continue', title: 'Start/Stop/Continue', route: '/ateliers/start-stop-continue', categorySlug: 'retrospectives', toolName: 'Start/Stop/Continue', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: "Identifier ce que l'équipe devrait commencer, arrêter et continuer de faire.", comingSoon: true },
 
-  { id: 'mad-sad-glad', slug: 'mad-sad-glad', title: 'Mad/Sad/Glad', route: '/ateliers/mad-sad-glad', categorySlug: 'retrospectives', toolName: 'Mad/Sad/Glad', level: 'beginner', durationMinutes: 20, interactionType: 'canvas', summary: "Explorer les émotions de l'équipe autour du sprint.", comingSoon: true },
   { id: '4-ls', slug: '4-ls', title: '4Ls — Liked, Learned, Lacked, Longed For', route: '/ateliers/4-ls', categorySlug: 'retrospectives', toolName: '4Ls', level: 'beginner', durationMinutes: 30, interactionType: 'canvas', summary: 'Rétrospective structurée en 4 catégories pour un feedback équilibré.', comingSoon: true },
   { id: 'timeline-retro', slug: 'timeline-retro', title: 'Timeline Retrospective', route: '/ateliers/timeline-retro', categorySlug: 'retrospectives', toolName: 'Timeline', level: 'intermediate', durationMinutes: 40, interactionType: 'canvas', summary: 'Reconstituer la chronologie du sprint ou de la release pour identifier les moments clés.', comingSoon: true },
   { id: 'futurespective', slug: 'futurespective', title: 'Futurespective', route: '/ateliers/futurespective', categorySlug: 'retrospectives', toolName: 'Futurespective', level: 'intermediate', durationMinutes: 30, interactionType: 'canvas', summary: "Imaginer un futur idéal et travailler à rebours pour définir les actions présentes.", comingSoon: true },

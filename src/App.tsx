@@ -29,6 +29,7 @@ import { SixHatsAtelier } from './components/SixHatsAtelier'
 import { RadicalCandorAtelier } from './components/RadicalCandorAtelier'
 import { SailboatRetrospectiveAtelier } from './components/SailboatRetrospectiveAtelier'
 import { StarfishRetrospectiveAtelier } from './components/StarfishRetrospectiveAtelier'
+import { MadSadGladAtelier } from './components/MadSadGladAtelier'
 import { ProgressPage } from './pages/gamification/ProgressPage'
 import { SkillsPage } from './pages/gamification/SkillsPage'
 import { BadgesPage } from './pages/gamification/BadgesPage'
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
       { path: '/ateliers/radical-candor', element: <RadicalCandorAtelier /> },
       { path: '/ateliers/sailboat', element: <SailboatRetrospectiveAtelier /> },
       { path: '/ateliers/starfish', element: <StarfishRetrospectiveAtelier /> },
+      { path: '/ateliers/mad-sad-glad', element: <MadSadGladAtelier /> },
       { path: '/ateliers/categories/:slug', element: <WorkshopCategoryPage /> },
       { path: '/progress', element: <ProgressPage /> },
       { path: '/skills', element: <SkillsPage /> },
