@@ -1633,19 +1633,42 @@ body {
 }
 .tki-column__cards { display: flex; flex-direction: column; gap: 0.5rem; }
 .tki-situation-card {
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 0.6rem 0.75rem;
+  background: #fef08a;
+  border: none;
+  border-radius: 2px;
+  padding: 2rem 0.75rem 0.75rem;
   font-size: 0.82rem;
-  color: var(--color-text);
+  color: #1c1917;
   cursor: grab;
   line-height: 1.4;
-  transition: border-color 0.15s;
+  position: relative;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.18), 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.15s, transform 0.15s;
 }
-.tki-situation-card:hover { border-color: var(--color-primary); }
-.tki-situation-card--correct { border-color: var(--color-ok); background: #14532d33; }
-.tki-situation-card--wrong { border-color: var(--color-danger); background: #7f1d1d33; }
+.tki-situation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.4rem;
+  background: #fde047;
+  border-radius: 2px 2px 0 0;
+}
+.tki-situation-card:hover {
+  box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.22), 0 2px 4px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+.tki-situation-card--correct {
+  background: #bbf7d0;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.18);
+}
+.tki-situation-card--correct::before { background: #86efac; }
+.tki-situation-card--wrong {
+  background: #fecaca;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.18);
+}
+.tki-situation-card--wrong::before { background: #fca5a5; }
 .tki-pool {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
