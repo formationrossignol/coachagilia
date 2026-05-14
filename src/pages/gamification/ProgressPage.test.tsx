@@ -29,6 +29,6 @@ describe('ProgressPage', () => {
 
   it('renders XP summary', () => {
     render(<MemoryRouter><ProgressPage /></MemoryRouter>)
-    expect(screen.getByText('XP total')).toBeInTheDocument()
+    expect(screen.getByText('Points de maîtrise')).toBeInTheDocument()
   })
 })

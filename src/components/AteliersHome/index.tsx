@@ -46,7 +46,7 @@ export function AteliersHome() {
     <div className="ateliers-home">
       <header className="selector-header">
         <h1>Ateliers</h1>
-        <p>Ancrez les concepts par la pratique : glisser-déposer, puzzles, cartes.</p>
+        <p>Manipulez les concepts, entraînez vos décisions et transformez la théorie en réflexes terrain.</p>
       </header>
       <div className="ateliers-home__toolbar">
         <div className="view-toggle">

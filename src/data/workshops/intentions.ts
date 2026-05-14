@@ -7,9 +7,9 @@ export interface WorkshopIntention {
 }
 
 export const WORKSHOP_INTENTIONS: WorkshopIntention[] = [
-  { slug: 'gerer-conflit',             label: 'Conflits',        name: 'Gérer un conflit',              emoji: '⚡', subtitle: 'Tensions, feedback, négociation' },
-  { slug: 'faciliter-decision',        label: 'Décision',        name: 'Faciliter une décision',        emoji: '⚖️', subtitle: 'Consensus, vote, arbitrage' },
-  { slug: 'debloquer-equipe',          label: 'Équipe',          name: 'Débloquer une équipe',          emoji: '🧩', subtitle: 'Co-dev, facilitation, résilience' },
+  { slug: 'gerer-conflit',             label: 'Conflits',        name: 'Gérer un conflit',              emoji: '⚡', subtitle: 'Désamorcer les tensions et restaurer un dialogue utile.' },
+  { slug: 'faciliter-decision',        label: 'Décision',        name: 'Faciliter une décision',        emoji: '⚖️', subtitle: 'Aider le groupe à décider sans bloquer la dynamique.' },
+  { slug: 'debloquer-equipe',          label: 'Équipe',          name: 'Débloquer une équipe',          emoji: '🧩', subtitle: 'Identifier ce qui bloque l’équipe et remettre le collectif en mouvement.' },
   { slug: 'preparer-retro',            label: 'Rétrospective',   name: 'Préparer une rétrospective',    emoji: '🔄', subtitle: 'Formats, techniques, animation' },
   { slug: 'cause-racine',              label: 'Diagnostic',      name: 'Trouver une cause racine',      emoji: '🔍', subtitle: 'Analyse, Ishikawa, TRIZ' },
   { slug: 'aligner-parties-prenantes', label: 'Alignement',      name: 'Aligner les parties prenantes', emoji: '🤝', subtitle: 'Cartographie, engagement' },
