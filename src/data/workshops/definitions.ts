@@ -18,6 +18,7 @@ import { johariWindowDataset } from './datasets/johari-window'
 import { sixHatsDataset } from './datasets/six-hats'
 import { radicalCandorDataset } from './datasets/radical-candor'
 import { sailboatRetrospectiveDataset } from './datasets/sailboat-retrospective'
+import { starfishRetrospectiveDataset } from './datasets/starfish-retrospective'
 
 const EXISTING: WorkshopDefinition[] = [
   {
@@ -605,6 +606,37 @@ const EXISTING: WorkshopDefinition[] = [
       ],
     },
     dataset: sailboatRetrospectiveDataset,
+  },
+  {
+    id: 'starfish',
+    slug: 'starfish',
+    title: 'Rétrospective Starfish',
+    route: '/ateliers/starfish',
+    categorySlug: 'retrospectives',
+    toolName: 'Starfish Retrospective',
+    level: 'intermediate',
+    durationMinutes: 15,
+    interactionType: 'drag-and-drop',
+    summary: "Nuancer l'amélioration continue en 5 dimensions : amplifier, réduire, commencer, arrêter et conserver.",
+    pedagogy: {
+      objectives: [
+        'Identifier les 5 dimensions de la Starfish Retrospective',
+        'Distinguer Less of et Stop',
+        'Distinguer More of et Keep',
+        "Transformer des constats de rétrospective en intentions d'amélioration claires",
+      ],
+      toolExplanation: "La Starfish Retrospective aide l'équipe à nuancer son amélioration continue. Tout ne doit pas être seulement gardé ou supprimé : certaines pratiques méritent d'être amplifiées (More of), réduites (Less of), commencées (Start), arrêtées (Stop) ou préservées (Keep).",
+      whenToUse: [
+        'En rétrospective de Sprint pour dépasser le simple bien/mal',
+        "Pour différencier ce qui doit être amplifié de ce qui doit être supprimé",
+        "Pour produire des actions d'amélioration plus précises et actionnables",
+      ],
+      expectedOutput: [
+        'Identification correcte des 5 dimensions Starfish',
+        'Classification de situations Scrum dans les 5 dimensions',
+      ],
+    },
+    dataset: starfishRetrospectiveDataset,
   },
 ]
 
