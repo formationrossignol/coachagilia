@@ -4,24 +4,24 @@ import { MemoryRouter } from 'react-router-dom'
 import { Home } from './index'
 
 describe('Home', () => {
-  it('renders three section cards', () => {
+  it('renders the training desk hero and situation of the day', () => {
     render(<MemoryRouter><Home /></MemoryRouter>)
-    expect(screen.getAllByRole('article')).toHaveLength(3)
+    expect(screen.getByRole('heading', { name: /Devenez plus solide quand Scrum devient difficile/i })).toBeInTheDocument()
+    expect(screen.getByText(/Un simulateur d’entraînement/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Sprint Review sous tension/i })).toBeInTheDocument()
   })
 
-  it('displays Simulation, Quiz PSM-1 and Ateliers cards', () => {
+  it('renders the required primary sections', () => {
     render(<MemoryRouter><Home /></MemoryRouter>)
-    expect(screen.getByText(/simulation/i)).toBeInTheDocument()
-    expect(screen.getByText(/quiz psm-1/i)).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /ateliers/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Reprendre votre entraînement/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Un board de pratique/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Des réflexes terrain observables/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Des plans courts/i })).toBeInTheDocument()
   })
 
-  it('renders links to /simulation, /quiz and /ateliers', () => {
+  it('links to the daily simulation and paths', () => {
     render(<MemoryRouter><Home /></MemoryRouter>)
-    const links = screen.getAllByRole('link')
-    const hrefs = links.map(l => l.getAttribute('href'))
-    expect(hrefs).toContain('/simulation')
-    expect(hrefs).toContain('/quiz')
-    expect(hrefs).toContain('/ateliers')
+    expect(screen.getByRole('link', { name: /Lancer la situation du jour/i })).toHaveAttribute('href', '/simulation')
+    expect(screen.getByRole('link', { name: /Voir les parcours/i })).toHaveAttribute('href', '/paths')
   })
 })
